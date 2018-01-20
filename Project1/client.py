@@ -1,26 +1,33 @@
 import socket
 import sys
 import ssl
+import argparse
 
 
 class MySocket:
-    TCP_IP = '129.10.113.143'
+    TCP_IP = ''
+    STUDENT_ID = ''
+    PORT_NUM = 0
     MAX_BYTES = 256
     mySock = socket
     response = ""
     res = 0
 
-    def connect(self):
+    def connect_with(self, args):
+        self.TCP_IP = args.hostname[0]
+        self.STUDENT_ID = args.id[0]
+        if args.p is None:
+            self.PORT_NUM = 27998
+        else:
+            self.PORT_NUM = args.p[0]
         self.mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.mySock.connect((self.TCP_IP, 27998))
-
-    def ssl_connect(self):
-        self.mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.mySock = ssl.wrap_socket(self.mySock)
-        self.mySock.connect((self.TCP_IP, 27999))
+        # ssl connection so it needs to be wrapped
+        if args.s == True:
+            self.mySock = ssl.wrap_socket(self.mySock)
+        self.mySock.connect((self.TCP_IP, self.PORT_NUM))
 
     def send_init_mess(self):
-        self.mySock.send("cs3700spring2018 HELLO 001616080\n")
+        self.mySock.send("cs3700spring2018 HELLO " + self.STUDENT_ID + "\n")
         self.response = self.mySock.recv(self.MAX_BYTES)
 
     def check_valid_response(self, words):
@@ -43,8 +50,10 @@ class MySocket:
     @staticmethod
     def is_int_num(num):
         try:
-            int(num)
-            return True
+            n = int(num)
+            if 1 <= n <= 1000:
+                return True
+            return False
         except ValueError:
             return False
 
@@ -70,9 +79,17 @@ class MySocket:
     def close(self):
         self.mySock.close()
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', nargs=1, type=int, help='port number', metavar='port')
+parser.add_argument('-s', default=False, help='indicates SSL connection',
+                    action="store_true")
+parser.add_argument('hostname', nargs=1, type=str, help='the '
+                    'name or address of the host', metavar='hostname')
+parser.add_argument('id', nargs=1, type=str, help='student ID', metavar='NEU '
+                                                                        'ID')
+args = parser.parse_args()
 s = MySocket()
-#s.connect()
-s.ssl_connect()
+s.connect_with(args)
 s.send_init_mess()
 while True:
     s.perform_operation()
