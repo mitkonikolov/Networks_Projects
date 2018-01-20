@@ -14,6 +14,7 @@ class MySocket:
     res = 0
 
     def connect_with(self, args):
+        """Uses the data provided in args to connect correctly"""
         self.TCP_IP = args.hostname[0]
         self.STUDENT_ID = args.id[0]
         if args.p is None:
@@ -27,10 +28,16 @@ class MySocket:
         self.mySock.connect((self.TCP_IP, self.PORT_NUM))
 
     def send_init_mess(self):
+        """Sends the initial message to the host."""
         self.mySock.send("cs3700spring2018 HELLO " + self.STUDENT_ID + "\n")
         self.response = self.mySock.recv(self.MAX_BYTES)
 
     def check_valid_response(self, words):
+        """Returns True if the response is valid.
+        
+        If the response is invalid or is the final message "BYE ...", then it
+        terminates.
+        """
         # check list's length and first word
         if (len(words)==3 or len(words)==5) and words[0] == "cs3700spring2018":
             if words[1] == "STATUS":
@@ -49,6 +56,7 @@ class MySocket:
 
     @staticmethod
     def is_int_num(num):
+        """Returns a bool indicating if num is an int in the correct range."""
         try:
             n = int(num)
             if 1 <= n <= 1000:
@@ -58,6 +66,7 @@ class MySocket:
             return False
 
     def perform_operation(self):
+        """Solve the problem that the host has sent."""
         words = self.response.split(" ")
         self.check_valid_response(words)
         oper = words[3]
@@ -73,10 +82,12 @@ class MySocket:
             self.res = num1/num2
 
     def send_solution(self):
+        """Send the solution to the problem."""
         self.mySock.send("cs3700spring2018 " + str(s.res) + "\n")
         self.response = self.mySock.recv(self.MAX_BYTES)
 
     def close(self):
+        """Close the connection with the host."""
         self.mySock.close()
 
 parser = argparse.ArgumentParser()
