@@ -17,8 +17,10 @@ class MySocket:
         """Uses the data provided in args to connect correctly"""
         self.TCP_IP = args.hostname[0]
         self.STUDENT_ID = args.id[0]
-        if args.p is None:
+        if args.p is None and not args.s:
             self.PORT_NUM = 27998
+        elif args.p is None and args.s:
+            self.PORT_NUM = 27999
         else:
             self.PORT_NUM = args.p[0]
         self.mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
