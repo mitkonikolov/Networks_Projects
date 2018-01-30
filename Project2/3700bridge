@@ -103,8 +103,7 @@ class Message(object):
                 s.send(bpdu)
 
     def is_BPDU(self, json_message):
-        print(json_message)
-        val = json_message[3]
+        val = json_message[2]
         return val == "bpdu"
 
     def gen_RN(self):
