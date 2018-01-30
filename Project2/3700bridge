@@ -3,81 +3,178 @@
 import sys
 import socket
 import select
+import json
+import random
 
-# pads the name with null bytes at the end
-def pad(name):
+
+
+
+class Bridge(object):
+    id = -1
+    LAN = None
+    sockets = []
+    root_id = -1 # the current root
+    cost = 0
+    root_port = -1 # the port to use to get to root
+    message = None
+
+    def __init__(self, id, LAN):
+        self.id = id
+        self.LAN = LAN
+        self.message = Message(self.sockets)
+        print("Bridge "+ self.id +" starting up")
+
+    # pads the name with null bytes at the end
+    def pad(self, name):
         result = '\0' + name
         while len(result) < 108:
-                result += '\0'
+            result += '\0'
         return result
 
-def broadcast(id, path, sockets):
-        bpdu = str(id) + ";" + str(path)
-        for s in sockets:
+    def connect_to_sockets(self):
+        for x in range(len(self.LAN)):
+            s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
+            s.connect(self.pad(self.LAN[x]))
+            sockets.append(s)
+
+    def start(self):
+        # TODO print out the messages that the assignment requires
+        # broadcast first message to start the process of building a spanning
+        #  tree
+        self.__broadcast_bpdu()
+
+        while True:
+            # Calls select with all the sockets; change the timeout value (1)
+            ready, ignore, ignore2 = select.select(sockets, [], [], 1)
+
+            # Reads from each fo the ready sockets
+            for socket in ready:
+                data = socket.recv(1500)
+                if (self.message.is_BPDU(data)):
+                    bpdu = None
+                    try:
+                        foreignBPDU = data
+                        if foreignBPDU.message.root < self.root_id or \
+                                (foreignBPDU.message.root == self.root_id and
+                                         foreignBPDU.message.cost < self.cost):
+                            self.root_id = foreignBPDU.message.root
+                            self.cost = foreignBPDU.message.cost
+                            self.root_port = socket.gethostname()
+                            self.__broadcast_bpdu()
+                            print("New root: {}/{}".format( self.id,
+                                                            self.root_id))
+                            print("Root port: {}/{}".format(self.id,
+                                                            self.root_port))
+                        # elif self.root_id < foreignBPDU.message.root:
+                    except Exception:
+                        print("BPDU was malformed")
+
+    def __broadcast_bpdu(self):
+        self.message.send_message(self.id, "FFFF", "bpdu", {"root":
+            self.id, "cost":self.cost})
+
+    # TODO Consider how to identify if a bridge has stopped working and a
+    # TODO socket thus becomes useless
+
+    # TODO Make broadcasting periodical
+
+
+class Message(object):
+    # source = ""
+    # dest = ""
+    # type = ""
+    # message = {}
+    sockets = {}
+    id = 0
+
+    def __init__(self, sockets):
+        self.sockets = sockets
+
+    def send_message(self, source, dest, type, message):
+        '''Packs and sends the message that was passed'''
+        if type == "bpdu": # broadcast
+            m = {}
+            m['source'] = source
+            m['dest'] = dest
+            m['type'] = type
+            m['message'] = message
+            m['message']['id'] = self.gen_RN()
+            for s in self.sockets:
                 s.send(bpdu)
 
-class BPDU(object):
-        root_id = -1
-        path_cost = -1  
+    def is_BPDU(self, json_message):
+        return json_message['type'] == "bpdu"
 
-        def __init__(self, data):
-                try:
-                        d = data.split(';')
-                        self.root_id = d[0]
-                        self.path_cost = d[1]
-                except Exception:
-                        raise Exception('Invalid BPDU')
-        @staticmethod
-        def isBpdu(data):
-                return len(packet.split(";")) == 2
+    def gen_RN(self):
+        '''Returns a random number'''
+        return random.choice('0123456789abcdef') + random.choice(
+            '0123456789abcdef') + random.choice('0123456789abcdef') + \
+               random.choice('0123456789abcdef')
+
+    def set_ports(self, ports):
+        self.sockets = ports
+
+
 
 if __name__ == "__main__":
-        # bridge ID
-        id = sys.argv[1]
-        # LANs the bridge is connecting to
-        LAN = sys.argv[2:]
-        sockets = []
+    # bridge ID
+    id = sys.argv[1]
+    # LANs the bridge is connecting to
+    LAN = sys.argv[2:]
+    sockets = []
 
-        # creates sockets and connects to them
-        for x in range(len(LAN)):
-                s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
-                s.connect(pad(LAN[x]))
-                sockets.append(s)
+    bridge = Bridge(id, LAN)
+    bridge.connect_to_sockets()
+    bridge.start()
 
-        #initialize root_id and path_cost
-        root_id = id
-        path_cost = 0
-        # root_port is not necessary in the beginning
-        root_port = -1
+'''
 
-        broadcast(str(root_id), path_cost, sockets)
+    # creates sockets and connects to them
+    for x in range(len(LAN)):
+        s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
+        s.connect(pad(LAN[x]))
+        sockets.append(s)
 
-        #Main loop
-        while True:
-                # Calls select with all the sockets; change the timeout value (1)
-                ready, ignore, ignore2 = select.select(sockets, [], [], 1)
+    #initialize root_id and path_cost
+    root_id = id
+    path_cost = 0
+    # root_port is not necessary in the beginning
+    root_port = -1
 
-                # Reads from each fo the ready sockets
-                for x in ready:
-                        data = x.recv(1500)
-                        if(BPDU.isBpdu(data)):
-                                bpdu = None
-                                try: 
-                                        foreignBPDU = BPDU(data)
-                                except Exception: 
-                                        continue
-                                if foreignBPDU.root_id < root_id:
-                                        root_id = foreignBPDU.root_id
-                                        path_cost = foreignBPDU.path_cost
-                                        root_port = x.gethostname()
-                                        broadcast(root_id, path_cost, sockets)
-                                elif foreignBPDU.root_id == root_id:
-                                        if foreignBPDU.path_cost < path_cost:
-                                                root_port = x.gethostname()
-                                                path_cost = foreignBPDU.path_cost
-                                                broadcast(root_id, path_cost, sockets)
+    send_message(str(root_id), path_cost, sockets)
+
+    #Main loop
+    while True:
+        # Calls select with all the sockets; change the timeout value (1)
+        ready, ignore, ignore2 = select.select(sockets, [], [], 1)
+
+        # Reads from each fo the ready sockets
+        for x in ready:
+            data = x.recv(1500)
+            if(BPDU.isBpdu(data)):
+                bpdu = None
+                try:
+                    foreignBPDU = BPDU(data)
+                except Exception:
+                    continue
+                if foreignBPDU.root_id < root_id:
+                    root_id = foreignBPDU.root_id
+                    path_cost = foreignBPDU.path_cost
+                    root_port = x.gethostname()
+                    send_message(root_id, path_cost,
+                                 sockets)
+                elif foreignBPDU.root_id == root_id:
+                    if foreignBPDU.path_cost < path_cost:
+                        root_port = x.gethostname()
+                        path_cost = foreignBPDU.path_cost
+                        send_message(root_id,
+                                     path_cost,
+                                     sockets)
+'''
 # TODO
-# 1. Confirm that tree building algo works for two/three bridges
+# 1. Confirm that tree building algo works for two/three bridges - make the
+# bridge meet all requirements to the best of our ability and run the test
+# script
 # 2. Decide which ports are active
 # 3. Build a forwarding table
 # 4. Forward packets
