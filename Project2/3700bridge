@@ -11,21 +11,30 @@ def pad(name):
                 result += '\0'
         return result
 
-def broadcast(id, path):
+def broadcast(id, path, sockets):
         bpdu = str(id) + ";" + str(path)
         for s in sockets:
                 s.send(bpdu)
 
-def isBpdu(packet):
-        return len(packet.split(";"))==2
+class BPDU(object):
+        root_id = -1
+        path_cost = -1  
 
-def get(packet, n):
-        return packet.split(";")[n]
-
-
+        def __init__(self, data):
+                try:
+                        d = data.split(';')
+                        self.root_id = d[0]
+                        self.path_cost = d[1]
+                except Exception:
+                        raise Exception('Invalid BPDU')
+        @staticmethod
+        def isBpdu(data):
+                return len(packet.split(";")) == 2
 
 if __name__ == "__main__":
+        # bridge ID
         id = sys.argv[1]
+        # LANs the bridge is connecting to
         LAN = sys.argv[2:]
         sockets = []
 
@@ -35,17 +44,13 @@ if __name__ == "__main__":
                 s.connect(pad(LAN[x]))
                 sockets.append(s)
 
-        #initialize root_id and path
+        #initialize root_id and path_cost
         root_id = id
-        path = 0
+        path_cost = 0
         # root_port is not necessary in the beginning
         root_port = -1
 
-        broadcast(str(root_id), path)
-
-
-
-        #       print "Bridge " + id + " starting up\n"
+        broadcast(str(root_id), path_cost, sockets)
 
         #Main loop
         while True:
@@ -55,18 +60,22 @@ if __name__ == "__main__":
                 # Reads from each fo the ready sockets
                 for x in ready:
                         data = x.recv(1500)
-                        if(isBpdu(data)):
-                                idForeign = get(data, 0)
-                                if idForeign < root_id:
-                                        root_id = idForeign
-                                        path = get(data, 1)
+                        if(BPDU.isBpdu(data)):
+                                bpdu = None
+                                try: 
+                                        foreignBPDU = BPDU(data)
+                                except Exception: 
+                                        continue
+                                if foreignBPDU.root_id < root_id:
+                                        root_id = foreignBPDU.root_id
+                                        path_cost = foreignBPDU.path_cost
                                         root_port = x.gethostname()
-                                        broadcast(root_id, path)
-                                elif idForeign == root_id:
-                                        if get(data, 1) < path:
+                                        broadcast(root_id, path_cost, sockets)
+                                elif foreignBPDU.root_id == root_id:
+                                        if foreignBPDU.path_cost < path_cost:
                                                 root_port = x.gethostname()
-                                                path = get(data, 1)
-                                                broadcast(root_id, path)
+                                                path_cost = foreignBPDU.path_cost
+                                                broadcast(root_id, path_cost, sockets)
 # TODO
 # 1. Confirm that tree building algo works for two/three bridges
 # 2. Decide which ports are active
