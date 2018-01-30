@@ -50,7 +50,7 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-                if (self.message.is_BPDU(data)):
+                if (self.message.is_BPDU(str(data))):
                     bpdu = None
                     try:
                         foreignBPDU = data
@@ -104,7 +104,7 @@ class Message(object):
 
     def is_BPDU(self, json_message):
         print(json_message)
-        val = json_message.type
+        val = json_message['type']
         return val == "bpdu"
 
     def gen_RN(self):
