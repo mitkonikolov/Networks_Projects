@@ -21,7 +21,7 @@ class Bridge(object):
     def __init__(self, id, LAN):
         self.id = id
         self.LAN = LAN
-        print("Bridge "+ self.id +" starting up")
+        print("Bridge "+ str(self.id) +" starting up")
 
     # pads the name with null bytes at the end
     def pad(self, name):
