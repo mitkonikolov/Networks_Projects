@@ -38,6 +38,7 @@ class Bridge(object):
         self.message = Message(self.sockets)
 
     def start(self):
+        print("length of sockets is " + str(len(self.sockets)))
         # TODO print out the messages that the assignment requires
         # broadcast first message to start the process of building a spanning
         #  tree
@@ -92,8 +93,10 @@ class Message(object):
         self.sockets = sockets
 
     def send_message(self, source, dest, type, message):
+        print("in send")
         '''Packs and sends the message that was passed'''
         if type == "bpdu": # broadcast
+            print("sending bpdu")
             m = {}
             m['source'] = source
             m['dest'] = dest
