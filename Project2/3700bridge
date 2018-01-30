@@ -72,6 +72,7 @@ class Bridge(object):
                         print("BPDU was malformed")
 
     def __broadcast_bpdu(self):
+        print("in broadcast_bpdu")
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
             self.id, "cost":self.cost})
 
