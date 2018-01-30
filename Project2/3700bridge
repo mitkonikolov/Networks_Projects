@@ -21,7 +21,6 @@ class Bridge(object):
     def __init__(self, id, LAN):
         self.id = id
         self.LAN = LAN
-        self.message = Message(self.sockets)
         print("Bridge "+ self.id +" starting up")
 
     # pads the name with null bytes at the end
@@ -36,6 +35,7 @@ class Bridge(object):
             s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
             s.connect(self.pad(self.LAN[x]))
             sockets.append(s)
+        self.message = Message(self.sockets)
 
     def start(self):
         # TODO print out the messages that the assignment requires
@@ -103,6 +103,7 @@ class Message(object):
                 s.send(bpdu)
 
     def is_BPDU(self, json_message):
+        print(json_message)
         return json_message['type'] == "bpdu"
 
     def gen_RN(self):
