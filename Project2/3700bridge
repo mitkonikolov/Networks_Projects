@@ -104,7 +104,7 @@ class Message(object):
 
     def is_BPDU(self, json_message):
         print(json_message)
-        return json_message['type'] == "bpdu"
+        return json_message["type"] == "bpdu"
 
     def gen_RN(self):
         '''Returns a random number'''
