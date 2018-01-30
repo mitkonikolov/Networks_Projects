@@ -34,7 +34,7 @@ class Bridge(object):
         for x in range(len(self.LAN)):
             s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
             s.connect(self.pad(self.LAN[x]))
-            sockets.append(s)
+            self.sockets.append(s)
         self.message = Message(self.sockets)
 
     def start(self):
