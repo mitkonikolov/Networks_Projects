@@ -34,7 +34,7 @@ class Bridge(object):
             s.connect(self.pad(self.LAN[x]))
             sockets.append(s)
 
-    def start_bridge(self):
+    def start(self):
         # TODO print out the messages that the assignment requires
         # broadcast first message to start the process of building a spanning
         #  tree
@@ -121,8 +121,9 @@ if __name__ == "__main__":
 
     bridge = Bridge(id, LAN)
     bridge.connect_to_sockets()
+    bridge.start()
 
-
+'''
 
     # creates sockets and connects to them
     for x in range(len(LAN)):
@@ -165,6 +166,7 @@ if __name__ == "__main__":
                         send_message(root_id,
                                      path_cost,
                                      sockets)
+'''
 # TODO
 # 1. Confirm that tree building algo works for two/three bridges - make the
 # bridge meet all requirements to the best of our ability and run the test
