@@ -104,7 +104,7 @@ class Message(object):
 
     def is_BPDU(self, json_message):
         print(json_message)
-        val = json_message['type']
+        val = json_message.type
         return val == "bpdu"
 
     def gen_RN(self):
