@@ -104,7 +104,7 @@ class Message(object):
             m['message'] = message
             m['message']['id'] = self.gen_RN()
             for s in self.sockets:
-                s.send(m.encode('utf-8'))
+                s.send(json.dumps(m))
 
     def is_BPDU(self, json_message):
         # val = json_message['type']
