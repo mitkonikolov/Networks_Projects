@@ -50,7 +50,7 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-                print(data)
+                print("\a " + data + " \a")
                 if (self.message.is_BPDU(data)):
                     bpdu = None
                     try:
@@ -101,12 +101,13 @@ class Message(object):
             m['message'] = message
             m['message']['id'] = self.gen_RN()
             for s in self.sockets:
-                s.send(bpdu)
+                s.send(m)
 
     def is_BPDU(self, json_message):
-        val = json_message[2]
-        print(val)
-        return val == "bpdu"
+        # val = json_message['type']
+        # print(val)
+        # return val == "bpdu"
+        return False
 
     def gen_RN(self):
         '''Returns a random number'''
