@@ -104,7 +104,7 @@ class Message(object):
             m['type'] = type
             m['message'] = message
             m['message']['id'] = self.gen_RN()
-            print(json.dumps(m).encode('utf-8'))
+            m = json.dumps(m).encode('utf-8')
             for s in self.sockets:
                 #s.send(json.dumps(m).encode('utf-8'))
                 s.send(m)
