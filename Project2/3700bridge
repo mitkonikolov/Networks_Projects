@@ -5,6 +5,7 @@ import socket
 import select
 import json
 import random
+import string
 
 
 
@@ -15,6 +16,7 @@ class Bridge(object):
     sockets = []
     root_id = -1 # the current root
     cost = 0
+    # file number of the port associated with the root
     root_port = -1 # the port to use to get to root
     message = None
     # unique LANs we are connected to
@@ -25,6 +27,7 @@ class Bridge(object):
     def __init__(self, id, LAN):
         self.id = id
         self.LAN = LAN
+	self.root_id = id
         print("Bridge "+ str(self.id) +" starting up")
 
     # pads the name with null bytes at the end
@@ -46,6 +49,9 @@ class Bridge(object):
         # broadcast first message to start the process of building a spanning
         #  tree
         self.broadcast_bpdu()
+	
+	f = open("out.txt", "w+")
+	f.close()
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
@@ -53,6 +59,10 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
+	        f = open("out.txt", "a")
+		f.write(data)
+		f.write("\n")
+		f.close()
                 if self.message.is_BPDU(data):
                     if self.is_from_me(data):
                         if socket.getpeername() in self.uniqueLANs:
@@ -63,36 +73,30 @@ class Bridge(object):
                     else:
                         try:
                             foreignBPDU = json.loads(data)
-                            # TODO check whether this comparison works
-                            if int(foreignBPDU['message']['root'], 16) < \
-                                    int(self.root_id, 16):
-                                '''
-                                or \
-                                    (int(foreignBPDU['message']['root'], 16) ==
-                                         self.root_id and
-                                             foreignBPDU['message']['cost'] <
-                                             self.cost)
-                                '''
-                                print("update root")
-                                self.root_id = foreignBPDU['message']['root']
-                                self.cost = foreignBPDU['message']['cost']
-                                # TODO what would you use so others know how to
-                                # TODO connect to. getpeername() and fileno() are
-                                # TODO options too
-                                self.root_port = socket.getsockname()
+			    if int(str(foreignBPDU['message']['root']), 16) < \
+                                    int(str(self.root_id), 16) or \
+			       (int(str(foreignBPDU['message']['root']), 16) ==
+                                     int(str(self.root_id), 16) and
+                                             int(str(foreignBPDU['message']['cost']), 16) <
+                                             int(str(self.cost), 16)):
+				self.root_id = foreignBPDU['message']['root']
+                                self.cost = foreignBPDU['message']['cost'] + 1
+                                self.root_port = socket.fileno()
                                 self.broadcast_bpdu()
-                                print("New root: {}/{}".format( self.id,
+				f = open("out.txt", "a")
+                                f.write("New root: {}/{}".format( self.id,
                                                                 self.root_id))
-                                print("Root port: {}/{}".format(self.id,
-                                                                self.root_port))
-                                # elif self.root_id < foreignBPDU.message.root:
+				f.write("\n")
+				f.close()
+			    else:
+				 print("here")
                         except Exception as e:
                             print(e)
                             print("BPDU was malformed and is " + data)
 
     def broadcast_bpdu(self):
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
-                                                                self.id, "cost":self.cost})
+                                                                self.root_id, "cost":self.cost})
 
         # TODO Consider how to identify if a bridge has stopped working and a
         # TODO socket thus becomes useless

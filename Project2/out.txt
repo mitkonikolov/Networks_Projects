@@ -1,0 +1,22 @@
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "10f7"}, "type": "bpdu"}
+New root: 9e3a/08ad{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3e67"}, "type": "bpdu"}
+{"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+{"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+{"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+{"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+{"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+{"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+{"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+{"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+{"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
+{"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
+{"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
+{"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
+{"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
+{"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
+{"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
+{"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
+{"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
+{"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
