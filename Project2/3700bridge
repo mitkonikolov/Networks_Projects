@@ -54,8 +54,6 @@ class Bridge(object):
             for socket in ready:
                 data = socket.recv(1500)
                 if self.message.is_BPDU(data):
-                    # TODO identify a bpdu sent by me and close the ports that
-                    # TODO create loops
                     if self.is_from_me(data):
                         if socket.getpeername() in self.uniqueLANs:
                             # mark port as inactive - don't listen/send data
@@ -66,11 +64,16 @@ class Bridge(object):
                         try:
                             foreignBPDU = json.loads(data)
                             # TODO check whether this comparison works
-                            if foreignBPDU['message']['root'] < self.root_id or \
-                                    (foreignBPDU['message']['root'] ==
+                            if int(foreignBPDU['message']['root'], 16) < \
+                                    int(self.root_id, 16):
+                                '''
+                                or \
+                                    (int(foreignBPDU['message']['root'], 16) ==
                                          self.root_id and
                                              foreignBPDU['message']['cost'] <
-                                             self.cost):
+                                             self.cost)
+                                '''
+                                print("update root")
                                 self.root_id = foreignBPDU['message']['root']
                                 self.cost = foreignBPDU['message']['cost']
                                 # TODO what would you use so others know how to
