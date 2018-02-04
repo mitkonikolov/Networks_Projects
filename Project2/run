@@ -25,7 +25,7 @@ die "File '3700bridge' is not executable" unless -x "3700bridge";
 
 my $DATA = "data";
 
-my $WAIT = 2;
+my $WAIT = 22;
 
 my $sel = IO::Select->new();
 
