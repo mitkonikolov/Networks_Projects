@@ -126,7 +126,6 @@ if __name__ == "__main__":
     id_main = sys.argv[1]
     # LANs the bridge is connecting to
     LAN_main = sys.argv[2:]
-    sockets_main = []
 
     bridge_main = Bridge(id_main, LAN_main)
     bridge_main.connect_to_sockets()
