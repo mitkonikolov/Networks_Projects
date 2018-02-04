@@ -45,11 +45,12 @@ class Bridge(object):
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore, ignore2 = select.select(self.sockets, [], [], 2.0)
+            ready, ignore, ignore2 = select.select(self.sockets, [], [], 0.5)
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-                if (self.message.is_BPDU(data)):
+                if self.message.is_BPDU(data):
+                    print(data)
                     try:
                         foreignBPDU = json.loads(data)
                         if foreignBPDU['message']['root'] < self.root_id or \
@@ -81,10 +82,6 @@ class Bridge(object):
 
 
 class Message(object):
-    # source = ""
-    # dest = ""
-    # type = ""
-    # message = {}
     sockets = {}
     id = 0
 
@@ -107,7 +104,6 @@ class Message(object):
     def is_BPDU(self, json_str):
         dict_message = json.loads(json_str)
         val = dict_message['type']
-        print(val)
         return val == "bpdu"
 
     def gen_RN(self):
