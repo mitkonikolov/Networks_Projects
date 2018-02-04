@@ -50,18 +50,24 @@ class Bridge(object):
             for socket in ready:
                 data = socket.recv(1500)
                 if self.message.is_BPDU(data):
+                    # TODO identify a bpdu sent by me and close the ports that
+                    # TODO create loops
                     print(socket.getsockname())
                     print(data)
                     try:
                         foreignBPDU = json.loads(data)
+                        # TODO check whether this comparison works
                         if foreignBPDU['message']['root'] < self.root_id or \
                                 (foreignBPDU['message']['root'] ==
                                      self.root_id and
                                          foreignBPDU['message']['cost'] <
                                          self.cost):
-                            self.root_id = foreignBPDU.message.root
-                            self.cost = foreignBPDU.message.cost
-                            self.root_port = socket.gethostname()
+                            self.root_id = foreignBPDU['message']['root']
+                            self.cost = foreignBPDU['message']['cost']
+                            # TODO what would you use so others know how to
+                            # TODO connect to. getpeername() and fileno() are
+                            # TODO options too
+                            self.root_port = socket.getsockname()
                             self.broadcast_bpdu()
                             print("New root: {}/{}".format( self.id,
                                                             self.root_id))
