@@ -1,106 +1,243 @@
+ff1a/ff1a broadcasting
 08ad/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "b3fc"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "6e3a"}, "type": "bpdu"}
+9e3a/9e3a broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c937"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "6e3a"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "6e3a"}, "type": "bpdu"}
+ff1a/ff1a broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "6e75"}, "type": "bpdu"}
+ff1a/9e3a broadcasting
+New root: ff1a/9e3a
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "6e75"}, "type": "bpdu"}
+ff1a/9e3a broadcasting
+New root: ff1a/9e3a
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c937"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "6e75"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "9515"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "692e"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "9515"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "9515"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "1f8f"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "1f8f"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "692e"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "1f8f"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "9e3a", "id": "c756"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "6439"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "9e3a", "id": "c756"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "9e3a", "id": "c756"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "a1be"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "a1be"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "6439"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "a1be"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "9e3a", "id": "32e8"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3712"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "9e3a", "id": "32e8"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "9e3a", "id": "32e8"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b0d1"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b0d1"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3712"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "3c0e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b0d1"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "e545"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "1d1b"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "e545"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "e545"}, "type": "bpdu"}
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":26}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3ca9"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3ca9"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "1d1b"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "391d"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "391d"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "391d"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "391d"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "391d"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "391d"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3ca9"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "0fb0"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":64}}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "0fb0"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "0fb0"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "84ac"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "84ac"}, "type": "bpdu"}
+{"source":"6494","dest":"90c3","type":"data","message":{"id":81}}
+{"source":"90c3","dest":"f36a","type":"data","message":{"id":56}}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "ac6b"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "bce0"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "bce0"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
-{"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-{"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
-{"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0302"}, "type": "bpdu"}
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":12}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "84ac"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "d2b2"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "ac6b"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "d2b2"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "d2b2"}, "type": "bpdu"}
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":69}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ac1f"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ac1f"}, "type": "bpdu"}
+{"source":"3005","dest":"95aa","type":"data","message":{"id":41}}
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":8}}
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "39f9"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "39f9"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "177a"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "bce0"}, "type": "bpdu"}
-{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "bce0"}, "type": "bpdu"}
-{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d2e"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ac1f"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "fade"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0c15"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "fade"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "fade"}, "type": "bpdu"}
+{"source":"01af","dest":"21ee","type":"data","message":{"id":14}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "80b3"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "80b3"}, "type": "bpdu"}
+{"source":"6494","dest":"4c03","type":"data","message":{"id":30}}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0c15"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "80b3"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "e305"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "eb6b"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "e305"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "e305"}, "type": "bpdu"}
+{"source":"e41c","dest":"9f3e","type":"data","message":{"id":92}}
+ff1a/08ad broadcasting
+{"source":"95aa","dest":"b1ea","type":"data","message":{"id":62}}
+{"source":"1de3","dest":"0aa8","type":"data","message":{"id":95}}
+{"source":"1c67","dest":"59e8","type":"data","message":{"id":87}}
+{"source":"f662","dest":"3005","type":"data","message":{"id":22}}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "eb6b"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "bc26"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "beea"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "06a2"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "beea"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "beea"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"source":"f36a","dest":"3005","type":"data","message":{"id":75}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "bc26"}, "type": "bpdu"}
+{"source":"3005","dest":"59e8","type":"data","message":{"id":40}}
+{"source":"c01f","dest":"1de3","type":"data","message":{"id":38}}
+08ad/08ad broadcasting
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":65}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "a610"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "7b36"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "a29e"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "7b36"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "7b36"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "bc26"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "a610"}, "type": "bpdu"}
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+{"source":"90c3","dest":"9f3e","type":"data","message":{"id":44}}
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":53}}
+08ad/08ad broadcasting
+{"source":"4c03","dest":"e41c","type":"data","message":{"id":77}}
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":64}}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "95a4"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":34}}
+{"source":"95aa","dest":"b1ea","type":"data","message":{"id":62}}
+{"source":"1de3","dest":"0aa8","type":"data","message":{"id":95}}
+{"source":"01af","dest":"f662","type":"data","message":{"id":73}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "a610"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b7f6"}, "type": "bpdu"}
+{"source":"6494","dest":"01af","type":"data","message":{"id":85}}
+{"source":"f662","dest":"90c3","type":"data","message":{"id":31}}
+{"source":"eec2","dest":"1c67","type":"data","message":{"id":70}}
+08ad/08ad broadcasting
+{"source":"4c03","dest":"21ee","type":"data","message":{"id":79}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b7f6"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "a9f8"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c773"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"source":"f36a","dest":"3005","type":"data","message":{"id":75}}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "95a4"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"source":"9f3e","dest":"f36a","type":"data","message":{"id":28}}
+{"source":"1de3","dest":"59e8","type":"data","message":{"id":24}}
+{"source":"1c67","dest":"59e8","type":"data","message":{"id":33}}
+{"source":"f662","dest":"eec2","type":"data","message":{"id":19}}
+{"source":"c01f","dest":"4c03","type":"data","message":{"id":46}}
+08ad/08ad broadcasting
+{"source":"4c03","dest":"95aa","type":"data","message":{"id":7}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3431"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "72d2"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "30f2"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "95a4"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "a9f8"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b7f6"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3431"}, "type": "bpdu"}
+{"source":"1c67","dest":"9f3e","type":"data","message":{"id":5}}
+{"source":"90c3","dest":"59e8","type":"data","message":{"id":54}}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "06a2"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
+08ad/08ad broadcasting
+{"source":"4c03","dest":"f662","type":"data","message":{"id":21}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "4b19"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "6910"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "00a1"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "a9f8"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "72d2"}, "type": "bpdu"}
+{"source":"01af","dest":"21ee","type":"data","message":{"id":2}}
+ff1a/08ad broadcasting
+{"source":"9f3e","dest":"b1ea","type":"data","message":{"id":82}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "4b19"}, "type": "bpdu"}
+{"source":"1c67","dest":"21ee","type":"data","message":{"id":93}}
+{"source":"90c3","dest":"6494","type":"data","message":{"id":80}}
+{"source":"c01f","dest":"ce76","type":"data","message":{"id":83}}

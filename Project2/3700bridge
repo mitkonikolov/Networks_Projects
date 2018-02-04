@@ -25,6 +25,7 @@ class Bridge(object):
     uniqueLANs = set()
     # file numbers for the active ports
     activePorts = []
+    routing_table = {}
 
     def __init__(self, id, LAN):
         self.id = id
@@ -81,7 +82,7 @@ class Bridge(object):
                         if peer_name not in self.uniqueLANs:
                             # mark port as inactive - don't listen/send data
                             self.uniqueLANs.add(peer_name)
-			    self.activePorts.append(file_no)
+			    self.activePorts.append(socket)
 			    f = open("ports.txt", "a")
 			    f.write("active: {}\n".format(file_no))
 			    f.close()
@@ -108,6 +109,25 @@ class Bridge(object):
                         except Exception as e:
                             print(e)
                             print("BPDU was malformed and is " + data)
+		else:
+		    if socket in self.activePorts:
+			# extract source and put in forwarding table
+			data_dict = json.loads(data)
+			source = data_dict['source']
+			self.routing_table[source] = socket
+			# extract destination and check whether we have it
+			destination = data_dict['dest']
+			dest_ports = []
+			if destination in self.routing_table:
+			    dest_ports.append(self.routing_table[destination])
+			else:
+			    for x in self.activePorts:
+				if x.fileno() != socket.fileno():
+				    dest_ports.append(x)
+			self.message.send(data, dest_ports)
+			    
+				# if we have it, forward to active ports
+				# if we don't, broadcast to all active ports but port_number
 
 
     def broadcast_bpdu(self):
@@ -120,7 +140,6 @@ class Bridge(object):
         # TODO Consider how to identify if a bridge has stopped working and a
         # TODO socket thus becomes useless
 
-        # TODO Make broadcasting periodical
 
     def is_from_me(self, bpdu):
         bpdu_dict = json.loads(bpdu)
@@ -160,6 +179,11 @@ class Message(object):
 
     def set_ports(self, ports):
         self.sockets = ports
+
+    def send(self, message, ports):
+	for s in ports:
+	    #m = json.dumps(message).encode('utf-8')
+	    s.send(message)
 
 
 
