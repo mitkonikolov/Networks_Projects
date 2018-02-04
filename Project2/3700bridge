@@ -101,8 +101,9 @@ class Message(object):
             for s in self.sockets:
                 s.send(m)
 
-    def is_BPDU(self, json_message):
-        val = json_message['type']
+    def is_BPDU(self, json_str):
+        dict_message = json.loads(json_str)
+        val = dict_message['type']
         print(val)
         return val == "bpdu"
 
