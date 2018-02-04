@@ -46,13 +46,14 @@ class Bridge(object):
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore, ignore2 = select.select(sockets, [], [], 3.0)
-
+            ready, ignore, ignore2 = select.select(self.sockets, [], [], 1.0)
+	    #print("h", flush=True)
             # Reads from each fo the ready sockets
             for socket in ready:
                 #print("got to listening")
                 data = socket.recv(1500)
                 print(data)
+		sys.stdout.flush()
                 #print("received")
                 #print(data)
                 # if (self.message.is_BPDU(data)):
