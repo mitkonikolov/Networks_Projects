@@ -64,7 +64,8 @@ class Bridge(object):
                             print("Root port: {}/{}".format(self.id,
                                                             self.root_port))
                             # elif self.root_id < foreignBPDU.message.root:
-                    except Exception:
+                    except Exception as e:
+                        print(e)
                         print("BPDU was malformed and is " + data)
 
     def broadcast_bpdu(self):
