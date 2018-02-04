@@ -38,20 +38,22 @@ class Bridge(object):
         self.message = Message(self.sockets)
 
     def start(self):
-        print("length of sockets is " + str(len(self.sockets)))
+        #print("length of sockets is " + str(len(self.sockets)))
         # TODO print out the messages that the assignment requires
         # broadcast first message to start the process of building a spanning
         #  tree
-        self.__broadcast_bpdu()
+        self.broadcast_bpdu()
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore, ignore2 = select.select(sockets, [], [], 1)
+            ready, ignore, ignore2 = select.select(sockets, [], [])
 
             # Reads from each fo the ready sockets
             for socket in ready:
+		print("got to listening")
                 data = socket.recv(1500)
-                print("\a " + data + " \a")
+		#print("received")
+                #print(data)
                 if (self.message.is_BPDU(data)):
                     bpdu = None
                     try:
@@ -71,8 +73,7 @@ class Bridge(object):
                     except Exception:
                         print("BPDU was malformed")
 
-    def __broadcast_bpdu(self):
-        print("in broadcast_bpdu")
+    def broadcast_bpdu(self):
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
             self.id, "cost":self.cost})
 
@@ -94,10 +95,8 @@ class Message(object):
         self.sockets = sockets
 
     def send_message(self, source, dest, type, message):
-        print("in send")
         '''Packs and sends the message that was passed'''
         if type == "bpdu": # broadcast
-            print("sending bpdu")
             m = {}
             m['source'] = source
             m['dest'] = dest
