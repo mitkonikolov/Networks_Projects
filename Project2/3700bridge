@@ -38,7 +38,6 @@ class Bridge(object):
         self.message = Message(self.sockets)
 
     def start(self):
-        #print("length of sockets is " + str(len(self.sockets)))
         # TODO print out the messages that the assignment requires
         # broadcast first message to start the process of building a spanning
         #  tree
@@ -47,7 +46,6 @@ class Bridge(object):
         while True:
             # Calls select with all the sockets; change the timeout value (1)
             ready, ignore, ignore2 = select.select(self.sockets, [], [], 0.5)
-            #print("h", flush=True)
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
@@ -101,14 +99,12 @@ class Message(object):
             m['message']['id'] = self.gen_RN()
             m = json.dumps(m).encode('utf-8')
             for s in self.sockets:
-                #s.send(json.dumps(m).encode('utf-8'))
                 s.send(m)
 
     def is_BPDU(self, json_message):
-        # val = json_message['type']
-        # print(val)
-        # return val == "bpdu"
-        return False
+        val = json_message['type']
+        print(val)
+        return val == "bpdu"
 
     def gen_RN(self):
         '''Returns a random number'''
