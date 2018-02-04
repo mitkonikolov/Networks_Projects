@@ -46,34 +46,28 @@ class Bridge(object):
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore, ignore2 = select.select(self.sockets, [], [], 1.0)
-	    #print("h", flush=True)
+            ready, ignore, ignore2 = select.select(self.sockets, [], [], 0.5)
+            #print("h", flush=True)
             # Reads from each fo the ready sockets
             for socket in ready:
-                #print("got to listening")
                 data = socket.recv(1500)
-                print(data)
-		sys.stdout.flush()
-                #print("received")
-                #print(data)
-                # if (self.message.is_BPDU(data)):
-                #     bpdu = None
-                #     try:
-                #         foreignBPDU = data
-                #         if foreignBPDU.message.root < self.root_id or \
-                #                 (foreignBPDU.message.root == self.root_id and
-                #                          foreignBPDU.message.cost < self.cost):
-                #             self.root_id = foreignBPDU.message.root
-                #             self.cost = foreignBPDU.message.cost
-                #             self.root_port = socket.gethostname()
-                #             self.__broadcast_bpdu()
-                #             print("New root: {}/{}".format( self.id,
-                #                                             self.root_id))
-                #             print("Root port: {}/{}".format(self.id,
-                #                                             self.root_port))
-                #             # elif self.root_id < foreignBPDU.message.root:
-                #     except Exception:
-                #         print("BPDU was malformed")
+                if (self.message.is_BPDU(data)):
+                    try:
+                        foreignBPDU = data
+                        if foreignBPDU.message.root < self.root_id or \
+                                (foreignBPDU.message.root == self.root_id and
+                                         foreignBPDU.message.cost < self.cost):
+                            self.root_id = foreignBPDU.message.root
+                            self.cost = foreignBPDU.message.cost
+                            self.root_port = socket.gethostname()
+                            self.broadcast_bpdu()
+                            print("New root: {}/{}".format( self.id,
+                                                            self.root_id))
+                            print("Root port: {}/{}".format(self.id,
+                                                            self.root_port))
+                            # elif self.root_id < foreignBPDU.message.root:
+                    except Exception:
+                        print("BPDU was malformed")
 
     def broadcast_bpdu(self):
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
@@ -129,14 +123,14 @@ class Message(object):
 
 if __name__ == "__main__":
     # bridge ID
-    id = sys.argv[1]
+    id_main = sys.argv[1]
     # LANs the bridge is connecting to
-    LAN = sys.argv[2:]
-    sockets = []
+    LAN_main = sys.argv[2:]
+    sockets_main = []
 
-    bridge = Bridge(id, LAN)
-    bridge.connect_to_sockets()
-    bridge.start()
+    bridge_main = Bridge(id_main, LAN_main)
+    bridge_main.connect_to_sockets()
+    bridge_main.start()
 
 '''
 
