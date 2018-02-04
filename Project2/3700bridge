@@ -52,9 +52,11 @@ class Bridge(object):
                 if (self.message.is_BPDU(data)):
                     try:
                         foreignBPDU = json.loads(data)
-                        if foreignBPDU.message.root < self.root_id or \
-                                (foreignBPDU.message.root == self.root_id and
-                                         foreignBPDU.message.cost < self.cost):
+                        if foreignBPDU['message']['root'] < self.root_id or \
+                                (foreignBPDU['message']['root'] ==
+                                     self.root_id and
+                                         foreignBPDU['message']['cost'] <
+                                         self.cost):
                             self.root_id = foreignBPDU.message.root
                             self.cost = foreignBPDU.message.cost
                             self.root_port = socket.gethostname()
