@@ -51,7 +51,7 @@ class Bridge(object):
                 data = socket.recv(1500)
                 if (self.message.is_BPDU(data)):
                     try:
-                        foreignBPDU = data
+                        foreignBPDU = json.loads(data)
                         if foreignBPDU.message.root < self.root_id or \
                                 (foreignBPDU.message.root == self.root_id and
                                          foreignBPDU.message.cost < self.cost):
