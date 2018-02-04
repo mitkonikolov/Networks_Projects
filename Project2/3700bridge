@@ -23,14 +23,15 @@ class Bridge(object):
     message = None
     # unique LANs we are connected to
     uniqueLANs = set()
-    # file numbers for the inactive ports
-    inactivePorts = []
+    # file numbers for the active ports
+    activePorts = []
 
     def __init__(self, id, LAN):
         self.id = id
         self.LAN = LAN
 	self.root_id = id
         print("Bridge "+ str(self.id) +" starting up")
+	open("ports.txt", "w+").close()
 
     # pads the name with null bytes at the end
     def pad(self, name):
@@ -42,8 +43,13 @@ class Bridge(object):
     def connect_to_sockets(self):
         for x in range(len(self.LAN)):
             s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
-            s.connect(self.pad(self.LAN[x]))
+	    name = self.pad(self.LAN[x])
+	    f = open("ports.txt", "a") 
+	    f.write("{}\n".format(name))           
+	    s.connect(self.pad(self.LAN[x]))
+	    f.write("{}\n\n".format(s.fileno()))
             self.sockets.append(s)
+	    f.close()
         self.message = Message(self.sockets)
 
     def start(self):
@@ -70,11 +76,15 @@ class Bridge(object):
 		f.close()
                 if self.message.is_BPDU(data):
                     if self.is_from_me(data):
-                        if socket.getpeername() in self.uniqueLANs:
+			peer_name = socket.getpeername()
+			file_no = socket.fileno()
+                        if peer_name not in self.uniqueLANs:
                             # mark port as inactive - don't listen/send data
-                            self.inactivePorts.append(socket.fileno())
-                        else:
-                            self.uniqueLANs.add(socket.getpeername())
+                            self.uniqueLANs.add(peer_name)
+			    self.activePorts.append(file_no)
+			    f = open("ports.txt", "a")
+			    f.write("active: {}\n".format(file_no))
+			    f.close()
                     else:
                         try:
                             foreignBPDU = json.loads(data)
