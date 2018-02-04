@@ -42,7 +42,6 @@ class Bridge(object):
         # broadcast first message to start the process of building a spanning
         #  tree
         self.broadcast_bpdu()
-        self.broadcast_bpdu()
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
