@@ -50,8 +50,9 @@ class Bridge(object):
 
             # Reads from each fo the ready sockets
             for socket in ready:
-                print("got to listening")
+                #print("got to listening")
                 data = socket.recv(1500)
+                print(data)
                 #print("received")
                 #print(data)
                 # if (self.message.is_BPDU(data)):
