@@ -46,7 +46,7 @@ class Bridge(object):
 
         while True:
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore, ignore2 = select.select(sockets, [], [])
+            ready, ignore, ignore2 = select.select(sockets, [], [], 3.0)
 
             # Reads from each fo the ready sockets
             for socket in ready:
