@@ -50,7 +50,7 @@ class Bridge(object):
             for socket in ready:
                 data = socket.recv(1500)
                 if self.message.is_BPDU(data):
-                    print(socket)
+                    print(socket.getsockname())
                     print(data)
                     try:
                         foreignBPDU = json.loads(data)
