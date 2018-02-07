@@ -45,14 +45,14 @@ class Bridge(object):
     def connect_to_sockets(self):
         for x in range(len(self.LAN)):
             s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
-	    name = self.pad(self.LAN[x])
-	    f = open("ports.txt", "a") 
-	    f.write("{}\n".format(name))           
+	    #name = self.pad(self.LAN[x])
+	    #f = open("ports.txt", "a") 
+	    #f.write("{}\n".format(name))           
 	    s.connect(self.pad(self.LAN[x]))
-	    f.write("{}\n\n".format(s.fileno()))
+	    #f.write("{}\n\n".format(s.fileno()))
             self.sockets.append(s)
 	    self.activePorts.append(s)
-	    f.close()
+	    #f.close()
         self.message = Message(self.sockets)
 
     def start(self):
@@ -64,15 +64,28 @@ class Bridge(object):
 	f.close()
 
         self.broadcast_bpdu()
+	last_mess_time = time.time() * 100
+	#print(last_mess_time)
+	#print(time.time() * 100)
+	#while ((time.time() * 100) - last_mess_time) < 20:
+	#    self.broadcast_bpdu()
+
         while True:
-	    time.sleep(0.5)
-	    self.broadcast_bpdu()
+	    curr_time = time.time() * 100
+	    if (curr_time-last_mess_time) > 200:
+		self.broadcast_bpdu()
+		last_mess_time = time.time() * 100
+	    #if (curr_time - last_mess_time) > 50:
+	    #time.sleep(0.5)
+	    #	self.broadcast_bpdu()
 	    
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore1, ignore2 = select.select(self.sockets, [], [], 0.5)
+            ready, ignore1, ignore2 = select.select(self.sockets, [], [], 2)
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
+		print(data)
+
 	        f = open("out.txt", "a")
 		f.write(data)
 		f.write("\n")
@@ -156,7 +169,8 @@ class Bridge(object):
 			f.close()    
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
-
+	    #if ((time.time() * 100) - last_mess_time) < 200: 
+	#	self.broadcast_bpdu()
 
     def broadcast_bpdu(self):
 	f = open("out.txt", "a")
