@@ -1,0 +1,100 @@
+[  0.0002       Driver] Starting host 0aa8 on LAN 1
+[  0.0003       Driver] Starting host d5b5 on LAN 1
+[  0.0003       Driver] Starting host 90c3 on LAN 1
+[  0.0003       Driver] Starting host 3005 on LAN 1
+[  0.0368  Bridge 08ad] Bridge 08ad starting up
+[  0.0565  Bridge 9e3a] Bridge 9e3a starting up
+[  0.0661  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "d7c2"}, "type": "bpdu"}
+[  0.0669  Bridge 08ad] 1.51804592348e+11
+[  0.0669  Bridge 08ad] here
+[  0.5689  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "c4c2"}, "type": "bpdu"}
+[  0.5690  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9485"}, "type": "bpdu"}
+[  0.5693  Bridge 08ad] 1.51804592399e+11
+[  0.5694  Bridge 08ad] here
+[  0.5698  Bridge 9e3a] 1.51804592399e+11
+[  0.5709  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2b74"}, "type": "bpdu"}
+[  0.5716  Bridge 08ad] 1.51804592399e+11
+[  0.5716  Bridge 08ad] here
+[  1.0733  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "654d"}, "type": "bpdu"}
+[  1.0734  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "38c6"}, "type": "bpdu"}
+[  1.0737  Bridge 08ad] 1.51804592449e+11
+[  1.0738  Bridge 08ad] here
+[  1.0742  Bridge 9e3a] 1.51804592449e+11
+[  1.5761  Bridge 9e3a] here
+[  1.5762  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "5a5c"}, "type": "bpdu"}
+[  1.5762  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "31d8"}, "type": "bpdu"}
+[  1.5766  Bridge 9e3a] 1.51804592499e+11
+[  1.5766  Bridge 9e3a] here
+[  1.5769  Bridge 08ad] 1.51804592499e+11
+[  1.5770  Bridge 08ad] here
+[  2.0791  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2826"}, "type": "bpdu"}
+[  2.0792  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "7ded"}, "type": "bpdu"}
+[  2.0795  Bridge 08ad] 1.5180459255e+11
+[  2.0795  Bridge 08ad] here
+[  2.0798  Bridge 9e3a] 1.5180459255e+11
+[  2.0799  Bridge 9e3a] here
+[  2.2173    Host 3005] Sent message 3 to 90c3
+[  2.2176    Host 90c3] Received message 3 from 3005
+[  2.2177  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2177  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5741    Host 3005] Sent message 5 to d5b5
+[  2.5744    Host d5b5] Received message 5 from 3005
+[  2.5746    Host 90c3] Sent message 1 to 90c3
+[  2.5747    Host 90c3] Received message 1 from 90c3
+[  2.5748  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5748  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5758  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+[  2.5763  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+[  2.6225    Host 90c3] Sent message 4 to 90c3
+[  2.6228    Host 90c3] Received message 4 from 90c3
+[  2.6229  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+[  2.6229  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+[  2.6259  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "eb18"}, "type": "bpdu"}
+[  2.6260  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c3af"}, "type": "bpdu"}
+[  2.6264  Bridge 08ad] 1.51804592604e+11
+[  2.6265  Bridge 08ad] here
+[  2.6269  Bridge 9e3a] 1.51804592604e+11
+[  2.6270  Bridge 9e3a] here
+[  2.7510    Host d5b5] Sent message 0 to d5b5
+[  2.7514    Host d5b5] Received message 0 from d5b5
+[  2.7514  Bridge 08ad] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+[  2.7515  Bridge 9e3a] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+[  2.8846    Host 90c3] Sent message 9 to 3005
+[  2.8849    Host 3005] Received message 9 from 90c3
+[  2.8850  Bridge 08ad] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
+[  2.8850  Bridge 9e3a] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
+[  2.8915    Host 0aa8] Sent message 6 to d5b5
+[  2.8918    Host d5b5] Received message 6 from 0aa8
+[  2.8919  Bridge 08ad] {"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
+[  2.8919  Bridge 9e3a] {"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
+[  2.8998    Host 0aa8] Sent message 7 to 90c3
+[  2.9001    Host 90c3] Received message 7 from 0aa8
+[  2.9002  Bridge 08ad] {"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
+[  2.9002  Bridge 9e3a] {"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
+[  2.9513    Host 90c3] Sent message 2 to 0aa8
+[  2.9516    Host 0aa8] Received message 2 from 90c3
+[  2.9517  Bridge 08ad] {"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
+[  2.9517  Bridge 9e3a] {"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
+[  2.9629    Host 90c3] Sent message 8 to 90c3
+[  2.9632    Host 90c3] Received message 8 from 90c3
+[  2.9633  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
+[  2.9633  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
+[  3.4674  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "8d8d"}, "type": "bpdu"}
+[  3.4675  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "984e"}, "type": "bpdu"}
+[  3.4679  Bridge 08ad] 1.51804592689e+11
+[  3.4679  Bridge 08ad] here
+[  3.4684  Bridge 9e3a] 1.51804592689e+11
+[  3.4685  Bridge 9e3a] here
+[  3.9705  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "4b41"}, "type": "bpdu"}
+[  3.9706  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "89b4"}, "type": "bpdu"}
+[  3.9711  Bridge 9e3a] 1.51804592739e+11
+[  3.9712  Bridge 9e3a] here
+[  3.9717  Bridge 08ad] 1.51804592739e+11
+[  3.9717  Bridge 08ad] here
+Simulation finished.
+Total packets sent: 27
+Total data packets sent: 10
+Total data packets received: 10
+Total data packets dropped: 0  (message ids )
+Total data packets duplicated: 0  (message ids )
+Data packet delivery ratio: 1.000000

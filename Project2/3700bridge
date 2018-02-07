@@ -99,7 +99,10 @@ class Bridge(object):
 		    # there have been no BPDUs on this socket/port
 		    if self.port_history[socket] is None:
 			self.port_history[socket] = []
-		    self.port_history[socket] = self.port_history[socket].append([data, time.time()*100])
+		    time_now = time.time() * 100
+		    print(time_now)
+		    tup1 = (data, time_now)
+		    self.port_history[socket].append(tup1)
 		    if self.is_from_me(data):
 			peer_name = socket.getpeername()
 			file_no = socket.fileno()
@@ -121,7 +124,7 @@ class Bridge(object):
 			       (int(str(foreignBPDU['message']['root']), 16) ==
                                      int(str(self.root_id), 16) and
                                              int(str(foreignBPDU['message']['cost']), 16) <
-                                             int(str(self.cost), 16)) or \
+                                             (int(str(self.cost), 16) - 1)) or \
 			       (int(str(foreignBPDU['message']['root']), 16) == int(str(self.root_id), 16) and int(str(foreignBPDU['message']['cost']), 16) == int(str(self.cost), 16) and int(str(foreignBPDU['source']), 16) < int(str(self.id), 16)):
 				self.root_id = foreignBPDU['message']['root']
                                 self.cost = foreignBPDU['message']['cost'] + 1
@@ -201,20 +204,18 @@ class Bridge(object):
 	    self.enabled_ports = self.sockets
 	    return
 	i = 0
-	print(self.port_history)
 	for port in self.port_history:
 	    # Reason B: this is the root port
 	    if port.fileno() == self.root_port:
-		self.enabled_ports.append(port)
+		# it has already been added
+		#self.enabled_ports.append(port)
 		continue
 	    bpdus = self.port_history[port]
 	    latest_to_drop = 0
 	    designated_bridge = True
-	    print(port)
-	    print(port.fileno())
-	    if len(self.port_history[port]) == 0:
-		self.enabled_ports.append(port)
-		continue 
+	    if len(bpdus) == 0:
+		#self.enabled_ports.append(port)
+		continue
 	    for i in range(len(bpdus)):
 		# the message is older than/equal to 750ms
 		if ((time.time()*100) - bpdus[i][1]) >= 750:
@@ -225,17 +226,20 @@ class Bridge(object):
 		    # some other bridge is designated for this LAN
 		    if json_obj['message']['cost'] < self.cost or int(str(json_obj['source'], 16)) < int(str(self.id), 16) or int(str(foreignBPDU['message']['root']), 16) < \
                                     int(str(self.root_id), 16):
-		        designated_bridge = false
+		        designated_bridge = False
 			break
 	    # remove the old messages
 	    #self.port_history[port] = bpdus[latest_to_drop+1:]
 	    # Reason C: this is the designated bridge
 	    if designated_bridge:
-		self.enabled_ports.append(port)
+		#self.enabled_ports.append(port)
 		continue
 	    # Reason A: there are not BPDUs younger than 750ms on this port
 	    if len(self.port_history[port]) == 0:
-		self.enabled_ports.append(port)
+		continue
+		#self.enabled_ports.append(port)
+	    if port in self.enabled_ports:
+	    	self.enabled_ports.remove(port)
 
         # TODO Consider how to identify if a bridge has stopped working and a
         # TODO socket thus becomes useless
