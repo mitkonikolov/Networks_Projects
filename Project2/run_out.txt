@@ -1,68 +1,670 @@
-[  0.0002       Driver] Starting host 0aa8 on LAN 1
-[  0.0003       Driver] Starting host d5b5 on LAN 1
-[  0.0003       Driver] Starting host 90c3 on LAN 1
-[  0.0003       Driver] Starting host 3005 on LAN 1
-[  0.0368  Bridge 08ad] Bridge 08ad starting up
-[  0.0565  Bridge 9e3a] Bridge 9e3a starting up
-[  0.0661  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "d7c2"}, "type": "bpdu"}
-[  0.0669  Bridge 08ad] 1.51804592348e+11
-[  0.0669  Bridge 08ad] here
-[  0.5689  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "c4c2"}, "type": "bpdu"}
-[  0.5690  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9485"}, "type": "bpdu"}
-[  0.5693  Bridge 08ad] 1.51804592399e+11
-[  0.5694  Bridge 08ad] here
-[  0.5698  Bridge 9e3a] 1.51804592399e+11
-[  0.5709  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2b74"}, "type": "bpdu"}
-[  0.5716  Bridge 08ad] 1.51804592399e+11
-[  0.5716  Bridge 08ad] here
-[  1.0733  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "654d"}, "type": "bpdu"}
-[  1.0734  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "38c6"}, "type": "bpdu"}
-[  1.0737  Bridge 08ad] 1.51804592449e+11
-[  1.0738  Bridge 08ad] here
-[  1.0742  Bridge 9e3a] 1.51804592449e+11
-[  1.5761  Bridge 9e3a] here
-[  1.5762  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "5a5c"}, "type": "bpdu"}
-[  1.5762  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "31d8"}, "type": "bpdu"}
-[  1.5766  Bridge 9e3a] 1.51804592499e+11
-[  1.5766  Bridge 9e3a] here
-[  1.5769  Bridge 08ad] 1.51804592499e+11
-[  1.5770  Bridge 08ad] here
-[  2.0791  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2826"}, "type": "bpdu"}
-[  2.0792  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "7ded"}, "type": "bpdu"}
-[  2.0795  Bridge 08ad] 1.5180459255e+11
-[  2.0795  Bridge 08ad] here
-[  2.0798  Bridge 9e3a] 1.5180459255e+11
-[  2.0799  Bridge 9e3a] here
+[  0.0004       Driver] Starting host 0aa8 on LAN 1
+[  0.0004       Driver] Starting host d5b5 on LAN 1
+[  0.0004       Driver] Starting host 90c3 on LAN 1
+[  0.0004       Driver] Starting host 3005 on LAN 2
+[  0.0530  Bridge 9e3a] Bridge 9e3a starting up
+[  0.0553  Bridge 08ad] Bridge 08ad starting up
+[  0.0578  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d74"}, "type": "bpdu"}
+[  0.0585  Bridge 9e3a] 1.51804676903e+11
+[  0.0595  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ed85"}, "type": "bpdu"}
+[  0.0598  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9d74"}, "type": "bpdu"}
+[  0.0602  Bridge 08ad] 1.51804676903e+11
+[  0.0602  Bridge 08ad] here
+[  0.0602  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ed85"}, "type": "bpdu"}
+[  0.0605  Bridge 9e3a] 1.51804676903e+11
+[  0.0606  Bridge 9e3a] here
+[  0.0606  Bridge 9e3a] 9e3a removing port 5
+[  0.0609  Bridge 08ad] 1.51804676903e+11
+[  0.0609  Bridge 08ad] here
+[  0.5632  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2512"}, "type": "bpdu"}
+[  0.5638  Bridge 08ad] 1.51804676954e+11
+[  0.5638  Bridge 9e3a] 
+[  0.5638  Bridge 08ad] here
+[  0.5638  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "2259"}, "type": "bpdu"}
+[  0.5639  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2512"}, "type": "bpdu"}
+[  0.5643  Bridge 9e3a] 1.51804676954e+11
+[  0.5644  Bridge 9e3a] here
+[  0.5644  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "2259"}, "type": "bpdu"}
+[  0.5646  Bridge 08ad] 1.51804676954e+11
+[  0.5647  Bridge 08ad] here
+[  0.5652  Bridge 9e3a] 1.51804676954e+11
+[  0.5653  Bridge 9e3a] here
+[  1.0677  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9c5f"}, "type": "bpdu"}
+[  1.0678  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c3db"}, "type": "bpdu"}
+[  1.0678  Bridge 9e3a] 1.51804677004e+11
+[  1.0678  Bridge 9e3a] here
+[  1.0682  Bridge 08ad] 1.51804677004e+11
+[  1.0683  Bridge 08ad] here
+[  1.0683  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c3db"}, "type": "bpdu"}
+[  1.0685  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9c5f"}, "type": "bpdu"}
+[  1.0686  Bridge 9e3a] 1.51804677004e+11
+[  1.0686  Bridge 9e3a] here
+[  1.0690  Bridge 08ad] 1.51804677004e+11
+[  1.5712  Bridge 08ad] here
+[  1.5718  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2ca2"}, "type": "bpdu"}
+[  1.5718  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0b95"}, "type": "bpdu"}
+[  1.5718  Bridge 08ad] 1.51804677055e+11
+[  1.5719  Bridge 08ad] here
+[  1.5719  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2ca2"}, "type": "bpdu"}
+[  1.5724  Bridge 9e3a] 1.51804677055e+11
+[  1.5724  Bridge 9e3a] here
+[  1.5725  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0b95"}, "type": "bpdu"}
+[  1.5727  Bridge 08ad] 1.51804677055e+11
+[  1.5727  Bridge 08ad] here
+[  1.5733  Bridge 9e3a] 1.51804677055e+11
+[  2.0757  Bridge 9e3a] here
+[  2.0758  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c47d"}, "type": "bpdu"}
+[  2.0758  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e471"}, "type": "bpdu"}
+[  2.0764  Bridge 08ad] 1.51804677105e+11
+[  2.0764  Bridge 08ad] here
+[  2.0765  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c47d"}, "type": "bpdu"}
+[  2.0768  Bridge 9e3a] 1.51804677105e+11
+[  2.0769  Bridge 9e3a] here
+[  2.0769  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e471"}, "type": "bpdu"}
+[  2.0770  Bridge 9e3a] 1.51804677105e+11
+[  2.0772  Bridge 08ad] 1.51804677105e+11
 [  2.2173    Host 3005] Sent message 3 to 90c3
-[  2.2176    Host 90c3] Received message 3 from 3005
+[  2.2176  Bridge 08ad] here
+[  2.2177  Bridge 9e3a] here
 [  2.2177  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
 [  2.2177  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5741    Host 3005] Sent message 5 to d5b5
-[  2.5744    Host d5b5] Received message 5 from 3005
-[  2.5746    Host 90c3] Sent message 1 to 90c3
-[  2.5747    Host 90c3] Received message 1 from 90c3
-[  2.5748  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5748  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5758  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
-[  2.5763  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
-[  2.6225    Host 90c3] Sent message 4 to 90c3
-[  2.6228    Host 90c3] Received message 4 from 90c3
-[  2.6229  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
-[  2.6229  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
-[  2.6259  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "eb18"}, "type": "bpdu"}
-[  2.6260  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c3af"}, "type": "bpdu"}
-[  2.6264  Bridge 08ad] 1.51804592604e+11
-[  2.6265  Bridge 08ad] here
-[  2.6269  Bridge 9e3a] 1.51804592604e+11
-[  2.6270  Bridge 9e3a] here
-[  2.7510    Host d5b5] Sent message 0 to d5b5
-[  2.7514    Host d5b5] Received message 0 from d5b5
-[  2.7514  Bridge 08ad] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
-[  2.7515  Bridge 9e3a] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+[  2.2192    Host 90c3] Received message 3 from 3005
+[  2.2194  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2208  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2221    Host 90c3] Received message 3 from 3005
+[  2.2222  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2237  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2251    Host 90c3] Received message 3 from 3005
+[  2.2253  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2268  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2282    Host 90c3] Received message 3 from 3005
+[  2.2283  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2299  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2313    Host 90c3] Received message 3 from 3005
+[  2.2314  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2329  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2343    Host 90c3] Received message 3 from 3005
+[  2.2344  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2360  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2372    Host 90c3] Received message 3 from 3005
+[  2.2373  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2388  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2399    Host 90c3] Received message 3 from 3005
+[  2.2401  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2414  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2426    Host 90c3] Received message 3 from 3005
+[  2.2428  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2441  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2453    Host 90c3] Received message 3 from 3005
+[  2.2455  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2468  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2479    Host 90c3] Received message 3 from 3005
+[  2.2481  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2494  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2506    Host 90c3] Received message 3 from 3005
+[  2.2508  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2521  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2533    Host 90c3] Received message 3 from 3005
+[  2.2535  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2549  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2561    Host 90c3] Received message 3 from 3005
+[  2.2562  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2576  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2588    Host 90c3] Received message 3 from 3005
+[  2.2590  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2603  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2629    Host 90c3] Received message 3 from 3005
+[  2.2630  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2646  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2661    Host 90c3] Received message 3 from 3005
+[  2.2662  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2678  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2692    Host 90c3] Received message 3 from 3005
+[  2.2694  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2709  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2723    Host 90c3] Received message 3 from 3005
+[  2.2725  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2739  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2753    Host 90c3] Received message 3 from 3005
+[  2.2754  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2768  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2779    Host 90c3] Received message 3 from 3005
+[  2.2781  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2794  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2806    Host 90c3] Received message 3 from 3005
+[  2.2808  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2822  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2834    Host 90c3] Received message 3 from 3005
+[  2.2835  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2848  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2859    Host 90c3] Received message 3 from 3005
+[  2.2860  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2875  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2886    Host 90c3] Received message 3 from 3005
+[  2.2888  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2903  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2915    Host 90c3] Received message 3 from 3005
+[  2.2917  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2930  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2942    Host 90c3] Received message 3 from 3005
+[  2.2943  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2958  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2970    Host 90c3] Received message 3 from 3005
+[  2.2971  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2985  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.2997    Host 90c3] Received message 3 from 3005
+[  2.2998  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3013  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3026    Host 90c3] Received message 3 from 3005
+[  2.3028  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3042  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3056    Host 90c3] Received message 3 from 3005
+[  2.3058  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3073  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3086    Host 90c3] Received message 3 from 3005
+[  2.3088  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3102  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3115    Host 90c3] Received message 3 from 3005
+[  2.3117  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3131  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3145    Host 90c3] Received message 3 from 3005
+[  2.3148  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3160  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3171    Host 90c3] Received message 3 from 3005
+[  2.3172  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3185  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3196    Host 90c3] Received message 3 from 3005
+[  2.3197  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3210  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3221    Host 90c3] Received message 3 from 3005
+[  2.3223  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3235  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3246    Host 90c3] Received message 3 from 3005
+[  2.3248  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3261  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3273    Host 90c3] Received message 3 from 3005
+[  2.3275  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3288  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3300    Host 90c3] Received message 3 from 3005
+[  2.3301  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3316  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3328    Host 90c3] Received message 3 from 3005
+[  2.3329  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3342  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3355    Host 90c3] Received message 3 from 3005
+[  2.3356  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3372  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3385    Host 90c3] Received message 3 from 3005
+[  2.3386  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3401  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3415    Host 90c3] Received message 3 from 3005
+[  2.3416  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3431  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3445    Host 90c3] Received message 3 from 3005
+[  2.3447  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3462  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3475    Host 90c3] Received message 3 from 3005
+[  2.3477  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3492  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3506    Host 90c3] Received message 3 from 3005
+[  2.3508  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3523  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3535    Host 90c3] Received message 3 from 3005
+[  2.3536  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3550  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3561    Host 90c3] Received message 3 from 3005
+[  2.3563  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3576  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3588    Host 90c3] Received message 3 from 3005
+[  2.3589  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3602  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3614    Host 90c3] Received message 3 from 3005
+[  2.3615  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3627  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3638    Host 90c3] Received message 3 from 3005
+[  2.3640  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3653  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3665    Host 90c3] Received message 3 from 3005
+[  2.3666  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3681  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3691    Host 90c3] Received message 3 from 3005
+[  2.3693  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3706  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3717    Host 90c3] Received message 3 from 3005
+[  2.3719  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3732  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3744    Host 90c3] Received message 3 from 3005
+[  2.3745  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3758  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3771    Host 90c3] Received message 3 from 3005
+[  2.3772  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3787  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3800    Host 90c3] Received message 3 from 3005
+[  2.3801  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3816  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3830    Host 90c3] Received message 3 from 3005
+[  2.3831  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3846  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3859    Host 90c3] Received message 3 from 3005
+[  2.3861  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3875  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3889    Host 90c3] Received message 3 from 3005
+[  2.3891  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3906  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3919    Host 90c3] Received message 3 from 3005
+[  2.3921  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3934  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3945    Host 90c3] Received message 3 from 3005
+[  2.3947  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3960  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3972    Host 90c3] Received message 3 from 3005
+[  2.3973  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3986  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.3999    Host 90c3] Received message 3 from 3005
+[  2.4000  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4013  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4026    Host 90c3] Received message 3 from 3005
+[  2.4027  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4041  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4052    Host 90c3] Received message 3 from 3005
+[  2.4054  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4067  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4078    Host 90c3] Received message 3 from 3005
+[  2.4080  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4093  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4104    Host 90c3] Received message 3 from 3005
+[  2.4106  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4121  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4134    Host 90c3] Received message 3 from 3005
+[  2.4136  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4150  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4163    Host 90c3] Received message 3 from 3005
+[  2.4164  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4178  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4191    Host 90c3] Received message 3 from 3005
+[  2.4192  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4207  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4220    Host 90c3] Received message 3 from 3005
+[  2.4222  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4236  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4250    Host 90c3] Received message 3 from 3005
+[  2.4251  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4266  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4279    Host 90c3] Received message 3 from 3005
+[  2.4280  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4294  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4305    Host 90c3] Received message 3 from 3005
+[  2.4307  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4319  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4331    Host 90c3] Received message 3 from 3005
+[  2.4332  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4345  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4356    Host 90c3] Received message 3 from 3005
+[  2.4357  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4370  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4381    Host 90c3] Received message 3 from 3005
+[  2.4382  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4395  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4408    Host 90c3] Received message 3 from 3005
+[  2.4409  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4422  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4434    Host 90c3] Received message 3 from 3005
+[  2.4435  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4447  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4458    Host 90c3] Received message 3 from 3005
+[  2.4459  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4472  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4484    Host 90c3] Received message 3 from 3005
+[  2.4486  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4500  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4511    Host 90c3] Received message 3 from 3005
+[  2.4513  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4527  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4539    Host 90c3] Received message 3 from 3005
+[  2.4541  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4555  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4569    Host 90c3] Received message 3 from 3005
+[  2.4570  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4584  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4596    Host 90c3] Received message 3 from 3005
+[  2.4598  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4613  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4626    Host 90c3] Received message 3 from 3005
+[  2.4627  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4641  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4655    Host 90c3] Received message 3 from 3005
+[  2.4656  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4671  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4682    Host 90c3] Received message 3 from 3005
+[  2.4683  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4696  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4708    Host 90c3] Received message 3 from 3005
+[  2.4710  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4722  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4734    Host 90c3] Received message 3 from 3005
+[  2.4736  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4750  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4762    Host 90c3] Received message 3 from 3005
+[  2.4763  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4777  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4789    Host 90c3] Received message 3 from 3005
+[  2.4791  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4806  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4819    Host 90c3] Received message 3 from 3005
+[  2.4820  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4835  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4847    Host 90c3] Received message 3 from 3005
+[  2.4848  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4862  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4874    Host 90c3] Received message 3 from 3005
+[  2.4875  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4890  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4904    Host 90c3] Received message 3 from 3005
+[  2.4905  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4920  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4933    Host 90c3] Received message 3 from 3005
+[  2.4935  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4949  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4975    Host 90c3] Received message 3 from 3005
+[  2.4977  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.4990  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5002    Host 90c3] Received message 3 from 3005
+[  2.5004  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5018  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5031    Host 90c3] Received message 3 from 3005
+[  2.5033  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5048  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5060    Host 90c3] Received message 3 from 3005
+[  2.5061  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5075  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5086    Host 90c3] Received message 3 from 3005
+[  2.5087  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5099  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5110    Host 90c3] Received message 3 from 3005
+[  2.5112  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5125  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5135    Host 90c3] Received message 3 from 3005
+[  2.5137  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5149  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5162    Host 90c3] Received message 3 from 3005
+[  2.5163  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5176  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5190    Host 90c3] Received message 3 from 3005
+[  2.5192  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5205  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5218    Host 90c3] Received message 3 from 3005
+[  2.5220  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5233  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5246    Host 90c3] Received message 3 from 3005
+[  2.5247  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5261  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5275    Host 90c3] Received message 3 from 3005
+[  2.5277  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5292  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5305    Host 90c3] Received message 3 from 3005
+[  2.5307  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5322  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5335    Host 90c3] Received message 3 from 3005
+[  2.5337  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5352  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5365    Host 90c3] Received message 3 from 3005
+[  2.5367  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5381  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5395    Host 90c3] Received message 3 from 3005
+[  2.5396  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5412  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5425    Host 90c3] Received message 3 from 3005
+[  2.5426  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5441  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5453    Host 90c3] Received message 3 from 3005
+[  2.5454  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5467  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5478    Host 90c3] Received message 3 from 3005
+[  2.5480  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5493  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5505    Host 90c3] Received message 3 from 3005
+[  2.5506  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5520  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5532    Host 90c3] Received message 3 from 3005
+[  2.5533  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5546  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5556    Host 90c3] Received message 3 from 3005
+[  2.5558  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5571  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5582    Host 90c3] Received message 3 from 3005
+[  2.5584  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5596  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5617    Host 90c3] Received message 3 from 3005
+[  2.5619  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5633  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5645    Host 90c3] Received message 3 from 3005
+[  2.5647  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5660  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5672    Host 90c3] Received message 3 from 3005
+[  2.5674  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5687  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5701    Host 90c3] Received message 3 from 3005
+[  2.5703  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5718  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5731    Host 90c3] Received message 3 from 3005
+[  2.5733  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5736    Host 3005] Sent message 5 to d5b5
+[  2.5739    Host 90c3] Sent message 1 to 90c3
+[  2.5741    Host 90c3] Received message 1 from 90c3
+[  2.5741  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5754    Host d5b5] Received message 5 from 3005
+[  2.5769  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+[  2.5769  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+[  2.5783  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5787  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5793  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5806    Host 90c3] Received message 3 from 3005
+[  2.5809  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "1d76"}, "type": "bpdu"}
+[  2.5811  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "b7bc"}, "type": "bpdu"}
+[  2.5814  Bridge 08ad] 1.51804677156e+11
+[  2.5815  Bridge 08ad] here
+[  2.5818  Bridge 9e3a] 1.51804677156e+11
+[  2.5819  Bridge 9e3a] here
+[  2.5820  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "b7bc"}, "type": "bpdu"}
+[  2.5822  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "1d76"}, "type": "bpdu"}
+[  2.5822  Bridge 08ad] 1.51804677156e+11
+[  2.5822  Bridge 08ad] here
+[  2.5823  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5826  Bridge 9e3a] 1.51804677156e+11
+[  2.5826  Bridge 9e3a] here
+[  2.5827  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+[  2.5836    Host d5b5] Received message 5 from 3005
+[  2.5843  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5855  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5867    Host d5b5] Received message 5 from 3005
+[  2.5869  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5882  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5895    Host d5b5] Received message 5 from 3005
+[  2.5896  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5910  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5923    Host d5b5] Received message 5 from 3005
+[  2.5924  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5938  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5950    Host d5b5] Received message 5 from 3005
+[  2.5952  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5966  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5980    Host d5b5] Received message 5 from 3005
+[  2.5982  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.5996  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6009    Host d5b5] Received message 5 from 3005
+[  2.6010  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6025  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6037    Host d5b5] Received message 5 from 3005
+[  2.6039  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6053  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6066    Host d5b5] Received message 5 from 3005
+[  2.6067  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6082  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6096    Host d5b5] Received message 5 from 3005
+[  2.6097  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6112  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6124    Host d5b5] Received message 5 from 3005
+[  2.6125  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6137  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6149    Host d5b5] Received message 5 from 3005
+[  2.6151  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6165  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6177    Host d5b5] Received message 5 from 3005
+[  2.6178  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6191  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6203    Host d5b5] Received message 5 from 3005
+[  2.6204  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6217  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6223    Host 90c3] Sent message 4 to 90c3
+[  2.6225    Host 90c3] Received message 4 from 90c3
+[  2.6225  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+[  2.6233    Host d5b5] Received message 5 from 3005
+[  2.6236  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+[  2.6241  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6257  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6270    Host d5b5] Received message 5 from 3005
+[  2.6271  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6284  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6296    Host d5b5] Received message 5 from 3005
+[  2.6298  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6311  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6324    Host d5b5] Received message 5 from 3005
+[  2.6326  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6342  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6356    Host d5b5] Received message 5 from 3005
+[  2.6358  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6373  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6386    Host d5b5] Received message 5 from 3005
+[  2.6388  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6403  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6416    Host d5b5] Received message 5 from 3005
+[  2.6417  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6433  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6445    Host d5b5] Received message 5 from 3005
+[  2.6447  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6460  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6471    Host d5b5] Received message 5 from 3005
+[  2.6473  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6486  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6497    Host d5b5] Received message 5 from 3005
+[  2.6499  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6511  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6522    Host d5b5] Received message 5 from 3005
+[  2.6524  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6538  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6550    Host d5b5] Received message 5 from 3005
+[  2.6551  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6564  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6575    Host d5b5] Received message 5 from 3005
+[  2.6577  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6590  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6602    Host d5b5] Received message 5 from 3005
+[  2.6603  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6616  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6630    Host d5b5] Received message 5 from 3005
+[  2.6632  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6646  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6660    Host d5b5] Received message 5 from 3005
+[  2.6661  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6675  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6689    Host d5b5] Received message 5 from 3005
+[  2.6690  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6705  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6718    Host d5b5] Received message 5 from 3005
+[  2.6720  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6735  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6748    Host d5b5] Received message 5 from 3005
+[  2.6750  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6765  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6776    Host d5b5] Received message 5 from 3005
+[  2.6778  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6790  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6802    Host d5b5] Received message 5 from 3005
+[  2.6804  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6818  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6830    Host d5b5] Received message 5 from 3005
+[  2.6831  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6845  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6856    Host d5b5] Received message 5 from 3005
+[  2.6858  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6872  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6885    Host d5b5] Received message 5 from 3005
+[  2.6886  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6902  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6914    Host d5b5] Received message 5 from 3005
+[  2.6915  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6928  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6940    Host d5b5] Received message 5 from 3005
+[  2.6942  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6957  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6969    Host d5b5] Received message 5 from 3005
+[  2.6971  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6984  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.6997    Host d5b5] Received message 5 from 3005
+[  2.6999  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7013  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7027    Host d5b5] Received message 5 from 3005
+[  2.7029  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7044  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7058    Host d5b5] Received message 5 from 3005
+[  2.7059  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7073  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7087    Host d5b5] Received message 5 from 3005
+[  2.7089  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7104  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7116    Host d5b5] Received message 5 from 3005
+[  2.7117  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7129  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7141    Host d5b5] Received message 5 from 3005
+[  2.7142  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7155  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7166    Host d5b5] Received message 5 from 3005
+[  2.7167  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7180  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7191    Host d5b5] Received message 5 from 3005
+[  2.7192  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7205  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7218    Host d5b5] Received message 5 from 3005
+[  2.7220  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7232  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7244    Host d5b5] Received message 5 from 3005
+[  2.7246  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7259  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7270    Host d5b5] Received message 5 from 3005
+[  2.7271  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7289  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7301    Host d5b5] Received message 5 from 3005
+[  2.7302  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7317  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7330    Host d5b5] Received message 5 from 3005
+[  2.7331  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7345  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7358    Host d5b5] Received message 5 from 3005
+[  2.7359  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7373  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7386    Host d5b5] Received message 5 from 3005
+[  2.7388  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7402  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7416    Host d5b5] Received message 5 from 3005
+[  2.7418  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7433  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7445    Host d5b5] Received message 5 from 3005
+[  2.7447  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7486  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7498    Host d5b5] Received message 5 from 3005
+[  2.7499  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7508    Host d5b5] Sent message 0 to d5b5
+[  2.7510    Host d5b5] Received message 0 from d5b5
+[  2.7512  Bridge 08ad] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+[  2.7514  Bridge 9e3a] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+[  2.7526  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+[  2.7540    Host d5b5] Received message 5 from 3005
+[  2.7542  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
 [  2.8846    Host 90c3] Sent message 9 to 3005
-[  2.8849    Host 3005] Received message 9 from 90c3
 [  2.8850  Bridge 08ad] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
 [  2.8850  Bridge 9e3a] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
+[  2.8863    Host 3005] Received message 9 from 90c3
+[  2.8871  Bridge 9e3a] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
 [  2.8915    Host 0aa8] Sent message 6 to d5b5
 [  2.8918    Host d5b5] Received message 6 from 0aa8
 [  2.8919  Bridge 08ad] {"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
@@ -79,22 +681,33 @@
 [  2.9632    Host 90c3] Received message 8 from 90c3
 [  2.9633  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
 [  2.9633  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
-[  3.4674  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "8d8d"}, "type": "bpdu"}
-[  3.4675  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "984e"}, "type": "bpdu"}
-[  3.4679  Bridge 08ad] 1.51804592689e+11
-[  3.4679  Bridge 08ad] here
-[  3.4684  Bridge 9e3a] 1.51804592689e+11
-[  3.4685  Bridge 9e3a] here
-[  3.9705  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "4b41"}, "type": "bpdu"}
-[  3.9706  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "89b4"}, "type": "bpdu"}
-[  3.9711  Bridge 9e3a] 1.51804592739e+11
-[  3.9712  Bridge 9e3a] here
-[  3.9717  Bridge 08ad] 1.51804592739e+11
-[  3.9717  Bridge 08ad] here
+[  3.4680  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "7d02"}, "type": "bpdu"}
+[  3.4686  Bridge 08ad] 1.51804677244e+11
+[  3.4686  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e343"}, "type": "bpdu"}
+[  3.4686  Bridge 08ad] here
+[  3.4687  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "7d02"}, "type": "bpdu"}
+[  3.4693  Bridge 9e3a] 1.51804677244e+11
+[  3.4694  Bridge 9e3a] here
+[  3.4695  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e343"}, "type": "bpdu"}
+[  3.4701  Bridge 08ad] 1.51804677244e+11
+[  3.4701  Bridge 08ad] here
+[  3.4704  Bridge 9e3a] 1.51804677244e+11
+[  3.4705  Bridge 9e3a] here
+[  3.9732  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0b1c"}, "type": "bpdu"}
+[  3.9733  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "0eb5"}, "type": "bpdu"}
+[  3.9733  Bridge 9e3a] 1.51804677295e+11
+[  3.9733  Bridge 9e3a] here
+[  3.9734  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "0b1c"}, "type": "bpdu"}
+[  3.9738  Bridge 08ad] 1.51804677295e+11
+[  3.9739  Bridge 08ad] here
+[  3.9739  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "0eb5"}, "type": "bpdu"}
+[  3.9742  Bridge 9e3a] 1.51804677295e+11
+[  3.9746  Bridge 08ad] 1.51804677295e+11
+[  3.9746  Bridge 08ad] here
 Simulation finished.
-Total packets sent: 27
+Total packets sent: 421
 Total data packets sent: 10
 Total data packets received: 10
 Total data packets dropped: 0  (message ids )
-Total data packets duplicated: 0  (message ids )
+Total data packets duplicated: 2  (message ids 3, 5)
 Data packet delivery ratio: 1.000000
