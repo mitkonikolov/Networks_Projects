@@ -21,10 +21,11 @@ class Bridge(object):
     # file number of the port associated with the root
     root_port = -1 # the port to use to get to root
     message = None
-    # unique LANs we are connected to
-    uniqueLANs = set()
+    # unique LANs we are connected to and ports through which we connect to them
+    uniqueLANs = {}
     # file numbers for the active ports
     activePorts = []
+    inactivePorts = []
     routing_table = {}
 
     def __init__(self, id, LAN):
@@ -50,6 +51,7 @@ class Bridge(object):
 	    s.connect(self.pad(self.LAN[x]))
 	    f.write("{}\n\n".format(s.fileno()))
             self.sockets.append(s)
+	    self.activePorts.append(s)
 	    f.close()
         self.message = Message(self.sockets)
 
@@ -67,7 +69,7 @@ class Bridge(object):
 	    self.broadcast_bpdu()
 	    
             # Calls select with all the sockets; change the timeout value (1)
-            ready, write, ignore2 = select.select(self.sockets, self.sockets, [], 0.5)
+            ready, ignore1, ignore2 = select.select(self.sockets, [], [], 0.5)
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
@@ -76,16 +78,17 @@ class Bridge(object):
 		f.write("\n")
 		f.close()
                 if self.message.is_BPDU(data):
-                    if self.is_from_me(data):
+		    if self.is_from_me(data):
 			peer_name = socket.getpeername()
 			file_no = socket.fileno()
-                        if peer_name not in self.uniqueLANs:
-                            # mark port as inactive - don't listen/send data
-                            self.uniqueLANs.add(peer_name)
-			    self.activePorts.append(socket)
+			if socket not in self.inactivePorts and peer_name in self.uniqueLANs and file_no != self.uniqueLANs[peer_name]:
+			    self.activePorts.remove(socket)
+			    self.inactivePorts.append(socket)
 			    f = open("ports.txt", "a")
-			    f.write("active: {}\n".format(file_no))
+			    f.write("inactive: {}\n".format(socket.fileno()))
 			    f.close()
+			elif peer_name not in self.uniqueLANs:
+			    self.uniqueLANs[peer_name] = file_no
                     else:
                         try:
                             foreignBPDU = json.loads(data)
@@ -110,7 +113,21 @@ class Bridge(object):
                             print(e)
                             print("BPDU was malformed and is " + data)
 		else:
-		    if socket in self.activePorts:
+		    
+		    #f = open("out.txt", "a")
+		    #f.write("\nActive Ports\n")
+		    #f.write(str(type(socket)))
+		    #for port in self.activePorts:
+		#	f.write("{}\n".format(port.fileno()))
+		 #   f.write(str(socket.fileno()))
+		  #  f.write(data)
+		    #f.close()
+		    
+		    # prevent reading from multiple ports
+		    if socket not in self.inactivePorts:
+		
+		   # 	f.write("\n------END-------\n")
+		#	f.close()
 			# extract source and put in forwarding table
 			data_dict = json.loads(data)
 			source = data_dict['source']
@@ -118,14 +135,25 @@ class Bridge(object):
 			# extract destination and check whether we have it
 			destination = data_dict['dest']
 			dest_ports = []
+			f = open("out.txt", "a")
+			f.write("\nRouting table:\n")
+			for host in self.routing_table:
+			    f.write("Host: {} - Port: {}\n\n".format(host, self.routing_table[host]))
+			#f.close()
 			if destination in self.routing_table:
-			    dest_ports.append(self.routing_table[destination])
+			    f.write("destionation is in routing table\n")
+			    # only send if the two hosts are on different ports
+			    if self.routing_table[destination] != socket:
+			        dest_ports.append(self.routing_table[destination])
 			else:
+			    f.write("destination is not in routing table\n")
 			    for x in self.activePorts:
-				if x.fileno() != socket.fileno():
+				if x != socket:
 				    dest_ports.append(x)
 			self.message.send(data, dest_ports)
-			    
+			f.write(str(len(dest_ports)))
+			#f.write("\ndestination is {}\n".format(dest_ports[0]))
+			f.close()    
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
 
@@ -144,6 +172,16 @@ class Bridge(object):
     def is_from_me(self, bpdu):
         bpdu_dict = json.loads(bpdu)
         return bpdu_dict['source'] == self.id
+
+    def __eq__(self, other):
+        """Overrides the default implementation"""
+        if isinstance(self, other.__class__):
+            return self.fileno() == other.fileno()
+    	return False
+
+    def __ne__(self, other):
+        """Overrides the default implementation (unnecessary in Python 3)"""
+        return not self.__eq__(other)
 
 
 class Message(object):
