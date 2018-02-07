@@ -1,110 +1,1738 @@
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "7e69"}, "type": "bpdu"}
+ff1a/ff1a broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "5dd9"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "5dd9"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "5dd9"}, "type": "bpdu"}
+ff1a/ff1a broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "d060"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "d060"}, "type": "bpdu"}
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "05b5"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "05b5"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "05b5"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "05b5"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "05b5"}, "type": "bpdu"}
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "05b5"}, "type": "bpdu"}
+9e3a/9e3a broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 0, "root": "ff1a", "id": "d060"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9e6c"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9e6c"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "e3a0"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+9e3a/08ad broadcasting
+New root: ff1a/08ad
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "1ae8"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "e3a0"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3e5b"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "e3a0"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3e5b"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 2, "root": "08ad", "id": "42a4"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "3e5b"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b1d8"}, "type": "bpdu"}
 08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "147d"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "147d"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+New root: ff1a/08ad
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "c39c"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "3f71"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "d4f0"}, "type": "bpdu"}
+ff1a/08ad broadcasting
 08ad/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "9eba"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "6187"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "6187"}, "type": "bpdu"}
 08ad/08ad broadcasting
-08ad/08ad broadcasting
-{"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
+9e3a/08ad broadcasting
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9326"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ba95"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9326"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "619a"}, "type": "bpdu"}
+{"source":"95aa","dest":"b1ea","type":"data","message":{"id":62}}
+{"source":"f36a","dest":"3005","type":"data","message":{"id":75}}
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":26}}
 
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
+Routing table for 9e3a:
+Host: 01af - Port: 7
 
 destination is not in routing table
-1{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+there are 1 destination ports
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":26}}
 
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
+Routing table for 08ad:
+Host: 01af - Port: 5
 
 destination is not in routing table
-108ad/08ad broadcasting
-{"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+there are 2 destination ports
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":26}}
+{"source":"1de3","dest":"0aa8","type":"data","message":{"id":95}}
+{"source":"6494","dest":"90c3","type":"data","message":{"id":81}}
 
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
+Routing table for ff1a:
+Host: 6494 - Port: 6
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
+destination is not in routing table
+there are 1 destination ports
+ff1a/08ad broadcasting
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":64}}
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":64}}
 
-destionation is in routing table
-0{"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
+Routing table for 9e3a:
+Host: 0aa8 - Port: 3
 
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
+Host: 01af - Port: 7
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
+destination is not in routing table
+there are 1 destination ports
 
-destionation is in routing table
-0{"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
+Routing table for 08ad:
+Host: 0aa8 - Port: 5
 
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
+Host: 01af - Port: 5
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-destionation is in routing table
-0{"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
-
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-destionation is in routing table
-1{"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
-
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-destionation is in routing table
-0{"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
-
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-destionation is in routing table
-0{"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
-
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-destionation is in routing table
-0{"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
-
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7fbd2bd90b40>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7fbd2bd90a60>
-
-destionation is in routing table
-008ad/08ad broadcasting
+destination is not in routing table
+there are 2 destination ports
+9e3a/08ad broadcasting
 08ad/08ad broadcasting
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":64}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "0030"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "5530"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "3576"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "5530"}, "type": "bpdu"}
+{"source":"90c3","dest":"f36a","type":"data","message":{"id":56}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"9f3e","dest":"f36a","type":"data","message":{"id":28}}
+{"source":"9f3e","dest":"b1ea","type":"data","message":{"id":82}}
+9e3a/08ad broadcasting
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "39fc"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "a469"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "a469"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "632f"}, "type": "bpdu"}
+{"source":"3005","dest":"95aa","type":"data","message":{"id":41}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":69}}
+
+Routing table for 9e3a:
+Host: 0aa8 - Port: 3
+
+Host: 01af - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":69}}
+
+Routing table for 08ad:
+Host: 0aa8 - Port: 5
+
+Host: 01af - Port: 5
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"01af","dest":"9f3e","type":"data","message":{"id":69}}
+{"source":"1de3","dest":"59e8","type":"data","message":{"id":24}}
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":12}}
+
+Routing table for 08ad:
+Host: 4c03 - Port: 3
+
+Host: 0aa8 - Port: 5
+
+Host: 01af - Port: 5
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":12}}
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":12}}
+
+Routing table for 9e3a:
+Host: 4c03 - Port: 3
+
+Host: 0aa8 - Port: 3
+
+Host: 01af - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"95aa","dest":"f662","type":"data","message":{"id":20}}
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":8}}
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":8}}
+
+Routing table for 08ad:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 6
+
+Host: 0aa8 - Port: 5
+
+Host: 01af - Port: 5
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":8}}
+
+Routing table for 9e3a:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 0aa8 - Port: 3
+
+Host: 01af - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"95aa","dest":"e41c","type":"data","message":{"id":89}}
+{"source":"01af","dest":"21ee","type":"data","message":{"id":14}}
+
+Routing table for 9e3a:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 0aa8 - Port: 3
+
+Host: 01af - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"01af","dest":"21ee","type":"data","message":{"id":14}}
+
+Routing table for 08ad:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 6
+
+Host: 0aa8 - Port: 5
+
+Host: 01af - Port: 5
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"01af","dest":"21ee","type":"data","message":{"id":14}}
+{"source":"f36a","dest":"b1ea","type":"data","message":{"id":84}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "b983"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "574b"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "574b"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "e2d1"}, "type": "bpdu"}
+{"source":"6494","dest":"4c03","type":"data","message":{"id":30}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"1c67","dest":"59e8","type":"data","message":{"id":87}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"e41c","dest":"9f3e","type":"data","message":{"id":92}}
+
+Routing table for 9e3a:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 0aa8 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"e41c","dest":"9f3e","type":"data","message":{"id":92}}
+
+Routing table for 08ad:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 6
+
+Host: 0aa8 - Port: 5
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"e41c","dest":"9f3e","type":"data","message":{"id":92}}
+{"source":"ce76","dest":"3005","type":"data","message":{"id":37}}
+{"source":"3005","dest":"59e8","type":"data","message":{"id":40}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"c01f","dest":"1de3","type":"data","message":{"id":38}}
+{"source":"c01f","dest":"1de3","type":"data","message":{"id":38}}
+
+Routing table for 08ad:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 6
+
+Host: 0aa8 - Port: 5
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"c01f","dest":"1de3","type":"data","message":{"id":38}}
+
+Routing table for 9e3a:
+Host: 4c03 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 0aa8 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":53}}
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":53}}
+ff1a/08ad broadcasting
+
+Routing table for 08ad:
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+08ad/08ad broadcasting
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":53}}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "d895"}, "type": "bpdu"}
+
+Routing table for 9e3a:
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "247b"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "247b"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "ca39"}, "type": "bpdu"}
+{"source":"eec2","dest":"1c67","type":"data","message":{"id":70}}
+{"source":"eec2","dest":"1c67","type":"data","message":{"id":70}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"eec2","dest":"1c67","type":"data","message":{"id":70}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"f662","dest":"3005","type":"data","message":{"id":22}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is in routing table
+there are 1 destination ports
+{"source":"f36a","dest":"95aa","type":"data","message":{"id":39}}
+{"source":"c01f","dest":"4c03","type":"data","message":{"id":46}}
+{"source":"c01f","dest":"4c03","type":"data","message":{"id":46}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 1 destination ports
+{"source":"c01f","dest":"ce76","type":"data","message":{"id":83}}
+{"source":"c01f","dest":"ce76","type":"data","message":{"id":83}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"c01f","dest":"ce76","type":"data","message":{"id":83}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"9f3e","dest":"b1ea","type":"data","message":{"id":67}}
+{"source":"1de3","dest":"eec2","type":"data","message":{"id":88}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "4f46"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "823d"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "823d"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "08da"}, "type": "bpdu"}
+{"source":"95aa","dest":"21ee","type":"data","message":{"id":0}}
+{"source":"ce76","dest":"90c3","type":"data","message":{"id":1}}
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":65}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 1 destination ports
+{"source":"4c03","dest":"c01f","type":"data","message":{"id":65}}
+{"source":"9f3e","dest":"90c3","type":"data","message":{"id":36}}
+{"source":"b1ea","dest":"21ee","type":"data","message":{"id":55}}
+{"source":"90c3","dest":"9f3e","type":"data","message":{"id":44}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"f36a","dest":"1de3","type":"data","message":{"id":51}}
+{"source":"6494","dest":"01af","type":"data","message":{"id":85}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"4c03","dest":"e41c","type":"data","message":{"id":77}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 1 destination ports
+{"source":"4c03","dest":"e41c","type":"data","message":{"id":77}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is in routing table
+there are 1 destination ports
+{"source":"f36a","dest":"21ee","type":"data","message":{"id":17}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "4c8a"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e89a"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e89a"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "616a"}, "type": "bpdu"}
+{"source":"1c67","dest":"59e8","type":"data","message":{"id":33}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":34}}
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":34}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":34}}
+{"source":"ce76","dest":"4c03","type":"data","message":{"id":91}}
+{"source":"1de3","dest":"4c03","type":"data","message":{"id":50}}
+{"source":"b1ea","dest":"0aa8","type":"data","message":{"id":90}}
+{"source":"95aa","dest":"e41c","type":"data","message":{"id":71}}
+{"source":"f662","dest":"90c3","type":"data","message":{"id":31}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is in routing table
+there are 0 destination ports
+{"source":"01af","dest":"f662","type":"data","message":{"id":73}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"01af","dest":"f662","type":"data","message":{"id":73}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"01af","dest":"f662","type":"data","message":{"id":73}}
+{"source":"ce76","dest":"f36a","type":"data","message":{"id":11}}
+{"source":"f36a","dest":"1c67","type":"data","message":{"id":57}}
+{"source":"c01f","dest":"0aa8","type":"data","message":{"id":63}}
+{"source":"c01f","dest":"0aa8","type":"data","message":{"id":63}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 1 destination ports
+{"source":"c01f","dest":"0aa8","type":"data","message":{"id":63}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is in routing table
+there are 0 destination ports
+{"source":"1c67","dest":"9f3e","type":"data","message":{"id":5}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "cce1"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "2317"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "2317"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "7836"}, "type": "bpdu"}
+{"source":"9f3e","dest":"f662","type":"data","message":{"id":13}}
+{"source":"f36a","dest":"3005","type":"data","message":{"id":15}}
+{"source":"f662","dest":"eec2","type":"data","message":{"id":19}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"90c3","dest":"59e8","type":"data","message":{"id":54}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"9f3e","dest":"eec2","type":"data","message":{"id":42}}
+{"source":"eec2","dest":"95aa","type":"data","message":{"id":10}}
+{"source":"eec2","dest":"95aa","type":"data","message":{"id":10}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"eec2","dest":"95aa","type":"data","message":{"id":10}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"ce76","dest":"eec2","type":"data","message":{"id":66}}
+{"source":"9f3e","dest":"59e8","type":"data","message":{"id":97}}
+{"source":"4c03","dest":"21ee","type":"data","message":{"id":79}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"4c03","dest":"21ee","type":"data","message":{"id":79}}
+{"source":"4c03","dest":"21ee","type":"data","message":{"id":79}}
+08ad/08ad broadcasting
+ff1a/08ad broadcasting
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "5e72"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "4a3c"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "5e72"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "23e6"}, "type": "bpdu"}
+{"source":"1c67","dest":"21ee","type":"data","message":{"id":93}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"4c03","dest":"95aa","type":"data","message":{"id":7}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"4c03","dest":"95aa","type":"data","message":{"id":7}}
+{"source":"4c03","dest":"95aa","type":"data","message":{"id":7}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"eec2","dest":"f662","type":"data","message":{"id":60}}
+{"source":"eec2","dest":"f662","type":"data","message":{"id":60}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"eec2","dest":"f662","type":"data","message":{"id":60}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"4c03","dest":"f662","type":"data","message":{"id":21}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"4c03","dest":"f662","type":"data","message":{"id":21}}
+{"source":"4c03","dest":"f662","type":"data","message":{"id":21}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"90c3","dest":"6494","type":"data","message":{"id":80}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is in routing table
+there are 1 destination ports
+{"source":"1de3","dest":"6494","type":"data","message":{"id":35}}
+{"source":"f662","dest":"eec2","type":"data","message":{"id":76}}
+
+Routing table for ff1a:
+Host: 3005 - Port: 6
+
+Host: 6494 - Port: 6
+
+Host: f662 - Port: 7
+
+Host: 1c67 - Port: 6
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":9}}
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":9}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"d5b5","dest":"ce76","type":"data","message":{"id":9}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"21ee","dest":"f662","type":"data","message":{"id":27}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 3005 - Port: 6
+
+Host: 21ee - Port: 7
+
+Host: f662 - Port: 7
+
+Host: 90c3 - Port: 7
+
+destination is in routing table
+there are 0 destination ports
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":29}}
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":29}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+9e3a/08ad broadcasting
+08ad/08ad broadcasting
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":29}}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "8b0c"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "f7a4"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "f7a4"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "0a02"}, "type": "bpdu"}
+{"source":"ce76","dest":"ce76","type":"data","message":{"id":96}}
+{"source":"eec2","dest":"90c3","type":"data","message":{"id":45}}
+{"source":"eec2","dest":"90c3","type":"data","message":{"id":45}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"eec2","dest":"90c3","type":"data","message":{"id":45}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"b1ea","dest":"1de3","type":"data","message":{"id":32}}
+{"source":"01af","dest":"21ee","type":"data","message":{"id":2}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"01af","dest":"21ee","type":"data","message":{"id":2}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"01af","dest":"21ee","type":"data","message":{"id":2}}
+{"source":"eec2","dest":"9f3e","type":"data","message":{"id":52}}
+{"source":"eec2","dest":"9f3e","type":"data","message":{"id":52}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"eec2","dest":"9f3e","type":"data","message":{"id":52}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"59e8","dest":"4c03","type":"data","message":{"id":98}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is in routing table
+there are 1 destination ports
+{"source":"59e8","dest":"4c03","type":"data","message":{"id":98}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 1 destination ports
+{"source":"21ee","dest":"95aa","type":"data","message":{"id":49}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 3005 - Port: 6
+
+Host: 21ee - Port: 7
+
+Host: f662 - Port: 7
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "571f"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "69e4"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "69e4"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "e193"}, "type": "bpdu"}
+{"source":"90c3","dest":"0aa8","type":"data","message":{"id":86}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 3005 - Port: 6
+
+Host: 21ee - Port: 7
+
+Host: f662 - Port: 7
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"eec2","dest":"01af","type":"data","message":{"id":43}}
+{"source":"eec2","dest":"01af","type":"data","message":{"id":43}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 1 destination ports
+{"source":"eec2","dest":"01af","type":"data","message":{"id":43}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is in routing table
+there are 1 destination ports
+{"source":"4c03","dest":"4c03","type":"data","message":{"id":58}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is in routing table
+there are 0 destination ports
+{"source":"b1ea","dest":"f662","type":"data","message":{"id":68}}
+{"source":"ce76","dest":"c01f","type":"data","message":{"id":23}}
+{"source":"21ee","dest":"f36a","type":"data","message":{"id":18}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 3005 - Port: 6
+
+Host: 21ee - Port: 7
+
+Host: f662 - Port: 7
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"21ee","dest":"ce76","type":"data","message":{"id":99}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 3005 - Port: 6
+
+Host: 21ee - Port: 7
+
+Host: f662 - Port: 7
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "d440"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e672"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "e672"}, "type": "bpdu"}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "39c7"}, "type": "bpdu"}
+{"source":"ce76","dest":"eec2","type":"data","message":{"id":4}}
+{"source":"0aa8","dest":"95aa","type":"data","message":{"id":74}}
+{"source":"0aa8","dest":"95aa","type":"data","message":{"id":74}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"0aa8","dest":"95aa","type":"data","message":{"id":74}}
+{"source":"9f3e","dest":"ce76","type":"data","message":{"id":61}}
+{"source":"b1ea","dest":"b1ea","type":"data","message":{"id":78}}
+{"source":"eec2","dest":"1de3","type":"data","message":{"id":16}}
+{"source":"eec2","dest":"1de3","type":"data","message":{"id":16}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"eec2","dest":"1de3","type":"data","message":{"id":16}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"6494","dest":"d5b5","type":"data","message":{"id":59}}
+
+Routing table for ff1a:
+Host: 6494 - Port: 6
+
+Host: 1c67 - Port: 6
+
+Host: 3005 - Port: 6
+
+Host: 21ee - Port: 7
+
+Host: f662 - Port: 7
+
+Host: 90c3 - Port: 7
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"9f3e","dest":"95aa","type":"data","message":{"id":6}}
+{"source":"f36a","dest":"21ee","type":"data","message":{"id":72}}
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "1f44"}, "type": "bpdu"}
+08ad/08ad broadcasting
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "5d46"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "5d46"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "1fb0"}, "type": "bpdu"}
+{"source":"ce76","dest":"e41c","type":"data","message":{"id":3}}
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":48}}
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":48}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"0aa8","dest":"6494","type":"data","message":{"id":48}}
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":47}}
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":47}}
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"c01f","dest":"9f3e","type":"data","message":{"id":47}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+{"source":"0aa8","dest":"3005","type":"data","message":{"id":25}}
+{"source":"0aa8","dest":"3005","type":"data","message":{"id":25}}
+
+Routing table for 9e3a:
+Host: eec2 - Port: 3
+
+Host: 01af - Port: 7
+
+Host: e41c - Port: 7
+
+Host: 0aa8 - Port: 3
+
+Host: c01f - Port: 3
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 7
+
+Host: d5b5 - Port: 3
+
+destination is not in routing table
+there are 1 destination ports
+
+Routing table for 08ad:
+Host: eec2 - Port: 6
+
+Host: 01af - Port: 5
+
+Host: e41c - Port: 5
+
+Host: 0aa8 - Port: 5
+
+Host: c01f - Port: 6
+
+Host: 4c03 - Port: 3
+
+Host: 59e8 - Port: 5
+
+Host: d5b5 - Port: 6
+
+destination is not in routing table
+there are 2 destination ports
+{"source":"0aa8","dest":"3005","type":"data","message":{"id":25}}
+9e3a/08ad broadcasting
+08ad/08ad broadcasting
+ff1a/08ad broadcasting
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "7505"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c600"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c600"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "87f5"}, "type": "bpdu"}

@@ -167,22 +167,22 @@ class Bridge(object):
 			destination = data_dict['dest']
 			dest_ports = []
 			f = open("out.txt", "a")
-			f.write("\nRouting table:\n")
+			f.write("\nRouting table for {}:\n".format(self.id))
 			for host in self.routing_table:
-			    f.write("Host: {} - Port: {}\n\n".format(host, self.routing_table[host]))
+			    f.write("Host: {} - Port: {}\n\n".format(host, self.routing_table[host].fileno()))
 			#f.close()
 			if destination in self.routing_table:
-			    f.write("destionation is in routing table\n")
+			    f.write("destination is in routing table\n")
 			    # only send if the two hosts are on different ports
 			    if self.routing_table[destination] != socket:
 			        dest_ports.append(self.routing_table[destination])
 			else:
 			    f.write("destination is not in routing table\n")
-			    for x in self.activePorts:
+			    for x in self.enabled_ports:
 				if x != socket:
 				    dest_ports.append(x)
 			self.message.send(data, dest_ports)
-			f.write(str(len(dest_ports)))
+			f.write("there are {} destination ports\n".format(len(dest_ports)))
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
 			f.close()    
 				# if we have it, forward to active ports
@@ -239,6 +239,7 @@ class Bridge(object):
 		continue
 		#self.enabled_ports.append(port)
 	    if port in self.enabled_ports:
+		print("{} disabling port {}\n".format(self.id, port.fileno()))
 	    	self.enabled_ports.remove(port)
 
         # TODO Consider how to identify if a bridge has stopped working and a
