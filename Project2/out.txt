@@ -1,202 +1,119 @@
 9e3a/9e3a broadcasting
-{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "94ce"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "143a"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "143a"}, "type": "bpdu"}
 9e3a/9e3a broadcasting
-{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "c428"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "7469"}, "type": "bpdu"}
 08ad/08ad broadcasting
-{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "37c7"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "7469"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9a14"}, "type": "bpdu"}
 9e3a/08ad broadcasting
 New root: 9e3a/08ad
-{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "55fc"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2f07"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "9a14"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "2f07"}, "type": "bpdu"}
+9e3a/08ad broadcasting
+New root: 9e3a/08ad
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c937"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c937"}, "type": "bpdu"}
+08ad/08ad broadcasting
+08ad/08ad broadcasting
+08ad/08ad broadcasting
 {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-{"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
 destination is not in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-destination is not in routing table
-0{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
+1{"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
 destination is not in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-destination is not in routing table
-0{"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
+108ad/08ad broadcasting
 {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
 0{"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
-{"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
 0{"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
-{"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: d5b5 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: d5b5 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
 0{"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
-{"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: d5b5 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: d5b5 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-destionation is in routing table
-0{"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
-{"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
+1{"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: d5b5 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: d5b5 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: 0aa8 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
 0{"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
-{"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: d5b5 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: d5b5 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: 0aa8 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
 0{"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
-{"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: d5b5 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: d5b5 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: 0aa8 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
 0{"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
-{"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
 
 Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 3005 - Port: <socket._socketobject object at 0x7fe6c69ada60>
 
-Host: 90c3 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: 90c3 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: d5b5 - Port: <socket._socketobject object at 0x7f604afca6e0>
+Host: d5b5 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f604afca6e0>
-
-destionation is in routing table
-0
-Routing table:
-Host: 3005 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 90c3 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: d5b5 - Port: <socket._socketobject object at 0x7f72a210e6e0>
-
-Host: 0aa8 - Port: <socket._socketobject object at 0x7f72a210e6e0>
+Host: 0aa8 - Port: <socket._socketobject object at 0x7fe6c69ad750>
 
 destionation is in routing table
-0
+008ad/08ad broadcasting
+08ad/08ad broadcasting
