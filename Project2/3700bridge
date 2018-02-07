@@ -27,6 +27,9 @@ class Bridge(object):
     activePorts = []
     inactivePorts = []
     routing_table = {}
+    # a dictionary of ports; each port maps to a list of (BPDU, time) tuple
+    port_history = {}
+    enabled_ports = []
 
     def __init__(self, id, LAN):
         self.id = id
@@ -52,6 +55,8 @@ class Bridge(object):
 	    #f.write("{}\n\n".format(s.fileno()))
             self.sockets.append(s)
 	    self.activePorts.append(s)
+	    self.enabled_ports.append(s)
+	    self.port_history[s] = []
 	    #f.close()
         self.message = Message(self.sockets)
 
@@ -72,7 +77,7 @@ class Bridge(object):
 
         while True:
 	    curr_time = time.time() * 100
-	    if (curr_time-last_mess_time) > 200:
+	    if (curr_time-last_mess_time) > 50:
 		self.broadcast_bpdu()
 		last_mess_time = time.time() * 100
 	    #if (curr_time - last_mess_time) > 50:
@@ -80,7 +85,7 @@ class Bridge(object):
 	    #	self.broadcast_bpdu()
 	    
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore1, ignore2 = select.select(self.sockets, [], [], 2)
+            ready, ignore1, ignore2 = select.select(self.sockets, [], [], 0.5)
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
@@ -91,11 +96,17 @@ class Bridge(object):
 		f.write("\n")
 		f.close()
                 if self.message.is_BPDU(data):
+		    # there have been no BPDUs on this socket/port
+		    if self.port_history[socket] is None:
+			self.port_history[socket] = []
+		    self.port_history[socket] = self.port_history[socket].append([data, time.time()*100])
 		    if self.is_from_me(data):
 			peer_name = socket.getpeername()
 			file_no = socket.fileno()
 			if socket not in self.inactivePorts and peer_name in self.uniqueLANs and file_no != self.uniqueLANs[peer_name]:
 			    self.activePorts.remove(socket)
+			    if socket in self.enabled_ports:
+				self.enabled_ports.remove(socket)
 			    self.inactivePorts.append(socket)
 			    f = open("ports.txt", "a")
 			    f.write("inactive: {}\n".format(socket.fileno()))
@@ -110,7 +121,8 @@ class Bridge(object):
 			       (int(str(foreignBPDU['message']['root']), 16) ==
                                      int(str(self.root_id), 16) and
                                              int(str(foreignBPDU['message']['cost']), 16) <
-                                             int(str(self.cost), 16)):
+                                             int(str(self.cost), 16)) or \
+			       (int(str(foreignBPDU['message']['root']), 16) == int(str(self.root_id), 16) and int(str(foreignBPDU['message']['cost']), 16) == int(str(self.cost), 16) and int(str(foreignBPDU['source']), 16) < int(str(self.id), 16)):
 				self.root_id = foreignBPDU['message']['root']
                                 self.cost = foreignBPDU['message']['cost'] + 1
                                 self.root_port = socket.fileno()
@@ -125,6 +137,7 @@ class Bridge(object):
                         except Exception as e:
                             print(e)
                             print("BPDU was malformed and is " + data)
+		    self.update_enabled_ports()
 		else:
 		    
 		    #f = open("out.txt", "a")
@@ -137,8 +150,10 @@ class Bridge(object):
 		    #f.close()
 		    
 		    # prevent reading from multiple ports
-		    if socket not in self.inactivePorts:
-		
+		    #if socket not in self.inactivePorts:
+		    if socket in self.enabled_ports:
+
+		    #if socket in self.activePorts:
 		   # 	f.write("\n------END-------\n")
 		#	f.close()
 			# extract source and put in forwarding table
@@ -178,6 +193,49 @@ class Bridge(object):
 	f.close()
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
                                                                 self.root_id, "cost":self.cost})
+
+
+    def update_enabled_ports(self):
+	# This is the root => all ports are enabled
+	if self.root_id == self.id:
+	    self.enabled_ports = self.sockets
+	    return
+	i = 0
+	print(self.port_history)
+	for port in self.port_history:
+	    # Reason B: this is the root port
+	    if port.fileno() == self.root_port:
+		self.enabled_ports.append(port)
+		continue
+	    bpdus = self.port_history[port]
+	    latest_to_drop = 0
+	    designated_bridge = True
+	    print(port)
+	    print(port.fileno())
+	    if len(self.port_history[port]) == 0:
+		self.enabled_ports.append(port)
+		continue 
+	    for i in range(len(bpdus)):
+		# the message is older than/equal to 750ms
+		if ((time.time()*100) - bpdus[i][1]) >= 750:
+		    # drop all messages before and up to this one
+		    latest_to_drop = i
+		else:
+		    json_obj = json.loads(bpdus[i][0])
+		    # some other bridge is designated for this LAN
+		    if json_obj['message']['cost'] < self.cost or int(str(json_obj['source'], 16)) < int(str(self.id), 16) or int(str(foreignBPDU['message']['root']), 16) < \
+                                    int(str(self.root_id), 16):
+		        designated_bridge = false
+			break
+	    # remove the old messages
+	    #self.port_history[port] = bpdus[latest_to_drop+1:]
+	    # Reason C: this is the designated bridge
+	    if designated_bridge:
+		self.enabled_ports.append(port)
+		continue
+	    # Reason A: there are not BPDUs younger than 750ms on this port
+	    if len(self.port_history[port]) == 0:
+		self.enabled_ports.append(port)
 
         # TODO Consider how to identify if a bridge has stopped working and a
         # TODO socket thus becomes useless
