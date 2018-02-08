@@ -141,6 +141,11 @@ class Bridge(object):
                             print(e)
                             print("BPDU was malformed and is " + data)
 		    self.update_enabled_ports()
+		    f  = open("out.txt", "a")
+		    f.write("Enabled ports for {}:\n".format(self.id))
+		    for s in self.enabled_ports:
+			f.write("{}\n".format(s.getpeername()))
+		    f.close()
 		else:
 		    
 		    #f = open("out.txt", "a")
@@ -208,7 +213,8 @@ class Bridge(object):
 	    # Reason B: this is the root port
 	    if port.fileno() == self.root_port:
 		# it has already been added
-		#self.enabled_ports.append(port)
+		'''if port not in self.enabled_ports:
+		    self.enabled_ports.append(port)'''
 		continue
 	    bpdus = self.port_history[port]
 	    latest_to_drop = 0
@@ -224,8 +230,7 @@ class Bridge(object):
 		else:
 		    json_obj = json.loads(bpdus[i][0])
 		    # some other bridge is designated for this LAN
-		    if json_obj['message']['cost'] < self.cost or int(str(json_obj['source'], 16)) < int(str(self.id), 16) or int(str(foreignBPDU['message']['root']), 16) < \
-                                    int(str(self.root_id), 16):
+		    if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
 		        designated_bridge = False
 			break
 	    # remove the old messages
@@ -239,7 +244,7 @@ class Bridge(object):
 		continue
 		#self.enabled_ports.append(port)
 	    if port in self.enabled_ports:
-		print("{} disabling port {}\n".format(self.id, port.fileno()))
+		print("{} disabling port {}\n".format(self.id, port.getpeername()))
 	    	self.enabled_ports.remove(port)
 
         # TODO Consider how to identify if a bridge has stopped working and a
