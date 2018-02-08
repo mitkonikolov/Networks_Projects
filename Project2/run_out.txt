@@ -1,957 +1,940 @@
-[  0.0004       Driver] Starting host 0aa8 on LAN 1
-[  0.0004       Driver] Starting host d5b5 on LAN 1
-[  0.0004       Driver] Starting host 90c3 on LAN 1
-[  0.0004       Driver] Starting host 3005 on LAN 2
-[  0.0506  Bridge 08ad] Bridge 08ad starting up
-[  0.0539  Bridge 9e3a] Bridge 9e3a starting up
-[  0.0560  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "545c"}, "type": "bpdu"}
-[  0.0567  Bridge 08ad] 1.51805558383e+11
-[  0.0567  Bridge 08ad] here
-[  0.0575  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "545c"}, "type": "bpdu"}
-[  0.0582  Bridge 08ad] 1.51805558383e+11
-[  0.5573  Bridge 08ad] here
-[  0.5574  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "4ece"}, "type": "bpdu"}
-[  0.5578  Bridge 08ad] 1.51805558433e+11
-[  0.5579  Bridge 08ad] here
-[  0.5599  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 0, "root": "9e3a", "id": "4ece"}, "type": "bpdu"}
-[  0.5600  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "b801"}, "type": "bpdu"}
-[  0.5600  Bridge 08ad] 1.51805558433e+11
-[  0.5601  Bridge 08ad] here
-[  0.5605  Bridge 9e3a] 1.51805558433e+11
-[  0.5620  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "292e"}, "type": "bpdu"}
-[  0.5625  Bridge 08ad] 1.51805558434e+11
-[  0.5626  Bridge 08ad] here
-[  0.5630  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "b801"}, "type": "bpdu"}
-[  0.5634  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "292e"}, "type": "bpdu"}
-[  0.5639  Bridge 9e3a] 1.51805558434e+11
-[  0.5640  Bridge 9e3a] here
-[  0.5643  Bridge 08ad] 1.51805558434e+11
-[  0.5643  Bridge 08ad] here
-[  1.0674  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c7b9"}, "type": "bpdu"}
-[  1.0676  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "6a7f"}, "type": "bpdu"}
-[  1.0679  Bridge 08ad] 1.51805558484e+11
-[  1.0679  Bridge 08ad] here
-[  1.0685  Bridge 9e3a] 1.51805558484e+11
-[  1.0685  Bridge 9e3a] here
-[  1.0690  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c7b9"}, "type": "bpdu"}
-[  1.0695  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "6a7f"}, "type": "bpdu"}
-[  1.0701  Bridge 08ad] 1.51805558484e+11
-[  1.0706  Bridge 9e3a] 1.51805558484e+11
-[  1.0707  Bridge 9e3a] here
-[  1.5731  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "b454"}, "type": "bpdu"}
-[  1.5737  Bridge 08ad] here
-[  1.5737  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b035"}, "type": "bpdu"}
-[  1.5737  Bridge 9e3a] 1.51805558535e+11
-[  1.5738  Bridge 9e3a] here
-[  1.5742  Bridge 08ad] 1.51805558535e+11
-[  1.5743  Bridge 08ad] here
-[  1.5747  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "b454"}, "type": "bpdu"}
-[  1.5750  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b035"}, "type": "bpdu"}
-[  1.5754  Bridge 9e3a] 1.51805558535e+11
-[  1.5754  Bridge 9e3a] here
-[  1.5758  Bridge 08ad] 1.51805558535e+11
-[  2.0789  Bridge 08ad] here
-[  2.0790  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c6c9"}, "type": "bpdu"}
-[  2.0790  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c2d0"}, "type": "bpdu"}
-[  2.0790  Bridge 08ad] 1.51805558585e+11
-[  2.0791  Bridge 08ad] here
-[  2.0795  Bridge 9e3a] 1.51805558585e+11
-[  2.0796  Bridge 9e3a] here
-[  2.0799  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "c6c9"}, "type": "bpdu"}
-[  2.0805  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "c2d0"}, "type": "bpdu"}
-[  2.0810  Bridge 08ad] 1.51805558585e+11
-[  2.0810  Bridge 08ad] here
-[  2.0816  Bridge 9e3a] 1.51805558585e+11
-[  2.0817  Bridge 9e3a] here
-[  2.2171    Host 3005] Sent message 3 to 90c3
-[  2.2174  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2174  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2189    Host 90c3] Received message 3 from 3005
-[  2.2194    Host 90c3] Received message 3 from 3005
-[  2.2195  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2199  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2218  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2220  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2233    Host 90c3] Received message 3 from 3005
-[  2.2239    Host 90c3] Received message 3 from 3005
-[  2.2241  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2243  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2259  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2260  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2272    Host 90c3] Received message 3 from 3005
-[  2.2275    Host 90c3] Received message 3 from 3005
-[  2.2276  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2277  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2295  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2296  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2309    Host 90c3] Received message 3 from 3005
-[  2.2314    Host 90c3] Received message 3 from 3005
-[  2.2315  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2316  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2334  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2335  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2347    Host 90c3] Received message 3 from 3005
-[  2.2352    Host 90c3] Received message 3 from 3005
-[  2.2353  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2354  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2373  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2375  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2387    Host 90c3] Received message 3 from 3005
-[  2.2392    Host 90c3] Received message 3 from 3005
-[  2.2393  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2396  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2414  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2417  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2430    Host 90c3] Received message 3 from 3005
-[  2.2434    Host 90c3] Received message 3 from 3005
-[  2.2435  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2439  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2458  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2460  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2473    Host 90c3] Received message 3 from 3005
-[  2.2476    Host 90c3] Received message 3 from 3005
-[  2.2477  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2478  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2495  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2497  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2508    Host 90c3] Received message 3 from 3005
-[  2.2512    Host 90c3] Received message 3 from 3005
-[  2.2512  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2514  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2529  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2530  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2542    Host 90c3] Received message 3 from 3005
-[  2.2545    Host 90c3] Received message 3 from 3005
-[  2.2546  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2547  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2564  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2565  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2578    Host 90c3] Received message 3 from 3005
-[  2.2583    Host 90c3] Received message 3 from 3005
-[  2.2583  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2584  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2602  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2604  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2618    Host 90c3] Received message 3 from 3005
-[  2.2623    Host 90c3] Received message 3 from 3005
-[  2.2624  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2627  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2646  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2649  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2663    Host 90c3] Received message 3 from 3005
-[  2.2667    Host 90c3] Received message 3 from 3005
-[  2.2668  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2716  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2734  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2737  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2747    Host 90c3] Received message 3 from 3005
-[  2.2750    Host 90c3] Received message 3 from 3005
-[  2.2751  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2752  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2770  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2771  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2784    Host 90c3] Received message 3 from 3005
-[  2.2787    Host 90c3] Received message 3 from 3005
-[  2.2788  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2789  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2808  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2809  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2820    Host 90c3] Received message 3 from 3005
-[  2.2826    Host 90c3] Received message 3 from 3005
-[  2.2827  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2829  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2846  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2847  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2860    Host 90c3] Received message 3 from 3005
-[  2.2864    Host 90c3] Received message 3 from 3005
-[  2.2865  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2866  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2885  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2888  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2902    Host 90c3] Received message 3 from 3005
-[  2.2906    Host 90c3] Received message 3 from 3005
-[  2.2907  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2910  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2928  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2930  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2941    Host 90c3] Received message 3 from 3005
-[  2.2947    Host 90c3] Received message 3 from 3005
-[  2.2948  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2950  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2967  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2968  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2980    Host 90c3] Received message 3 from 3005
-[  2.2983    Host 90c3] Received message 3 from 3005
-[  2.2985  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.2985  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3002  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3004  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3015    Host 90c3] Received message 3 from 3005
-[  2.3019    Host 90c3] Received message 3 from 3005
-[  2.3020  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3021  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3037  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3039  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3050    Host 90c3] Received message 3 from 3005
-[  2.3055    Host 90c3] Received message 3 from 3005
-[  2.3056  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3057  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3076  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3077  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3088    Host 90c3] Received message 3 from 3005
-[  2.3094    Host 90c3] Received message 3 from 3005
-[  2.3095  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3098  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3117  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3120  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3132    Host 90c3] Received message 3 from 3005
-[  2.3137    Host 90c3] Received message 3 from 3005
-[  2.3138  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3141  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3160  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3163  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3176    Host 90c3] Received message 3 from 3005
-[  2.3182    Host 90c3] Received message 3 from 3005
-[  2.3183  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3186  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3200  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3202  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3213    Host 90c3] Received message 3 from 3005
-[  2.3217    Host 90c3] Received message 3 from 3005
-[  2.3218  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3219  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3235  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3236  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3247    Host 90c3] Received message 3 from 3005
-[  2.3252    Host 90c3] Received message 3 from 3005
-[  2.3252  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3254  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3272  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3273  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3286    Host 90c3] Received message 3 from 3005
-[  2.3291    Host 90c3] Received message 3 from 3005
-[  2.3292  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3293  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3311  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3312  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3326    Host 90c3] Received message 3 from 3005
-[  2.3329    Host 90c3] Received message 3 from 3005
-[  2.3330  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3333  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3352  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3355  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3367    Host 90c3] Received message 3 from 3005
-[  2.3373    Host 90c3] Received message 3 from 3005
-[  2.3374  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3377  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3395  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3398  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3411    Host 90c3] Received message 3 from 3005
-[  2.3415    Host 90c3] Received message 3 from 3005
-[  2.3416  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3417  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3432  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3433  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3445    Host 90c3] Received message 3 from 3005
-[  2.3448    Host 90c3] Received message 3 from 3005
-[  2.3449  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3450  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3466  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3467  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3479    Host 90c3] Received message 3 from 3005
-[  2.3483    Host 90c3] Received message 3 from 3005
-[  2.3484  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3485  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3503  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3504  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3515    Host 90c3] Received message 3 from 3005
-[  2.3519    Host 90c3] Received message 3 from 3005
-[  2.3520  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3521  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3540  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3541  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3555    Host 90c3] Received message 3 from 3005
-[  2.3560    Host 90c3] Received message 3 from 3005
-[  2.3561  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3564  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3582  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3586  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3598    Host 90c3] Received message 3 from 3005
-[  2.3603    Host 90c3] Received message 3 from 3005
-[  2.3604  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3607  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3625  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3628  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3637    Host 90c3] Received message 3 from 3005
-[  2.3642    Host 90c3] Received message 3 from 3005
-[  2.3643  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3643  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3661  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3662  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3673    Host 90c3] Received message 3 from 3005
-[  2.3676    Host 90c3] Received message 3 from 3005
-[  2.3678  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3678  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3695  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3697  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3709    Host 90c3] Received message 3 from 3005
-[  2.3712    Host 90c3] Received message 3 from 3005
-[  2.3713  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3714  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3730  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3732  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3744    Host 90c3] Received message 3 from 3005
-[  2.3749    Host 90c3] Received message 3 from 3005
-[  2.3750  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3751  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3768  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3771  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3784    Host 90c3] Received message 3 from 3005
-[  2.3789    Host 90c3] Received message 3 from 3005
-[  2.3790  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3794  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3813  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3816  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3828    Host 90c3] Received message 3 from 3005
-[  2.3833    Host 90c3] Received message 3 from 3005
-[  2.3834  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3837  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3854  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3855  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3867    Host 90c3] Received message 3 from 3005
-[  2.3869    Host 90c3] Received message 3 from 3005
-[  2.3870  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3872  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3887  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3888  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3901    Host 90c3] Received message 3 from 3005
-[  2.3905    Host 90c3] Received message 3 from 3005
-[  2.3906  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3907  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3925  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3926  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3938    Host 90c3] Received message 3 from 3005
-[  2.3942    Host 90c3] Received message 3 from 3005
-[  2.3943  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3944  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3960  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3962  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3974    Host 90c3] Received message 3 from 3005
-[  2.3978    Host 90c3] Received message 3 from 3005
-[  2.3979  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3981  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.3998  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4001  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4014    Host 90c3] Received message 3 from 3005
-[  2.4020    Host 90c3] Received message 3 from 3005
-[  2.4021  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4023  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4042  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4045  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4058    Host 90c3] Received message 3 from 3005
-[  2.4063    Host 90c3] Received message 3 from 3005
-[  2.4064  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4067  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4080  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4082  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4092    Host 90c3] Received message 3 from 3005
-[  2.4096    Host 90c3] Received message 3 from 3005
-[  2.4097  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4097  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4114  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4115  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4126    Host 90c3] Received message 3 from 3005
-[  2.4132    Host 90c3] Received message 3 from 3005
-[  2.4133  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4134  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4152  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4153  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4166    Host 90c3] Received message 3 from 3005
-[  2.4169    Host 90c3] Received message 3 from 3005
-[  2.4170  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4172  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4189  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4190  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4203    Host 90c3] Received message 3 from 3005
-[  2.4208    Host 90c3] Received message 3 from 3005
-[  2.4209  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4211  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4230  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4233  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4245    Host 90c3] Received message 3 from 3005
-[  2.4250    Host 90c3] Received message 3 from 3005
-[  2.4251  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4254  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4272  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4275  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4287    Host 90c3] Received message 3 from 3005
-[  2.4291    Host 90c3] Received message 3 from 3005
-[  2.4292  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4293  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4310  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4310  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4323    Host 90c3] Received message 3 from 3005
-[  2.4327    Host 90c3] Received message 3 from 3005
-[  2.4328  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4328  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4345  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4347  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4358    Host 90c3] Received message 3 from 3005
-[  2.4363    Host 90c3] Received message 3 from 3005
-[  2.4364  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4365  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4382  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4384  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4396    Host 90c3] Received message 3 from 3005
-[  2.4401    Host 90c3] Received message 3 from 3005
-[  2.4402  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4403  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4421  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4421  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4435    Host 90c3] Received message 3 from 3005
-[  2.4439    Host 90c3] Received message 3 from 3005
-[  2.4440  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4443  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4462  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4465  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4477    Host 90c3] Received message 3 from 3005
-[  2.4483    Host 90c3] Received message 3 from 3005
-[  2.4484  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4487  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4504  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4507  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4517    Host 90c3] Received message 3 from 3005
-[  2.4522    Host 90c3] Received message 3 from 3005
-[  2.4523  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4524  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4541  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4541  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4553    Host 90c3] Received message 3 from 3005
-[  2.4556    Host 90c3] Received message 3 from 3005
-[  2.4557  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4558  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4575  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4576  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4588    Host 90c3] Received message 3 from 3005
-[  2.4593    Host 90c3] Received message 3 from 3005
-[  2.4594  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4595  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4613  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4614  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4627    Host 90c3] Received message 3 from 3005
-[  2.4632    Host 90c3] Received message 3 from 3005
-[  2.4633  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4634  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4651  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4654  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4666    Host 90c3] Received message 3 from 3005
-[  2.4670    Host 90c3] Received message 3 from 3005
-[  2.4671  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4674  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4692  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4695  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4708    Host 90c3] Received message 3 from 3005
-[  2.4713    Host 90c3] Received message 3 from 3005
-[  2.4714  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4718  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4737  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4738  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4751    Host 90c3] Received message 3 from 3005
-[  2.4754    Host 90c3] Received message 3 from 3005
-[  2.4755  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4756  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4773  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4774  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4786    Host 90c3] Received message 3 from 3005
-[  2.4788    Host 90c3] Received message 3 from 3005
-[  2.4789  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4790  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4808  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4809  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4821    Host 90c3] Received message 3 from 3005
-[  2.4825    Host 90c3] Received message 3 from 3005
-[  2.4826  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4827  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4844  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4846  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4858    Host 90c3] Received message 3 from 3005
-[  2.4862    Host 90c3] Received message 3 from 3005
-[  2.4863  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4866  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4883  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4886  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4899    Host 90c3] Received message 3 from 3005
-[  2.4904    Host 90c3] Received message 3 from 3005
-[  2.4905  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4908  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4924  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4928  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4940    Host 90c3] Received message 3 from 3005
-[  2.4944    Host 90c3] Received message 3 from 3005
-[  2.4945  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4948  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4961  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4963  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4975    Host 90c3] Received message 3 from 3005
-[  2.4977    Host 90c3] Received message 3 from 3005
-[  2.4978  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4979  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4995  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.4996  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5007    Host 90c3] Received message 3 from 3005
-[  2.5011    Host 90c3] Received message 3 from 3005
-[  2.5012  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5013  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5030  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5032  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5044    Host 90c3] Received message 3 from 3005
-[  2.5048    Host 90c3] Received message 3 from 3005
-[  2.5050  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5050  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5069  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5071  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5082    Host 90c3] Received message 3 from 3005
-[  2.5085    Host 90c3] Received message 3 from 3005
-[  2.5086  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5089  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5108  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5111  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5124    Host 90c3] Received message 3 from 3005
-[  2.5130    Host 90c3] Received message 3 from 3005
-[  2.5131  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5133  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5152  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5155  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5168    Host 90c3] Received message 3 from 3005
-[  2.5173    Host 90c3] Received message 3 from 3005
-[  2.5174  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5175  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5191  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5192  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5203    Host 90c3] Received message 3 from 3005
-[  2.5207    Host 90c3] Received message 3 from 3005
-[  2.5209  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5209  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5227  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5227  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5240    Host 90c3] Received message 3 from 3005
-[  2.5244    Host 90c3] Received message 3 from 3005
-[  2.5245  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5247  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5265  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5266  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5278    Host 90c3] Received message 3 from 3005
-[  2.5282    Host 90c3] Received message 3 from 3005
-[  2.5283  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5284  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5302  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5303  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5316    Host 90c3] Received message 3 from 3005
-[  2.5321    Host 90c3] Received message 3 from 3005
-[  2.5322  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5325  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5343  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5347  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5359    Host 90c3] Received message 3 from 3005
-[  2.5363    Host 90c3] Received message 3 from 3005
-[  2.5364  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5367  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5386  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5389  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5398    Host 90c3] Received message 3 from 3005
-[  2.5402    Host 90c3] Received message 3 from 3005
-[  2.5403  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5404  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5420  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5422  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5433    Host 90c3] Received message 3 from 3005
-[  2.5436    Host 90c3] Received message 3 from 3005
-[  2.5438  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5438  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5455  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5457  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5469    Host 90c3] Received message 3 from 3005
-[  2.5474    Host 90c3] Received message 3 from 3005
-[  2.5475  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5476  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5493  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5494  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5505    Host 90c3] Received message 3 from 3005
-[  2.5511    Host 90c3] Received message 3 from 3005
-[  2.5512  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5513  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5530  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5534  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5547    Host 90c3] Received message 3 from 3005
-[  2.5552    Host 90c3] Received message 3 from 3005
-[  2.5553  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5557  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5575  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5579  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5591    Host 90c3] Received message 3 from 3005
-[  2.5594    Host 90c3] Received message 3 from 3005
-[  2.5595  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5598  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5617  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5618  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5631    Host 90c3] Received message 3 from 3005
-[  2.5634    Host 90c3] Received message 3 from 3005
-[  2.5635  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5636  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5652  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5654  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5666    Host 90c3] Received message 3 from 3005
-[  2.5669    Host 90c3] Received message 3 from 3005
-[  2.5670  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5671  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5690  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5691  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5703    Host 90c3] Received message 3 from 3005
-[  2.5707    Host 90c3] Received message 3 from 3005
-[  2.5708  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5709  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5727  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5728  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5735    Host 3005] Sent message 5 to d5b5
-[  2.5738    Host 90c3] Sent message 1 to 90c3
-[  2.5740    Host 90c3] Received message 1 from 90c3
-[  2.5742    Host 90c3] Received message 3 from 3005
-[  2.5744    Host 90c3] Received message 3 from 3005
-[  2.5745  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
-[  2.5748  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":1}}
-[  2.5761  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5766  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5778    Host d5b5] Received message 5 from 3005
-[  2.5781  Bridge 08ad] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5783    Host d5b5] Received message 5 from 3005
-[  2.5802  Bridge 9e3a] {"source":"3005","dest":"90c3","type":"data","message":{"id":3}}
-[  2.5817  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5817  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5832  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "e3ee"}, "type": "bpdu"}
-[  2.5835  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "afba"}, "type": "bpdu"}
-[  2.5839  Bridge 08ad] 1.51805558636e+11
-[  2.5843  Bridge 9e3a] 1.51805558636e+11
-[  2.5844  Bridge 9e3a] here
-[  2.5847  Bridge 08ad] here
-[  2.5847  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "e3ee"}, "type": "bpdu"}
-[  2.5852  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "afba"}, "type": "bpdu"}
-[  2.5855  Bridge 08ad] 1.51805558636e+11
-[  2.5855  Bridge 08ad] here
-[  2.5858  Bridge 9e3a] 1.51805558636e+11
-[  2.5859  Bridge 9e3a] here
-[  2.5862  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5868  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5879    Host d5b5] Received message 5 from 3005
-[  2.5883    Host d5b5] Received message 5 from 3005
-[  2.5884  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5885  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5903  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5904  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5916    Host d5b5] Received message 5 from 3005
-[  2.5921    Host d5b5] Received message 5 from 3005
-[  2.5923  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5925  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5943  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5946  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5957    Host d5b5] Received message 5 from 3005
-[  2.5963    Host d5b5] Received message 5 from 3005
-[  2.5963  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5967  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5984  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.5988  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6000    Host d5b5] Received message 5 from 3005
-[  2.6003    Host d5b5] Received message 5 from 3005
-[  2.6004  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6005  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6020  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6021  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6032    Host d5b5] Received message 5 from 3005
-[  2.6037    Host d5b5] Received message 5 from 3005
-[  2.6038  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6039  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6055  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6057  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6068    Host d5b5] Received message 5 from 3005
-[  2.6074    Host d5b5] Received message 5 from 3005
-[  2.6075  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6076  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6093  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6095  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6106    Host d5b5] Received message 5 from 3005
-[  2.6110    Host d5b5] Received message 5 from 3005
-[  2.6111  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6112  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6131  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6133  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6146    Host d5b5] Received message 5 from 3005
-[  2.6150    Host d5b5] Received message 5 from 3005
-[  2.6151  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6154  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6173  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6177  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6190    Host d5b5] Received message 5 from 3005
-[  2.6194    Host d5b5] Received message 5 from 3005
-[  2.6196  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6197  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6214  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6215  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6223    Host 90c3] Sent message 4 to 90c3
-[  2.6224    Host 90c3] Received message 4 from 90c3
-[  2.6226    Host d5b5] Received message 5 from 3005
-[  2.6228  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
-[  2.6230    Host d5b5] Received message 5 from 3005
-[  2.6232  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":4}}
-[  2.6243  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6249  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6264  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6266  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6278    Host d5b5] Received message 5 from 3005
-[  2.6282    Host d5b5] Received message 5 from 3005
-[  2.6283  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6284  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6301  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6302  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6314    Host d5b5] Received message 5 from 3005
-[  2.6319    Host d5b5] Received message 5 from 3005
-[  2.6320  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6323  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6342  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6345  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6358    Host d5b5] Received message 5 from 3005
-[  2.6363    Host d5b5] Received message 5 from 3005
-[  2.6363  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6367  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6385  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6388  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6397    Host d5b5] Received message 5 from 3005
-[  2.6402    Host d5b5] Received message 5 from 3005
-[  2.6403  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6404  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6421  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6422  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6433    Host d5b5] Received message 5 from 3005
-[  2.6437    Host d5b5] Received message 5 from 3005
-[  2.6438  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6439  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6455  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6457  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6468    Host d5b5] Received message 5 from 3005
-[  2.6473    Host d5b5] Received message 5 from 3005
-[  2.6474  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6477  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6493  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6496  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6507    Host d5b5] Received message 5 from 3005
-[  2.6512    Host d5b5] Received message 5 from 3005
-[  2.6513  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6517  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6534  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6538  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6550    Host d5b5] Received message 5 from 3005
-[  2.6553    Host d5b5] Received message 5 from 3005
-[  2.6554  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6558  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6574  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6579  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6588    Host d5b5] Received message 5 from 3005
-[  2.6590    Host d5b5] Received message 5 from 3005
-[  2.6591  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6593  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6607  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6608  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6620    Host d5b5] Received message 5 from 3005
-[  2.6626    Host d5b5] Received message 5 from 3005
-[  2.6627  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6628  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6646  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6648  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6660    Host d5b5] Received message 5 from 3005
-[  2.6663    Host d5b5] Received message 5 from 3005
-[  2.6664  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6666  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6682  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6684  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6696    Host d5b5] Received message 5 from 3005
-[  2.6701    Host d5b5] Received message 5 from 3005
-[  2.6702  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6705  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6722  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6725  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6738    Host d5b5] Received message 5 from 3005
-[  2.6742    Host d5b5] Received message 5 from 3005
-[  2.6743  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6747  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6765  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6769  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6779    Host d5b5] Received message 5 from 3005
-[  2.6783    Host d5b5] Received message 5 from 3005
-[  2.6784  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6785  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6802  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6804  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6815    Host d5b5] Received message 5 from 3005
-[  2.6819    Host d5b5] Received message 5 from 3005
-[  2.6820  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6821  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6836  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6837  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6850    Host d5b5] Received message 5 from 3005
-[  2.6854    Host d5b5] Received message 5 from 3005
-[  2.6855  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6856  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6873  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6874  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6886    Host d5b5] Received message 5 from 3005
-[  2.6891    Host d5b5] Received message 5 from 3005
-[  2.6893  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6894  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6912  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6916  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6929    Host d5b5] Received message 5 from 3005
-[  2.6933    Host d5b5] Received message 5 from 3005
-[  2.6934  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6937  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6955  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6958  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6970    Host d5b5] Received message 5 from 3005
-[  2.6975    Host d5b5] Received message 5 from 3005
-[  2.6976  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6977  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6994  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.6996  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7007    Host d5b5] Received message 5 from 3005
-[  2.7011    Host d5b5] Received message 5 from 3005
-[  2.7012  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7013  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7030  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7032  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7044    Host d5b5] Received message 5 from 3005
-[  2.7049    Host d5b5] Received message 5 from 3005
-[  2.7050  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7051  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7068  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7070  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7082    Host d5b5] Received message 5 from 3005
-[  2.7086    Host d5b5] Received message 5 from 3005
-[  2.7088  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7088  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7105  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7108  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7121    Host d5b5] Received message 5 from 3005
-[  2.7125    Host d5b5] Received message 5 from 3005
-[  2.7126  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7129  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7147  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7150  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7162    Host d5b5] Received message 5 from 3005
-[  2.7168    Host d5b5] Received message 5 from 3005
-[  2.7169  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7170  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7185  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7187  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7197    Host d5b5] Received message 5 from 3005
-[  2.7200    Host d5b5] Received message 5 from 3005
-[  2.7201  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7202  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7220  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7221  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7234    Host d5b5] Received message 5 from 3005
-[  2.7238    Host d5b5] Received message 5 from 3005
-[  2.7239  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7240  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7259  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7261  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7272    Host d5b5] Received message 5 from 3005
-[  2.7278    Host d5b5] Received message 5 from 3005
-[  2.7279  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7280  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7298  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7302  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7316    Host d5b5] Received message 5 from 3005
-[  2.7322    Host d5b5] Received message 5 from 3005
-[  2.7323  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7325  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7345  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7349  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7363    Host d5b5] Received message 5 from 3005
-[  2.7367    Host d5b5] Received message 5 from 3005
-[  2.7368  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7371  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7386  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7387  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7400    Host d5b5] Received message 5 from 3005
-[  2.7404    Host d5b5] Received message 5 from 3005
-[  2.7405  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7405  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7423  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7424  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7436    Host d5b5] Received message 5 from 3005
-[  2.7441    Host d5b5] Received message 5 from 3005
-[  2.7442  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7443  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7461  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7462  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7474    Host d5b5] Received message 5 from 3005
-[  2.7480    Host d5b5] Received message 5 from 3005
-[  2.7481  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7482  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7501  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7504  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7507    Host d5b5] Sent message 0 to d5b5
-[  2.7508    Host d5b5] Received message 0 from d5b5
-[  2.7515    Host d5b5] Received message 5 from 3005
-[  2.7520  Bridge 08ad] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
-[  2.7522    Host d5b5] Received message 5 from 3005
-[  2.7525  Bridge 9e3a] {"source":"d5b5","dest":"d5b5","type":"data","message":{"id":0}}
-[  2.7542  Bridge 08ad] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.7548  Bridge 9e3a] {"source":"3005","dest":"d5b5","type":"data","message":{"id":5}}
-[  2.8845    Host 90c3] Sent message 9 to 3005
-[  2.8847  Bridge 08ad] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
-[  2.8847  Bridge 9e3a] {"source":"90c3","dest":"3005","type":"data","message":{"id":9}}
-[  2.8914    Host 0aa8] Sent message 6 to d5b5
-[  2.8916    Host d5b5] Received message 6 from 0aa8
-[  2.8916  Bridge 08ad] {"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
-[  2.8916  Bridge 9e3a] {"source":"0aa8","dest":"d5b5","type":"data","message":{"id":6}}
-[  2.8996    Host 0aa8] Sent message 7 to 90c3
-[  2.8997    Host 90c3] Received message 7 from 0aa8
-[  2.8998  Bridge 08ad] {"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
-[  2.8998  Bridge 9e3a] {"source":"0aa8","dest":"90c3","type":"data","message":{"id":7}}
-[  2.9511    Host 90c3] Sent message 2 to 0aa8
-[  2.9513    Host 0aa8] Received message 2 from 90c3
-[  2.9514  Bridge 08ad] {"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
-[  2.9514  Bridge 9e3a] {"source":"90c3","dest":"0aa8","type":"data","message":{"id":2}}
-[  2.9627    Host 90c3] Sent message 8 to 90c3
-[  2.9629    Host 90c3] Received message 8 from 90c3
-[  2.9630  Bridge 08ad] {"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
-[  2.9630  Bridge 9e3a] {"source":"90c3","dest":"90c3","type":"data","message":{"id":8}}
-[  3.4668  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "4199"}, "type": "bpdu"}
-[  3.4674  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "bee6"}, "type": "bpdu"}
-[  3.4674  Bridge 9e3a] 1.51805558724e+11
-[  3.4675  Bridge 9e3a] here
-[  3.4683  Bridge 08ad] 1.51805558724e+11
-[  3.4688  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "4199"}, "type": "bpdu"}
-[  3.4693  Bridge 08ad] here
-[  3.4694  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "bee6"}, "type": "bpdu"}
-[  3.4699  Bridge 9e3a] 1.51805558724e+11
-[  3.4700  Bridge 9e3a] here
-[  3.4705  Bridge 08ad] 1.51805558724e+11
-[  3.4706  Bridge 08ad] here
-[  3.9736  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "73f1"}, "type": "bpdu"}
-[  3.9737  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "4fd4"}, "type": "bpdu"}
-[  3.9741  Bridge 08ad] 1.51805558775e+11
-[  3.9741  Bridge 08ad] here
-[  3.9747  Bridge 9e3a] 1.51805558775e+11
-[  3.9748  Bridge 9e3a] here
-[  3.9754  Bridge 08ad] {"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "73f1"}, "type": "bpdu"}
-[  3.9759  Bridge 9e3a] {"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "4fd4"}, "type": "bpdu"}
-[  3.9763  Bridge 08ad] 1.51805558775e+11
-[  3.9763  Bridge 08ad] here
-[  3.9768  Bridge 9e3a] 1.51805558775e+11
-[  3.9768  Bridge 9e3a] here
-Simulation finished.
-Total packets sent: 584
-Total data packets sent: 10
-Total data packets received: 9
-Total data packets dropped: 1  (message ids 9)
-Total data packets duplicated: 2  (message ids 3, 5)
-Data packet delivery ratio: 0.900000
+[  0.0005       Driver] Starting host 0aa8 on LAN 3
+[  0.0005       Driver] Starting host d5b5 on LAN 3
+[  0.0005       Driver] Starting host 90c3 on LAN 1
+[  0.0005       Driver] Starting host 3005 on LAN 2
+[  0.0005       Driver] Starting host c01f on LAN 3
+[  0.0005       Driver] Starting host 59e8 on LAN 3
+[  0.0005       Driver] Starting host 21ee on LAN 1
+[  0.0005       Driver] Starting host f36a on LAN 1
+[  0.0005       Driver] Starting host 95aa on LAN 1
+[  0.0006       Driver] Starting host ce76 on LAN 1
+[  0.0264  Bridge f8ad] Bridge f8ad starting up
+[  0.0274  Bridge aa09] Bridge aa09 starting up
+[  2.0326    Host 3005] Sent message 39 to 59e8
+[  2.0346    Host 59e8] Received message 39 from 3005
+[  2.2378    Host ce76] Sent message 62 to c01f
+[  2.2420    Host c01f] Received message 62 from ce76
+[  2.4405    Host 3005] Sent message 54 to f36a
+[  2.4435    Host f36a] Received message 54 from 3005
+[  2.5506    Host 3005] Sent message 45 to ce76
+[  2.5531    Host ce76] Received message 45 from 3005
+[  2.6204    Host 3005] Sent message 15 to 0aa8
+[  2.6226    Host 0aa8] Received message 15 from 3005
+[  2.6464    Host d5b5] Sent message 53 to f36a
+[  2.6498    Host f36a] Received message 53 from d5b5
+[  3.4617    Host c01f] Sent message 31 to f36a
+[  3.4649    Host f36a] Received message 31 from c01f
+[  3.5566    Host 59e8] Sent message 42 to 59e8
+[  3.5569    Host 59e8] Received message 42 from 59e8
+[  3.5609    Host d5b5] Sent message 57 to 59e8
+[  3.5611    Host 59e8] Received message 57 from d5b5
+[  3.7772    Host f36a] Sent message 35 to 0aa8
+[  3.7823    Host 0aa8] Received message 35 from f36a
+[  3.8137    Host d5b5] Sent message 13 to 90c3
+[  3.8174    Host 90c3] Received message 13 from d5b5
+[  3.8720    Host f36a] Sent message 20 to 3005
+[  3.8739    Host 3005] Received message 20 from f36a
+[  4.0172    Host 90c3] Sent message 68 to 95aa
+[  4.0175    Host 95aa] Received message 68 from 90c3
+[  4.0277    Host ce76] Sent message 49 to 0aa8
+[  4.0330    Host 0aa8] Received message 49 from ce76
+[  4.0789    Host 90c3] Sent message 6 to 59e8
+[  4.0805    Host 0aa8] Sent message 43 to 3005
+[  4.0825    Host 3005] Received message 43 from 0aa8
+[  4.0851    Host 59e8] Received message 6 from 90c3
+[  4.1938    Host f36a] Sent message 25 to d5b5
+[  4.1977    Host d5b5] Received message 25 from f36a
+[  4.4295    Host d5b5] Sent message 56 to d5b5
+[  4.4297    Host d5b5] Received message 56 from d5b5
+[  4.4481    Host f36a] Sent message 34 to c01f
+[  4.4522    Host c01f] Received message 34 from f36a
+[  4.4610    Host 21ee] Sent message 50 to 59e8
+[  4.4650    Host 59e8] Received message 50 from 21ee
+[  4.5069    Host f36a] Sent message 67 to 21ee
+[  4.5070    Host 21ee] Received message 67 from f36a
+[  4.5116    Host 3005] Sent message 59 to ce76
+[  4.5137    Host ce76] Received message 59 from 3005
+[  4.5783    Host 0aa8] Sent message 52 to ce76
+[  4.5791    Host 3005] Sent message 23 to 59e8
+[  4.5828    Host 59e8] Received message 23 from 3005
+[  4.5833    Host ce76] Received message 52 from 0aa8
+[  4.6295    Host d5b5] Sent message 17 to d5b5
+[  4.6296    Host d5b5] Received message 17 from d5b5
+[  4.9124    Host d5b5] Sent message 37 to d5b5
+[  4.9126    Host d5b5] Received message 37 from d5b5
+[  5.0236    Host 0aa8] Sent message 66 to 90c3
+[  5.0270    Host 90c3] Received message 66 from 0aa8
+[  5.0297  Bridge 9e3a] Bridge 9e3a starting up
+[  5.3255    Host 3005] Sent message 12 to f36a
+[  5.3279    Host f36a] Received message 12 from 3005
+[  5.3282    Host f36a] Received message 12 from 3005
+[  5.3324    Host f36a] Received message 12 from 3005
+[  5.3376    Host f36a] Received message 12 from 3005
+[  5.3417    Host f36a] Received message 12 from 3005
+[  5.3460    Host f36a] Received message 12 from 3005
+[  5.3501    Host f36a] Received message 12 from 3005
+[  5.3543    Host f36a] Received message 12 from 3005
+[  5.3549    Host c01f] Sent message 40 to d5b5
+[  5.3550    Host d5b5] Received message 40 from c01f
+[  5.3596    Host f36a] Received message 12 from 3005
+[  5.3644    Host f36a] Received message 12 from 3005
+[  5.3674    Host f36a] Received message 12 from 3005
+[  5.3709    Host f36a] Received message 12 from 3005
+[  5.3751    Host f36a] Received message 12 from 3005
+[  5.3793    Host f36a] Received message 12 from 3005
+[  5.3834    Host f36a] Received message 12 from 3005
+[  5.3870    Host f36a] Received message 12 from 3005
+[  5.3909    Host f36a] Received message 12 from 3005
+[  5.3951    Host f36a] Received message 12 from 3005
+[  5.3992    Host f36a] Received message 12 from 3005
+[  5.4034    Host f36a] Received message 12 from 3005
+[  5.4064    Host f36a] Received message 12 from 3005
+[  5.4105    Host f36a] Received message 12 from 3005
+[  5.4142    Host f36a] Received message 12 from 3005
+[  5.4186    Host f36a] Received message 12 from 3005
+[  5.4231    Host f36a] Received message 12 from 3005
+[  5.4260    Host f36a] Received message 12 from 3005
+[  5.4303    Host f36a] Received message 12 from 3005
+[  5.4347    Host f36a] Received message 12 from 3005
+[  5.4388    Host f36a] Received message 12 from 3005
+[  5.4432    Host f36a] Received message 12 from 3005
+[  5.4461    Host f36a] Received message 12 from 3005
+[  5.4503    Host f36a] Received message 12 from 3005
+[  5.4547    Host f36a] Received message 12 from 3005
+[  5.4596    Host f36a] Received message 12 from 3005
+[  5.4630    Host f36a] Received message 12 from 3005
+[  5.4666    Host f36a] Received message 12 from 3005
+[  5.4708    Host f36a] Received message 12 from 3005
+[  5.4749    Host f36a] Received message 12 from 3005
+[  5.4788    Host f36a] Received message 12 from 3005
+[  5.4822    Host f36a] Received message 12 from 3005
+[  5.4864    Host f36a] Received message 12 from 3005
+[  5.4906    Host f36a] Received message 12 from 3005
+[  5.4948    Host f36a] Received message 12 from 3005
+[  5.4985    Host f36a] Received message 12 from 3005
+[  5.5018    Host f36a] Received message 12 from 3005
+[  5.5061    Host f36a] Received message 12 from 3005
+[  5.5068    Host ce76] Sent message 7 to 59e8
+[  5.5111    Host f36a] Received message 12 from 3005
+[  5.5148    Host 59e8] Received message 7 from ce76
+[  5.5175    Host f36a] Received message 12 from 3005
+[  5.5210    Host f36a] Received message 12 from 3005
+[  5.5253    Host f36a] Received message 12 from 3005
+[  5.5294    Host f36a] Received message 12 from 3005
+[  5.5350    Host f36a] Received message 12 from 3005
+[  5.5591    Host f36a] Received message 12 from 3005
+[  5.5653    Host f36a] Received message 12 from 3005
+[  5.5703    Host f36a] Received message 12 from 3005
+[  5.5739    Host f36a] Received message 12 from 3005
+[  5.5775    Host f36a] Received message 12 from 3005
+[  5.5818    Host f36a] Received message 12 from 3005
+[  5.5860    Host f36a] Received message 12 from 3005
+[  5.5903    Host f36a] Received message 12 from 3005
+[  5.5939    Host f36a] Received message 12 from 3005
+[  5.5982    Host f36a] Received message 12 from 3005
+[  5.6025    Host f36a] Received message 12 from 3005
+[  5.6066    Host f36a] Received message 12 from 3005
+[  5.6075    Host 95aa] Sent message 69 to d5b5
+[  5.6116    Host f36a] Received message 12 from 3005
+[  5.6130    Host d5b5] Received message 69 from 95aa
+[  5.6173    Host f36a] Received message 12 from 3005
+[  5.6215    Host f36a] Received message 12 from 3005
+[  5.6255    Host f36a] Received message 12 from 3005
+[  5.6288    Host f36a] Received message 12 from 3005
+[  5.6331    Host f36a] Received message 12 from 3005
+[  5.6374    Host f36a] Received message 12 from 3005
+[  5.6420    Host f36a] Received message 12 from 3005
+[  5.6448    Host f36a] Received message 12 from 3005
+[  5.6492    Host f36a] Received message 12 from 3005
+[  5.6537    Host f36a] Received message 12 from 3005
+[  5.6578    Host f36a] Received message 12 from 3005
+[  5.6619    Host f36a] Received message 12 from 3005
+[  5.6654    Host f36a] Received message 12 from 3005
+[  5.6698    Host f36a] Received message 12 from 3005
+[  5.6742    Host f36a] Received message 12 from 3005
+[  5.6783    Host f36a] Received message 12 from 3005
+[  5.6818    Host f36a] Received message 12 from 3005
+[  5.6861    Host f36a] Received message 12 from 3005
+[  5.6906    Host f36a] Received message 12 from 3005
+[  5.6946    Host f36a] Received message 12 from 3005
+[  5.6981    Host f36a] Received message 12 from 3005
+[  5.7021    Host f36a] Received message 12 from 3005
+[  5.7064    Host f36a] Received message 12 from 3005
+[  5.7105    Host f36a] Received message 12 from 3005
+[  5.7145    Host f36a] Received message 12 from 3005
+[  5.7182    Host f36a] Received message 12 from 3005
+[  5.7226    Host f36a] Received message 12 from 3005
+[  5.7269    Host f36a] Received message 12 from 3005
+[  5.7308    Host f36a] Received message 12 from 3005
+[  5.7345    Host f36a] Received message 12 from 3005
+[  5.7387    Host f36a] Received message 12 from 3005
+[  5.7430    Host f36a] Received message 12 from 3005
+[  5.7473    Host f36a] Received message 12 from 3005
+[  5.7507    Host f36a] Received message 12 from 3005
+[  5.7548    Host f36a] Received message 12 from 3005
+[  5.7591    Host f36a] Received message 12 from 3005
+[  5.7634    Host f36a] Received message 12 from 3005
+[  5.7663    Host f36a] Received message 12 from 3005
+[  5.7702    Host f36a] Received message 12 from 3005
+[  5.7736    Host f36a] Received message 12 from 3005
+[  5.7785    Host f36a] Received message 12 from 3005
+[  5.7826    Host f36a] Received message 12 from 3005
+[  5.7860    Host f36a] Received message 12 from 3005
+[  5.7905    Host f36a] Received message 12 from 3005
+[  5.7954    Host f36a] Received message 12 from 3005
+[  5.7998    Host f36a] Received message 12 from 3005
+[  5.8032    Host f36a] Received message 12 from 3005
+[  5.8064    Host f36a] Received message 12 from 3005
+[  5.8113    Host f36a] Received message 12 from 3005
+[  5.8117    Host f36a] Sent message 27 to 90c3
+[  5.8118    Host 90c3] Received message 27 from f36a
+[  5.8155    Host f36a] Received message 12 from 3005
+[  5.8187    Host 90c3] Received message 27 from f36a
+[  5.8234    Host 90c3] Received message 27 from f36a
+[  5.8277    Host 90c3] Received message 27 from f36a
+[  5.8312    Host 90c3] Received message 27 from f36a
+[  5.8348    Host 90c3] Received message 27 from f36a
+[  5.8385    Host 90c3] Received message 27 from f36a
+[  5.8431    Host 90c3] Received message 27 from f36a
+[  5.8474    Host 90c3] Received message 27 from f36a
+[  5.8512    Host 90c3] Received message 27 from f36a
+[  5.8541    Host 90c3] Received message 27 from f36a
+[  5.8585    Host 90c3] Received message 27 from f36a
+[  5.8625    Host 90c3] Received message 27 from f36a
+[  5.8666    Host 90c3] Received message 27 from f36a
+[  5.8699    Host 90c3] Received message 27 from f36a
+[  5.8746    Host 90c3] Received message 27 from f36a
+[  5.8785    Host 90c3] Received message 27 from f36a
+[  5.8835    Host 90c3] Received message 27 from f36a
+[  5.8871    Host 90c3] Received message 27 from f36a
+[  5.8919    Host 90c3] Received message 27 from f36a
+[  5.8960    Host 90c3] Received message 27 from f36a
+[  5.9010    Host 90c3] Received message 27 from f36a
+[  5.9045    Host 90c3] Received message 27 from f36a
+[  5.9061    Host d5b5] Sent message 65 to f36a
+[  5.9091    Host 90c3] Received message 27 from f36a
+[  5.9162    Host f36a] Received message 65 from d5b5
+[  5.9169    Host 90c3] Received message 27 from f36a
+[  5.9206    Host 90c3] Received message 27 from f36a
+[  5.9248    Host 90c3] Received message 27 from f36a
+[  5.9291    Host 90c3] Received message 27 from f36a
+[  5.9336    Host 90c3] Received message 27 from f36a
+[  5.9375    Host 90c3] Received message 27 from f36a
+[  5.9413    Host 90c3] Received message 27 from f36a
+[  5.9462    Host 90c3] Received message 27 from f36a
+[  5.9504    Host 90c3] Received message 27 from f36a
+[  5.9546    Host 90c3] Received message 27 from f36a
+[  5.9581    Host 90c3] Received message 27 from f36a
+[  5.9630    Host 90c3] Received message 27 from f36a
+[  5.9672    Host 90c3] Received message 27 from f36a
+[  5.9713    Host 90c3] Received message 27 from f36a
+[  5.9721    Host f36a] Sent message 28 to ce76
+[  5.9722    Host ce76] Received message 28 from f36a
+[  5.9758    Host 90c3] Received message 27 from f36a
+[  5.9813    Host 90c3] Received message 27 from f36a
+[  5.9857    Host 90c3] Received message 27 from f36a
+[  5.9886    Host d5b5] Sent message 14 to 3005
+[  5.9898    Host 90c3] Received message 27 from f36a
+[  5.9908    Host 3005] Received message 14 from d5b5
+[  5.9974    Host 90c3] Received message 27 from f36a
+[  6.0019    Host 90c3] Received message 27 from f36a
+[  6.0069    Host 90c3] Received message 27 from f36a
+[  6.0105    Host 90c3] Received message 27 from f36a
+[  6.0133    Host f36a] Sent message 1 to ce76
+[  6.0134    Host ce76] Received message 1 from f36a
+[  6.0157    Host 90c3] Received message 27 from f36a
+[  6.0213    Host 90c3] Received message 27 from f36a
+[  6.0250    Host 90c3] Received message 27 from f36a
+[  6.0281    Host 90c3] Received message 27 from f36a
+[  6.0334    Host 90c3] Received message 27 from f36a
+[  6.0416    Host 90c3] Received message 27 from f36a
+[  6.0607    Host 90c3] Received message 27 from f36a
+[  6.0691    Host 90c3] Received message 27 from f36a
+[  6.0746    Host 90c3] Received message 27 from f36a
+[  6.0784    Host 90c3] Received message 27 from f36a
+[  6.0818    Host 90c3] Received message 27 from f36a
+[  6.0865    Host 90c3] Received message 27 from f36a
+[  6.0907    Host 90c3] Received message 27 from f36a
+[  6.0951    Host 90c3] Received message 27 from f36a
+[  6.0988    Host 90c3] Received message 27 from f36a
+[  6.1036    Host 90c3] Received message 27 from f36a
+[  6.1084    Host 90c3] Received message 27 from f36a
+[  6.1124    Host 90c3] Received message 27 from f36a
+[  6.1159    Host 90c3] Received message 27 from f36a
+[  6.1198    Host 90c3] Received message 27 from f36a
+[  6.1235    Host 90c3] Received message 27 from f36a
+[  6.1272    Host 90c3] Received message 27 from f36a
+[  6.1306    Host 90c3] Received message 27 from f36a
+[  6.1344    Host 90c3] Received message 27 from f36a
+[  6.1381    Host 90c3] Received message 27 from f36a
+[  6.1423    Host 90c3] Received message 27 from f36a
+[  6.1462    Host 90c3] Received message 27 from f36a
+[  6.1506    Host 90c3] Received message 27 from f36a
+[  6.1528    Host 95aa] Sent message 19 to d5b5
+[  6.1543    Host 90c3] Received message 27 from f36a
+[  6.1574    Host d5b5] Received message 19 from 95aa
+[  6.1607    Host 90c3] Received message 27 from f36a
+[  6.1644    Host 90c3] Received message 27 from f36a
+[  6.1686    Host 90c3] Received message 27 from f36a
+[  6.1727    Host 90c3] Received message 27 from f36a
+[  6.1763    Host 90c3] Received message 27 from f36a
+[  6.1800    Host 90c3] Received message 27 from f36a
+[  6.1844    Host 90c3] Received message 27 from f36a
+[  6.1881    Host 90c3] Received message 27 from f36a
+[  6.1920    Host 90c3] Received message 27 from f36a
+[  6.1957    Host 90c3] Received message 27 from f36a
+[  6.1996    Host 90c3] Received message 27 from f36a
+[  6.2030    Host 90c3] Received message 27 from f36a
+[  6.2082    Host 90c3] Received message 27 from f36a
+[  6.2127    Host 90c3] Received message 27 from f36a
+[  6.2177    Host 90c3] Received message 27 from f36a
+[  6.2223    Host 90c3] Received message 27 from f36a
+[  6.2265    Host 90c3] Received message 27 from f36a
+[  6.2310    Host 90c3] Received message 27 from f36a
+[  6.2347    Host 90c3] Received message 27 from f36a
+[  6.2397    Host 90c3] Received message 27 from f36a
+[  6.2434    Host 90c3] Received message 27 from f36a
+[  6.2475    Host 90c3] Received message 27 from f36a
+[  6.2512    Host 90c3] Received message 27 from f36a
+[  6.2552    Host 90c3] Received message 27 from f36a
+[  6.2590    Host 90c3] Received message 27 from f36a
+[  6.2634    Host 90c3] Received message 27 from f36a
+[  6.2679    Host 90c3] Received message 27 from f36a
+[  6.2720    Host 90c3] Received message 27 from f36a
+[  6.2765    Host 90c3] Received message 27 from f36a
+[  6.2806    Host 90c3] Received message 27 from f36a
+[  6.2847    Host 90c3] Received message 27 from f36a
+[  6.2886    Host 90c3] Received message 27 from f36a
+[  6.2927    Host 90c3] Received message 27 from f36a
+[  6.3010    Host 90c3] Received message 27 from f36a
+[  6.3047    Host 90c3] Received message 27 from f36a
+[  6.3103    Host d5b5] Sent message 48 to 90c3
+[  6.3133    Host 90c3] Received message 27 from f36a
+[  6.3186    Host 90c3] Received message 27 from f36a
+[  6.3187    Host 90c3] Received message 48 from d5b5
+[  6.3227    Host 90c3] Received message 48 from d5b5
+[  6.3254    Host 90c3] Received message 27 from f36a
+[  6.3280    Host 90c3] Received message 48 from d5b5
+[  6.3308    Host 90c3] Received message 27 from f36a
+[  6.3335    Host 90c3] Received message 48 from d5b5
+[  6.3363    Host 90c3] Received message 27 from f36a
+[  6.3390    Host 90c3] Received message 48 from d5b5
+[  6.3416    Host 90c3] Received message 27 from f36a
+[  6.3444    Host 90c3] Received message 48 from d5b5
+[  6.3474    Host 90c3] Received message 27 from f36a
+[  6.3500    Host 90c3] Received message 48 from d5b5
+[  6.3525    Host 90c3] Received message 27 from f36a
+[  6.3546    Host 3005] Sent message 0 to 95aa
+[  6.3553    Host 90c3] Received message 48 from d5b5
+[  6.3618    Host 90c3] Received message 27 from f36a
+[  6.3628    Host 95aa] Received message 0 from 3005
+[  6.3645    Host 90c3] Received message 48 from d5b5
+[  6.3692    Host 90c3] Received message 27 from f36a
+[  6.3719    Host 90c3] Received message 48 from d5b5
+[  6.3745    Host 90c3] Received message 27 from f36a
+[  6.3772    Host 90c3] Received message 48 from d5b5
+[  6.3805    Host 90c3] Received message 27 from f36a
+[  6.3841    Host 90c3] Received message 48 from d5b5
+[  6.3871    Host 90c3] Received message 27 from f36a
+[  6.3895    Host 90c3] Received message 48 from d5b5
+[  6.3924    Host 90c3] Received message 27 from f36a
+[  6.3955    Host 90c3] Received message 48 from d5b5
+[  6.3984    Host 90c3] Received message 27 from f36a
+[  6.4011    Host 90c3] Received message 48 from d5b5
+[  6.4040    Host 90c3] Received message 27 from f36a
+[  6.4066    Host 90c3] Received message 48 from d5b5
+[  6.4093    Host 90c3] Received message 27 from f36a
+[  6.4122    Host 90c3] Received message 48 from d5b5
+[  6.4149    Host 90c3] Received message 27 from f36a
+[  6.4179    Host 90c3] Received message 48 from d5b5
+[  6.4206    Host 90c3] Received message 27 from f36a
+[  6.4233    Host 90c3] Received message 48 from d5b5
+[  6.4261    Host 90c3] Received message 27 from f36a
+[  6.4286    Host 90c3] Received message 48 from d5b5
+[  6.4313    Host 90c3] Received message 27 from f36a
+[  6.4340    Host 90c3] Received message 48 from d5b5
+[  6.4365    Host 90c3] Received message 27 from f36a
+[  6.4396    Host 90c3] Received message 48 from d5b5
+[  6.4423    Host 90c3] Received message 27 from f36a
+[  6.4452    Host 90c3] Received message 48 from d5b5
+[  6.4481    Host 90c3] Received message 27 from f36a
+[  6.4508    Host 90c3] Received message 48 from d5b5
+[  6.4537    Host 90c3] Received message 27 from f36a
+[  6.4566    Host 90c3] Received message 48 from d5b5
+[  6.4592    Host 90c3] Received message 27 from f36a
+[  6.4617    Host 90c3] Received message 48 from d5b5
+[  6.4650    Host 90c3] Received message 27 from f36a
+[  6.4678    Host 90c3] Received message 48 from d5b5
+[  6.4703    Host 90c3] Received message 27 from f36a
+[  6.4732    Host 90c3] Received message 48 from d5b5
+[  6.4758    Host 90c3] Received message 27 from f36a
+[  6.4789    Host 90c3] Received message 48 from d5b5
+[  6.4816    Host 90c3] Received message 27 from f36a
+[  6.4840    Host 90c3] Received message 48 from d5b5
+[  6.4871    Host 90c3] Received message 27 from f36a
+[  6.4900    Host 90c3] Received message 48 from d5b5
+[  6.4927    Host 90c3] Received message 27 from f36a
+[  6.4959    Host 90c3] Received message 48 from d5b5
+[  6.4991    Host 90c3] Received message 27 from f36a
+[  6.5018    Host 90c3] Received message 48 from d5b5
+[  6.5047    Host 90c3] Received message 27 from f36a
+[  6.5072    Host 90c3] Received message 48 from d5b5
+[  6.5097    Host 90c3] Received message 27 from f36a
+[  6.5125    Host 90c3] Received message 48 from d5b5
+[  6.5149    Host 90c3] Received message 27 from f36a
+[  6.5177    Host 90c3] Received message 48 from d5b5
+[  6.5203    Host 90c3] Received message 27 from f36a
+[  6.5230    Host 90c3] Received message 48 from d5b5
+[  6.5258    Host 90c3] Received message 27 from f36a
+[  6.5294    Host 90c3] Received message 48 from d5b5
+[  6.5319    Host 90c3] Received message 27 from f36a
+[  6.5320    Host c01f] Sent message 47 to c01f
+[  6.5322    Host c01f] Received message 47 from c01f
+[  6.5345    Host 90c3] Received message 48 from d5b5
+[  6.5371    Host 90c3] Received message 27 from f36a
+[  6.5415    Host 90c3] Received message 48 from d5b5
+[  6.5471    Host 90c3] Received message 27 from f36a
+[  6.5603    Host 90c3] Received message 48 from d5b5
+[  6.5658    Host 90c3] Received message 27 from f36a
+[  6.5725    Host 90c3] Received message 48 from d5b5
+[  6.5756    Host 90c3] Received message 27 from f36a
+[  6.5785    Host 90c3] Received message 48 from d5b5
+[  6.5827    Host 90c3] Received message 27 from f36a
+[  6.5865    Host 90c3] Received message 48 from d5b5
+[  6.5887    Host 90c3] Received message 27 from f36a
+[  6.5923    Host 90c3] Received message 48 from d5b5
+[  6.5957    Host 90c3] Received message 27 from f36a
+[  6.5986    Host 90c3] Received message 48 from d5b5
+[  6.6013    Host 90c3] Received message 27 from f36a
+[  6.6039    Host 90c3] Received message 48 from d5b5
+[  6.6045    Host 95aa] Sent message 30 to c01f
+[  6.6068    Host 90c3] Received message 27 from f36a
+[  6.6097    Host f36a] Sent message 18 to c01f
+[  6.6109    Host 90c3] Received message 48 from d5b5
+[  6.6115    Host c01f] Received message 30 from 95aa
+[  6.6173    Host c01f] Received message 18 from f36a
+[  6.6181    Host 90c3] Received message 27 from f36a
+[  6.6205    Host 0aa8] Sent message 8 to 0aa8
+[  6.6206    Host 0aa8] Received message 8 from 0aa8
+[  6.6234    Host 90c3] Received message 48 from d5b5
+[  6.6265    Host 90c3] Received message 27 from f36a
+[  6.6291    Host 90c3] Received message 48 from d5b5
+[  6.6316    Host 90c3] Received message 27 from f36a
+[  6.6342    Host 90c3] Received message 48 from d5b5
+[  6.6369    Host 90c3] Received message 27 from f36a
+[  6.6397    Host 90c3] Received message 48 from d5b5
+[  6.6426    Host 90c3] Received message 27 from f36a
+[  6.6454    Host 90c3] Received message 48 from d5b5
+[  6.6481    Host 90c3] Received message 27 from f36a
+[  6.6514    Host 90c3] Received message 48 from d5b5
+[  6.6546    Host 90c3] Received message 27 from f36a
+[  6.6572    Host 90c3] Received message 48 from d5b5
+[  6.6599    Host 90c3] Received message 27 from f36a
+[  6.6628    Host 90c3] Received message 48 from d5b5
+[  6.6666    Host 90c3] Received message 27 from f36a
+[  6.6693    Host 90c3] Received message 48 from d5b5
+[  6.6725    Host 90c3] Received message 27 from f36a
+[  6.6753    Host 90c3] Received message 48 from d5b5
+[  6.6779    Host 90c3] Received message 27 from f36a
+[  6.6808    Host 90c3] Received message 48 from d5b5
+[  6.6832    Host 90c3] Received message 27 from f36a
+[  6.6861    Host 90c3] Received message 48 from d5b5
+[  6.6889    Host 90c3] Received message 27 from f36a
+[  6.6916    Host 90c3] Received message 48 from d5b5
+[  6.6947    Host 90c3] Received message 27 from f36a
+[  6.6973    Host 90c3] Received message 48 from d5b5
+[  6.7005    Host 90c3] Received message 27 from f36a
+[  6.7041    Host 90c3] Received message 48 from d5b5
+[  6.7071    Host 90c3] Received message 27 from f36a
+[  6.7101    Host 90c3] Received message 48 from d5b5
+[  6.7137    Host 90c3] Received message 27 from f36a
+[  6.7168    Host 90c3] Received message 48 from d5b5
+[  6.7197    Host 90c3] Received message 27 from f36a
+[  6.7226    Host 90c3] Received message 48 from d5b5
+[  6.7252    Host 90c3] Received message 27 from f36a
+[  6.7277    Host 90c3] Received message 48 from d5b5
+[  6.7304    Host 90c3] Received message 27 from f36a
+[  6.7332    Host 90c3] Received message 48 from d5b5
+[  6.7358    Host 90c3] Received message 27 from f36a
+[  6.7377    Host 90c3] Sent message 44 to ce76
+[  6.7378    Host ce76] Received message 44 from 90c3
+[  6.7390    Host 90c3] Received message 48 from d5b5
+[  6.7434    Host 90c3] Received message 27 from f36a
+[  6.7576    Host c01f] Sent message 10 to 21ee
+[  6.7611    Host 21ee] Received message 10 from c01f
+[  6.7615    Host 21ee] Received message 10 from c01f
+[  6.7650    Host 21ee] Received message 10 from c01f
+[  6.7691    Host 21ee] Received message 10 from c01f
+[  6.7730    Host 21ee] Received message 10 from c01f
+[  6.7767    Host 21ee] Received message 10 from c01f
+[  6.7804    Host 21ee] Received message 10 from c01f
+[  6.7841    Host 21ee] Received message 10 from c01f
+[  6.7878    Host 21ee] Received message 10 from c01f
+[  6.7914    Host 21ee] Received message 10 from c01f
+[  6.7952    Host 21ee] Received message 10 from c01f
+[  6.7996    Host 21ee] Received message 10 from c01f
+[  6.8032    Host 21ee] Received message 10 from c01f
+[  6.8068    Host 21ee] Received message 10 from c01f
+[  6.8106    Host 21ee] Received message 10 from c01f
+[  6.8146    Host 21ee] Received message 10 from c01f
+[  6.8183    Host 21ee] Received message 10 from c01f
+[  6.8220    Host 21ee] Received message 10 from c01f
+[  6.8255    Host 21ee] Received message 10 from c01f
+[  6.8291    Host 21ee] Received message 10 from c01f
+[  6.8325    Host 21ee] Received message 10 from c01f
+[  6.8364    Host 21ee] Received message 10 from c01f
+[  6.8418    Host 21ee] Received message 10 from c01f
+[  6.8462    Host 21ee] Received message 10 from c01f
+[  6.8494    Host 21ee] Received message 10 from c01f
+[  6.8534    Host 21ee] Received message 10 from c01f
+[  6.8573    Host 21ee] Received message 10 from c01f
+[  6.8613    Host 21ee] Received message 10 from c01f
+[  6.8649    Host 21ee] Received message 10 from c01f
+[  6.8685    Host 21ee] Received message 10 from c01f
+[  6.8724    Host 21ee] Received message 10 from c01f
+[  6.8760    Host 21ee] Received message 10 from c01f
+[  6.8775    Host ce76] Sent message 11 to d5b5
+[  6.8812    Host 21ee] Received message 10 from c01f
+[  6.8847    Host 21ee] Received message 10 from c01f
+[  6.8883    Host 21ee] Received message 10 from c01f
+[  6.8926    Host 21ee] Received message 10 from c01f
+[  6.8958    Host 21ee] Received message 10 from c01f
+[  6.8998    Host 21ee] Received message 10 from c01f
+[  6.9031    Host 21ee] Received message 10 from c01f
+[  6.9074    Host 21ee] Received message 10 from c01f
+[  6.9113    Host 21ee] Received message 10 from c01f
+[  6.9157    Host 21ee] Received message 10 from c01f
+[  6.9192    Host 21ee] Received message 10 from c01f
+[  6.9229    Host 21ee] Received message 10 from c01f
+[  6.9262    Host 21ee] Received message 10 from c01f
+[  6.9301    Host 21ee] Received message 10 from c01f
+[  6.9335    Host 21ee] Received message 10 from c01f
+[  6.9377    Host 21ee] Received message 10 from c01f
+[  6.9418    Host 21ee] Received message 10 from c01f
+[  6.9454    Host 21ee] Received message 10 from c01f
+[  6.9490    Host 21ee] Received message 10 from c01f
+[  6.9531    Host 21ee] Received message 10 from c01f
+[  6.9569    Host 21ee] Received message 10 from c01f
+[  6.9611    Host 21ee] Received message 10 from c01f
+[  6.9650    Host 21ee] Received message 10 from c01f
+[  6.9694    Host 21ee] Received message 10 from c01f
+[  6.9734    Host 21ee] Received message 10 from c01f
+[  6.9773    Host 21ee] Received message 10 from c01f
+[  6.9814    Host 21ee] Received message 10 from c01f
+[  6.9852    Host 21ee] Received message 10 from c01f
+[  6.9891    Host 21ee] Received message 10 from c01f
+[  6.9929    Host 21ee] Received message 10 from c01f
+[  6.9970    Host 21ee] Received message 10 from c01f
+[  7.0059    Host 21ee] Received message 10 from c01f
+[  7.0106    Host 21ee] Received message 10 from c01f
+[  7.0147    Host 21ee] Received message 10 from c01f
+[  7.0192    Host 21ee] Received message 10 from c01f
+[  7.0223    Host 21ee] Received message 10 from c01f
+[  7.0272    Host 21ee] Received message 10 from c01f
+[  7.0301  Bridge 1000] Bridge 1000 starting up
+[  7.0304    Host 21ee] Received message 10 from c01f
+[  7.0364    Host 21ee] Received message 10 from c01f
+[  7.0368    Host 21ee] Received message 10 from c01f
+[  7.0488    Host 3005] Sent message 51 to 0aa8
+[  7.0669    Host 21ee] Received message 10 from c01f
+[  7.0842    Host 0aa8] Received message 51 from 3005
+[  7.0862    Host 21ee] Received message 10 from c01f
+[  7.0906    Host 21ee] Received message 10 from c01f
+[  7.0942    Host 21ee] Received message 10 from c01f
+[  7.0974    Host 21ee] Received message 10 from c01f
+[  7.1004    Host 21ee] Received message 10 from c01f
+[  7.1029    Host 21ee] Received message 10 from c01f
+[  7.1067    Host 21ee] Received message 10 from c01f
+[  7.1100    Host 21ee] Received message 10 from c01f
+[  7.1138    Host 21ee] Received message 10 from c01f
+[  7.1172    Host 21ee] Received message 10 from c01f
+[  7.1203    Host 21ee] Received message 10 from c01f
+[  7.1209    Host 21ee] Received message 10 from c01f
+[  7.1282    Host 21ee] Received message 10 from c01f
+[  7.1287    Host 21ee] Received message 10 from c01f
+[  7.1322    Host 21ee] Received message 10 from c01f
+[  7.1352    Host 21ee] Received message 10 from c01f
+[  7.1378    Host 21ee] Received message 10 from c01f
+[  7.1430    Host 21ee] Received message 10 from c01f
+[  7.1435    Host 21ee] Received message 10 from c01f
+[  7.1467    Host 21ee] Received message 10 from c01f
+[  7.1508    Host 21ee] Received message 10 from c01f
+[  7.1522    Host 21ee] Received message 10 from c01f
+[  7.1574    Host 21ee] Received message 10 from c01f
+[  7.1585    Host 21ee] Received message 10 from c01f
+[  7.1614    Host 21ee] Received message 10 from c01f
+[  7.1666    Host 21ee] Received message 10 from c01f
+[  7.1673    Host 21ee] Received message 10 from c01f
+[  7.1729    Host 21ee] Received message 10 from c01f
+[  7.1754    Host 21ee] Received message 10 from c01f
+[  7.1763    Host 21ee] Received message 10 from c01f
+[  7.1818    Host 21ee] Received message 10 from c01f
+[  7.1822    Host 21ee] Received message 10 from c01f
+[  7.1849    Host 21ee] Received message 10 from c01f
+[  7.1858    Host c01f] Sent message 61 to 59e8
+[  7.1859    Host 59e8] Received message 61 from c01f
+[  7.1895    Host 21ee] Received message 10 from c01f
+[  7.1904    Host 21ee] Received message 10 from c01f
+[  7.1960    Host 21ee] Received message 10 from c01f
+[  7.1974    Host 21ee] Received message 10 from c01f
+[  7.2001    Host 21ee] Received message 10 from c01f
+[  7.2058    Host 21ee] Received message 10 from c01f
+[  7.2092    Host 21ee] Received message 10 from c01f
+[  7.2105    Host f36a] Sent message 63 to d5b5
+[  7.2136    Host 21ee] Received message 10 from c01f
+[  7.2177    Host 21ee] Received message 10 from c01f
+[  7.2185    Host 21ee] Received message 10 from c01f
+[  7.2247    Host 21ee] Received message 10 from c01f
+[  7.2254    Host 21ee] Received message 10 from c01f
+[  7.2304    Host 21ee] Received message 10 from c01f
+[  7.2338    Host 21ee] Received message 10 from c01f
+[  7.2349    Host 21ee] Received message 10 from c01f
+[  7.2408    Host 21ee] Received message 10 from c01f
+[  7.2421    Host 21ee] Received message 10 from c01f
+[  7.2446    Host 21ee] Received message 10 from c01f
+[  7.2494    Host 21ee] Received message 10 from c01f
+[  7.2504    Host 21ee] Received message 10 from c01f
+[  7.2566    Host 21ee] Received message 10 from c01f
+[  7.2585    Host 21ee] Received message 10 from c01f
+[  7.2602    Host 21ee] Received message 10 from c01f
+[  7.2661    Host 21ee] Received message 10 from c01f
+[  7.2664    Host 21ee] Received message 10 from c01f
+[  7.2724    Host 21ee] Received message 10 from c01f
+[  7.2739    Host 21ee] Received message 10 from c01f
+[  7.2771    Host 21ee] Received message 10 from c01f
+[  7.2829    Host 21ee] Received message 10 from c01f
+[  7.2830    Host 21ee] Received message 10 from c01f
+[  7.2910    Host 21ee] Received message 10 from c01f
+[  7.2923    Host 21ee] Received message 10 from c01f
+[  7.2981    Host 21ee] Received message 10 from c01f
+[  7.3035    Host 21ee] Received message 10 from c01f
+[  7.3061    Host 21ee] Received message 10 from c01f
+[  7.3145    Host 21ee] Received message 10 from c01f
+[  7.3152    Host 21ee] Received message 10 from c01f
+[  7.3184    Host 21ee] Received message 10 from c01f
+[  7.3198    Host 90c3] Sent message 16 to 90c3
+[  7.3199    Host 90c3] Received message 16 from 90c3
+[  7.3232    Host 21ee] Received message 10 from c01f
+[  7.3235    Host 21ee] Received message 10 from c01f
+[  7.3269    Host d5b5] Received message 63 from f36a
+[  7.3294    Host 21ee] Received message 10 from c01f
+[  7.3299    Host 21ee] Received message 10 from c01f
+[  7.3355    Host 21ee] Received message 10 from c01f
+[  7.3384    Host 21ee] Received message 10 from c01f
+[  7.3410    Host 21ee] Received message 10 from c01f
+[  7.3459    Host 21ee] Received message 10 from c01f
+[  7.3467    Host 21ee] Received message 10 from c01f
+[  7.3493    Host 21ee] Received message 10 from c01f
+[  7.3539    Host 21ee] Received message 10 from c01f
+[  7.3547    Host 21ee] Received message 10 from c01f
+[  7.3601    Host 21ee] Received message 10 from c01f
+[  7.3611    Host 21ee] Received message 10 from c01f
+[  7.3633    Host 21ee] Received message 10 from c01f
+[  7.3679    Host 21ee] Received message 10 from c01f
+[  7.3688    Host 21ee] Received message 10 from c01f
+[  7.3716    Host 21ee] Received message 10 from c01f
+[  7.3763    Host 21ee] Received message 10 from c01f
+[  7.3770    Host 21ee] Received message 10 from c01f
+[  7.3823    Host 21ee] Received message 10 from c01f
+[  7.3837    Host 21ee] Received message 10 from c01f
+[  7.3866    Host 21ee] Received message 10 from c01f
+[  7.3927    Host 21ee] Received message 10 from c01f
+[  7.3933    Host 21ee] Received message 10 from c01f
+[  7.3990    Host 21ee] Received message 10 from c01f
+[  7.4000    Host 21ee] Received message 10 from c01f
+[  7.4020    Host 21ee] Received message 10 from c01f
+[  7.4069    Host 21ee] Received message 10 from c01f
+[  7.4070    Host 21ee] Received message 10 from c01f
+[  7.4132    Host 21ee] Received message 10 from c01f
+[  7.4146    Host 21ee] Received message 10 from c01f
+[  7.4167    Host 21ee] Received message 10 from c01f
+[  7.4217    Host 21ee] Received message 10 from c01f
+[  7.4228    Host 21ee] Received message 10 from c01f
+[  7.4288    Host 21ee] Received message 10 from c01f
+[  7.4294    Host 21ee] Received message 10 from c01f
+[  7.4337    Host 21ee] Received message 10 from c01f
+[  7.4371    Host 21ee] Received message 10 from c01f
+[  7.4396    Host 21ee] Received message 10 from c01f
+[  7.4454    Host 21ee] Received message 10 from c01f
+[  7.4457    Host 21ee] Received message 10 from c01f
+[  7.4502    Host 21ee] Received message 10 from c01f
+[  7.4528    Host 21ee] Received message 10 from c01f
+[  7.4560    Host 21ee] Received message 10 from c01f
+[  7.4569    Host 90c3] Sent message 60 to d5b5
+[  7.4602    Host 21ee] Received message 10 from c01f
+[  7.4607    Host 21ee] Received message 10 from c01f
+[  7.4664    Host 21ee] Received message 10 from c01f
+[  7.4677    Host 21ee] Received message 10 from c01f
+[  7.4720    Host 21ee] Received message 10 from c01f
+[  7.4760    Host 21ee] Received message 10 from c01f
+[  7.4769    Host 21ee] Received message 10 from c01f
+[  7.4817    Host 21ee] Received message 10 from c01f
+[  7.4822    Host 21ee] Received message 10 from c01f
+[  7.4852    Host 21ee] Received message 10 from c01f
+[  7.4913    Host 21ee] Received message 10 from c01f
+[  7.4916    Host 21ee] Received message 10 from c01f
+[  7.4984    Host 21ee] Received message 10 from c01f
+[  7.5008    Host 21ee] Received message 10 from c01f
+[  7.5022    Host 21ee] Received message 10 from c01f
+[  7.5076    Host 21ee] Received message 10 from c01f
+[  7.5079    Host 21ee] Received message 10 from c01f
+[  7.5133    Host 21ee] Received message 10 from c01f
+[  7.5160    Host 21ee] Received message 10 from c01f
+[  7.5239    Host 21ee] Received message 10 from c01f
+[  7.5263    Host 21ee] Received message 10 from c01f
+[  7.5305    Host 21ee] Received message 10 from c01f
+[  7.5308    Host 21ee] Received message 10 from c01f
+[  7.5356    Host 21ee] Received message 10 from c01f
+[  7.5396    Host 21ee] Received message 10 from c01f
+[  7.5405    Host 21ee] Received message 10 from c01f
+[  7.5468    Host 21ee] Received message 10 from c01f
+[  7.5487    Host 21ee] Received message 10 from c01f
+[  7.5573    Host 21ee] Received message 10 from c01f
+[  7.5694    Host 21ee] Received message 10 from c01f
+[  7.5800    Host d5b5] Received message 63 from f36a
+[  7.5872    Host 21ee] Received message 10 from c01f
+[  7.5945    Host 21ee] Received message 10 from c01f
+[  7.6018    Host 21ee] Received message 10 from c01f
+[  7.6091    Host 21ee] Received message 10 from c01f
+[  7.6125    Host ce76] Sent message 21 to d5b5
+[  7.6161    Host 21ee] Received message 10 from c01f
+[  7.6230    Host 21ee] Received message 10 from c01f
+[  7.6310    Host 21ee] Received message 10 from c01f
+[  7.6381    Host 21ee] Received message 10 from c01f
+[  7.6456    Host 21ee] Received message 10 from c01f
+[  7.6494    Host d5b5] Received message 63 from f36a
+[  7.6535    Host 21ee] Received message 10 from c01f
+[  7.6602    Host 21ee] Received message 10 from c01f
+[  7.6643    Host d5b5] Received message 63 from f36a
+[  7.6684    Host 21ee] Received message 10 from c01f
+[  7.6761    Host 21ee] Received message 10 from c01f
+[  7.6832    Host 21ee] Received message 10 from c01f
+[  7.6907    Host 21ee] Received message 10 from c01f
+[  7.6930    Host ce76] Sent message 9 to f36a
+[  7.6932    Host f36a] Received message 9 from ce76
+[  7.6977    Host 21ee] Received message 10 from c01f
+[  7.7043    Host 21ee] Received message 10 from c01f
+[  7.7119    Host 21ee] Received message 10 from c01f
+[  7.7161    Host d5b5] Received message 60 from 90c3
+[  7.7199    Host 21ee] Received message 10 from c01f
+[  7.7275    Host 21ee] Received message 10 from c01f
+[  7.7346    Host 21ee] Received message 10 from c01f
+[  7.7413    Host 21ee] Received message 10 from c01f
+[  7.7482    Host 21ee] Received message 10 from c01f
+[  7.7554    Host 21ee] Received message 10 from c01f
+[  7.7636    Host 21ee] Received message 10 from c01f
+[  7.7704    Host 21ee] Received message 10 from c01f
+[  7.7762    Host 21ee] Received message 10 from c01f
+[  7.7842    Host 21ee] Received message 10 from c01f
+[  7.7918    Host 21ee] Received message 10 from c01f
+[  7.7977    Host 21ee] Received message 10 from c01f
+[  7.8046    Host 21ee] Received message 10 from c01f
+[  7.8127    Host 21ee] Received message 10 from c01f
+[  7.8200    Host 21ee] Received message 10 from c01f
+[  7.8271    Host 21ee] Received message 10 from c01f
+[  7.8337    Host 21ee] Received message 10 from c01f
+[  7.8447    Host 21ee] Received message 10 from c01f
+[  7.8522    Host 21ee] Received message 10 from c01f
+[  7.8559    Host d5b5] Received message 21 from ce76
+[  7.8598    Host 21ee] Received message 10 from c01f
+[  7.8674    Host 21ee] Received message 10 from c01f
+[  7.8696    Host 21ee] Received message 10 from c01f
+[  7.8708    Host d5b5] Received message 63 from f36a
+[  7.8739    Host 21ee] Received message 10 from c01f
+[  7.8752    Host 21ee] Received message 10 from c01f
+[  7.8773    Host d5b5] Received message 63 from f36a
+[  7.8811    Host 21ee] Received message 10 from c01f
+[  7.8813    Host 21ee] Received message 10 from c01f
+[  7.8857    Host d5b5] Received message 21 from ce76
+[  7.8861    Host 21ee] Received message 10 from c01f
+[  7.8897    Host 21ee] Received message 10 from c01f
+[  7.8974    Host 21ee] Received message 10 from c01f
+[  7.8976    Host 21ee] Received message 10 from c01f
+[  7.9034    Host 21ee] Received message 10 from c01f
+[  7.9042    Host 21ee] Received message 10 from c01f
+[  7.9086    Host 21ee] Received message 10 from c01f
+[  7.9111    Host 21ee] Received message 10 from c01f
+[  7.9145    Host 21ee] Received message 10 from c01f
+[  7.9188    Host 21ee] Received message 10 from c01f
+[  7.9203    Host 21ee] Received message 10 from c01f
+[  7.9257    Host 21ee] Received message 10 from c01f
+[  7.9274    Host 21ee] Received message 10 from c01f
+[  7.9316    Host 21ee] Received message 10 from c01f
+[  7.9344    Host 21ee] Received message 10 from c01f
+[  7.9372    Host d5b5] Received message 63 from f36a
+[  7.9374    Host 21ee] Received message 10 from c01f
+[  7.9378    Host 3005] Sent message 33 to 0aa8
+[  7.9401    Host 21ee] Received message 10 from c01f
+[  7.9433    Host 21ee] Received message 10 from c01f
+[  7.9474    Host 21ee] Received message 10 from c01f
+[  7.9513    Host d5b5] Received message 63 from f36a
+[  7.9539    Host 21ee] Received message 10 from c01f
+[  7.9547    Host 21ee] Received message 10 from c01f
+[  7.9591    Host 21ee] Received message 10 from c01f
+[  7.9620    Host 21ee] Received message 10 from c01f
+[  7.9651    Host 21ee] Received message 10 from c01f
+[  7.9706    Host 21ee] Received message 10 from c01f
+[  7.9709    Host 21ee] Received message 10 from c01f
+[  7.9765    Host 21ee] Received message 10 from c01f
+[  7.9786    Host 21ee] Received message 10 from c01f
+[  7.9796    Host 59e8] Sent message 55 to 0aa8
+[  7.9798    Host 0aa8] Received message 55 from 59e8
+[  7.9823    Host 21ee] Received message 10 from c01f
+[  7.9830    Host d5b5] Received message 63 from f36a
+[  7.9880    Host 21ee] Received message 10 from c01f
+[  7.9916    Host 21ee] Received message 10 from c01f
+[  7.9936    Host 21ee] Received message 10 from c01f
+[  7.9948    Host 21ee] Received message 10 from c01f
+[  8.0013    Host d5b5] Received message 63 from f36a
+[  8.0016    Host 21ee] Received message 10 from c01f
+[  8.0080    Host 21ee] Received message 10 from c01f
+[  8.0128    Host 21ee] Received message 10 from c01f
+[  8.0161    Host 21ee] Received message 10 from c01f
+[  8.0187    Host 21ee] Received message 10 from c01f
+[  8.0194    Host 90c3] Sent message 32 to 95aa
+[  8.0195    Host 95aa] Received message 32 from 90c3
+[  8.0214    Host 21ee] Received message 10 from c01f
+[  8.0260    Host 21ee] Received message 10 from c01f
+[  8.0270    Host 21ee] Received message 10 from c01f
+[  8.0322    Host 21ee] Received message 10 from c01f
+[  8.0337    Host 21ee] Received message 10 from c01f
+[  8.0381    Host 21ee] Received message 10 from c01f
+[  8.0412    Host 21ee] Received message 10 from c01f
+[  8.0444    Host 21ee] Received message 10 from c01f
+[  8.0486    Host 21ee] Received message 10 from c01f
+[  8.0505    Host 21ee] Received message 10 from c01f
+[  8.0566    Host 21ee] Received message 10 from c01f
+[  8.0587    Host 21ee] Received message 10 from c01f
+[  8.0596    Host 59e8] Sent message 41 to 90c3
+[  8.0660    Host d5b5] Received message 63 from f36a
+[  8.0769    Host d5b5] Received message 63 from f36a
+[  8.0801    Host 90c3] Received message 41 from 59e8
+[  8.0876    Host 21ee] Received message 10 from c01f
+[  8.1021    Host 21ee] Received message 10 from c01f
+[  8.1130    Host 21ee] Received message 10 from c01f
+[  8.1175    Host d5b5] Received message 60 from 90c3
+[  8.1247    Host 21ee] Received message 10 from c01f
+[  8.1337    Host 21ee] Received message 10 from c01f
+[  8.1425    Host 21ee] Received message 10 from c01f
+[  8.1510    Host 21ee] Received message 10 from c01f
+[  8.1556    Host d5b5] Received message 60 from 90c3
+[  8.1605    Host 21ee] Received message 10 from c01f
+[  8.1694    Host 21ee] Received message 10 from c01f
+[  8.1777    Host d5b5] Received message 21 from ce76
+[  8.1869    Host 21ee] Received message 10 from c01f
+[  8.1889    Host c01f] Sent message 5 to 0aa8
+[  8.1890    Host 0aa8] Received message 5 from c01f
+[  8.1964    Host 21ee] Received message 10 from c01f
+[  8.2053    Host 21ee] Received message 10 from c01f
+[  8.2534    Host 59e8] Sent message 36 to 3005
+[  8.2536    Host d5b5] Sent message 2 to ce76
+[  8.2546    Host 21ee] Received message 10 from c01f
+[  8.2547    Host 21ee] Received message 10 from c01f
+[  8.2729    Host 21ee] Received message 10 from c01f
+[  8.2841    Host 21ee] Received message 10 from c01f
+[  8.2843    Host 21ee] Received message 10 from c01f
+[  8.2849    Host 21ee] Received message 10 from c01f
+[  8.3160    Host 90c3] Sent message 3 to 3005
+[  8.3165    Host 21ee] Received message 10 from c01f
+[  8.3167    Host 21ee] Received message 10 from c01f
+[  8.3256    Host 21ee] Received message 10 from c01f
+[  8.3257    Host 3005] Received message 36 from 59e8
+[  8.3424    Host 3005] Received message 3 from 90c3
+[  8.3426    Host 21ee] Received message 10 from c01f
+[  8.3428    Host 21ee] Received message 10 from c01f
+[  8.3506    Host 21ee] Received message 10 from c01f
+[  8.3513    Host 21ee] Received message 10 from c01f
+[  8.3675    Host d5b5] Received message 63 from f36a
+[  8.3676    Host 3005] Sent message 58 to 0aa8
+[  8.3681    Host 21ee] Received message 10 from c01f
+[  8.3683    Host 21ee] Received message 10 from c01f
+[  8.3684    Host 3005] Received message 3 from 90c3
+[  8.3685    Host d5b5] Received message 63 from f36a
+[  8.3690    Host 21ee] Received message 10 from c01f
+[  8.3860    Host d5b5] Received message 63 from f36a
+[  8.3864    Host 21ee] Received message 10 from c01f
+[  8.3867    Host 21ee] Received message 10 from c01f
+[  8.3960    Host 21ee] Received message 10 from c01f
+[  8.3963    Host 21ee] Received message 10 from c01f
+[  8.3964    Host d5b5] Received message 21 from ce76
+[  8.3967    Host 21ee] Received message 10 from c01f
+[  8.3970    Host 21ee] Received message 10 from c01f
+[  8.4217    Host ce76] Sent message 24 to 21ee
+[  8.4218    Host 21ee] Received message 24 from ce76
+[  8.4222    Host 21ee] Received message 10 from c01f
+[  8.4224    Host 21ee] Received message 10 from c01f
+[  8.4296    Host 21ee] Received message 10 from c01f
+[  8.4299    Host 21ee] Received message 10 from c01f
+[  8.4408    Host 21ee] Received message 10 from c01f
+[  8.4410    Host 21ee] Received message 10 from c01f
+[  8.4412    Host d5b5] Received message 21 from ce76
+[  8.4414    Host 21ee] Received message 10 from c01f
+[  8.4416    Host 21ee] Received message 10 from c01f
+[  8.4596    Host d5b5] Received message 63 from f36a
+[  8.4598    Host 21ee] Received message 10 from c01f
+[  8.4601    Host 21ee] Received message 10 from c01f
+[  8.4683    Host 21ee] Received message 10 from c01f
+[  8.4685    Host 21ee] Received message 10 from c01f
+[  8.4689    Host 21ee] Received message 10 from c01f
+[  8.4691    Host 21ee] Received message 10 from c01f
+[  8.4850    Host d5b5] Received message 63 from f36a
+[  8.4855    Host 21ee] Received message 10 from c01f
+[  8.4858    Host 21ee] Received message 10 from c01f
+[  8.4863    Host 21ee] Received message 10 from c01f
+[  8.4865    Host 21ee] Received message 10 from c01f
+[  8.5024    Host 21ee] Received message 10 from c01f
+[  8.5026    Host 21ee] Received message 10 from c01f
+[  8.5030    Host 21ee] Received message 10 from c01f
+[  8.5032    Host 21ee] Received message 10 from c01f
+[  8.5212    Host 21ee] Received message 10 from c01f
+[  8.5214    Host 21ee] Received message 10 from c01f
+[  8.5217    Host d5b5] Received message 63 from f36a
+[  8.5219    Host 21ee] Received message 10 from c01f
+[  8.5221    Host 21ee] Received message 10 from c01f
+[  8.5381    Host 21ee] Received message 10 from c01f
+[  8.5478    Host d5b5] Received message 63 from f36a
+[  8.5479    Host 59e8] Sent message 64 to 21ee
+[  8.5485    Host 21ee] Received message 10 from c01f
+[  8.5488    Host 21ee] Received message 10 from c01f
+[  8.5490    Host 21ee] Received message 10 from c01f
+[  8.5656    Host 21ee] Received message 10 from c01f
+[  8.5773    Host d5b5] Sent message 46 to 3005
+[  8.5878    Host 21ee] Received message 10 from c01f
+[  8.5880    Host 21ee] Received message 10 from c01f
+[  8.5961    Host d5b5] Received message 21 from ce76
+[  8.5964    Host 21ee] Received message 10 from c01f
+[  8.5966    Host 21ee] Received message 10 from c01f
+[  8.6044    Host 21ee] Received message 10 from c01f
+[  8.6047    Host 21ee] Received message 10 from c01f
+[  8.6049    Host d5b5] Received message 63 from f36a
+[  8.6053    Host 21ee] Received message 10 from c01f
+[  8.6332    Host 90c3] Sent message 22 to f36a
+[  8.6333    Host f36a] Received message 22 from 90c3
+[  8.6342    Host 21ee] Received message 10 from c01f
+[  8.6345    Host 21ee] Received message 10 from c01f
+[  8.6517    Host 21ee] Received message 64 from 59e8
+[  8.6612    Host d5b5] Received message 21 from ce76
+[  8.6615    Host 21ee] Received message 10 from c01f
+[  8.6617    Host 21ee] Received message 10 from c01f
+[  8.6621    Host 21ee] Received message 10 from c01f
+[  8.6623    Host 21ee] Received message 10 from c01f
+[  8.6801    Host 21ee] Received message 10 from c01f
+[  8.6898    Host 21ee] Received message 10 from c01f
+[  8.6900    Host 21ee] Received message 10 from c01f
+[  8.6904    Host 21ee] Received message 10 from c01f
+[  8.6907    Host 21ee] Received message 10 from c01f
+[  8.7055    Host 21ee] Received message 10 from c01f
+[  8.7058    Host 21ee] Received message 10 from c01f
+[  8.7063    Host 21ee] Received message 10 from c01f
+[  8.7065    Host 21ee] Received message 10 from c01f
+[  8.7230    Host d5b5] Received message 60 from 90c3
+[  8.7232    Host 21ee] Received message 10 from c01f
+[  8.7235    Host 21ee] Received message 10 from c01f
+[  8.7323    Host 21ee] Received message 10 from c01f
+[  8.7326    Host 21ee] Received message 10 from c01f
+[  8.7331    Host 21ee] Received message 10 from c01f
+[  8.7585    Host 95aa] Sent message 4 to c01f
+[  8.7588    Host 21ee] Received message 10 from c01f
+[  8.7591    Host 21ee] Received message 10 from c01f
+[  8.7596    Host 21ee] Received message 10 from c01f
+[  8.7599    Host 21ee] Received message 10 from c01f
