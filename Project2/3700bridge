@@ -89,7 +89,7 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-		print(data)
+		#print(data)
 
 	        f = open("out.txt", "a")
 		f.write(data)
@@ -100,7 +100,7 @@ class Bridge(object):
 		    if self.port_history[socket] is None:
 			self.port_history[socket] = []
 		    time_now = time.time() * 100
-		    print(time_now)
+		    #print(time_now)
 		    tup1 = (data, time_now)
 		    self.port_history[socket].append(tup1)
 		    if self.is_from_me(data):
@@ -137,10 +137,8 @@ class Bridge(object):
                                                                 self.root_id))
 				f.write("\n")
 				f.close()
-			    else:
-				 print("here")
                         except Exception as e:
-                            print(e)
+                            #print(e)
                             print("BPDU was malformed and is " + data)
 		    self.update_enabled_ports()
 		    f  = open("out.txt", "a")
@@ -212,6 +210,9 @@ class Bridge(object):
 	    return
 	i = 0
 	for port in self.port_history:
+	    # add the port in case it was mistakenly removed
+	    if port not in self.enabled_ports:
+	        self.enabled_ports.append(port)
 	    # Reason B: this is the root port
 	    if port.fileno() == self.root_port:
 		# it has already been added
@@ -224,7 +225,7 @@ class Bridge(object):
 		continue
 	    for i in range(len(bpdus)):
 		# the message is older than/equal to 750ms
-		if ((time.time()*100) - bpdus[i][1]) >= 750:
+		if ((time.time()*100) - bpdus[i][1]) >= 75:
 		    # drop all messages before and up to this one
 		    latest_to_drop = i
 		else:
@@ -248,7 +249,7 @@ class Bridge(object):
 		continue
 		#self.enabled_ports.append(port)
 	    if port in self.enabled_ports:
-		print("{} disabling port {}\n".format(self.id, port.getpeername()))
+		#print("{} disabling port {}\n".format(self.id, port.getpeername()))
 	    	self.enabled_ports.remove(port)
 
         # TODO Consider how to identify if a bridge has stopped working and a
