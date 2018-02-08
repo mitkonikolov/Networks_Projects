@@ -125,10 +125,12 @@ class Bridge(object):
                                      int(str(self.root_id), 16) and
                                              int(str(foreignBPDU['message']['cost']), 16) <
                                              (int(str(self.cost), 16) - 1)) or \
-			       (int(str(foreignBPDU['message']['root']), 16) == int(str(self.root_id), 16) and int(str(foreignBPDU['message']['cost']), 16) == int(str(self.cost), 16) and int(str(foreignBPDU['source']), 16) < int(str(self.id), 16)):
+			       (int(str(foreignBPDU['message']['root']), 16) == int(str(self.root_id), 16) and int(str(foreignBPDU['message']['cost']), 16) == (int(str(self.cost), 16) - 1) and int(str(foreignBPDU['source']), 16) < int(str(self.id), 16)):
 				self.root_id = foreignBPDU['message']['root']
                                 self.cost = foreignBPDU['message']['cost'] + 1
                                 self.root_port = socket.fileno()
+				if socket not in self.enabled_ports:
+				    self.enabled_ports.append(socket)
                                 self.broadcast_bpdu()
 				f = open("out.txt", "a")
                                 f.write("New root: {}/{}".format( self.id,
@@ -213,8 +215,6 @@ class Bridge(object):
 	    # Reason B: this is the root port
 	    if port.fileno() == self.root_port:
 		# it has already been added
-		'''if port not in self.enabled_ports:
-		    self.enabled_ports.append(port)'''
 		continue
 	    bpdus = self.port_history[port]
 	    latest_to_drop = 0
@@ -233,6 +233,10 @@ class Bridge(object):
 		    if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
 		        designated_bridge = False
 			break
+		    if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+		        designated_bridge = False
+			break
+
 	    # remove the old messages
 	    #self.port_history[port] = bpdus[latest_to_drop+1:]
 	    # Reason C: this is the designated bridge
