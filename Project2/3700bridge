@@ -70,9 +70,9 @@ class Bridge(object):
 
         while True:
 	    curr_time = time.time() * 100
-	    diff = 0.05 - ((curr_time - last_mess_time)/100)
-	    if (curr_time-last_mess_time) > 5:
-		diff = 0.05
+	    diff = 0.5 - ((curr_time - last_mess_time)/100)
+	    if (curr_time-last_mess_time) > 50:
+		diff = 0.5
 		if curr_time-last_mess_time > 10:
 		    f = open("delayed_broadcast.txt", "a")
 		    f.write("Broadcast delayed by {}:\n".format(curr_time-last_mess_time))
@@ -232,8 +232,8 @@ class Bridge(object):
 		    f.write("Port does not have a history\n")
 	        
 	    # add the port in case it was mistakenly removed
-	    if port not in self.enabled_ports:
-	        self.enabled_ports.append(port)
+	    '''if port not in self.enabled_ports:
+	        self.enabled_ports.append(port)'''
 	    # Reason B: this is the root port
 	    if port.fileno() == self.root_port:
 		if mode:
