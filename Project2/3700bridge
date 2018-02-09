@@ -65,35 +65,32 @@ class Bridge(object):
         # broadcast first message to start the process of building a spanning
         #  tree
 	
-	#f = open("out.txt", "w+")
-	#f.close()
-
         self.broadcast_bpdu()
 	last_mess_time = time.time() * 100
-	#print(last_mess_time)
-	#print(time.time() * 100)
-	#while ((time.time() * 100) - last_mess_time) < 20:
-	#    self.broadcast_bpdu()
-
-	#rec_mess = open("received_mess.txt", "w+")
-	#rec_mess.close()
 
         while True:
 	    curr_time = time.time() * 100
-	    if (curr_time-last_mess_time) > 50:
+	    diff = 0.05 - ((curr_time - last_mess_time)/100)
+	    if (curr_time-last_mess_time) > 5:
+		diff = 0.05
+		if curr_time-last_mess_time > 10:
+		    f = open("delayed_broadcast.txt", "a")
+		    f.write("Broadcast delayed by {}:\n".format(curr_time-last_mess_time))
+		    for message in mess_buffer:
+			f.write("{}\n".format(message))
+		    f.write("\n\n\n")
+		    f.close()
+	   	last_mess_time = time.time() * 100
 		self.broadcast_bpdu()
-		last_mess_time = time.time() * 100
-	    #if (curr_time - last_mess_time) > 50:
-	    #time.sleep(0.5)
-	    #	self.broadcast_bpdu()
-	    
+
+	     
+	    mess_buffer = []
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore1, ignore2 = select.select(self.sockets, [], [], 0.5)
+            ready, ignore1, ignore2 = select.select(self.sockets, [], [], diff)
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-		#print(data)
-
+		mess_buffer.append(data)		
 	        f = open("out.txt", "a")
 		f.write(data)
 		f.write("\n")
@@ -103,7 +100,6 @@ class Bridge(object):
 		    if self.port_history[socket] is None:
 			self.port_history[socket] = []
 		    time_now = time.time() * 100
-		    #print(time_now)
 		    tup1 = (data, time_now)
 		    self.port_history[socket].append(tup1)
 		    if self.is_from_me(data):
@@ -223,8 +219,8 @@ class Bridge(object):
 	if self.root_id == self.id:
 	    self.enabled_ports = self.sockets
 	    return
-	i = 0
 	for port in self.port_history:
+	    i = 0
 	    f =""
 	    if mode:
 	        f = open("all_ports.txt", "a")
@@ -247,17 +243,20 @@ class Bridge(object):
 	    bpdus = self.port_history[port]
 	    latest_to_drop = 0
 	    designated_bridge = True
+	    new_list = []
 	    if len(bpdus) == 0:
 		if mode:
 		    f.write("\nno BPDUS\n")
-		#self.enabled_ports.append(port)
 		continue
 	    for i in range(len(bpdus)):
-		# the message is older than/equal to 750ms
-		if ((time.time()*100) - bpdus[i][1]) >= 7500:
+		# the message is older than 750ms
+		if ((time.time() * 100) - bpdus[i][1]) > 75:
+		    print("{} --- {}".format(time.time()*100, bpdus[i][1]))
 		    # drop all messages before and up to this one
 		    latest_to_drop = i
 		else:
+		    new_tup = (bpdus[i][0], bpdus[i][1])
+		    new_list.append(new_tup)
 		    json_obj = json.loads(bpdus[i][0])
 		    # some other bridge is designated for this LAN
 		    if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
@@ -269,20 +268,18 @@ class Bridge(object):
 
 	    # remove the old messages
 	    #self.port_history[port] = bpdus[latest_to_drop+1:]
+	    self.port_history[port] = new_list
 	    # Reason C: this is the designated bridge
 	    if designated_bridge:
 		if mode:
 		    f.write("\n----Designated bridge-----\n")
-		#self.enabled_ports.append(port)
 		continue
 	    # Reason A: there are not BPDUs younger than 750ms on this port
 	    if len(self.port_history[port]) == 0:
 		if mode:
 		    f.write("no young BPDUs")
 		continue
-		#self.enabled_ports.append(port)
 	    if port in self.enabled_ports:
-		#print("{} disabling port {}\n".format(self.id, port.getpeername()))
 	    	if mode:
 		    f.write("\n--------closing the port at time{}---------\n".format(time.time()*100))
 		self.enabled_ports.remove(port)
