@@ -65,8 +65,8 @@ class Bridge(object):
         # broadcast first message to start the process of building a spanning
         #  tree
 	
-	f = open("out.txt", "w+")
-	f.close()
+	#f = open("out.txt", "w+")
+	#f.close()
 
         self.broadcast_bpdu()
 	last_mess_time = time.time() * 100
@@ -74,6 +74,9 @@ class Bridge(object):
 	#print(time.time() * 100)
 	#while ((time.time() * 100) - last_mess_time) < 20:
 	#    self.broadcast_bpdu()
+
+	rec_mess = open("received_mess.txt", "w+")
+	rec_mess.close()
 
         while True:
 	    curr_time = time.time() * 100
@@ -117,6 +120,8 @@ class Bridge(object):
 			elif peer_name not in self.uniqueLANs:
 			    self.uniqueLANs[peer_name] = file_no
                     else:
+			
+			
                         try:
                             foreignBPDU = json.loads(data)
 			    if int(str(foreignBPDU['message']['root']), 16) < \
@@ -147,8 +152,7 @@ class Bridge(object):
 			f.write("{}\n".format(s.getpeername()))
 		    f.close()
 		else:
-		    
-		    #f = open("out.txt", "a")
+		    		    #f = open("out.txt", "a")
 		    #f.write("\nActive Ports\n")
 		    #f.write(str(type(socket)))
 		    #for port in self.activePorts:
@@ -160,6 +164,9 @@ class Bridge(object):
 		    # prevent reading from multiple ports
 		    #if socket not in self.inactivePorts:
 		    if socket in self.enabled_ports:
+			rec_mess = open("received_mess.txt", "a")
+		    	rec_mess.write("Bridge id {}, root is {}: {}\n".format(self.id,self.root_id, data))
+		    	rec_mess.close()
 
 		    #if socket in self.activePorts:
 		   # 	f.write("\n------END-------\n")
@@ -167,20 +174,21 @@ class Bridge(object):
 			# extract source and put in forwarding table
 			data_dict = json.loads(data)
 			source = data_dict['source']
-			self.routing_table[source] = socket
+			tuple1 = (socket, time.time()*100)
+			self.routing_table[source] = tuple1
 			# extract destination and check whether we have it
 			destination = data_dict['dest']
 			dest_ports = []
 			f = open("out.txt", "a")
 			f.write("\nRouting table for {}:\n".format(self.id))
 			for host in self.routing_table:
-			    f.write("Host: {} - Port: {}\n\n".format(host, self.routing_table[host].fileno()))
+			    f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
 			#f.close()
 			if destination in self.routing_table:
 			    f.write("destination is in routing table\n")
 			    # only send if the two hosts are on different ports
-			    if self.routing_table[destination] != socket:
-			        dest_ports.append(self.routing_table[destination])
+			    if self.routing_table[destination][0] != socket:
+			        dest_ports.append(self.routing_table[destination][0])
 			else:
 			    f.write("destination is not in routing table\n")
 			    for x in self.enabled_ports:
@@ -189,7 +197,8 @@ class Bridge(object):
 			self.message.send(data, dest_ports)
 			f.write("there are {} destination ports\n".format(len(dest_ports)))
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
-			f.close()    
+			f.close()
+			self.update_routing_table()    
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
 	    #if ((time.time() * 100) - last_mess_time) < 200: 
@@ -202,6 +211,11 @@ class Bridge(object):
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
                                                                 self.root_id, "cost":self.cost})
 
+
+    def update_routing_table(self):
+	for k, v in self.routing_table.iteritems():
+	    if (time.time()*100) - v[1] > 500:
+		del self.routing_table[k]
 
     def update_enabled_ports(self):
 	# This is the root => all ports are enabled
