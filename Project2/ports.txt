@@ -1,2 +1,0 @@
-inactive: 6
-inactive: 3
