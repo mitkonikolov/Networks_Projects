@@ -17,9 +17,7 @@ if (! (-e $RUN)) {
 
 print "Basic (no failures, no new bridges) tests (PDR = 1.0)\n";
 runTest("One bridge, one LAN", "simple-1.conf", 1);
-print "\n\n\n\n";
 runTest("One bridge, two LANs", "simple-2.conf", 1);
-print "\n\n\n\n";
 runTest("One bridge, three LANs", "simple-3.conf", 1);
 runTest("Two bridges, one LAN", "simple-4.conf", 1);
 runTest("Two bridges, two LANs", "simple-5.conf", 1);
