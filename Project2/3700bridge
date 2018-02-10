@@ -10,7 +10,23 @@ import random
 import string
 
 
+class My_Socket(socket.socket):
+    
+    def __init__(self, val1, val2):
+        super(My_Socket, self).__init__(val1,val2)
+        #self.queue = queue.Queue
 
+    def __eq__(self, other):
+	if isinstance(self, other.__class__):
+	    return self.fileno() == other.fileno()
+	return False    
+
+    def getpeername(self):
+	return super(My_Socket, self).getpeername()
+
+
+    def fileno(self):
+	return super(My_Socket, self).fileno()
 
 class Bridge(object):
     id = -1
@@ -32,7 +48,10 @@ class Bridge(object):
     enabled_ports = []
     # has the tree been found to fail
     failed_tree = False
+    # neighbor and the last time I heard from them
     neighbor_time = {}
+    # data that I need to send to the root or hosts and will buffer for now
+    send_buffer = []
 
     def __init__(self, id, LAN):
         self.id = id
@@ -43,14 +62,15 @@ class Bridge(object):
 
     # pads the name with null bytes at the end
     def pad(self, name):
-        result = '\0' + name
+        result = "\0" + name
         while len(result) < 108:
-            result += '\0'
-        return result
+            result += "\0"
+        return result.encode('ascii')
 
     def connect_to_sockets(self):
         for x in range(len(self.LAN)):
-            s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
+	    #s = My_Socket()
+            s = My_Socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
 	    #name = self.pad(self.LAN[x])
 	    #f = open("ports.txt", "a") 
 	    #f.write("{}\n".format(name))           
@@ -124,7 +144,7 @@ class Bridge(object):
 			    
 			    neighbor = foreignBPDU['source']
 			    self.neighbor_time[neighbor] = time.time()*100
-			    if self.failed_tree:
+			    '''if self.failed_tree:
 				self.root_id = self.id # the current root
     				self.cost = 0
     				# file number of the port associated with the root
@@ -140,7 +160,7 @@ class Bridge(object):
 				last_mess_time = 0
 				self.failed_tree = False
 				self.neighbors_time = {}
-				break
+				break'''
 				
 
 
@@ -186,7 +206,7 @@ class Bridge(object):
 		  #  f.write(data)
 		    #f.close()
 		    
-		    # prevent reading from multiple ports
+		    # ports that I need to listen to
 		    #if socket not in self.inactivePorts:
 		    if socket in self.enabled_ports:
 			rec_mess = open("received_mess.txt", "a")
@@ -250,9 +270,9 @@ class Bridge(object):
 		# the root is down
 		if self.root_id == neighbor or True:
 		    
-	    	    '''print("MISSING NEIGHBOR {}".format(neighbor))
+	    	    print("MISSING NEIGHBOR {}".format(neighbor))
 		    f = open("out.txt", "a")
-		    f.write("\n --------Root {} is down----------\n All ports are:\n".format(self.root_id))'''
+		    f.write("\n --------Root {} is down----------\n All ports are:\n".format(self.root_id))
 		    self.root_id = self.id
 		    self.cost = 0
 		    self.root_port = -1
@@ -266,10 +286,10 @@ class Bridge(object):
 		    self.inactivePorts = []
 		    self.port_history = {}
 		    self.uniqueLANs = {}
-		    '''f.write("New root is {} and new enabled ports are:\n".format(self.root_id))
+		    f.write("New root is {} and new enabled ports are:\n".format(self.root_id))
 		    for s in self.enabled_ports:
 			f.write("{}\n".format(s))
-		    f.close()'''
+		    f.close()
 		    #del neighbor_time[neighbor]
 		    #break
 	    else:
@@ -299,7 +319,8 @@ class Bridge(object):
 	# This is the root => all ports are enabled
 	if self.root_id == self.id:
 	    for s in self.sockets:
-		if s not in self.enabled_ports:
+		# this port is not enabled and we are not already connected to this LAN
+		if s not in self.enabled_ports and s.getpeername() not in self.uniqueLANs:
 		    self.enabled_ports.append(s)
 	    #self.enabled_ports = self.sockets
 	    return
@@ -375,9 +396,10 @@ class Bridge(object):
         return bpdu_dict['source'] == self.id
 
     def __eq__(self, other):
-        """Overrides the default implementation"""
+        """Overrides the default implementation."""
         if isinstance(self, other.__class__):
-            return self.fileno() == other.fileno()
+            #return self.fileno() == other.fileno()
+	    return seld.id  == other.id
     	return False
 
     def __ne__(self, other):
