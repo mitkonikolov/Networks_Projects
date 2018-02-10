@@ -10,27 +10,44 @@ import random
 import string
 
 
-
-
+# Bridge is a class that stores the information required for a bridge and all its functionalities
 class Bridge(object):
+
+	# bridge id
     id = -1
+    # bridge's conencted Lans
     LAN = None
+    # array of sockets
     sockets = []
-    root_id = -1 # the current root
+
+    # the current root id
+    root_id = -1 
+    # the current cost to the root
     cost = 0
-    # file number of the port associated with the root
-    root_port = -1 # the port to use to get to root
+
+    # the number of which the bridge's root port
+    root_port = -1
+    # the message we use when sending to the ports
     message = None
     # unique LANs we are connected to and ports through which we connect to them
     uniqueLANs = {}
+
     # file numbers for the active ports
     activePorts = []
+    # file numbers for the inactive ports
     inactivePorts = []
+    # the enabled ports
+    enabled_ports = []
+
+    # routing table of the bridge
     routing_table = {}
     # a dictionary of ports; each port maps to a list of (BPDU, time) tuple
     port_history = {}
-    enabled_ports = []
 
+    # init: constructor for the bridge
+	# args:
+	#     param1 (int): the id of the bridge
+	#     param2 ([Socket]): sockets which the bridge is connected to
     def __init__(self, id, LAN):
         self.id = id
         self.LAN = LAN
@@ -38,13 +55,18 @@ class Bridge(object):
         print("Bridge "+ str(self.id) +" starting up")
 	open("ports.txt", "w+").close()
 
-    # pads the name with null bytes at the end
+    # pad: performs padding '\0' to a string
+	# args:
+	#     param1 (string): the string to pad
+	# return:
+	#     string: the padded string
     def pad(self, name):
         result = '\0' + name
         while len(result) < 108:
             result += '\0'
         return result
 
+	# connect_to_sockets: connects to all sockets from the LAN array, initialized all the default port arrays
     def connect_to_sockets(self):
         for x in range(len(self.LAN)):
             s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
@@ -60,6 +82,7 @@ class Bridge(object):
 	    #f.close()
         self.message = Message(self.sockets)
 
+    # start: the main logic for the bridge
     def start(self):
         # TODO print out the messages that the assignment requires
         # broadcast first message to start the process of building a spanning
@@ -200,6 +223,7 @@ class Bridge(object):
 	    #if ((time.time() * 100) - last_mess_time) < 200: 
 	#	self.broadcast_bpdu()
 
+	# broadcase_bpdu: broadcast its bpdu to all the ports
     def broadcast_bpdu(self):
 	f = open("out.txt", "a")
 	f.write("{}/{} broadcasting\n".format(self.id, self.root_id))
@@ -207,12 +231,13 @@ class Bridge(object):
         self.message.send_message(self.id, "FFFF", "bpdu", {"root":
                                                                 self.root_id, "cost":self.cost})
 
-
+    # update_routing_table: updates the routing table, remove old entries
     def update_routing_table(self):
 	for k, v in self.routing_table.iteritems():
 	    if (time.time()*100) - v[1] > 500:
 		del self.routing_table[k]
 
+    # update_enabled_ports: main logic for updating the enabled ports for a bridge
     def update_enabled_ports(self, mode):
 	# This is the root => all ports are enabled
 	if self.root_id == self.id:
@@ -282,31 +307,44 @@ class Bridge(object):
         # TODO Consider how to identify if a bridge has stopped working and a
         # TODO socket thus becomes useless
 
-
+    # is_from_me: determines whether a bpdu is sent from us
+    # args:
+    #     param1 (json): the bpdu
+    # return:
+    #     boolean: it's from us
     def is_from_me(self, bpdu):
         bpdu_dict = json.loads(bpdu)
         return bpdu_dict['source'] == self.id
 
+    # __eq__: Overrides the default equality
     def __eq__(self, other):
-        """Overrides the default implementation"""
         if isinstance(self, other.__class__):
             return self.fileno() == other.fileno()
     	return False
 
+    # __ne__: Overrides the default implementation (unnecessary in Python 3)
     def __ne__(self, other):
-        """Overrides the default implementation (unnecessary in Python 3)"""
         return not self.__eq__(other)
 
-
+# Message is a class representing the message that's being sent from a bridget
 class Message(object):
     sockets = {}
     id = 0
 
+	# init: constructor for the message
+	# args:
+	#     param1 (int): the sockets to be sent
     def __init__(self, sockets):
         self.sockets = sockets
 
+    # send_message: send messages to all sockets
+	# args:
+	#     param1 (string): the source
+	#     param2 (string): the destination
+	#     param3 (string): the type of the message
+	#     param4 (string): the message wiht its id
     def send_message(self, source, dest, type, message):
-        '''Packs and sends the message that was passed'''
+        # Packs and sends the message that was passed
         if type == "bpdu": # broadcast
             m = {}
             m['source'] = source
@@ -318,25 +356,39 @@ class Message(object):
             for s in self.sockets:
                 s.send(m)
 
+    # is_BPDU: checks if a string is a BPDU
+	# args:
+	#     param1 (json): the json string
+	# return:
+	#     boolean: it's a BPDU
     def is_BPDU(self, json_str):
         dict_message = json.loads(json_str)
         val = dict_message['type']
         return val == "bpdu"
 
+    # gen_RM: generates a random hex number with length 4
+	# return: 
+	# 	  string: generated random string
     def gen_RN(self):
         '''Returns a random number'''
         return random.choice('0123456789abcdef') + random.choice(
             '0123456789abcdef') + random.choice('0123456789abcdef') + \
                random.choice('0123456789abcdef')
 
+    # set_porst: setter for ports
+	# args:
+	#     param1 ([Socket]): array of ports
     def set_ports(self, ports):
         self.sockets = ports
 
+    # send: sends a message to all sockets
+	# args:
+	#     param1 (string): the message 
+	#     param2 ([Socket]): the sockets
     def send(self, message, ports):
 	for s in ports:
 	    #m = json.dumps(message).encode('utf-8')
 	    s.send(message)
-
 
 
 if __name__ == "__main__":
