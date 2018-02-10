@@ -1,1 +1,1233 @@
 
+Broadcast delayed by 50.0528869629:
+
+
+
+Broadcast delayed by 50.0504150391:
+
+
+
+Broadcast delayed by 50.0511169434:
+
+
+
+Broadcast delayed by 50.0529174805:
+
+
+
+Broadcast delayed by 50.0534057617:
+
+
+
+Broadcast delayed by 50.0545043945:
+
+
+
+Broadcast delayed by 50.0551757812:
+
+
+
+Broadcast delayed by 50.0539855957:
+
+
+
+Broadcast delayed by 50.0500793457:
+
+
+
+Broadcast delayed by 50.0532226562:
+
+
+
+Broadcast delayed by 50.0574035645:
+
+
+
+Broadcast delayed by 50.0529174805:
+
+
+
+Broadcast delayed by 50.0527038574:
+
+
+
+Broadcast delayed by 50.0531921387:
+
+
+
+Broadcast delayed by 50.0542602539:
+
+
+
+Broadcast delayed by 50.0542297363:
+
+
+
+Broadcast delayed by 50.0534973145:
+
+
+
+Broadcast delayed by 50.0557250977:
+
+
+
+Broadcast delayed by 50.0517883301:
+
+
+
+Broadcast delayed by 50.0546875:
+
+
+
+Broadcast delayed by 50.0581054688:
+
+
+
+Broadcast delayed by 50.055480957:
+
+
+
+Broadcast delayed by 50.0524902344:
+
+
+
+Broadcast delayed by 50.0527954102:
+
+
+
+Broadcast delayed by 50.0568847656:
+
+
+
+Broadcast delayed by 50.0560913086:
+
+
+
+Broadcast delayed by 50.0527038574:
+
+
+
+Broadcast delayed by 50.0528869629:
+
+
+
+Broadcast delayed by 50.0495910645:
+
+
+
+Broadcast delayed by 50.0514221191:
+
+
+
+Broadcast delayed by 50.0576171875:
+
+
+
+Broadcast delayed by 50.058807373:
+
+
+
+Broadcast delayed by 50.0545043945:
+
+
+
+Broadcast delayed by 50.0534667969:
+
+
+
+Broadcast delayed by 50.0518188477:
+
+
+
+Broadcast delayed by 50.0592956543:
+
+
+
+Broadcast delayed by 50.0590820312:
+
+
+
+Broadcast delayed by 50.0104064941:
+
+
+
+Broadcast delayed by 50.0114746094:
+
+
+
+Broadcast delayed by 50.0513916016:
+
+
+
+Broadcast delayed by 50.0160827637:
+
+
+
+Broadcast delayed by 50.019317627:
+
+
+
+Broadcast delayed by 50.0181884766:
+
+
+
+Broadcast delayed by 50.0126342773:
+
+
+
+Broadcast delayed by 50.0147094727:
+
+
+
+Broadcast delayed by 50.0179748535:
+
+
+
+Broadcast delayed by 50.0439147949:
+
+
+
+Broadcast delayed by 50.0204162598:
+
+
+
+Broadcast delayed by 50.0198059082:
+
+
+
+Broadcast delayed by 50.0141906738:
+
+
+
+Broadcast delayed by 50.0152893066:
+
+
+
+Broadcast delayed by 50.0154724121:
+
+
+
+Broadcast delayed by 50.0103149414:
+
+
+
+Broadcast delayed by 50.0162963867:
+
+
+
+Broadcast delayed by 50.0152282715:
+
+
+
+Broadcast delayed by 50.009979248:
+
+
+
+Broadcast delayed by 50.0141601562:
+
+
+
+Broadcast delayed by 50.1386108398:
+{"source":"01af","dest":"21ee","type":"data","message":{"id":14}}
+
+
+
+Broadcast delayed by 50.0108032227:
+
+
+
+Broadcast delayed by 50.0148925781:
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.217010498:
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.0093078613:
+
+
+
+Broadcast delayed by 50.219909668:
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.4039001465:
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.0159912109:
+
+
+
+Broadcast delayed by 50.0091247559:
+
+
+
+Broadcast delayed by 50.013671875:
+
+
+
+Broadcast delayed by 50.0170288086:
+
+
+
+Broadcast delayed by 50.3248901367:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "d16a"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.6605224609:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "d16a"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.6108093262:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "d16a"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0108032227:
+
+
+
+Broadcast delayed by 50.0104980469:
+
+
+
+Broadcast delayed by 50.0104980469:
+
+
+
+Broadcast delayed by 50.0087890625:
+
+
+
+Broadcast delayed by 50.1610107422:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "ba39"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.142578125:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "ba39"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.4142150879:
+{"source":"9f3e","dest":"90c3","type":"data","message":{"id":36}}
+{"dest": "FFFF", "source": "118a", "message": {"cost": 2, "root": "08ad", "id": "5a47"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0805053711:
+{"source":"ce76","dest":"4c03","type":"data","message":{"id":91}}
+
+
+
+Broadcast delayed by 50.0088195801:
+
+
+
+Broadcast delayed by 50.0168151855:
+
+
+
+Broadcast delayed by 50.0113830566:
+
+
+
+Broadcast delayed by 50.0065917969:
+
+
+
+Broadcast delayed by 50.0012207031:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "f2fd"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.2574157715:
+{"source":"b1ea","dest":"0aa8","type":"data","message":{"id":90}}
+{"source":"b1ea","dest":"0aa8","type":"data","message":{"id":90}}
+{"source":"1de3","dest":"4c03","type":"data","message":{"id":50}}
+{"dest": "FFFF", "source": "58bd", "message": {"cost": 1, "root": "08ad", "id": "c2e2"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.4085998535:
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "0129", "id": "9aca"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.7485961914:
+{"dest": "FFFF", "source": "0129", "message": {"cost": 0, "root": "0129", "id": "198f"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0095825195:
+
+
+
+Broadcast delayed by 50.009979248:
+
+
+
+Broadcast delayed by 50.0117797852:
+
+
+
+Broadcast delayed by 50.0077209473:
+
+
+
+Broadcast delayed by 50.2102050781:
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "0129", "id": "3a4d"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0097045898:
+
+
+
+Broadcast delayed by 50.0077819824:
+
+
+
+Broadcast delayed by 50.294921875:
+{"source":"eec2","dest":"f662","type":"data","message":{"id":60}}
+
+
+
+Broadcast delayed by 50.0110778809:
+
+
+
+Broadcast delayed by 50.0079040527:
+
+
+
+Broadcast delayed by 50.0108032227:
+
+
+
+Broadcast delayed by 50.009185791:
+
+
+
+Broadcast delayed by 50.0119018555:
+
+
+
+Broadcast delayed by 50.0095825195:
+
+
+
+Broadcast delayed by 50.0110168457:
+
+
+
+Broadcast delayed by 50.0093078613:
+
+
+
+Broadcast delayed by 50.0143127441:
+
+
+
+Broadcast delayed by 50.0130004883:
+
+
+
+Broadcast delayed by 50.0095825195:
+
+
+
+Broadcast delayed by 50.0084228516:
+
+
+
+Broadcast delayed by 50.0088195801:
+
+
+
+Broadcast delayed by 50.0071716309:
+
+
+
+Broadcast delayed by 50.0106201172:
+
+
+
+Broadcast delayed by 50.3947753906:
+{"source":"90c3","dest":"0aa8","type":"data","message":{"id":86}}
+
+
+
+Broadcast delayed by 50.0106201172:
+
+
+
+Broadcast delayed by 50.012512207:
+
+
+
+Broadcast delayed by 50.0109863281:
+
+
+
+Broadcast delayed by 50.0083007812:
+
+
+
+Broadcast delayed by 50.011505127:
+
+
+
+Broadcast delayed by 50.0284118652:
+
+
+
+Broadcast delayed by 50.0301208496:
+
+
+
+Broadcast delayed by 50.0069885254:
+
+
+
+Broadcast delayed by 50.0182189941:
+
+
+
+Broadcast delayed by 50.0386047363:
+
+
+
+Broadcast delayed by 50.0086364746:
+
+
+
+Broadcast delayed by 50.008605957:
+
+
+
+Broadcast delayed by 50.0101013184:
+
+
+
+Broadcast delayed by 50.0130004883:
+
+
+
+Broadcast delayed by 50.0101928711:
+
+
+
+Broadcast delayed by 50.0090332031:
+
+
+
+Broadcast delayed by 50.0107116699:
+
+
+
+Broadcast delayed by 50.0087280273:
+
+
+
+Broadcast delayed by 50.0092163086:
+
+
+
+Broadcast delayed by 50.0093994141:
+
+
+
+Broadcast delayed by 50.010925293:
+
+
+
+Broadcast delayed by 50.0150146484:
+
+
+
+Broadcast delayed by 50.0115966797:
+
+
+
+Broadcast delayed by 50.0100097656:
+
+
+
+Broadcast delayed by 50.0185852051:
+
+
+
+Broadcast delayed by 50.0195007324:
+
+
+
+Broadcast delayed by 50.0099182129:
+
+
+
+Broadcast delayed by 50.0097961426:
+
+
+
+Broadcast delayed by 50.0102844238:
+
+
+
+Broadcast delayed by 50.0435180664:
+
+
+
+Broadcast delayed by 50.0458984375:
+
+
+
+Broadcast delayed by 50.0068969727:
+
+
+
+Broadcast delayed by 50.0174865723:
+
+
+
+Broadcast delayed by 50.0481567383:
+
+
+
+Broadcast delayed by 50.0108032227:
+
+
+
+Broadcast delayed by 50.0077819824:
+
+
+
+Broadcast delayed by 50.0103759766:
+
+
+
+Broadcast delayed by 50.0545959473:
+
+
+
+Broadcast delayed by 50.0531005859:
+
+
+
+Broadcast delayed by 51.2691040039:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "8686"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.5731811523:
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "08ad", "id": "b928"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.3554077148:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "8686"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0540771484:
+
+
+
+Broadcast delayed by 50.0537719727:
+
+
+
+Broadcast delayed by 50.0101318359:
+
+
+
+Broadcast delayed by 50.0086975098:
+
+
+
+Broadcast delayed by 50.0103149414:
+
+
+
+Broadcast delayed by 50.0537719727:
+
+
+
+Broadcast delayed by 50.0543823242:
+
+
+
+Broadcast delayed by 50.0102233887:
+
+
+
+Broadcast delayed by 50.0119934082:
+
+
+
+Broadcast delayed by 50.0110778809:
+
+
+
+Broadcast delayed by 50.0538024902:
+
+
+
+Broadcast delayed by 50.0536193848:
+
+
+
+Broadcast delayed by 50.0079956055:
+
+
+
+Broadcast delayed by 50.012298584:
+
+
+
+Broadcast delayed by 50.0067138672:
+
+
+
+Broadcast delayed by 50.0539550781:
+
+
+
+Broadcast delayed by 50.0526123047:
+
+
+
+Broadcast delayed by 50.005279541:
+
+
+
+Broadcast delayed by 50.0122680664:
+
+
+
+Broadcast delayed by 50.0066833496:
+
+
+
+Broadcast delayed by 50.054473877:
+
+
+
+Broadcast delayed by 50.0530700684:
+
+
+
+Broadcast delayed by 50.0082092285:
+
+
+
+Broadcast delayed by 50.011505127:
+
+
+
+Broadcast delayed by 50.0081787109:
+
+
+
+Broadcast delayed by 50.0537109375:
+
+
+
+Broadcast delayed by 50.0526123047:
+
+
+
+Broadcast delayed by 50.0079040527:
+
+
+
+Broadcast delayed by 50.0111999512:
+
+
+
+Broadcast delayed by 50.0067138672:
+
+
+
+Broadcast delayed by 50.0575866699:
+
+
+
+Broadcast delayed by 50.0527038574:
+
+
+
+Broadcast delayed by 50.0069274902:
+
+
+
+Broadcast delayed by 50.0069885254:
+
+
+
+Broadcast delayed by 50.0083007812:
+
+
+
+Broadcast delayed by 50.0104064941:
+
+
+
+Broadcast delayed by 50.0140075684:
+
+
+
+Broadcast delayed by 50.012298584:
+
+
+
+Broadcast delayed by 50.0065917969:
+
+
+
+Broadcast delayed by 50.0084838867:
+
+
+
+Broadcast delayed by 50.0095214844:
+
+
+
+Broadcast delayed by 50.0401000977:
+
+
+
+Broadcast delayed by 50.0148010254:
+
+
+
+Broadcast delayed by 50.0120849609:
+
+
+
+Broadcast delayed by 50.0066223145:
+
+
+
+Broadcast delayed by 50.0080871582:
+
+
+
+Broadcast delayed by 50.0033874512:
+
+
+
+Broadcast delayed by 50.0146179199:
+
+
+
+Broadcast delayed by 50.0151977539:
+
+
+
+Broadcast delayed by 50.0079040527:
+
+
+
+Broadcast delayed by 50.0084838867:
+
+
+
+Broadcast delayed by 50.0087890625:
+
+
+
+Broadcast delayed by 50.0072021484:
+
+
+
+Broadcast delayed by 50.0093078613:
+
+
+
+Broadcast delayed by 50.1130981445:
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.3446044922:
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.2028198242:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "96e7"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.466796875:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "96e7"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.8275146484:
+{"dest": "FFFF", "source": "08ad", "message": {"cost": 0, "root": "08ad", "id": "96e7"}, "type": "bpdu"}
+{"source":"3005","dest":"0aa8","type":"data","message":{"id":94}}
+
+
+
+Broadcast delayed by 50.0120849609:
+
+
+
+Broadcast delayed by 50.0084838867:
+
+
+
+Broadcast delayed by 50.0157165527:
+
+
+
+Broadcast delayed by 50.0137023926:
+
+
+
+Broadcast delayed by 50.0089111328:
+
+
+
+Broadcast delayed by 50.0085754395:
+
+
+
+Broadcast delayed by 50.3437805176:
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "3269"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0152893066:
+
+
+
+Broadcast delayed by 50.0108032227:
+
+
+
+Broadcast delayed by 50.0131835938:
+
+
+
+Broadcast delayed by 50.0101318359:
+
+
+
+Broadcast delayed by 50.0068664551:
+
+
+
+Broadcast delayed by 50.0066223145:
+
+
+
+Broadcast delayed by 50.116973877:
+{"dest": "FFFF", "source": "ff1a", "message": {"cost": 1, "root": "08ad", "id": "4df5"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.1557006836:
+{"source":"ce76","dest":"4c03","type":"data","message":{"id":91}}
+
+
+
+Broadcast delayed by 50.0089111328:
+
+
+
+Broadcast delayed by 50.0107116699:
+
+
+
+Broadcast delayed by 50.013885498:
+
+
+
+Broadcast delayed by 50.0067138672:
+
+
+
+Broadcast delayed by 50.007019043:
+
+
+
+Broadcast delayed by 50.0096130371:
+
+
+
+Broadcast delayed by 50.7008972168:
+{"dest": "FFFF", "source": "0129", "message": {"cost": 0, "root": "0129", "id": "8b34"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.4656982422:
+{"dest": "FFFF", "source": "58bd", "message": {"cost": 2, "root": "0129", "id": "d034"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0072021484:
+
+
+
+Broadcast delayed by 50.1138916016:
+{"dest": "FFFF", "source": "882a", "message": {"cost": 3, "root": "0129", "id": "b1a6"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.1481933594:
+{"dest": "FFFF", "source": "9e3a", "message": {"cost": 1, "root": "0129", "id": "f81e"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 52.6319885254:
+{"dest": "FFFF", "source": "0129", "message": {"cost": 0, "root": "0129", "id": "8b34"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "0129", "message": {"cost": 0, "root": "0129", "id": "8b34"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "58bd", "message": {"cost": 2, "root": "0129", "id": "d034"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 51.0500793457:
+{"dest": "FFFF", "source": "0c8a", "message": {"cost": 1, "root": "0129", "id": "5c8e"}, "type": "bpdu"}
+{"dest": "FFFF", "source": "118a", "message": {"cost": 2, "root": "0129", "id": "b5f8"}, "type": "bpdu"}
+
+
+
+Broadcast delayed by 50.0083007812:
+
+
+
+Broadcast delayed by 50.0068969727:
+
+
+
+Broadcast delayed by 50.0081176758:
+
+
+
+Broadcast delayed by 50.0662841797:
+{"source":"eec2","dest":"f662","type":"data","message":{"id":60}}
+
+
+
+Broadcast delayed by 50.0068969727:
+
+
+
+Broadcast delayed by 50.0088806152:
+
+
+
+Broadcast delayed by 50.0083007812:
+
+
+
+Broadcast delayed by 50.0108032227:
+
+
+
+Broadcast delayed by 50.0097045898:
+
+
+
+Broadcast delayed by 50.0144958496:
+
+
+
+Broadcast delayed by 50.0086975098:
+
+
+
+Broadcast delayed by 50.0147094727:
+
+
+
+Broadcast delayed by 50.008392334:
+
+
+
+Broadcast delayed by 50.0099182129:
+
+
+
+Broadcast delayed by 50.007019043:
+
+
+
+Broadcast delayed by 50.0100097656:
+
+
+
+Broadcast delayed by 50.0066833496:
+
+
+
+Broadcast delayed by 50.009185791:
+
+
+
+Broadcast delayed by 50.0099182129:
+
+
+
+Broadcast delayed by 50.0614929199:
+{"source":"90c3","dest":"0aa8","type":"data","message":{"id":86}}
+
+
+
+Broadcast delayed by 50.0099182129:
+
+
+
+Broadcast delayed by 50.0095214844:
+
+
+
+Broadcast delayed by 50.0068054199:
+
+
+
+Broadcast delayed by 50.0101928711:
+
+
+
+Broadcast delayed by 50.030670166:
+
+
+
+Broadcast delayed by 50.0157165527:
+
+
+
+Broadcast delayed by 50.0399169922:
+
+
+
+Broadcast delayed by 50.0330810547:
+
+
+
+Broadcast delayed by 50.0101928711:
+
+
+
+Broadcast delayed by 50.0101013184:
+
+
+
+Broadcast delayed by 50.0083007812:
+
+
+
+Broadcast delayed by 50.0065917969:
+
+
+
+Broadcast delayed by 50.0151062012:
+
+
+
+Broadcast delayed by 50.0103149414:
+
+
+
+Broadcast delayed by 50.0119934082:
+
+
+
+Broadcast delayed by 50.0150146484:
+
+
+
+Broadcast delayed by 50.0090942383:
+
+
+
+Broadcast delayed by 50.1661987305:
+{"source":"9f3e","dest":"95aa","type":"data","message":{"id":6}}
+
+
+
+Broadcast delayed by 50.2481079102:
+{"source":"9f3e","dest":"95aa","type":"data","message":{"id":6}}
+
+
+
+Broadcast delayed by 50.0079040527:
+
+
+
+Broadcast delayed by 50.0116271973:
+
+
+
+Broadcast delayed by 50.0108947754:
+
+
+
+Broadcast delayed by 50.012512207:
+
+
+
+Broadcast delayed by 50.0127868652:
+
+
+
+Broadcast delayed by 50.0097961426:
+
+
+
+Broadcast delayed by 50.0145263672:
+
+
+
+Broadcast delayed by 50.0106811523:
+
+
+
+Broadcast delayed by 50.0111083984:
+
+
+
+Broadcast delayed by 50.0520019531:
+
+
+
+Broadcast delayed by 50.0160827637:
+
+
+
+Broadcast delayed by 50.0545043945:
+
+
+
+Broadcast delayed by 50.0524902344:
+
+
+
+Broadcast delayed by 50.0091247559:
+
+
+
+Broadcast delayed by 50.0115966797:
+
+
+
+Broadcast delayed by 50.0106811523:
+
+
+
+Broadcast delayed by 50.0108947754:
+
+
+
