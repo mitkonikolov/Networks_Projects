@@ -30,6 +30,9 @@ class Bridge(object):
     # a dictionary of ports; each port maps to a list of (BPDU, time) tuple
     port_history = {}
     enabled_ports = []
+    # has the tree been found to fail
+    failed_tree = False
+    neighbor_time = {}
 
     def __init__(self, id, LAN):
         self.id = id
@@ -69,35 +72,34 @@ class Bridge(object):
 	last_mess_time = time.time() * 100
 
         while True:
+	    self.check_for_failures()
+
 	    curr_time = time.time() * 100
 	    diff = 0.5 - ((curr_time - last_mess_time)/100)
+
 	    if (curr_time-last_mess_time) > 50:
 		diff = 0.5
-		if curr_time-last_mess_time > 10:
-		    f = open("delayed_broadcast.txt", "a")
-		    f.write("Broadcast delayed by {}:\n".format(curr_time-last_mess_time))
-		    for message in mess_buffer:
-			f.write("{}\n".format(message))
-		    f.write("\n\n\n")
-		    f.close()
 	   	last_mess_time = time.time() * 100
 		self.broadcast_bpdu()
 
+	    while ((time.time()*100) - curr_time) < abs(diff/4):
+		self.check_for_failures()
+
 	     
-	    mess_buffer = []
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore1, ignore2 = select.select(self.sockets, [], [], diff)
+            ready, ignore1, ignore2 = select.select(self.sockets, [], [], diff - abs(diff/4))
+	    if len(ready)==0:
+		self.check_for_failures()
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-		mess_buffer.append(data)		
 	        f = open("out.txt", "a")
 		f.write(data)
 		f.write("\n")
 		f.close()
                 if self.message.is_BPDU(data):
 		    # there have been no BPDUs on this socket/port
-		    if self.port_history[socket] is None:
+		    if socket not in self.port_history or self.port_history[socket] is None:
 			self.port_history[socket] = []
 		    time_now = time.time() * 100
 		    tup1 = (data, time_now)
@@ -117,9 +119,33 @@ class Bridge(object):
 			    self.uniqueLANs[peer_name] = file_no
                     else:
 			
-			
                         try:
                             foreignBPDU = json.loads(data)
+			    
+			    neighbor = foreignBPDU['source']
+			    self.neighbor_time[neighbor] = time.time()*100
+			    if self.failed_tree:
+				self.root_id = self.id # the current root
+    				self.cost = 0
+    				# file number of the port associated with the root
+    				self.root_port = -1 # the port to use to get to root
+    				# unique LANs we are connected to and ports through which we connect to them
+    				self.uniqueLANs = {}
+    				# file numbers for the active ports
+    				self.activePorts = self.sockets
+    				self.inactivePorts = []
+				self.enabled_ports = self.sockets
+				self.port_history = {}
+				self.routing_table = {}
+				last_mess_time = 0
+				self.failed_tree = False
+				self.neighbors_time = {}
+				break
+				
+
+
+
+
 			    if int(str(foreignBPDU['message']['root']), 16) < \
                                     int(str(self.root_id), 16) or \
 			       (int(str(foreignBPDU['message']['root']), 16) ==
@@ -138,6 +164,7 @@ class Bridge(object):
 				f.write("\n")
 				f.close()
 				self.update_enabled_ports(True)
+
 				# new root -> flush the routing table
 				self.routing_table = {}
                         except Exception as e:
@@ -194,7 +221,10 @@ class Bridge(object):
 				if x != socket:
 				    dest_ports.append(x)
 			self.message.send(data, dest_ports)
-			f.write("there are {} destination ports\n".format(len(dest_ports)))
+			f.write("there are {} destination ports:\n".format(len(dest_ports)))
+			for d in dest_ports:
+			    f.write("{}\n".format(d.getpeername()))
+			f.write("\n\n\n")
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
 			f.close()
 				# if we have it, forward to active ports
@@ -210,6 +240,43 @@ class Bridge(object):
                                                                 self.root_id, "cost":self.cost})
 
 
+
+    def check_for_failures(self):
+	new_neighbors = {}
+	for neighbor in self.neighbor_time:
+	    #print("{} has root {} and neighbor {}".format(self.id, self.root_id, neighbor))
+	    if (time.time()*100) - self.neighbor_time[neighbor] >= 75:
+		#self.failed_tree = True
+		# the root is down
+		if self.root_id == neighbor or True:
+		    
+	    	    '''print("MISSING NEIGHBOR {}".format(neighbor))
+		    f = open("out.txt", "a")
+		    f.write("\n --------Root {} is down----------\n All ports are:\n".format(self.root_id))'''
+		    self.root_id = self.id
+		    self.cost = 0
+		    self.root_port = -1
+		    self.enabled_ports = []
+		    self.activePorts = []
+		    for s in self.sockets:
+			#f.write("{}\n".format(s))
+			self.enabled_ports.append(s)
+			self.activePorts.append(s)
+		    self.routing_table = {}
+		    self.inactivePorts = []
+		    self.port_history = {}
+		    self.uniqueLANs = {}
+		    '''f.write("New root is {} and new enabled ports are:\n".format(self.root_id))
+		    for s in self.enabled_ports:
+			f.write("{}\n".format(s))
+		    f.close()'''
+		    #del neighbor_time[neighbor]
+		    #break
+	    else:
+		new_neighbors[neighbor] = self.neighbor_time[neighbor]
+	if len(new_neighbors)!=len(self.neighbor_time):
+	    self.neighbor_time = new_neighbors
+
     def update_routing_table(self):
 	new_table = {}
 	for host in self.routing_table:
@@ -217,9 +284,6 @@ class Bridge(object):
 	    if (time.time()*100) - port_time[1] < 500:
 		new_table[host] = (port_time[0], port_time[1])
 	self.routing_table = new_table
-	'''for k, v in self.routing_table.iteritems():
-	    if (time.time()*100) - v[1] > 500:
-		del self.routing_table[k]'''
 
     def update_port_history(self):
 	new_port_history = {}
@@ -234,10 +298,17 @@ class Bridge(object):
     def update_enabled_ports(self, mode):
 	# This is the root => all ports are enabled
 	if self.root_id == self.id:
-	    self.enabled_ports = self.sockets
+	    for s in self.sockets:
+		if s not in self.enabled_ports:
+		    self.enabled_ports.append(s)
+	    #self.enabled_ports = self.sockets
 	    return
 
 	self.update_port_history()
+	# the tree has failed and needs to be reconstructed
+	if self.failed_tree:
+	    return
+
 	for port in self.port_history:
 	    f =""
 	    if mode:
