@@ -271,23 +271,6 @@ class Bridge(object):
 		if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
 		        designated_bridge = False
 			break		
-	    '''for i in range(len(bpdus)):
-		# the message is older than 750ms
-		if ((time.time() * 100) - bpdus[i][1]) > 75:
-		    #print("{} --- {}".format(time.time()*100, bpdus[i][1]))
-		    # drop all messages before and up to this one
-		    latest_to_drop = i
-		else:
-		    new_tup = (bpdus[i][0], bpdus[i][1])
-		    new_list.append(bpdus[i])
-		    json_obj = json.loads(bpdus[i][0])
-		    # some other bridge is designated for this LAN
-		    if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
-		        designated_bridge = False
-			#break
-		    if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
-		        designated_bridge = False
-			#break'''
 
 	    # Reason C: this is the designated bridge
 	    if designated_bridge:
