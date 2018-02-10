@@ -48,10 +48,11 @@ class Bridge(object):
     enabled_ports = []
     # has the tree been found to fail
     failed_tree = False
-    # neighbor and the last time I heard from them
+    # neighbor maps to (port, the last time I heard from them)
     neighbor_time = {}
-    # data that I need to send to the root or hosts and will buffer for now
-    send_buffer = []
+    # currently disabled port -> [(message, time) ...]
+    send_buffer = {}
+    time_tree_failed = ""
 
     def __init__(self, id, LAN):
         self.id = id
@@ -124,48 +125,32 @@ class Bridge(object):
 		    time_now = time.time() * 100
 		    tup1 = (data, time_now)
 		    self.port_history[socket].append(tup1)
+
+		
+		    peer_name = socket.getpeername()
+		    file_no = socket.fileno()
+		    #f = open("out.txt", "a")
+		    if peer_name not in self.uniqueLANs:
+			#f.write("Bridge {} length is {}, adding {},\n message is {}".format(self.id, len(self.uniqueLANs), peer_name, data))
+			self.uniqueLANs[peer_name] = file_no
+		    #f.close()
+
 		    if self.is_from_me(data):
-			peer_name = socket.getpeername()
-			file_no = socket.fileno()
 			if socket not in self.inactivePorts and peer_name in self.uniqueLANs and file_no != self.uniqueLANs[peer_name]:
-			    self.activePorts.remove(socket)
+			    #self.activePorts.remove(socket)
 			    if socket in self.enabled_ports:
 				self.enabled_ports.remove(socket)
 			    self.inactivePorts.append(socket)
 			    f = open("ports.txt", "a")
 			    f.write("inactive: {}\n".format(socket.fileno()))
 			    f.close()
-			elif peer_name not in self.uniqueLANs:
-			    self.uniqueLANs[peer_name] = file_no
                     else:
 			
                         try:
                             foreignBPDU = json.loads(data)
 			    
 			    neighbor = foreignBPDU['source']
-			    self.neighbor_time[neighbor] = time.time()*100
-			    '''if self.failed_tree:
-				self.root_id = self.id # the current root
-    				self.cost = 0
-    				# file number of the port associated with the root
-    				self.root_port = -1 # the port to use to get to root
-    				# unique LANs we are connected to and ports through which we connect to them
-    				self.uniqueLANs = {}
-    				# file numbers for the active ports
-    				self.activePorts = self.sockets
-    				self.inactivePorts = []
-				self.enabled_ports = self.sockets
-				self.port_history = {}
-				self.routing_table = {}
-				last_mess_time = 0
-				self.failed_tree = False
-				self.neighbors_time = {}
-				break'''
-				
-
-
-
-
+			    self.neighbor_time[neighbor] = (socket, time.time()*100)
 			    if int(str(foreignBPDU['message']['root']), 16) < \
                                     int(str(self.root_id), 16) or \
 			       (int(str(foreignBPDU['message']['root']), 16) ==
@@ -207,7 +192,6 @@ class Bridge(object):
 		    #f.close()
 		    
 		    # ports that I need to listen to
-		    #if socket not in self.inactivePorts:
 		    if socket in self.enabled_ports:
 			rec_mess = open("received_mess.txt", "a")
 		    	rec_mess.write("Bridge id {}, root is {}, time is {}: {}\n".format(self.id,self.root_id,time.time()*100,  data))
@@ -225,12 +209,14 @@ class Bridge(object):
 			# extract destination and check whether we have it
 			destination = data_dict['dest']
 			dest_ports = []
+			destination_port = ""
 			f = open("out.txt", "a")
 			f.write("\nRouting table for {}:\n".format(self.id))
 			for host in self.routing_table:
 			    f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
 			#f.close()
 			if destination in self.routing_table:
+			    destination_port = self.routing_table[destination][0]
 			    f.write("destination is in routing table\n")
 			    # only send if the two hosts are on different ports
 			    if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
@@ -240,6 +226,26 @@ class Bridge(object):
 			    for x in self.enabled_ports:
 				if x != socket:
 				    dest_ports.append(x)
+
+
+			# store all the ports where the message COULD be going and someone else needs to take came of them there
+			for x in self.sockets:
+			    # this port is not a destination and not because I am already connected to the LAN through another port or because the data came through this port
+			    if x not in dest_ports and (x.getpeername() in self.uniqueLANs and x.fileno()== self.uniqueLANs[x.getpeername()]) and x != socket:
+				if not self.designated_bridge_is_there(x):
+				    # I have not heard from the designated recently so buffer the data
+				    if x not in self.send_buffer:
+				        self.send_buffer[x] = []
+				    self.send_buffer[x].append((data, socket, time.time()*100))
+
+			self.update_send_buffer()
+
+			f.write("\n\n Send buffer:\n")
+			for p in self.send_buffer:
+			    f.write("Bridge {}, port {} there are:\n".format(self.id, p.getpeername()))
+			    for m in self.send_buffer[p]:
+				f.write("{} at time {}\n".format(m[0], m[2]))
+
 			self.message.send(data, dest_ports)
 			f.write("there are {} destination ports:\n".format(len(dest_ports)))
 			for d in dest_ports:
@@ -247,10 +253,61 @@ class Bridge(object):
 			f.write("\n\n\n")
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
 			f.close()
+		    '''if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
+			for entry in self.send_buffer:
+			    data = self.send_buffer[entry][0]
+			    socket = self.send_buffer[entry][1]'''
+ 
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
 	    #if ((time.time() * 100) - last_mess_time) < 200: 
 	#	self.broadcast_bpdu()
+
+
+#    def prep_send(self, data, socket)
+
+
+    def update_send_buffer(self):
+	new_buffer = {}
+	for port in self.send_buffer:
+	    for message in self.send_buffer[port]:
+		# the bridge for this port might have failed and this might have 
+		# not been discovered yet; the message is preserved for now
+		if time.time()*100 - message[2] < 75:
+		    if port not in new_buffer:
+			new_buffer[port] = []
+		    new_buffer[port].append(message)
+	self.send_buffer = new_buffer
+    
+    def designated_bridge_is_there(self, port):
+	if port in self.port_history:
+	    bpdus = self.port_history[port]
+	    for message in bpdus:
+		# this bridge is more fit than me and I heard from them in the last 100ms
+		if (time.time()*100 - message[1]) < 10 and self.is_better_than_me(message[0]):
+		    return True
+	return False
+
+
+    def is_better_than_me(self, bpdu):
+	json_obj = json.loads(bpdu)
+	if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+	    return True
+	if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+	    return True
+	return False
+
+
+
+
+
+	if other_bridge.cost == self.cost and int(other_bridge.id, 16) < int(str(self.id), 16) and int(other_bridge.root_id, 16) == int(str(self.root_id), 16):
+	    return True
+	if other_bridge.cost < self.cost and int(other_bridge.root_id, 16) == int(str(self.root_id), 16):
+	    return True
+	if int(other_bridge.root_id, 16) < int(str(self.root_id), 16):
+	    return True
+	return False
 
     def broadcast_bpdu(self):
 	f = open("out.txt", "a")
@@ -265,11 +322,12 @@ class Bridge(object):
 	new_neighbors = {}
 	for neighbor in self.neighbor_time:
 	    #print("{} has root {} and neighbor {}".format(self.id, self.root_id, neighbor))
-	    if (time.time()*100) - self.neighbor_time[neighbor] >= 75:
+	    if (time.time()*100) - self.neighbor_time[neighbor][1] >= 75:
 		#self.failed_tree = True
 		# the root is down
 		if self.root_id == neighbor or True:
-		    
+		    self.time_tree_failed = time.time()*100
+		    self.failed_tree = True
 	    	    print("MISSING NEIGHBOR {}".format(neighbor))
 		    f = open("out.txt", "a")
 		    f.write("\n --------Root {} is down----------\n All ports are:\n".format(self.root_id))
@@ -327,8 +385,8 @@ class Bridge(object):
 
 	self.update_port_history()
 	# the tree has failed and needs to be reconstructed
-	if self.failed_tree:
-	    return
+	'''if self.failed_tree:
+	    return'''
 
 	for port in self.port_history:
 	    f =""
