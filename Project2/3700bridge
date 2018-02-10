@@ -138,6 +138,8 @@ class Bridge(object):
 				f.write("\n")
 				f.close()
 				self.update_enabled_ports(True)
+				# new root -> flush the routing table
+				self.routing_table = {}
                         except Exception as e:
                             print(e)
                             print("BPDU was malformed and is " + data)
@@ -172,6 +174,7 @@ class Bridge(object):
 			source = data_dict['source']
 			tuple1 = (socket, time.time()*100)
 			self.routing_table[source] = tuple1
+			self.update_routing_table()
 			# extract destination and check whether we have it
 			destination = data_dict['dest']
 			dest_ports = []
@@ -194,7 +197,6 @@ class Bridge(object):
 			f.write("there are {} destination ports\n".format(len(dest_ports)))
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
 			f.close()
-			#self.update_routing_table()    
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
 	    #if ((time.time() * 100) - last_mess_time) < 200: 
@@ -209,24 +211,41 @@ class Bridge(object):
 
 
     def update_routing_table(self):
-	for k, v in self.routing_table.iteritems():
+	new_table = {}
+	for host in self.routing_table:
+	    port_time = self.routing_table[host]
+	    if (time.time()*100) - port_time[1] < 500:
+		new_table[host] = (port_time[0], port_time[1])
+	self.routing_table = new_table
+	'''for k, v in self.routing_table.iteritems():
 	    if (time.time()*100) - v[1] > 500:
-		del self.routing_table[k]
+		del self.routing_table[k]'''
+
+    def update_port_history(self):
+	new_port_history = {}
+	for port in self.port_history:
+	    new_port_history[port] = []
+	    messages = self.port_history[port]
+	    for message in messages:
+		if time.time()*100 - message[1] < 75:
+		    new_port_history[port].append(message)
+	self.port_history = new_port_history
 
     def update_enabled_ports(self, mode):
 	# This is the root => all ports are enabled
 	if self.root_id == self.id:
 	    self.enabled_ports = self.sockets
 	    return
+
+	self.update_port_history()
 	for port in self.port_history:
-	    i = 0
 	    f =""
 	    if mode:
 	        f = open("all_ports.txt", "a")
-	        f.write("Bridge {}, root {}, port is {} and history is\n".format(self.id, self.root_id, port.getpeername()))
+	        f.write("Bridge {}, root {}, port is {}, current time is {} and history is\n".format(self.id, self.root_id, port.getpeername(), time.time()*100))
 	        if port in self.port_history:
 		    for m in self.port_history[port]:
-		        f.write("{}\n".format(m[0]))
+		        f.write("{} at time {}\n".format(m[0], m[1]))
 	        else:
 		    f.write("Port does not have a history\n")    
 	    # Reason B: this is the root port
@@ -243,7 +262,16 @@ class Bridge(object):
 		if mode:
 		    f.write("\nno BPDUS\n")
 		continue
-	    for i in range(len(bpdus)):
+	    for message in bpdus:
+		json_obj = json.loads(message[0])
+		# some other bridge is designated for this LAN
+		if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+		        designated_bridge = False
+			break
+		if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+		        designated_bridge = False
+			break		
+	    '''for i in range(len(bpdus)):
 		# the message is older than 750ms
 		if ((time.time() * 100) - bpdus[i][1]) > 75:
 		    #print("{} --- {}".format(time.time()*100, bpdus[i][1]))
@@ -251,32 +279,36 @@ class Bridge(object):
 		    latest_to_drop = i
 		else:
 		    new_tup = (bpdus[i][0], bpdus[i][1])
-		    new_list.append(new_tup)
+		    new_list.append(bpdus[i])
 		    json_obj = json.loads(bpdus[i][0])
 		    # some other bridge is designated for this LAN
 		    if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
 		        designated_bridge = False
-			break
+			#break
 		    if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
 		        designated_bridge = False
-			break
+			#break'''
 
-	    # remove the old messages
-	    #self.port_history[port] = bpdus[latest_to_drop+1:]
-	    self.port_history[port] = new_list
 	    # Reason C: this is the designated bridge
 	    if designated_bridge:
 		if mode:
 		    f.write("\n----Designated bridge-----\n")
+		# change state so flush routing table
+		if port not in self.enabled_ports:
+		    self.enabled_ports.append(port)
+		self.routing_table = {}
 		continue
 	    # Reason A: there are not BPDUs younger than 750ms on this port
 	    if len(self.port_history[port]) == 0:
 		if mode:
 		    f.write("no young BPDUs")
+		self.routing_table = {}
 		continue
 	    if port in self.enabled_ports:
 	    	if mode:
 		    f.write("\n--------closing the port at time{}---------\n".format(time.time()*100))
+		# flush routing_table because of change of state
+		self.routing_table = {}
 		self.enabled_ports.remove(port)
 
         # TODO Consider how to identify if a bridge has stopped working and a

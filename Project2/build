@@ -3,4 +3,4 @@ echo "" > all_ports.txt
 echo "" > out.txt
 echo "" > received_mess.txt
 echo "" > delayed_broadcast.txt
-echo "" > all_ports.txt
+echo "" > run_out.txt
