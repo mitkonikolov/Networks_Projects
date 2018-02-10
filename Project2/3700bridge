@@ -252,7 +252,7 @@ class Bridge(object):
 	    if port.fileno() == self.root_port:
 		if mode:
 		    f.write("\n---this is the root port---\n")
-		# it has already been added
+		# it has already been added so no updates on routing table are necessary
 		continue
 	    bpdus = self.port_history[port]
 	    latest_to_drop = 0
@@ -271,7 +271,6 @@ class Bridge(object):
 		if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
 		        designated_bridge = False
 			break		
-
 	    # Reason C: this is the designated bridge
 	    if designated_bridge:
 		if mode:
@@ -279,13 +278,15 @@ class Bridge(object):
 		# change state so flush routing table
 		if port not in self.enabled_ports:
 		    self.enabled_ports.append(port)
-		self.routing_table = {}
+		    self.routing_table = {}
 		continue
 	    # Reason A: there are not BPDUs younger than 750ms on this port
 	    if len(self.port_history[port]) == 0:
 		if mode:
 		    f.write("no young BPDUs")
-		self.routing_table = {}
+		if port not in enabled_ports:
+		    self.enabled_ports.append(port)
+		    self.routing_table = {}
 		continue
 	    if port in self.enabled_ports:
 	    	if mode:
