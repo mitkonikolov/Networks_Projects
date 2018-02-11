@@ -84,6 +84,7 @@ class Bridge(object):
 		last_mess_time = time.time() * 100
 
 		while True:
+			self.recover()
 
 			'''if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
 				for entry in self.send_buffer:
