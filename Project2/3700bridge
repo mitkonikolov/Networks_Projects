@@ -88,10 +88,6 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
-                f = open("out.txt", "a")
-                f.write(data)
-                f.write("\n")
-                f.close()
                 if self.message.is_BPDU(data):
                     self.process_bpdu(socket, data)
                 else:
@@ -157,13 +153,6 @@ class Bridge(object):
 
 
     def pack_send(self, socket, data):
-        rec_mess = open("received_mess.txt", "a")
-        rec_mess.write(
-            "Bridge id {}, root is {}, time is {}: {}\n".format(self.id,
-                                                                self.root_id,
-                                                                time.time() * 100,
-                                                                data))
-        rec_mess.close()
 
         # extract source and put in forwarding table
         data_dict = json.loads(data)
