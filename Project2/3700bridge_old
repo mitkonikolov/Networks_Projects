@@ -268,7 +268,7 @@ class Bridge(object):
     def is_better_than_me(self, bpdu):
 	''' Returns True if the given bpdu was from a bridge that would be
 	designated on the port over self.
-	''' 
+	'''
 	json_obj = json.loads(bpdu)
 	if json_obj['message']['cost'] == self.cost and \
 	    int(json_obj['source'], 16) < int(str(self.id), 16) and \
