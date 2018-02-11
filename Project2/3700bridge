@@ -108,8 +108,6 @@ class Bridge(object):
                     # ports that I need to listen to
                     if socket in self.enabled_ports:
                         self.pack_send(socket, data)
-                    else:
-                        self.store_into_buffer(socket, data, [])
 
 
     def process_bpdu(self, socket, data):
