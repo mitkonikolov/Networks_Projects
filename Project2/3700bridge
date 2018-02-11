@@ -51,15 +51,22 @@ class Bridge(object):
         return result.encode()
 
     def connect_to_sockets(self):
+        ''' Connects to all the sockets in self.LAN '''
         for x in range(len(self.LAN)):
             s = My_Socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
             s.connect(self.pad(self.LAN[x]))
             self.sockets.append(s)
+            # all sockets are enabled initially
             self.enabled_ports.append(s)
             self.port_history[s] = []
         self.message = Message(self.sockets)
 
     def start(self):
+        ''' Starts the bridge and calls all helper methods to perform 
+        different aspects of its functionality
+        :return: None
+        '''
+
         # first broadcast
         self.broadcast_bpdu()
         # the time of the most recent broadcast
@@ -70,12 +77,15 @@ class Bridge(object):
             self.check_for_failures()
 
             curr_time = time.time() * 100
+            # the maximum slack time after which the bridge needs to broadcast
             diff = 0.5 - ((curr_time - last_mess_time)/100)
 
-            if (curr_time-last_mess_time) > 50:
+            # if it has been 490ms since last broadcast, broadcast again
+            if (curr_time-last_mess_time) > 49:
                 diff = 0.5
                 last_mess_time = time.time() * 100
                 self.broadcast_bpdu()
+            # spend a quarter of the slack time checking for failures
             while ((time.time()*100) - curr_time) < abs(diff/4):
                 self.check_for_failures()
 
@@ -87,6 +97,7 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
+                # keep a log of the incoming packets
                 f = open("out.txt", "a")
                 f.write(data)
                 f.write("\n")
@@ -100,11 +111,18 @@ class Bridge(object):
 
 
     def process_bpdu(self, socket, data):
+        '''Process the BPDU message given in data and update root if necessary.
+        
+        :param socket: the My_Socket where the @param data arrived 
+        :param data: the BPDU message to be processed
+        :return: None 
+        '''
         # there have been no BPDUs on this socket/port
         if socket not in self.port_history or self.port_history[socket] is None:
             self.port_history[socket] = []
         time_now = time.time() * 100
         tup1 = (data, time_now)
+        # store the time when the BPDU arrived and map it to the socket
         self.port_history[socket].append(tup1)
 
         peer_name = socket.getpeername()
@@ -128,6 +146,12 @@ class Bridge(object):
 
 
     def update_root(self, socket, data):
+        ''' Checks whether the given BPDU message would cause a change in the
+        root and if so, it updates the root.
+        :param socket:  the My_Socket where the @param data arrived 
+        :param data: the BPDU message to be processed
+        :return: None
+        '''
         try:
             foreignBPDU = json.loads(data)
 
@@ -157,6 +181,13 @@ class Bridge(object):
 
 
     def pack_send(self, socket, data):
+        ''' Process the given data message, pack all destination ports into 
+        one variable, send the message and store data into a buffer.
+        
+        :param socket: the My_Socket where the @param data arrived  
+        :param data: the data message that needs to be processed
+        :return: None
+        '''
         rec_mess = open("received_mess.txt", "a")
         rec_mess.write(
             "Bridge id {}, root is {}, time is {}: {}\n".format(self.id,
@@ -191,6 +222,14 @@ class Bridge(object):
 
 
     def store_into_buffer(self, socket, data, dest_ports):
+        ''' Stores the given data into self.send_buffer mapping it to the given
+         socket.
+        
+        :param socket: the My_Socket where the @param data arrived  
+        :param data: the message to be buffered 
+        :param dest_ports: the ports to which the message is going to be sent
+        :return: None
+        '''
         # store the places there the packets could be going
         for x in self.sockets:
             # this port is not a destination and not in
@@ -209,6 +248,12 @@ class Bridge(object):
 
 
     def recover(self):
+        ''' Recover information that could have been lost by sending the data
+        that was buffered.
+        
+        :return: None
+        '''
+        # the tree has failed and it has been at least 500ms
         if self.failed_tree and (time.time() * 100 -
                                      self.time_tree_failed) > 50:
             for entry in self.send_buffer:
