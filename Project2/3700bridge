@@ -88,6 +88,10 @@ class Bridge(object):
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
+                f = open("out.txt", "a")
+                f.write(data)
+                f.write("\n")
+                f.close()
                 if self.message.is_BPDU(data):
                     self.process_bpdu(socket, data)
                 else:
@@ -121,38 +125,47 @@ class Bridge(object):
                 print("Disabled port: {}/{}\n".format(self.id, file_no))
                 print("The disabled port connects to {}\n".format(peer_name))
         else:
-
-            try:
-                foreignBPDU = json.loads(data)
-
-                neighbor = foreignBPDU['source']
-                self.neighbor_time[neighbor] = (socket, time.time() * 100)
-                if int(str(foreignBPDU['message']['root']), 16) < \
-                        int(str(self.root_id), 16) or \
-                        (int(str(foreignBPDU['message']['root']), 16) ==
-                             int(str(self.root_id), 16) and
-                                 int(str(foreignBPDU['message']['cost']), 16) <
-                                 (int(str(self.cost), 16) - 1)):
-                    self.root_id = foreignBPDU['message']['root']
-                    self.cost = foreignBPDU['message']['cost'] + 1
-                    self.root_port = socket.fileno()
-                    if socket not in self.enabled_ports:
-                        self.enabled_ports.append(socket)
-                    self.broadcast_bpdu()
-                    print("New root: {}/{}".format(self.id,
-                                                   self.root_id))
-                    print("Root port: {}/{}".format(self.id,
-                                                    self.root_port))
-                    self.update_enabled_ports(True)
-
-                    # new root -> flush the routing table
-                    self.routing_table = {}
-            except Exception as e:
-                print(e)
+            self.update_root(socket, data)
         self.update_enabled_ports(True)
 
 
+    def update_root(self, socket, data):
+        try:
+            foreignBPDU = json.loads(data)
+
+            neighbor = foreignBPDU['source']
+            self.neighbor_time[neighbor] = (socket, time.time() * 100)
+            if int(str(foreignBPDU['message']['root']), 16) < \
+                    int(str(self.root_id), 16) or \
+                    (int(str(foreignBPDU['message']['root']), 16) ==
+                         int(str(self.root_id), 16) and
+                             int(str(foreignBPDU['message']['cost']), 16) <
+                             (int(str(self.cost), 16) - 1)):
+                self.root_id = foreignBPDU['message']['root']
+                self.cost = foreignBPDU['message']['cost'] + 1
+                self.root_port = socket.fileno()
+                if socket not in self.enabled_ports:
+                    self.enabled_ports.append(socket)
+                self.broadcast_bpdu()
+                print("New root: {}/{}".format(self.id,
+                                               self.root_id))
+                print("Root port: {}/{}".format(self.id,
+                                                self.root_port))
+                self.update_enabled_ports(True)
+                # new root -> flush the routing table
+                self.routing_table = {}
+        except Exception as e:
+            print(e)
+
+
     def pack_send(self, socket, data):
+        rec_mess = open("received_mess.txt", "a")
+        rec_mess.write(
+            "Bridge id {}, root is {}, time is {}: {}\n".format(self.id,
+                                                                self.root_id,
+                                                                time.time() * 100,
+                                                                data))
+        rec_mess.close()
 
         # extract source and put in forwarding table
         data_dict = json.loads(data)
@@ -175,7 +188,11 @@ class Bridge(object):
             for x in self.enabled_ports:
                 if x != socket:
                     dest_ports.append(x)
+        self.message.send(data, dest_ports)
+        self.store_into_buffer(socket, data, dest_ports)
 
+
+    def store_into_buffer(self, socket, data, dest_ports):
         # store the places there the packets could be going
         for x in self.sockets:
             # this port is not a destination and not because I am already connected to the LAN through another port or because the data came through this port
@@ -190,12 +207,11 @@ class Bridge(object):
                         (data, time.time() * 100, socket))
                     break
         self.update_send_buffer()
-        self.message.send(data, dest_ports)
 
 
     def recover(self):
-        if self.failed_tree and (
-                time.time() * 100 - self.time_tree_failed) > 50:
+        if self.failed_tree and (time.time() * 100 -
+                                     self.time_tree_failed) > 50:
             for entry in self.send_buffer:
                 if entry not in self.send_buffer:
                     continue
@@ -204,16 +220,15 @@ class Bridge(object):
                     socket = message[1]
                     self.failed_tree = False
                     data_dict = json.loads(data)
-                    source = data_dict['source']
                     # extract destination and check whether we have it
                     destination = data_dict['dest']
                     dest_ports = []
                     for host in self.routing_table:
                         if destination in self.routing_table:
                             # only send if the two hosts are on different ports
-                            if self.routing_table[destination][0] != socket and \
-                                            self.routing_table[destination][
-                                                0] in self.enabled_ports:
+                            if self.routing_table[destination][0] != socket and\
+                                            self.routing_table[destination][0] \
+                                            in self.enabled_ports:
                                 dest_ports.append(
                                     self.routing_table[destination][0])
                         else:
@@ -222,6 +237,7 @@ class Bridge(object):
                                     dest_ports.append(x)
                     self.message.send(data, dest_ports)
                     self.send_buffer = {}
+
 
     def update_send_buffer(self):
         ''' Updates self.send_buffer by removing all messages older than
