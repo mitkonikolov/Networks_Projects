@@ -98,23 +98,17 @@ class Bridge(object):
 	                # extract destination and check whether we have it
 	                destination = data_dict['dest']
 	                dest_ports = []
-	                f = open("out.txt", "a")
-                        f.write("\nRecovery Routing table for {} and message\n {}:\n".format(self.id, data))
 	                for host in self.routing_table:
-		            f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
 			    if destination in self.routing_table:
-			        f.write("destination is in routing table\n")
 			        # only send if the two hosts are on different ports
 			        if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
 			            dest_ports.append(self.routing_table[destination][0])
 			    else:
-			        f.write("destination is not in routing table\n")
 			        for x in self.enabled_ports:
 				    if x != socket:
 				        dest_ports.append(x)
 	                self.message.send(data, dest_ports)
 		        self.send_buffer = {}
-		        f.write("sending to {} places".format(len(dest_ports)))		
 		
 	    self.check_for_failures()
 
@@ -193,13 +187,7 @@ class Bridge(object):
 				self.routing_table = {}
                         except Exception as e:
                             print(e)
-                            print("BPDU was malformed and is " + data)
 		    self.update_enabled_ports(True)
-		    f  = open("out.txt", "a")
-		    f.write("Enabled ports for {}:\n".format(self.id))
-		    for s in self.enabled_ports:
-			f.write("{}\n".format(s.getpeername()))
-		    f.close()
 		else:
 		    # ports that I need to listen to
 		    if socket in self.enabled_ports:
@@ -217,18 +205,12 @@ class Bridge(object):
 			destination = data_dict['dest']
 			dest_ports = []
 			destination_port = ""
-			f = open("out.txt", "a")
-			f.write("\nRouting table for {}:\n".format(self.id))
-			for host in self.routing_table:
-			    f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
 			if destination in self.routing_table:
 			    destination_port = self.routing_table[destination][0]
-			    f.write("destination is in routing table\n")
 			    # only send if the two hosts are on different ports
 			    if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
 			        dest_ports.append(self.routing_table[destination][0])
 			else:
-			    f.write("destination is not in routing table\n")
 			    for x in self.enabled_ports:
 				if x != socket:
 				    dest_ports.append(x)
@@ -244,22 +226,8 @@ class Bridge(object):
 				        self.send_buffer[x] = []
 				    self.send_buffer[x].append((data, time.time()*100, socket))
 				    break
-
 			self.update_send_buffer()
-
-			f.write("\n\n Send buffer:\n")
-			for p in self.send_buffer:
-			    f.write("Bridge {}, port {} there are:\n".format(self.id, p.getpeername()))
-			    for m in self.send_buffer[p]:
-				f.write("{} at time {}\n".format(m[0], m[1]))
-
 			self.message.send(data, dest_ports)
-			f.write("there are {} destination ports:\n".format(len(dest_ports)))
-			for d in dest_ports:
-			    f.write("{}\n".format(d.getpeername()))
-			f.write("\n\n\n")
-			#f.write("\ndestination is {}\n".format(dest_ports[0]))
-			f.close()
 
 
     def update_send_buffer(self):
@@ -289,8 +257,10 @@ class Bridge(object):
 	if port in self.port_history:
 	    bpdus = self.port_history[port]
 	    for message in bpdus:
-		# this bridge is more fit than me and I heard from them in the last 100ms
-		if (time.time()*100 - message[1]) < 10 and self.is_better_than_me(message[0]):
+		# this bridge is more fit than me and has sent a BPDU in the 
+		# last 100ms
+		if (time.time()*100 - message[1]) < 10 and \
+		    self.is_better_than_me(message[0]):
 		    return True
 	return False
 
@@ -300,20 +270,22 @@ class Bridge(object):
 	designated on the port over self.
 	'''
 	json_obj = json.loads(bpdu)
-	if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+	if json_obj['message']['cost'] == self.cost and \
+	    int(json_obj['source'], 16) < int(str(self.id), 16) and \
+	    int(str(json_obj['message']['root']), 16) == \
+	    int(str(self.root_id), 16):
 	    return True
-	if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
+	if json_obj['message']['cost'] < self.cost and \
+	    int(str(json_obj['message']['root']), 16) == \
+	    int(str(self.root_id), 16):
 	    return True
 	return False
 
 
     def broadcast_bpdu(self):
 	''' Broadcasts bpdu message to all ports.'''
-	f = open("out.txt", "a")
-	f.write("{}/{} broadcasting\n".format(self.id, self.root_id))
-	f.close()
-        self.message.send_message(self.id, "FFFF", "bpdu", {"root":
-                                                                self.root_id, "cost":self.cost})
+        self.message.send_message(self.id, "FFFF", "bpdu", {"root":\
+	self.root_id, "cost":self.cost})
 
 
     def check_for_failures(self):
@@ -364,6 +336,7 @@ class Bridge(object):
 		    new_port_history[port].append(message)
 	self.port_history = new_port_history
 
+
     def update_enabled_ports(self, mode):
 	'''Updates the list of enabled ports.'''
 	# This is the root => all ports are enabled
@@ -373,71 +346,37 @@ class Bridge(object):
 		if s not in self.enabled_ports and s.getpeername() not in self.uniqueLANs:
 		    self.enabled_ports.append(s)
 	    return
-
 	self.update_port_history()
 	# the tree has failed and needs to be reconstructed
-
 	for port in self.port_history:
-	    f =""
-	    if mode:
-	        f = open("all_ports.txt", "a")
-	        f.write("Bridge {}, root {}, port is {}, current time is {} and history is\n".format(self.id, self.root_id, port.getpeername(), time.time()*100))
-	        if port in self.port_history:
-		    for m in self.port_history[port]:
-		        f.write("{} at time {}\n".format(m[0], m[1]))
-	        else:
-		    f.write("Port does not have a history\n")    
 	    # Reason B: this is the root port
 	    if port.fileno() == self.root_port:
-		if mode:
-		    f.write("\n---this is the root port---\n")
-		# it has already been added so no updates on routing table are necessary
+		# it has already been added so no routing table updates
 		continue
 	    bpdus = self.port_history[port]
-	    latest_to_drop = 0
 	    designated_bridge = True
-	    new_list = []
 	    if len(bpdus) == 0:
-		if mode:
-		    f.write("\nno BPDUS\n")
 		continue
 	    for message in bpdus:
 		json_obj = json.loads(message[0])
 		# some other bridge is designated for this LAN
-		if json_obj['message']['cost'] == self.cost and int(json_obj['source'], 16) < int(str(self.id), 16) and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
-		        designated_bridge = False
-			break
-		if json_obj['message']['cost'] < self.cost and int(str(json_obj['message']['root']), 16) == int(str(self.root_id), 16):
-		        designated_bridge = False
-			break		
-	    # Reason C: this is the designated bridge
-	    if designated_bridge:
-		if mode:
-		    f.write("\n----Designated bridge-----\n")
+		if self.is_better_than_me(message[0]):
+		    designated_bridge = False
+		    break
+	    # Reason C: this is the designated bridge or 
+	    # no BPDUs younger than 750ms
+	    if designated_bridge or len(self.port_history[port])==0:
 		# change state so flush routing table
 		if port not in self.enabled_ports:
 		    self.enabled_ports.append(port)
 		    self.routing_table = {}
 		continue
-	    # Reason A: there are not BPDUs younger than 750ms on this port
-	    if len(self.port_history[port]) == 0:
-		if mode:
-		    f.write("no young BPDUs")
-		if port not in enabled_ports:
-		    self.enabled_ports.append(port)
-		    self.routing_table = {}
-		continue
 	    if port in self.enabled_ports:
-	    	if mode:
-		    f.write("\n--------closing the port at time{}---------\n".format(time.time()*100))
 		# flush routing_table because of change of state
 		self.routing_table = {}
 		self.enabled_ports.remove(port)
 		print("Disabled port: {}/{}".format(self.id, port.fileno()))
 		print("The disabled port connects to {}".format(port.getpeername()))
-
-        # TODO Consider how to identify if a bridge has stopped working and a
-        # TODO socket thus becomes useless
 
 
     def is_from_me(self, bpdu):
@@ -445,12 +384,14 @@ class Bridge(object):
         bpdu_dict = json.loads(bpdu)
         return bpdu_dict['source'] == self.id
 
+
     def __eq__(self, other):
         """Overrides the default implementation of __eq__."""
         if isinstance(self, other.__class__):
             #return self.fileno() == other.fileno()
 	    return seld.id  == other.id
     	return False
+
 
     def __ne__(self, other):
         """Overrides the default implementation of __ne__."""
@@ -461,8 +402,10 @@ class Message(object):
     sockets = {}
     id = 0
 
+
     def __init__(self, sockets):
         self.sockets = sockets
+
 
     def send_message(self, source, dest, type, message):
         '''Packs and sends the message that was passed'''
@@ -477,11 +420,13 @@ class Message(object):
             for s in self.sockets:
                 s.send(m)
 
+
     def is_BPDU(self, json_str):
 	'''Returns True if the given json_str is a BPDU message.'''
         dict_message = json.loads(json_str)
         val = dict_message['type']
         return val == "bpdu"
+
 
     def gen_RN(self):
         '''Returns a random number'''
@@ -489,9 +434,11 @@ class Message(object):
             '0123456789abcdef') + random.choice('0123456789abcdef') + \
                random.choice('0123456789abcdef')
 
+
     def set_ports(self, ports):
 	'''Sets self.sockets to the given ports.'''
         self.sockets = ports
+
 
     def send(self, message, ports):
 	'''Sends the message on the given ports.'''
