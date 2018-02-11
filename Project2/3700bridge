@@ -10,24 +10,6 @@ import random
 import string
 
 
-class My_Socket(socket.socket):
-
-	def __init__(self, val1, val2):
-		super(My_Socket, self).__init__(val1,val2)
-		#self.queue = queue.Queue
-
-	def __eq__(self, other):
-		if isinstance(self, other.__class__):
-			return self.fileno() == other.fileno()
-		return False
-
-	def getpeername(self):
-		return super(My_Socket, self).getpeername()
-
-
-	def fileno(self):
-		return super(My_Socket, self).fileno()
-
 class Bridge(object):
 	id = -1
 	LAN = None
@@ -85,32 +67,6 @@ class Bridge(object):
 
 		while True:
 			self.recover()
-
-			'''if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
-				for entry in self.send_buffer:
-					if entry not in self.send_buffer:
-						continue
-					for message in self.send_buffer[entry]:
-						data = message[0]
-						socket = message[1]
-						self.failed_tree = False
-						data_dict = json.loads(data)
-						source = data_dict['source']
-						# extract destination and check whether we have it
-						destination = data_dict['dest']
-						dest_ports = []
-						for host in self.routing_table:
-							if destination in self.routing_table:
-								# only send if the two hosts are on different ports
-								if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
-									dest_ports.append(self.routing_table[destination][0])
-							else:
-								for x in self.enabled_ports:
-									if x != socket:
-										dest_ports.append(x)
-						self.message.send(data, dest_ports)
-						self.send_buffer = {}'''
-
 			self.check_for_failures()
 
 			curr_time = time.time() * 100
@@ -420,13 +376,34 @@ class Bridge(object):
 		"""Overrides the default implementation of __eq__."""
 		if isinstance(self, other.__class__):
 			#return self.fileno() == other.fileno()
-			return seld.id  == other.id
+			return self.id  == other.id
 		return False
 
 
 	def __ne__(self, other):
 		"""Overrides the default implementation of __ne__."""
 		return not self.__eq__(other)
+
+
+
+class My_Socket(socket.socket):
+
+	def __init__(self, val1, val2):
+		super(My_Socket, self).__init__(val1,val2)
+		#self.queue = queue.Queue
+
+	def __eq__(self, other):
+		if isinstance(self, other.__class__):
+			return self.fileno() == other.fileno()
+		return False
+
+	def getpeername(self):
+		return super(My_Socket, self).getpeername()
+
+
+	def fileno(self):
+		return super(My_Socket, self).fileno()
+
 
 
 class Message(object):
