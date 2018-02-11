@@ -93,101 +93,67 @@ class Bridge(object):
                 f.write("\n")
                 f.close()
                 if self.message.is_BPDU(data):
-                    # there have been no BPDUs on this socket/port
-                    if socket not in self.port_history or self.port_history[socket] is None:
-                        self.port_history[socket] = []
-                    time_now = time.time() * 100
-                    tup1 = (data, time_now)
-                    self.port_history[socket].append(tup1)
-
-
-                    peer_name = socket.getpeername()
-                    file_no = socket.fileno()
-                    # currently do not have a designated port for the LAN
-                    if peer_name not in self.uniqueLANs:
-                        self.uniqueLANs[peer_name] = file_no
-                        print("Designated port: {}/{}".format(self.id, file_no))
-                        print("The designated port connects to the LAN {}".format(peer_name))
-
-                    if self.is_from_me(data):
-                        if peer_name in self.uniqueLANs and file_no != self.uniqueLANs[peer_name]:
-                            if socket in self.enabled_ports:
-                                self.enabled_ports.remove(socket)
-                            print("Disabled port: {}/{}\n".format(self.id, file_no))
-                            print("The disabled port connects to {}\n".format(peer_name))
-                    else:
-
-                        try:
-                            foreignBPDU = json.loads(data)
-
-                            neighbor = foreignBPDU['source']
-                            self.neighbor_time[neighbor] = (socket, time.time()*100)
-                            if int(str(foreignBPDU['message']['root']), 16) < \
-                                    int(str(self.root_id), 16) or \
-                                    (int(str(foreignBPDU['message']['root']), 16) ==
-                                         int(str(self.root_id), 16) and
-                                             int(str(foreignBPDU['message']['cost']), 16) <
-                                             (int(str(self.cost), 16) - 1)):
-                                self.root_id = foreignBPDU['message']['root']
-                                self.cost = foreignBPDU['message']['cost'] + 1
-                                self.root_port = socket.fileno()
-                                if socket not in self.enabled_ports:
-                                    self.enabled_ports.append(socket)
-                                self.broadcast_bpdu()
-                                print("New root: {}/{}".format(self.id,
-                                                               self.root_id))
-                                print("Root port: {}/{}".format(self.id,
-                                                                self.root_port))
-                                self.update_enabled_ports(True)
-
-                                # new root -> flush the routing table
-                                self.routing_table = {}
-                        except Exception as e:
-                            print(e)
-                    self.update_enabled_ports(True)
+                    self.process_bpdu(socket, data)
                 else:
                     # ports that I need to listen to
                     if socket in self.enabled_ports:
                         self.pack_send(socket, data)
-                        '''rec_mess = open("received_mess.txt", "a")
-                        rec_mess.write("Bridge id {}, root is {}, time is {}: {}\n".format(self.id,self.root_id,time.time()*100,  data))
-                        rec_mess.close()
-
-                        # extract source and put in forwarding table
-                        data_dict = json.loads(data)
-                        source = data_dict['source']
-                        tuple1 = (socket, time.time()*100)
-                        self.routing_table[source] = tuple1
-                        self.update_routing_table()
-                        # extract destination and check whether we have it
-                        destination = data_dict['dest']
-                        dest_ports = []
-                        destination_port = ""
-                        if destination in self.routing_table:
-                            destination_port = self.routing_table[destination][0]
-                            # only send if the two hosts are on different ports
-                            if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
-                                dest_ports.append(self.routing_table[destination][0])
-                        else:
-                            for x in self.enabled_ports:
-                                if x != socket:
-                                    dest_ports.append(x)
 
 
-                        # store the places there the packets could be going
-                        for x in self.sockets:
-                            # this port is not a destination and not because I am already connected to the LAN through another port or because the data came through this port
-                            if x not in dest_ports and (x.getpeername() in self.uniqueLANs and x.fileno()== self.uniqueLANs[x.getpeername()]) and x != socket:
-                                if not self.designated_bridge_is_there(x):
-                                    # I have not heard from the designated recently so buffer the data
-                                    if x not in self.send_buffer:
-                                        self.send_buffer[x] = []
-                                    self.send_buffer[x].append((data, time.time()*100, socket))
-                                    break
-                        self.update_send_buffer()
-                        self.message.send(data, dest_ports)'''
+    def process_bpdu(self, socket, data):
+        # there have been no BPDUs on this socket/port
+        if socket not in self.port_history or self.port_history[socket] is None:
+            self.port_history[socket] = []
+        time_now = time.time() * 100
+        tup1 = (data, time_now)
+        self.port_history[socket].append(tup1)
 
+        peer_name = socket.getpeername()
+        file_no = socket.fileno()
+        # currently do not have a designated port for the LAN
+        if peer_name not in self.uniqueLANs:
+            self.uniqueLANs[peer_name] = file_no
+            print("Designated port: {}/{}".format(self.id, file_no))
+            print(
+                "The designated port connects to the LAN {}".format(peer_name))
 
+        if self.is_from_me(data):
+            if peer_name in self.uniqueLANs and file_no != self.uniqueLANs[
+                peer_name]:
+                if socket in self.enabled_ports:
+                    self.enabled_ports.remove(socket)
+                print("Disabled port: {}/{}\n".format(self.id, file_no))
+                print("The disabled port connects to {}\n".format(peer_name))
+        else:
+
+            try:
+                foreignBPDU = json.loads(data)
+
+                neighbor = foreignBPDU['source']
+                self.neighbor_time[neighbor] = (socket, time.time() * 100)
+                if int(str(foreignBPDU['message']['root']), 16) < \
+                        int(str(self.root_id), 16) or \
+                        (int(str(foreignBPDU['message']['root']), 16) ==
+                             int(str(self.root_id), 16) and
+                                 int(str(foreignBPDU['message']['cost']), 16) <
+                                 (int(str(self.cost), 16) - 1)):
+                    self.root_id = foreignBPDU['message']['root']
+                    self.cost = foreignBPDU['message']['cost'] + 1
+                    self.root_port = socket.fileno()
+                    if socket not in self.enabled_ports:
+                        self.enabled_ports.append(socket)
+                    self.broadcast_bpdu()
+                    print("New root: {}/{}".format(self.id,
+                                                   self.root_id))
+                    print("Root port: {}/{}".format(self.id,
+                                                    self.root_port))
+                    self.update_enabled_ports(True)
+
+                    # new root -> flush the routing table
+                    self.routing_table = {}
+            except Exception as e:
+                print(e)
+        self.update_enabled_ports(True)
 
 
     def pack_send(self, socket, data):
@@ -236,6 +202,7 @@ class Bridge(object):
                     break
         self.update_send_buffer()
         self.message.send(data, dest_ports)
+
 
     def recover(self):
         if self.failed_tree and (
