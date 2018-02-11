@@ -90,10 +90,11 @@ class Bridge(object):
         #  tree
 	
 	
-	if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
+	if self.failed_tree: #and (time.time()*100 - self.time_tree_failed) > 1:
 	    for entry in self.send_buffer:
 	        for message in self.send_buffer[entry]:
 	            data = message[0]
+		    #print("RESENDING --- {}".format(data))
                     socket = message[1]
 		    self.failed_tree = False
  	            data_dict = json.loads(data)
