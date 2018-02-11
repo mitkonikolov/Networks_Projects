@@ -88,8 +88,12 @@ class Bridge(object):
         # TODO print out the messages that the assignment requires
         # broadcast first message to start the process of building a spanning
         #  tree
-	
-	
+		
+        self.broadcast_bpdu()
+	last_mess_time = time.time() * 100
+
+        while True:
+		
 	if self.failed_tree: #and (time.time()*100 - self.time_tree_failed) > 1:
 	    for entry in self.send_buffer:
 	        for message in self.send_buffer[entry]:
@@ -118,13 +122,8 @@ class Bridge(object):
 				        dest_ports.append(x)
 	            self.message.send(data, dest_ports)
 		    self.send_buffer = {}
-		    f.write("sending to {} places".format(len(dest_ports)))
-	
-	
-        self.broadcast_bpdu()
-	last_mess_time = time.time() * 100
-
-        while True:
+		    f.write("sending to {} places".format(len(dest_ports)))		
+		
 	    self.check_for_failures()
 
 	    curr_time = time.time() * 100
