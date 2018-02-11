@@ -68,7 +68,17 @@ class Bridge(object):
         while True:
             self.recover()
             self.check_for_failures()
-            diff = self.broadcast_check_failures(last_mess_time)
+
+            curr_time = time.time() * 100
+            diff = 0.5 - ((curr_time - last_mess_time)/100)
+
+            if (curr_time-last_mess_time) > 50:
+                diff = 0.5
+                last_mess_time = time.time() * 100
+                self.broadcast_bpdu()
+            while ((time.time()*100) - curr_time) < abs(diff/4):
+                self.check_for_failures()
+
             # Calls select with all the sockets; change the timeout value (1)
             ready, ignore1, ignore2 = select.select(self.sockets, [], [],
                                                     diff - abs(diff/4))
@@ -87,18 +97,6 @@ class Bridge(object):
                     # ports that I need to listen to
                     if socket in self.enabled_ports:
                         self.pack_send(socket, data)
-
-    def broadcast_check_failures(self, last_mess_time):
-        curr_time = time.time() * 100
-        diff = 0.5 - ((curr_time - last_mess_time) / 100)
-
-        if (curr_time - last_mess_time) > 50:
-            diff = 0.5
-            last_mess_time = time.time() * 100
-            self.broadcast_bpdu()
-        while ((time.time() * 100) - curr_time) < abs(diff / 4):
-            self.check_for_failures()
-        return diff
 
 
     def process_bpdu(self, socket, data):
