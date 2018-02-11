@@ -68,21 +68,10 @@ class Bridge(object):
         while True:
             self.recover()
             self.check_for_failures()
-
-            curr_time = time.time() * 100
-            diff = 0.5 - ((curr_time - last_mess_time)/100)
-
-            if (curr_time-last_mess_time) > 50:
-                diff = 0.5
-                last_mess_time = time.time() * 100
-                self.broadcast_bpdu()
-
-            while ((time.time()*100) - curr_time) < abs(diff/4):
-                self.check_for_failures()
-
-
+            diff = self.broadcast_check_failures(last_mess_time)
             # Calls select with all the sockets; change the timeout value (1)
-            ready, ignore1, ignore2 = select.select(self.sockets, [], [], diff - abs(diff/4))
+            ready, ignore1, ignore2 = select.select(self.sockets, [], [],
+                                                    diff - abs(diff/4))
             if len(ready)==0:
                 self.check_for_failures()
             # Reads from each fo the ready sockets
@@ -98,6 +87,18 @@ class Bridge(object):
                     # ports that I need to listen to
                     if socket in self.enabled_ports:
                         self.pack_send(socket, data)
+
+    def broadcast_check_failures(self, last_mess_time):
+        curr_time = time.time() * 100
+        diff = 0.5 - ((curr_time - last_mess_time) / 100)
+
+        if (curr_time - last_mess_time) > 50:
+            diff = 0.5
+            last_mess_time = time.time() * 100
+            self.broadcast_bpdu()
+        while ((time.time() * 100) - curr_time) < abs(diff / 4):
+            self.check_for_failures()
+        return diff
 
 
     def process_bpdu(self, socket, data):
@@ -116,9 +117,8 @@ class Bridge(object):
             print("Designated port: {}/{}".format(self.id, file_no))
             print(
                 "The designated port connects to the LAN {}".format(peer_name))
-
         if self.is_from_me(data):
-            if peer_name in self.uniqueLANs and file_no != self.uniqueLANs[
+            if peer_name in self.uniqueLANs and file_no !=  self.uniqueLANs[
                 peer_name]:
                 if socket in self.enabled_ports:
                     self.enabled_ports.remove(socket)
@@ -195,12 +195,13 @@ class Bridge(object):
     def store_into_buffer(self, socket, data, dest_ports):
         # store the places there the packets could be going
         for x in self.sockets:
-            # this port is not a destination and not because I am already connected to the LAN through another port or because the data came through this port
-            if x not in dest_ports and (
-                    x.getpeername() in self.uniqueLANs and x.fileno() ==
-                self.uniqueLANs[x.getpeername()]) and x != socket:
+            # this port is not a destination and not in
+            if x not in dest_ports and (x.getpeername() in self.uniqueLANs
+                and x.fileno() == self.uniqueLANs[x.getpeername()]) and x != \
+                    socket:
                 if not self.designated_bridge_is_there(x):
-                    # I have not heard from the designated recently so buffer the data
+                    # I have not heard from the designated recently so buffer
+                    # the data
                     if x not in self.send_buffer:
                         self.send_buffer[x] = []
                     self.send_buffer[x].append(
@@ -294,7 +295,8 @@ class Bridge(object):
     def broadcast_bpdu(self):
         ''' Broadcasts bpdu message to all ports.'''
         self.message.send_message(self.id, "FFFF", "bpdu", {"root": \
-                                                                self.root_id, "cost":self.cost})
+                                                            self.root_id,
+                                                            "cost":self.cost})
 
 
     def check_for_failures(self):
@@ -351,8 +353,10 @@ class Bridge(object):
         # This is the root => all ports are enabled
         if self.root_id == self.id:
             for s in self.sockets:
-                # this port is not enabled and we are not already connected to this LAN
-                if s not in self.enabled_ports and s.getpeername() not in self.uniqueLANs:
+                # this port is not enabled and we are not already connected to
+                # this LAN
+                if s not in self.enabled_ports and  s.getpeername() not in \
+                        self.uniqueLANs:
                     self.enabled_ports.append(s)
             return
         self.update_port_history()
