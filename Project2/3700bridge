@@ -236,7 +236,7 @@ class Bridge(object):
 				    # I have not heard from the designated recently so buffer the data
 				    if x not in self.send_buffer:
 				        self.send_buffer[x] = []
-				    self.send_buffer[x].append((data, socket, time.time()*100))
+				    self.send_buffer[x].append((data, time.time()*100, socket))
 
 			self.update_send_buffer()
 
@@ -244,7 +244,7 @@ class Bridge(object):
 			for p in self.send_buffer:
 			    f.write("Bridge {}, port {} there are:\n".format(self.id, p.getpeername()))
 			    for m in self.send_buffer[p]:
-				f.write("{} at time {}\n".format(m[0], m[2]))
+				f.write("{} at time {}\n".format(m[0], m[1]))
 
 			self.message.send(data, dest_ports)
 			f.write("there are {} destination ports:\n".format(len(dest_ports)))
@@ -253,11 +253,35 @@ class Bridge(object):
 			f.write("\n\n\n")
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
 			f.close()
-		    '''if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
+		    if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
 			for entry in self.send_buffer:
-			    data = self.send_buffer[entry][0]
-			    socket = self.send_buffer[entry][1]'''
- 
+			    for message in self.send_buffer[entry]:
+			        data = message[0]
+			        socket = message[1]
+			        self.failed_tree = False
+ 			        data_dict = json.loads(data)
+			        source = data_dict['source']
+			        # extract destination and check whether we have it
+			        destination = data_dict['dest']
+			        dest_ports = []
+			        f = open("out.txt", "a")
+			        f.write("\nRecovery Routing table for {} and message\n {}:\n".format(self.id, data))
+			        for host in self.routing_table:
+			            f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
+			        if destination in self.routing_table:
+			            f.write("destination is in routing table\n")
+			        # only send if the two hosts are on different ports
+			            if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
+			                dest_ports.append(self.routing_table[destination][0])
+			        else:
+			            f.write("destination is not in routing table\n")
+			            for x in self.enabled_ports:
+				        if x != socket:
+				            dest_ports.append(x)
+			        self.message.send(data, dest_ports)
+			        self.send_buffer = {}
+				f.write("sending to {} places".format(len(dest_ports)))
+
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
 	    #if ((time.time() * 100) - last_mess_time) < 200: 
@@ -273,7 +297,7 @@ class Bridge(object):
 	    for message in self.send_buffer[port]:
 		# the bridge for this port might have failed and this might have 
 		# not been discovered yet; the message is preserved for now
-		if time.time()*100 - message[2] < 75:
+		if time.time()*100 - message[1] < 75:
 		    if port not in new_buffer:
 			new_buffer[port] = []
 		    new_buffer[port].append(message)
