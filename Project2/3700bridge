@@ -108,6 +108,8 @@ class Bridge(object):
                     # ports that I need to listen to
                     if socket in self.enabled_ports:
                         self.pack_send(socket, data)
+                    else:
+                        self.store_into_buffer(socket, data, [])
 
 
     def process_bpdu(self, socket, data):
@@ -231,23 +233,19 @@ class Bridge(object):
         :return: None
         '''
         # store the places there the packets could be going
-        # for x in self.sockets:
-        #     # this port is not a destination and not in
-        #     if x not in dest_ports and (x.getpeername() in self.uniqueLANs
-        #         and x.fileno() == self.uniqueLANs[x.getpeername()]) and x != \
-        #             socket:
-        #         if not self.designated_bridge_is_there(x):
-        #             # I have not heard from the designated recently so buffer
-        #             # the data
-        #             if x not in self.send_buffer:
-        #                 self.send_buffer[x] = []
-        #             self.send_buffer[x].append(
-        #                 (data, time.time() * 100, socket))
-        #             break
-        if socket not in self.send_buffer:
-            self.send_buffer[socket] = []
-        self.send_buffer[socket].append(
-            (data, time.time() * 100, socket))
+        for x in self.sockets:
+            # this port is not a destination and not in
+            if x not in dest_ports and (x.getpeername() in self.uniqueLANs
+                and x.fileno() == self.uniqueLANs[x.getpeername()]) and x != \
+                    socket:
+                if not self.designated_bridge_is_there(x):
+                    # I have not heard from the designated recently so buffer
+                    # the data
+                    if x not in self.send_buffer:
+                        self.send_buffer[x] = []
+                    self.send_buffer[x].append(
+                        (data, time.time() * 100, socket))
+                    break
         self.update_send_buffer()
 
 
