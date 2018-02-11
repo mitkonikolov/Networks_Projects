@@ -89,6 +89,37 @@ class Bridge(object):
         # broadcast first message to start the process of building a spanning
         #  tree
 	
+	
+	if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
+	    for entry in self.send_buffer:
+	        for message in self.send_buffer[entry]:
+	            data = message[0]
+                    socket = message[1]
+		    self.failed_tree = False
+ 	            data_dict = json.loads(data)
+	            source = data_dict['source']
+	            # extract destination and check whether we have it
+	            destination = data_dict['dest']
+	            dest_ports = []
+	            f = open("out.txt", "a")
+                    f.write("\nRecovery Routing table for {} and message\n {}:\n".format(self.id, data))
+	            for host in self.routing_table:
+		        f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
+			if destination in self.routing_table:
+			    f.write("destination is in routing table\n")
+			    # only send if the two hosts are on different ports
+			    if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
+			        dest_ports.append(self.routing_table[destination][0])
+			    else:
+			        f.write("destination is not in routing table\n")
+			        for x in self.enabled_ports:
+				    if x != socket:
+				        dest_ports.append(x)
+	            self.message.send(data, dest_ports)
+		    self.send_buffer = {}
+		    f.write("sending to {} places".format(len(dest_ports)))
+	
+	
         self.broadcast_bpdu()
 	last_mess_time = time.time() * 100
 
@@ -253,34 +284,7 @@ class Bridge(object):
 			f.write("\n\n\n")
 			#f.write("\ndestination is {}\n".format(dest_ports[0]))
 			f.close()
-		    if self.failed_tree and (time.time()*100 - self.time_tree_failed) > 50:
-			for entry in self.send_buffer:
-			    for message in self.send_buffer[entry]:
-			        data = message[0]
-			        socket = message[1]
-			        self.failed_tree = False
- 			        data_dict = json.loads(data)
-			        source = data_dict['source']
-			        # extract destination and check whether we have it
-			        destination = data_dict['dest']
-			        dest_ports = []
-			        f = open("out.txt", "a")
-			        f.write("\nRecovery Routing table for {} and message\n {}:\n".format(self.id, data))
-			        for host in self.routing_table:
-			            f.write("Host: {} - Network: {} at time {}\n\n".format(host, self.routing_table[host][0].getpeername(), self.routing_table[host][1]))
-			        if destination in self.routing_table:
-			            f.write("destination is in routing table\n")
-			        # only send if the two hosts are on different ports
-			            if self.routing_table[destination][0] != socket and self.routing_table[destination][0] in self.enabled_ports:
-			                dest_ports.append(self.routing_table[destination][0])
-			        else:
-			            f.write("destination is not in routing table\n")
-			            for x in self.enabled_ports:
-				        if x != socket:
-				            dest_ports.append(x)
-			        self.message.send(data, dest_ports)
-			        self.send_buffer = {}
-				f.write("sending to {} places".format(len(dest_ports)))
+		    
 
 				# if we have it, forward to active ports
 				# if we don't, broadcast to all active ports but port_number
