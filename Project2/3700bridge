@@ -78,9 +78,12 @@ class Bridge(object):
         # the time of the most recent broadcast
         last_mess_time = time.time() * 100
 
-        # keep a log of the incoming packets
+        # keep a log of the incoming packets and received messages
         f = open("out.txt", "w+")
         f.close()
+
+        rec_mess = open("received_mess.txt", "w+")
+        rec_mess.close()
 
         while True:
             self.recover()
@@ -197,6 +200,11 @@ class Bridge(object):
         
         :return: None
         '''
+        # keep a log of the received messages
+        rec_mess = open("received_mess.txt", "a")
+        rec_mess.write(
+            "Bridge id {}, root is {}\n".format(self.id, self.root_id))
+        rec_mess.close()
         # extract source and put in forwarding table
         data_dict = json.loads(data)
         source = data_dict['source']
