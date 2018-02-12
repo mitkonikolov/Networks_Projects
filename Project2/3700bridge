@@ -95,16 +95,14 @@ class Bridge(object):
             # Calls select with all the sockets; change the timeout value (1)
             ready, ignore1, ignore2 = select.select(self.sockets, [], [],
                                                     diff - abs(diff/4))
-            if len(ready)==0:
-                self.check_for_failures()
             # Reads from each fo the ready sockets
             for socket in ready:
                 data = socket.recv(1500)
                 # keep a log of the incoming packets
-                f = open("out.txt", "a")
-                f.write(data)
-                f.write("\n")
-                f.close()
+                # f = open("out.txt", "a")
+                # f.write(data)
+                # f.write("\n")
+                # f.close()
                 if self.message.is_BPDU(data):
                     self.process_bpdu(socket, data)
                 else:
@@ -196,10 +194,10 @@ class Bridge(object):
         :return: None
         '''
         # keep a log of the received messages
-        rec_mess = open("received_mess.txt", "a")
-        rec_mess.write(
-            "Bridge id {}, root is {}\n".format(self.id, self.root_id))
-        rec_mess.close()
+        # rec_mess = open("received_mess.txt", "a")
+        # rec_mess.write(
+        #     "Bridge id {}, root is {}\n".format(self.id, self.root_id))
+        # rec_mess.close()
         # extract source and put in forwarding table
         data_dict = json.loads(data)
         source = data_dict['source']
