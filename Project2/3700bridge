@@ -92,8 +92,8 @@ class Bridge(object):
                 last_mess_time = time.time() * 100
                 self.broadcast_bpdu()
             # spend a quarter of the slack time checking for failures
-            while ((time.time()*100) - curr_time) < abs(diff/4):
-                self.check_for_failures()
+            # while ((time.time()*100) - curr_time) < abs(diff/4):
+            #     self.check_for_failures()
 
             # Calls select with all the sockets; change the timeout value (1)
             ready, ignore1, ignore2 = select.select(self.sockets, [], [],
