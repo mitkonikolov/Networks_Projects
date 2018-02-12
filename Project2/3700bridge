@@ -236,11 +236,10 @@ class Bridge(object):
         # store the places there the packets could be going
         for x in self.sockets:
             # this port is not a destination and not in
-            if True or x not in dest_ports and (x.getpeername() in \
-                    self.uniqueLANs
+            if x not in dest_ports and (x.getpeername() in self.uniqueLANs
                 and x.fileno() == self.uniqueLANs[x.getpeername()]) and x != \
                     socket:
-                if True or not self.designated_bridge_is_there(x):
+                if not self.designated_bridge_is_there(x):
                     # I have not heard from the designated recently so buffer
                     # the data
                     if x not in self.send_buffer:
