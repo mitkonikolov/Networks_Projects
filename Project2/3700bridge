@@ -3,11 +3,9 @@
 import sys
 import socket
 import select
-import threading
 import time
 import json
 import random
-import string
 
 
 class Bridge(object):
@@ -43,15 +41,22 @@ class Bridge(object):
         print("Bridge "+ str(self.id) +" starting up")
         open("ports.txt", "w+").close()
 
-    # pads the name with null bytes at the end
     def pad(self, name):
+        '''Pads the name with null bytes at the end
+        
+        :param name: the LAN name that needs to be padded
+        :return: the padded name
+        '''
         result = "\0" + name
         while len(result) < 108:
             result += "\0"
         return result.encode()
 
     def connect_to_sockets(self):
-        ''' Connects to all the sockets in self.LAN '''
+        ''' Connects to all the sockets in self.LAN 
+        
+        :return: None
+        '''
         for x in range(len(self.LAN)):
             s = My_Socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
             s.connect(self.pad(self.LAN[x]))
@@ -63,7 +68,8 @@ class Bridge(object):
 
     def start(self):
         ''' Starts the bridge and calls all helper methods to perform 
-        different aspects of its functionality
+        different aspects of its functionality.
+        
         :return: None
         '''
 
@@ -115,6 +121,7 @@ class Bridge(object):
         
         :param socket: the My_Socket where the @param data arrived 
         :param data: the BPDU message to be processed
+        
         :return: None 
         '''
         # there have been no BPDUs on this socket/port
@@ -142,14 +149,16 @@ class Bridge(object):
                 print("The disabled port connects to {}\n".format(peer_name))
         else:
             self.update_root(socket, data)
-        self.update_enabled_ports(True)
+        self.update_enabled_ports()
 
 
     def update_root(self, socket, data):
         ''' Checks whether the given BPDU message would cause a change in the
         root and if so, it updates the root.
+        
         :param socket:  the My_Socket where the @param data arrived 
         :param data: the BPDU message to be processed
+        
         :return: None
         '''
         try:
@@ -173,7 +182,7 @@ class Bridge(object):
                                                self.root_id))
                 print("Root port: {}/{}".format(self.id,
                                                 self.root_port))
-                self.update_enabled_ports(True)
+                self.update_enabled_ports()
                 # new root -> flush the routing table
                 self.routing_table = {}
         except Exception as e:
@@ -186,16 +195,14 @@ class Bridge(object):
         
         :param socket: the My_Socket where the @param data arrived  
         :param data: the data message that needs to be processed
+        
         :return: None
         '''
+        # keep a log of the received messages
         rec_mess = open("received_mess.txt", "a")
         rec_mess.write(
-            "Bridge id {}, root is {}, time is {}: {}\n".format(self.id,
-                                                                self.root_id,
-                                                                time.time() * 100,
-                                                                data))
+            "Bridge id {}, root is {}\n".format(self.id, self.root_id))
         rec_mess.close()
-
         # extract source and put in forwarding table
         data_dict = json.loads(data)
         source = data_dict['source']
@@ -205,9 +212,7 @@ class Bridge(object):
         # extract destination and check whether we have it
         destination = data_dict['dest']
         dest_ports = []
-        destination_port = ""
         if destination in self.routing_table:
-            destination_port = self.routing_table[destination][0]
             # only send if the two hosts are on different ports
             if self.routing_table[destination][0] != socket and \
                             self.routing_table[destination][
@@ -228,6 +233,7 @@ class Bridge(object):
         :param socket: the My_Socket where the @param data arrived  
         :param data: the message to be buffered 
         :param dest_ports: the ports to which the message is going to be sent
+        
         :return: None
         '''
         # store the places there the packets could be going
@@ -284,8 +290,10 @@ class Bridge(object):
 
 
     def update_send_buffer(self):
-        ''' Updates self.send_buffer by removing all messages older than
+        '''Update self.send_buffer by removing all messages older than
         750 ms.
+        
+        :return: None
         '''
         new_buffer = {}
         for port in self.send_buffer:
@@ -305,7 +313,13 @@ class Bridge(object):
         to the root.
     
         If there has not been a message from another bridge, then False is
-        returned indicating that the data should be buffered for now. 
+        returned indicating that the data should be buffered for now.
+        
+        :param port: the port that needs to be checked for the presence of a
+        better fitting bridge 
+         
+        :return: boolean indicating whether there has been a message on the 
+        given port in the last 100ms
         '''
         if port in self.port_history:
             bpdus = self.port_history[port]
@@ -321,6 +335,9 @@ class Bridge(object):
     def is_better_than_me(self, bpdu):
         ''' Returns True if the given bpdu was from a bridge that would be
         designated on the port over self.
+        
+        :return: boolean indicating if the bridge from the given bpdu would be
+                 a designated bridge over self
         '''
         json_obj = json.loads(bpdu)
         if json_obj['message']['cost'] == self.cost and \
@@ -336,7 +353,10 @@ class Bridge(object):
 
 
     def broadcast_bpdu(self):
-        ''' Broadcasts bpdu message to all ports.'''
+        ''' Broadcasts bpdu message to all ports.
+        
+        :return: None
+        '''
         self.message.send_message(self.id, "FFFF", "bpdu", {"root": \
                                                             self.root_id,
                                                             "cost":self.cost})
@@ -347,6 +367,8 @@ class Bridge(object):
         in the last 750 ms. If a neighbor has not sent a bpdu in the time
         period, then it sets self.failed_tree to True and record the time of
         the failure in self.time_tree_failed.
+        
+        :return: None
         '''
         new_neighbors = {}
         for neighbor in self.neighbor_time:
@@ -370,7 +392,10 @@ class Bridge(object):
 
 
     def update_routing_table(self):
-        ''' Update the routing table by dropping all entries older than 5s'''
+        ''' Update the routing table by dropping all entries older than 5s.
+        
+        :return: None
+        '''
         new_table = {}
         for host in self.routing_table:
             port_time = self.routing_table[host]
@@ -380,7 +405,10 @@ class Bridge(object):
 
 
     def update_port_history(self):
-        '''Update the port history by removing BPDUs older than 750ms.'''
+        '''Update the port history by removing BPDUs older than 750ms.
+        
+        :return: None
+        '''
         new_port_history = {}
         for port in self.port_history:
             new_port_history[port] = []
@@ -391,8 +419,11 @@ class Bridge(object):
         self.port_history = new_port_history
 
 
-    def update_enabled_ports(self, mode):
-        '''Updates the list of enabled ports.'''
+    def update_enabled_ports(self):
+        '''Updates the list of enabled ports.
+        
+        :return: None
+        '''
         # This is the root => all ports are enabled
         if self.root_id == self.id:
             for s in self.sockets:
@@ -414,7 +445,6 @@ class Bridge(object):
             if len(bpdus) == 0:
                 continue
             for message in bpdus:
-                json_obj = json.loads(message[0])
                 # some other bridge is designated for this LAN
                 if self.is_better_than_me(message[0]):
                     designated_bridge = False
@@ -436,13 +466,21 @@ class Bridge(object):
 
 
     def is_from_me(self, bpdu):
-        '''Check if the given BPDU was sent by self.'''
+        '''Check if the given BPDU was sent by self.
+        
+        :param bpdu: a message to check 
+        :return: boolean indicating whether the bpdu is from self
+        '''
         bpdu_dict = json.loads(bpdu)
         return bpdu_dict['source'] == self.id
 
 
     def __eq__(self, other):
-        """Overrides the default implementation of __eq__."""
+        """Overrides the default implementation of __eq__.
+        
+        :param other: another bridge
+        :return: boolean indicating whether this bridge is the same as other
+        """
         if isinstance(self, other.__class__):
             #return self.fileno() == other.fileno()
             return self.id  == other.id
@@ -450,7 +488,11 @@ class Bridge(object):
 
 
     def __ne__(self, other):
-        """Overrides the default implementation of __ne__."""
+        """Overrides the default implementation of __ne__.
+        
+        :param other: another bridge
+        :return: boolean indicating whether this bridge is different from other
+        """
         return not self.__eq__(other)
 
 
@@ -462,30 +504,50 @@ class My_Socket(socket.socket):
         #self.queue = queue.Queue
 
     def __eq__(self, other):
+        '''Overrides the default implementation of __eq__ for socket.
+        
+        :param other: the other object that needs to be compared to self
+        :return: True if the self and other are equivalent
+        '''
         if isinstance(self, other.__class__):
             return self.fileno() == other.fileno()
         return False
 
     def getpeername(self):
+        '''Returns the peername of the network to which this socket is
+        connected.
+        
+        :return: the peername of the network to which this socket is connected 
+        '''
         return super(My_Socket, self).getpeername()
 
 
     def fileno(self):
+        '''Returns the file number for this socket.
+        
+        :return: the file number for this socket
+        '''
         return super(My_Socket, self).fileno()
 
 
 
 class Message(object):
+    # all the sockets to which this message could be sent
     sockets = {}
-    id = 0
-
 
     def __init__(self, sockets):
         self.sockets = sockets
 
 
     def send_message(self, source, dest, type, message):
-        '''Packs and sends the message that was passed'''
+        ''' Packs and sends the message based on the given data
+        
+        :param source: the source for the message
+        :param dest: the destination for the message
+        :param type: the type of the message
+        :param message: the message itself
+        :return: None
+        '''
         if type == "bpdu": # broadcast
             m = {}
             m['source'] = source
@@ -499,26 +561,42 @@ class Message(object):
 
 
     def is_BPDU(self, json_str):
-        '''Returns True if the given json_str is a BPDU message.'''
+        '''Checks whether the given string is a BPDU message.
+        
+        :param json_str: a string which is the message that arrived
+        :return: True if the message is a BPDU, False otherwise
+        '''
         dict_message = json.loads(json_str)
         val = dict_message['type']
         return val == "bpdu"
 
 
     def gen_RN(self):
-        '''Returns a random number'''
+        '''Generates and returns a random number.
+        
+        :return: a random number
+        '''
         return random.choice('0123456789abcdef') + random.choice(
             '0123456789abcdef') + random.choice('0123456789abcdef') + \
                random.choice('0123456789abcdef')
 
 
     def set_ports(self, ports):
-        '''Sets self.sockets to the given ports.'''
+        '''Sets self.sockets to the given ports.
+        
+        :param ports: all the ports that this Message might send to
+        :return: None
+        '''
         self.sockets = ports
 
 
     def send(self, message, ports):
-        '''Sends the message on the given ports.'''
+        '''Sends the message on the given ports.
+        
+        :param message: the message that needs to be sent
+        :param ports: the ports to which the message needs to be sent
+        :return: None
+        '''
         for s in ports:
             s.send(message)
 
