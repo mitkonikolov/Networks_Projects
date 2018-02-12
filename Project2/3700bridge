@@ -78,6 +78,10 @@ class Bridge(object):
         # the time of the most recent broadcast
         last_mess_time = time.time() * 100
 
+        # keep a log of the incoming packets
+        f = open("out.txt", "w+")
+        f.close()
+
         while True:
             self.recover()
             self.check_for_failures()
@@ -99,7 +103,7 @@ class Bridge(object):
             for socket in ready:
                 data = socket.recv(1500)
                 # keep a log of the incoming packets
-                f = open("out.txt", "w+")
+                f = open("out.txt", "a")
                 f.write(data)
                 f.write("\n")
                 f.close()
