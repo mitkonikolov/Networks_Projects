@@ -81,7 +81,6 @@ class Bridge(object):
         # keep a log of the incoming packets and received messages
         f = open("out.txt", "w+")
         f.close()
-
         rec_mess = open("received_mess.txt", "w+")
         rec_mess.close()
 
