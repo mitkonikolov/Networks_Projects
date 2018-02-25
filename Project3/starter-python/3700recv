@@ -4,6 +4,7 @@
 # Project 2 Starter Code
 #
 
+
 import sys
 import socket
 import time
@@ -44,7 +45,7 @@ while True:
       # If the EOF flag is set, exit
       if (decoded['eof']):
         log("[completed]")
-        sys.exit(0)
+        #sys.exit(0)
 
       # If there is data, we accept it and print it out
       if (decoded['data']):
@@ -52,6 +53,7 @@ while True:
         # You will need to do much more here
         log("[recv data] " + str(decoded['sequence']) + " (" + str(len(decoded['data'])) + ") ACCEPTED (in-order)")
         sys.stdout.write(decoded['data'])
+        print(decoded['data'])
 
       # Send back an ack to the sender
       msg = json.dumps({"ack": decoded['sequence'] + len(decoded['data'])})
@@ -64,4 +66,4 @@ while True:
       raise e
   else:
     log("[error] timeout")
-    sys.exit(-1)
+    # sys.exit(-1)
