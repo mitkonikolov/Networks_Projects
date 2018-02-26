@@ -6,18 +6,19 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs36 \cf0 \
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Triggering transmission\
+\cf0 \
+Triggering transmission\
 	a. The receiver needs to identify the size of its window size in order to advertise it - generally this is defined by a buffer but in our case it might be based on bandwidth too - this needs further consideration\
 	b. The sender needs to identify an SWS (send window size) based on the min of the bandwidth and the advertised window\
 	c. The sender must know its effective window - can it send anything or is it waiting for ACKs\
 	d. The sender needs to identify an MSS - maximum segment size\
 	e. The sender needs to know when is the best time to send - Nagle\'92s Algorithm\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
+	f. The sender must maintain a current waiting time for each packet so that it knows when to timeout a specific packet\
+\
 \
 Retransmitting dropped packets\
+	a. Use Fast Retransmission: duplicate ACKs - always ACK the last packet before which everything else was received so we can know to resubmit some packet X earlier - this would need to also cancel to reset the timer on this packet X\
 	b. Adaptive retransmission - needed because RTT varies over time and routes - the sender needs to calculate its timeout using Karn/Partridge; this also includes exponential backoff when a timeout occurs\
 		- in order to implement Karn/Partridge, the sender needs to time each and every packet\
 \
@@ -36,10 +37,10 @@ Sliding Window\
 Packet structure\
 	a. Seq#\
 	b. Data\
-	c. TTL\
+	c. Flag - D - data,A - ACK,DA - Data & ACK\
 	d. AdvWindow\
-	e. ACK\
-	f. Error checking\
+	e. ACK - Seq#\
+	f. Error checking	\
 \
 \
 Notes\
