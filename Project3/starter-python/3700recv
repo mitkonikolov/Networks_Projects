@@ -4,15 +4,19 @@
 # Project 2 Starter Code
 #
 
+
 import sys
 import socket
 import time
 import datetime
 import select
 import json
+from Logger import Logger
 
 def log(string):
   sys.stderr.write(datetime.datetime.now().strftime("%H:%M:%S.%f") + " " + string + "\n")
+
+logger = Logger()
 
 MSG_SIZE = 1500
 TIMEOUT = 30
@@ -28,7 +32,7 @@ sock.settimeout(TIMEOUT)
 
 # Get port we bound to
 UDP_PORT = sock.getsockname()[1]
-log("[bound] " + str(UDP_PORT))
+logger.log("[bound] " + str(UDP_PORT))
 
 # Now listen for packets
 while True:
@@ -43,25 +47,26 @@ while True:
 
       # If the EOF flag is set, exit
       if (decoded['eof']):
-        log("[completed]")
+        logger.log("[completed]")
         sys.exit(0)
 
       # If there is data, we accept it and print it out
       if (decoded['data']):
         # If we receive data, we assume it's in-order
         # You will need to do much more here
-        log("[recv data] " + str(decoded['sequence']) + " (" + str(len(decoded['data'])) + ") ACCEPTED (in-order)")
+        logger.log("[recv data] " + str(decoded['sequence']) + " (" +
+            str(len(decoded['data'])) + ") ACCEPTED (in-order)")
         sys.stdout.write(decoded['data'])
 
       # Send back an ack to the sender
       msg = json.dumps({"ack": decoded['sequence'] + len(decoded['data'])})
-      log("ABOUT TO SEND " + msg)
+      logger.log("ABOUT TO SEND " + msg)
       if sock.sendto(msg, addr) < len(msg):
-        log("[error] unable to fully send packet")
+        logger.log("[error] unable to fully send packet")
 
     except (ValueError, KeyError, TypeError) as e:
-      log("[recv corrupt packet]")
+      logger.log("[recv corrupt packet]")
       raise e
   else:
-    log("[error] timeout")
+    logger.log("[error] timeout")
     sys.exit(-1)

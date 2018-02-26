@@ -1,0 +1,2 @@
+#!/bin/bash
+scp * mnikolov@login.ccs.neu.edu:cs3700/Projects/Networks_Projects/Project3/starter-python

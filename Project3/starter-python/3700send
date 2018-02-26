@@ -4,72 +4,109 @@
 # Project 2 Starter Code
 #
 
+
 import sys
 import socket
 import time
 import datetime
 import select
 import json
+from Logger import Logger
 
-MSG_SIZE = 1500
-DATA_SIZE = 1000
-TIMEOUT = 30
-SEQUENCE = 0
+class Sender(object):
+    logger = Logger()
 
-# Bind to localhost and an ephemeral port
-IP_PORT = sys.argv[1]
-UDP_IP = IP_PORT[0:IP_PORT.find(":")]
-UDP_PORT = int(IP_PORT[IP_PORT.find(":")+1:])
-dest = (UDP_IP, UDP_PORT)
+    time_last_sent = 0
+    curr_mess = ""
 
-# Set up the socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
-sock.settimeout(TIMEOUT)
+    MSG_SIZE = 1500
+    DATA_SIZE = 1000
+    TIMEOUT = 30
+    SEQUENCE = 0
 
-def log(string):
-  sys.stderr.write(datetime.datetime.now().strftime("%H:%M:%S.%f") + " " + string + "\n")
+    def __init__(self):
+        # Bind to localhost and an ephemeral port
+        self.IP_PORT = sys.argv[1]
+        self.UDP_IP = self.IP_PORT[0:self.IP_PORT.find(":")]
+        self.UDP_PORT = int(self.IP_PORT[self.IP_PORT.find(":")+1:])
+        self.dest = (self.UDP_IP, self.UDP_PORT)
 
-def send_next_packet():
-  global SEQUENCE
+        # Set up the socket
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock.settimeout(self.TIMEOUT)
 
-  data = sys.stdin.read(DATA_SIZE)
-  if (len(data) > 0):
-    msg = json.dumps({"sequence": SEQUENCE, "data": data, "ack": False, "eof": False})
-    SEQUENCE += len(data)
+        # set up the sending window size
+        self.sws = 5
+        # the seq# of the last sent packet
+        self.last_sent = 0
+        # the seq# of the last acknowledged
+        self.last_ack = 0
+        # map of seq# -> (time_sent, timeout) - could be ordered by timeout
+        self.packets_timers = {}
 
-    if sock.sendto(msg, dest) < len(msg):
-      log("[error] unable to fully send packet")
-    else:
-      log("[send data] " + str(SEQUENCE) + " (" + str(len(data)) + ")")
-    return True
-  else:
-    return False
 
-# Send first packet
-send_next_packet()
+    def send_next_packet(self, resending):
 
-# Now read in data, send packets
-while True:
-  log("ABOUT TO SLEEP")
-  result = sock.recvfrom(MSG_SIZE)
+        self.logger.log("inside packet sender")
 
-  if result:
-    (data, addr) = result
-    try:
-      decoded = json.loads(data)
+        if not resending:
+            data = sys.stdin.read(self.DATA_SIZE)
+            self.curr_mess = data
+        else:
+            data = self.curr_mess
 
-      # If there is an ack, send next packet
-      if decoded['ack'] == SEQUENCE:
-        log("[recv ack] " + str(SEQUENCE))
 
-        # Try to send next packet; break if no more data
-        if (not send_next_packet()):
-          break
-    except (ValueError, KeyError, TypeError):
-      log("[recv corrupt packet]")
-  else:
-    log("[error] timeout")
-    sys.exit(-1)
+        if (len(data) > 0):
+            self.logger.log("data is {}".format(data))
+            msg = json.dumps({"sequence": self.SEQUENCE, "data": data, "ack":
+                False, "eof": False})
+            self.SEQUENCE += len(data)
 
-sock.sendto(json.dumps({"eof": True, "data": "", "sequence": SEQUENCE, "ack": False}), dest)
-sys.exit(0)
+            self.logger.log("sending {}\n".format(msg))
+
+            if self.sock.sendto(msg, self.dest) < len(msg):
+                self.logger.log("[error] unable to fully send packet")
+            else:
+                time_last_sent = time.time()
+                self.logger.log("[send data] " + str(self.SEQUENCE) + " (" +
+                                str(len(data)) +
+                        ")")
+            return True
+        else:
+            # there is no more data to be sent
+            return False
+
+
+if __name__ == "__main__":
+    s = Sender()
+    # Send first packet
+    s.send_next_packet(False)
+
+
+    # Now read in data, send packets
+    while True:
+        s.logger.log("ABOUT TO SLEEP")
+
+        result = s.sock.recvfrom(s.MSG_SIZE)
+
+        if result:
+            (data, addr) = result
+            try:
+                decoded = json.loads(data)
+
+                # If there is an ack, send next packet
+                if decoded['ack'] == s.SEQUENCE:
+                    s.logger.log("[recv ack] " + str(s.SEQUENCE))
+
+                    # Try to send next packet; break if no more data
+                    if (not s.send_next_packet(False)):
+                        break
+            except (ValueError, KeyError, TypeError):
+                s.logger.log("[recv corrupt packet]")
+        else:
+            s.send_next_packet(True)
+
+
+    s.sock.sendto(json.dumps({"eof": True, "data": "", "sequence": s.SEQUENCE,
+                            "ack": False}), s.dest)
+    sys.exit(0)
