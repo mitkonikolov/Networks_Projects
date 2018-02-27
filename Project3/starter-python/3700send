@@ -22,7 +22,6 @@ class Sender(object):
     prev_packet = None
 
     time_last_sent = 0
-    curr_mess = ""
 
     MSG_SIZE = 1500
     DATA_SIZE = 1000
@@ -49,7 +48,7 @@ class Sender(object):
         :param packet: the packet to be retransmitted
         :return: bool
         """
-        packet.sendPacket(self.sock, self.dest, eof)
+        packet.send_packet(self.sock, self.dest, eof)
 
     def send_next_packet(self, eof = False, data = None):
 
@@ -58,41 +57,28 @@ class Sender(object):
         if data is None:
             data = sys.stdin.read(self.DATA_SIZE)
 
-        # TODO
-        self.curr_mess = data
-
-
         if (len(data) > 0):
 
+            self.logger.log("data is {}".format(data))
+
+            # if we're sending the first packet
             if self.prev_packet is None:
                 self.packet = Packet(data, "data", "")
             else:
                 self.packet = Packet(data, "data", "", self.prev_packet.get_seq_num())
 
             # returns the time sent of the packet if success, -1 otherwise
-            result = self.packet.sendPacket(self.sock, self.dest, eof)
+            packet_sent_time = self.packet.send_packet(self.sock, self.dest, eof)
 
-            if result == -1:
+            # if failed sending the packet
+            if packet_sent_time == -1:
                 self.retransmit(self.packet)
                 return
             else:
-                self.packet_log.add_to_log(self.packet, result)
+                # once successfully sent, we add packet to log and saves its sent_time
+                self.packet_log.add_to_log(self.packet, packet_sent_time)
                 self.prev_packet = self.packet
 
-            self.logger.log("data is {}".format(data))
-            msg = json.dumps({"sequence": self.SEQUENCE, "data": data, "ack":
-                False, "eof": False})
-            self.SEQUENCE += len(data)
-
-            self.logger.log("sending {}\n".format(msg))
-
-            if self.sock.sendto(msg, self.dest) < len(msg):
-                self.logger.log("[error] unable to fully send packet")
-            else:
-                time_last_sent = time.time()
-                self.logger.log("[send data] " + str(self.SEQUENCE) + " (" +
-                                str(len(data)) +
-                        ")")
             return True
         else:
             # there is no more data to be sent
@@ -102,7 +88,6 @@ if __name__ == "__main__":
     s = Sender()
     # Send first packet
     s.send_next_packet()
-
 
     # Now read in data, send packets
     while True:

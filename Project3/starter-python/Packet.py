@@ -109,13 +109,15 @@ class Packet(object):
             "flag": self.flag
         })
 
-    def sendPacket(self, sock, dest, eof):
+    def send_packet(self, sock, dest, eof):
         """ Sends this packet (self) using the given sock to the given dest.
         :param sock: the socket to use
         :param dest: the address is a pair (hostaddr, port)
         :return: the time it sends the packet
         """
         msg = self.generateData(eof)
+
+        self.logger.log("sending {}\n".format(msg))
 
         if sock.sendto(msg, dest) < len(msg):
             self.logger.log("[error] unable to fully send packet")
