@@ -19,10 +19,19 @@ class PacketLog(object):
         self.last_ack = 0
 
     def add_to_log(self, packet, time):
+        """ Adds a packet to self.packets_timers
+        :param packet: the packet to add
+        :param time: the sent time for the packet
+        :return: None
+        """
         if self.sws > 0:
             self.packets_timers[packet.get_seq_num()] = (packet, time)
 
     def retransmit_table(self):
+        """ Goes through self.packets_timers and checks which packet has timed out.
+        And compiles a list of timed out packets
+        :return: a list of timed out packets
+        """
         out = []
         for packet in self.packets_timers:
             if time.time() - self.packets_timers[packet][1] > self.timeout:
@@ -30,15 +39,30 @@ class PacketLog(object):
         return out
 
     def get_timeout(self):
+        """ Getting for timeout
+        :return: self.timeout
+        """
         return self.timeout
 
     def get_sws(self):
+        """ Getting for sws
+        :return: self.sws
+        """
         return self.sws
 
     def update_sws(self, offset):
+        """ Update the sending window size
+        :param offset: integer by which to change sws
+        :return: None
+        """
         self.sws += offset
 
     def update_unacked_packets(self, ack):
+        """ Remove all the acked packets from the packets_timers table.
+        Also updates the lask_ack and dup_acks
+        :param ack: the ack we just received
+        :return: the packet that needs to retransmitted or None
+        """
         out = {}
 
         if self.last_ack == ack:
