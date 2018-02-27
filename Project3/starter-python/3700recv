@@ -16,57 +16,63 @@ from Logger import Logger
 def log(string):
   sys.stderr.write(datetime.datetime.now().strftime("%H:%M:%S.%f") + " " + string + "\n")
 
-logger = Logger()
+class Receiver(object):
 
-MSG_SIZE = 1500
-TIMEOUT = 30
+  logger = Logger()
 
-# Bind to localhost and an ephemeral port
-UDP_IP = "127.0.0.1"
-UDP_PORT = 0
+  MSG_SIZE = 1500
+  TIMEOUT = 2
 
-# Set up the socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
-sock.bind((UDP_IP, UDP_PORT))
-sock.settimeout(TIMEOUT)
+  # Bind to localhost and an ephemeral port
+  UDP_IP = "127.0.0.1"
+  UDP_PORT = 0
 
-# Get port we bound to
-UDP_PORT = sock.getsockname()[1]
-logger.log("[bound] " + str(UDP_PORT))
+  # Set up the socket
+  sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+  sock.bind((UDP_IP, UDP_PORT))
+  sock.settimeout(TIMEOUT)
 
-# Now listen for packets
-while True:
-  result = sock.recvfrom(MSG_SIZE)
+  # Get port we bound to
+  UDP_PORT = sock.getsockname()[1]
+  logger.log("[bound] " + str(UDP_PORT))
 
-  # If nothing is ready, we hit the timeout
-  if result:
-    (data, addr) = result
 
-    try:
-      decoded = json.loads(data)
+if __name__ == "__main__":
+  r = Receiver()
 
-      # If the EOF flag is set, exit
-      if (decoded['eof']):
-        logger.log("[completed]")
-        sys.exit(0)
+  # Now listen for packets
+  while True:
+    result = r.sock.recvfrom(r.MSG_SIZE)
 
-      # If there is data, we accept it and print it out
-      if (decoded['data']):
-        # If we receive data, we assume it's in-order
-        # You will need to do much more here
-        logger.log("[recv data] " + str(decoded['sequence']) + " (" +
-            str(len(decoded['data'])) + ") ACCEPTED (in-order)")
-        sys.stdout.write(decoded['data'])
+    # If nothing is ready, we hit the timeout
+    if result:
+      (data, addr) = result
 
-      # Send back an ack to the sender
-      msg = json.dumps({"ack": decoded['sequence'] + len(decoded['data'])})
-      logger.log("ABOUT TO SEND " + msg)
-      if sock.sendto(msg, addr) < len(msg):
-        logger.log("[error] unable to fully send packet")
+      try:
+        decoded = json.loads(data)
 
-    except (ValueError, KeyError, TypeError) as e:
-      logger.log("[recv corrupt packet]")
-      raise e
-  else:
-    logger.log("[error] timeout")
-    sys.exit(-1)
+        # If the EOF flag is set, exit
+        if (decoded['eof']):
+          r.logger.log("[completed]")
+          sys.exit(0)
+
+        # If there is data, we accept it and print it out
+        if (decoded['data']):
+          # If we receive data, we assume it's in-order
+          # You will need to do much more here
+          r.logger.log("[recv data] " + str(decoded['sequence']) + " (" +
+              str(len(decoded['data'])) + ") ACCEPTED (in-order)")
+          sys.stdout.write(decoded['data'])
+
+        # Send back an ack to the sender
+        msg = json.dumps({"ack": decoded['sequence'] + len(decoded['data'])})
+        r.logger.log("ABOUT TO SEND " + msg)
+        if r.sock.sendto(msg, addr) < len(msg):
+          r.logger.log("[error] unable to fully send packet")
+
+      except (ValueError, KeyError, TypeError) as e:
+        r.logger.log("[recv corrupt packet]")
+        raise e
+    else:
+      r.logger.log("[error] timeout")
+      sys.exit(-1)

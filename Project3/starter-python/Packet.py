@@ -3,6 +3,8 @@
 import random
 import zlib
 from Logger import Logger
+import time
+import json
 
 
 class Packet(object):
@@ -11,7 +13,7 @@ class Packet(object):
     MSG_SIZE = 1500
 
 
-    def __init__(self, data, flag, ack_num, error_checking, prev_seq_num=None):
+    def __init__(self, data, flag, ack_num, prev_seq_num=None):
         '''If prev_seq_num is not passed, the constructor is used for creating 
         the first packet to ever be sent.
         
@@ -32,7 +34,6 @@ class Packet(object):
             ack - the packet only acknowledges data
             dack - the packet sends and acknowledges data in the same time
         :param ack_num: an int sequence number of the packet being ACKed
-        :param error_checking: a number for cyclic redundancy check
         :return: None
         :param prev_seq_num: an int sequence number of the previous sent 
         packet or the sequence number of the packet that is being acknowledged
@@ -54,7 +55,7 @@ class Packet(object):
         self.data = data
         self.flag = flag
         self.ack_num = ack_num
-        self.error_checking = error_checking
+        self.crc32 = self.__calculate_checksum()
 
 
     def gen_random_seq_num(self):
@@ -97,3 +98,42 @@ class Packet(object):
 
     def __calculate_checksum(self):
         hex(zlib.crc32(self.data) & 0xffffffff)
+
+    def generateData(self, eof = False):
+        return json.dumps({
+            "sequence": self.seq_num,
+            "data": self.data,
+            "crc32": self.crc32,
+            "ack": self.ack_num,
+            "eof": eof,
+            "flag": self.flag
+        })
+
+    def sendPacket(self, sock, dest, eof):
+        """ Sends this packet (self) using the given sock to the given dest.
+        :param sock: the socket to use
+        :param dest: the address is a pair (hostaddr, port)
+        :return: the time it sends the packet
+        """
+        msg = self.generateData(eof)
+
+        if sock.sendto(msg, dest) < len(msg):
+            self.logger.log("[error] unable to fully send packet")
+            return -1
+        else:
+            self.logger.log("[send data] " + str(self.seq_num) + " (" +
+                            str(len(self.data)) +
+                            ")")
+        return time.time()
+
+    def check_ack(self, data):
+
+        try:
+            decoded = json.loads(data)
+            if decoded["flag"] == "ack" and decoded['ack'] == decoded['sequence']:
+                self.logger.log("[recv ack] " + decoded['sequence'])
+                return decoded['ack']
+        except (ValueError, KeyError, TypeError):
+            pass
+        self.logger.log("[recv corrupt packet]")
+        return False

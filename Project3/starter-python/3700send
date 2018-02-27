@@ -12,16 +12,20 @@ import datetime
 import select
 import json
 from Logger import Logger
+from Packet import Packet
+from PacketLog import PacketLog
 
 class Sender(object):
     logger = Logger()
+    packet = None
+    packet_log = PacketLog()
+    prev_packet = None
 
     time_last_sent = 0
     curr_mess = ""
 
     MSG_SIZE = 1500
     DATA_SIZE = 1000
-    TIMEOUT = 30
     SEQUENCE = 0
 
     def __init__(self):
@@ -33,30 +37,48 @@ class Sender(object):
 
         # Set up the socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.sock.settimeout(self.TIMEOUT)
+        self.sock.settimeout(self.packet_log.get_timeout())
 
-        # set up the sending window size
-        self.sws = 5
         # the seq# of the last sent packet
         self.last_sent = 0
         # the seq# of the last acknowledged
-        self.last_ack = 0
-        # map of seq# -> (time_sent, timeout) - could be ordered by timeout
-        self.packets_timers = {}
+        # self.last_ack = 0
 
+    def retransmit(self, packet, eof = False):
+        """ Retransmits the packet.
+        :param packet: the packet to be retransmitted
+        :return: bool
+        """
+        packet.sendPacket(self.sock, self.dest, eof)
 
-    def send_next_packet(self, resending):
+    def send_next_packet(self, eof = False, data = None):
 
         self.logger.log("inside packet sender")
 
-        if not resending:
+        if data is None:
             data = sys.stdin.read(self.DATA_SIZE)
-            self.curr_mess = data
-        else:
-            data = self.curr_mess
+
+        # TODO
+        self.curr_mess = data
 
 
         if (len(data) > 0):
+
+            if self.prev_packet is None:
+                self.packet = Packet(data, "data", "")
+            else:
+                self.packet = Packet(data, "data", "", self.prev_packet.get_seq_num())
+
+            # returns the time sent of the packet if success, -1 otherwise
+            result = self.packet.sendPacket(self.sock, self.dest, eof)
+
+            if result == -1:
+                self.retransmit(self.packet)
+                return
+            else:
+                self.packet_log.add_to_log(self.packet, result)
+                self.prev_packet = self.packet
+
             self.logger.log("data is {}".format(data))
             msg = json.dumps({"sequence": self.SEQUENCE, "data": data, "ack":
                 False, "eof": False})
@@ -76,37 +98,38 @@ class Sender(object):
             # there is no more data to be sent
             return False
 
-
 if __name__ == "__main__":
     s = Sender()
     # Send first packet
-    s.send_next_packet(False)
+    s.send_next_packet()
 
 
     # Now read in data, send packets
     while True:
         s.logger.log("ABOUT TO SLEEP")
 
-        result = s.sock.recvfrom(s.MSG_SIZE)
-
-        if result:
-            (data, addr) = result
-            try:
-                decoded = json.loads(data)
-
-                # If there is an ack, send next packet
-                if decoded['ack'] == s.SEQUENCE:
-                    s.logger.log("[recv ack] " + str(s.SEQUENCE))
-
-                    # Try to send next packet; break if no more data
-                    if (not s.send_next_packet(False)):
-                        break
-            except (ValueError, KeyError, TypeError):
-                s.logger.log("[recv corrupt packet]")
+        if s.packet_log.get_sws() > 0:
+            if s.send_next_packet():
+                s.packet_log.update_sws(-1)
+            else:
+                break
         else:
-            s.send_next_packet(True)
+            result = s.sock.recvfrom(s.MSG_SIZE)
 
+            if result:
 
-    s.sock.sendto(json.dumps({"eof": True, "data": "", "sequence": s.SEQUENCE,
-                            "ack": False}), s.dest)
+                (data, addr) = result
+
+                ack = s.packet.check_ack(data)
+
+                if ack:
+                    dropped_packet = s.packet_log.update_unacked_packets(ack)
+                    if dropped_packet is not None:
+                        s.retransmit(dropped_packet)
+
+            else:
+                for packet in s.packet_log.retransmit_table():
+                    s.retransmit(packet)
+
+    s.send_next_packet(True, "")
     sys.exit(0)
