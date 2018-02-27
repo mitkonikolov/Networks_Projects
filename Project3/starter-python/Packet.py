@@ -67,7 +67,7 @@ class Packet(object):
         while True:
             random_num = random.choice('0123456789') + random.choice(
                 '0123456789') + random.choice('0123456789') + \
-                   random.choice('0123456789')
+                         random.choice('0123456789')
             if random_num != 0:
                 break
         self.seq_num = int(random_num)
@@ -109,7 +109,7 @@ class Packet(object):
             "flag": self.flag
         })
 
-    def send_packet(self, sock, dest, eof):
+    def send_packet(self, sock, dest, eof = False):
         """ Sends this packet (self) using the given sock to the given dest.
         :param sock: the socket to use
         :param dest: the address is a pair (hostaddr, port)

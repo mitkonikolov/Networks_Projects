@@ -21,14 +21,14 @@ class Receiver(object):
   logger = Logger()
 
   MSG_SIZE = 1500
-  TIMEOUT = 2
+  TIMEOUT = 5
 
   # Bind to localhost and an ephemeral port
   UDP_IP = "127.0.0.1"
   UDP_PORT = 0
 
   # Set up the socket
-  sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+  sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   sock.bind((UDP_IP, UDP_PORT))
   sock.settimeout(TIMEOUT)
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
           # If we receive data, we assume it's in-order
           # You will need to do much more here
           r.logger.log("[recv data] " + str(decoded['sequence']) + " (" +
-              str(len(decoded['data'])) + ") ACCEPTED (in-order)")
+                       str(len(decoded['data'])) + ") ACCEPTED (in-order)")
           sys.stdout.write(decoded['data'])
 
         # Send back an ack to the sender

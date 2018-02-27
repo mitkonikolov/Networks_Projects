@@ -5,15 +5,23 @@ import time
 
 class PacketLog(object):
 
-    def __init_(self, sws = 5, timeout =  2):
+    # TODO add comments
+    sws = 5
+    timeout = 2
+    packets_timers = {}
+    dup_acks = 0
+    last_ack = 0
+
+    # def __init_(self, sws = 5, timeout = 5):
+    def __init_(self):
         # map of seq# -> (packet, time_sent)
-        self.packets_timers = {}
+        # self.packets_timers = {}
 
         # sending window size
-        self.sws = sws
+        # self.sws = sws
 
         # timeout of a packet
-        self.timeout = timeout
+        # self.timeout = timeout
 
         self.dup_acks = 0
         self.last_ack = 0
@@ -67,7 +75,7 @@ class PacketLog(object):
 
         if self.last_ack == ack:
             self.dup_acks += 1
-            if self.dup_acks >=3 :
+            if self.dup_acks >= 3 :
                 return self.packets_timers[ack + 1][0]
 
         for key in self.packets_timers:
