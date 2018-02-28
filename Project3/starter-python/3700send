@@ -15,6 +15,7 @@ from Logger import Logger
 from Packet import Packet
 from PacketLog import PacketLog
 
+
 class Sender(object):
     logger = Logger()
     packet = None
@@ -48,6 +49,7 @@ class Sender(object):
         :param packet: the packet to be retransmitted
         :return: bool
         """
+        self.logger.log("retransmitting: {}".format(packet.seq_num))
         packet.send_packet(self.sock, self.dest, eof)
 
     def send_next_packet(self, eof = False, data = None):
@@ -72,6 +74,9 @@ class Sender(object):
 
             # if failed sending the packet
             if packet_sent_time == -1:
+                # TODO: this is not getting hit when sender does not get any acks
+                # something might be wrong with `update_unacked_packets`?
+                s.logger.log("failed sending a packet, resending...")
                 self.retransmit(self.packet)
                 return
             else:
@@ -94,14 +99,13 @@ class Sender(object):
 
 if __name__ == "__main__":
     s = Sender()
-    # Send first packet
-    s.send_next_packet()
 
     # Now read in data, send packets
     while True:
         s.logger.log("ABOUT TO SLEEP")
 
         if s.packet_log.get_sws() > 0:
+            s.logger.log("sws is {}".format(s.packet_log.get_sws()))
             if s.send_next_packet():
                 s.packet_log.update_sws(-1)
             else:
@@ -111,15 +115,16 @@ if __name__ == "__main__":
 
             if result:
 
-                (data, addr) = result
+                (raw_data, addr) = result
                 receival_time = time.time()
 
-                ack = s.packet.check_ack(data)
+                ack = s.packet.check_ack(raw_data)
 
                 if ack:
                     dropped_packet = s.packet_log.update_unacked_packets(ack, receival_time)
                     # a packet has been dropped
                     if dropped_packet is not None:
+                        s.logger.log("one or more packets are not getting acked, retransmitting those packets...")
                         s.retransmit(dropped_packet)
                     # packets were sent successfully and timeout needs to be
                     # updated based on latest sampleRTT

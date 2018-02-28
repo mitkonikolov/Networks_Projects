@@ -55,7 +55,7 @@ class Packet(object):
         self.data = data
         self.flag = flag
         self.ack_num = ack_num
-        self.crc32 = self.__calculate_checksum()
+        self.crc32 = self.__calculate_checksum(data)
 
 
     def gen_random_seq_num(self):
@@ -96,9 +96,7 @@ class Packet(object):
         if old_seq_num > self.seq_num:
             self.gen_random_seq_num()
 
-    def __calculate_checksum(self, data = None):
-        if data is None:
-            data = self.data
+    def __calculate_checksum(self, data):
         return hex(zlib.crc32(data) & 0xffffffff)
 
     def generateData(self, eof = False):
@@ -130,13 +128,13 @@ class Packet(object):
                             ")")
         return time.time()
 
-    def check_ack(self, data):
+    def check_ack(self, raw_data):
         try:
-            decoded = json.loads(data)
-            self.logger.log("the received ack is {}".format(decoded))
+            decoded = json.loads(raw_data)
+            self.logger.log("the received ack is {}".format(json.dumps(decoded)))
 
-            if not self.check_ack(data):
-                self.logger.log("invalid crc for ack")
+            # check if it's good data using crc
+            if self.is_good_crc(decoded["crc32"], decoded["data"]):
                 return False
 
             if decoded["flag"] == "ack" and decoded["ack"] == decoded["sequence"]:
@@ -148,18 +146,10 @@ class Packet(object):
         self.logger.log("[recv corrupt packet]")
         return False
 
-    def check_crc(self, data):
-        try:
-            decoded = json.loads(data)
-
-            # check if the given crc matches with the data itself
-            calculated_checksum = self.__calculate_checksum(data)
-            good_packet = decoded["crc32"] == calculated_checksum
-            if not good_packet:
-                self.logger.log("packet is corrupted, given: {}, calculated: {}"
-                                .format(decoded["crc32"], calculated_checksum))
-            return good_packet
-        except (ValueError, KeyError, TypeError):
-            self.logger.log("error decoding json while checking crc")
-            return False
-            pass
+    def is_good_crc(self, decoded_crc, decoded_data):
+        calculated_crc = self.__calculate_checksum(decoded_data)
+        out = decoded_crc == calculated_crc
+        if not out:
+            self.logger.log("invalid crc for ack, received {} but calculated {}"
+                            .format(decoded_crc, calculated_crc))
+        return out

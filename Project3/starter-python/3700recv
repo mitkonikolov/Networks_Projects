@@ -12,10 +12,12 @@ import datetime
 import select
 import json
 from Logger import Logger
+from Packet import Packet
+
 
 class Receiver(object):
-
     logger = Logger()
+    packet = None
 
     MSG_SIZE = 1500
     TIMEOUT = 5
@@ -48,12 +50,25 @@ if __name__ == "__main__":
             try:
                 decoded = json.loads(data)
 
+                # creating a packet object only for checking crc32
+                r.packet = Packet(decoded["data"], "data", "")
+
+                # TODO:
+                # note, check sender's todo, if this fails (bad data, crc no match),
+                # we continue (and keeping waiting until time out), but the sender should resend the
+                # packet after 2 seconds (timeout for packetlog), currently the sender is not doing
+                # that. Fix that.
+                if not r.packet.is_good_crc(decoded["crc32"], decoded["data"]):
+                    r.logger.log("bad crc")
+                    continue
+
                 # If the EOF flag is set, exit
                 if (decoded['eof']):
                     r.logger.log("[completed]")
                     sys.exit(0)
 
                 # If there is data, we accept it and print it out
+                # TODO: change this to make sure we're printing in order
                 if (decoded['data']):
                     # If we receive data, we assume it's in-order
                     # You will need to do much more here
@@ -62,20 +77,21 @@ if __name__ == "__main__":
                     r.logger.log_data(decoded['data'])
 
                 # Send back an ack to the sender
-                # msg = json.dumps({"ack": decoded['sequence'] + len(decoded['data'])})
-                msg = json.dumps({"ack": decoded['sequence'],
-                                  "flag": "ack"})
-                msg = json.dumps({
-                    "sequence": decoded["sequence"],
-                    "data": "",
-                    "crc32": "",
-                    "ack": decoded["sequence"],
-                    "eof": False,
-                    "flag": "ack"
-                })
-                r.logger.log("ABOUT TO SEND " + msg)
-                if r.sock.sendto(msg, addr) < len(msg):
-                    r.logger.log("[error] unable to fully send packet")
+
+                # construct the ack for the data packet that we just received
+                # TODO: add the correct ack_num and prev_seq_num (not sure how this works)
+                r.packet = Packet("", "ack", decoded["sequence"])
+
+                r.logger.log("ABOUT TO SEND " + r.packet.generateData())
+
+                packet_sent_time = r.packet.send_packet(r.sock, addr)
+
+                # currently not doing anything to packet_sent_time
+                if packet_sent_time == -1:
+                    r.logger.log("failed sending ack")
+                    continue
+                else:
+                    r.logger.log("successfully sent an ack")
 
             except (ValueError, KeyError, TypeError) as e:
                 r.logger.log("[recv corrupt packet]")
