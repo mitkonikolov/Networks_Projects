@@ -134,11 +134,17 @@ class Packet(object):
         try:
             decoded = json.loads(data)
             self.logger.log("the received ack is {}".format(decoded))
+
+            if not self.check_ack(data):
+                self.logger.log("invalid crc for ack")
+                return False
+
             if decoded["flag"] == "ack" and decoded["ack"] == decoded["sequence"]:
                 self.logger.log("[recv ack] " + decoded['sequence'])
                 return decoded['ack']
         except (ValueError, KeyError, TypeError):
             pass
+
         self.logger.log("[recv corrupt packet]")
         return False
 

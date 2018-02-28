@@ -117,8 +117,7 @@ if __name__ == "__main__":
                 ack = s.packet.check_ack(data)
 
                 if ack:
-                    dropped_packet = s.packet_log.update_unacked_packets(ack,
-                        receival_time)
+                    dropped_packet = s.packet_log.update_unacked_packets(ack, receival_time)
                     # a packet has been dropped
                     if dropped_packet is not None:
                         s.retransmit(dropped_packet)
