@@ -74,8 +74,6 @@ class Sender(object):
 
             # if failed sending the packet
             if packet_sent_time == -1:
-                # TODO: this is not getting hit when sender does not get any acks
-                # something might be wrong with `update_unacked_packets`?
                 s.logger.log("failed sending a packet, resending...")
                 self.retransmit(self.packet)
                 return
@@ -124,6 +122,8 @@ if __name__ == "__main__":
                     dropped_packet = s.packet_log.update_unacked_packets(ack, receival_time)
                     # a packet has been dropped
                     if dropped_packet is not None:
+                        # TODO: this is not getting hit when sender does not get any acks
+                        # something might be wrong with `update_unacked_packets`?
                         s.logger.log("one or more packets are not getting acked, retransmitting those packets...")
                         s.retransmit(dropped_packet)
                     # packets were sent successfully and timeout needs to be
