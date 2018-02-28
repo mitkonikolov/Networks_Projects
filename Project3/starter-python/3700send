@@ -92,7 +92,6 @@ class Sender(object):
         self.sock.settimeout(self.packet_log.get_timeout())
 
 
-
 if __name__ == "__main__":
     s = Sender()
     # Send first packet

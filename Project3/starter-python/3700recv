@@ -13,9 +13,6 @@ import select
 import json
 from Logger import Logger
 
-def log(string):
-    sys.stderr.write(datetime.datetime.now().strftime("%H:%M:%S.%f") + " " + string + "\n")
-
 class Receiver(object):
 
     logger = Logger()
@@ -62,7 +59,7 @@ if __name__ == "__main__":
                     # You will need to do much more here
                     r.logger.log("[recv data] " + str(decoded['sequence']) + " (" +
                                  str(len(decoded['data'])) + ") ACCEPTED (in-order)")
-                    sys.stdout.write(decoded['data'])
+                    r.logger.log_data(decoded['data'])
 
                 # Send back an ack to the sender
                 # msg = json.dumps({"ack": decoded['sequence'] + len(decoded['data'])})
