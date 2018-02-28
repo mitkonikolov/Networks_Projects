@@ -96,8 +96,10 @@ class Packet(object):
         if old_seq_num > self.seq_num:
             self.gen_random_seq_num()
 
-    def __calculate_checksum(self):
-        hex(zlib.crc32(self.data) & 0xffffffff)
+    def __calculate_checksum(self, data = None):
+        if data is None:
+            data = self.data
+        return hex(zlib.crc32(data) & 0xffffffff)
 
     def generateData(self, eof = False):
         return json.dumps({
@@ -129,7 +131,6 @@ class Packet(object):
         return time.time()
 
     def check_ack(self, data):
-
         try:
             decoded = json.loads(data)
             self.logger.log("the received ack is {}".format(decoded))
@@ -140,3 +141,19 @@ class Packet(object):
             pass
         self.logger.log("[recv corrupt packet]")
         return False
+
+    def check_crc(self, data):
+        try:
+            decoded = json.loads(data)
+
+            # check if the given crc matches with the data itself
+            calculated_checksum = self.__calculate_checksum(data)
+            good_packet = decoded["crc32"] == calculated_checksum
+            if not good_packet:
+                self.logger.log("packet is corrupted, given: {}, calculated: {}"
+                                .format(decoded["crc32"], calculated_checksum))
+            return good_packet
+        except (ValueError, KeyError, TypeError):
+            self.logger.log("error decoding json while checking crc")
+            return False
+            pass
