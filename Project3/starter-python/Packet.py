@@ -132,7 +132,8 @@ class Packet(object):
 
         try:
             decoded = json.loads(data)
-            if decoded["flag"] == "ack" and decoded['ack'] == decoded['sequence']:
+            self.logger.log("the received ack is {}".format(decoded))
+            if decoded["flag"] == "ack" and decoded["ack"] == decoded["sequence"]:
                 self.logger.log("[recv ack] " + decoded['sequence'])
                 return decoded['ack']
         except (ValueError, KeyError, TypeError):
