@@ -7,7 +7,7 @@ class PacketLog(object):
 
     # TODO add comments
     # sending window size
-    sws = 5
+    sws = 30
     # timeout value
     timeout = 2
     # map of seq# -> (packet, time_sent)
@@ -73,15 +73,16 @@ class PacketLog(object):
         """
         out = {}
 
-        # this is a duplicate ACK
-        if self.last_ack == ack:
-            self.dup_acks += 1
-            if self.dup_acks >= 3 :
-                return self.packets_timers[ack + 1][0]
+        # this is a duplicate ACK - for now do not rely on duplicate ACKs
+        # because we need to find out what is the first seq_num to do this
+        # if self.last_ack == ack:
+        #     self.dup_acks += 1
+        #     if self.dup_acks >= 3 :
+        #         return self.packets_timers[ack + 1][0]
 
         for key in self.packets_timers:
             # this packet is not being ACKed
-            if key > int(ack):
+            if key != int(ack):
                 out[key] = self.packets_timers[key]
             # this packet is being ACKed
             else:
@@ -90,7 +91,10 @@ class PacketLog(object):
                 self.sws += 1
                 sampleRTT = receival_time - self.packets_timers[key][1]
                 self.augment_timeout(sampleRTT)
-        return None
+        # keep only the unACKed packets in the dictionary
+        self.packets_timers = out
+        # check if any packets have expired
+        return self.retransmit_table()
 
     def augment_timeout(self, sampleRTT, exp_back_off=False):
         """It updates the timeout value using the given sampleRTT in seconds
@@ -103,3 +107,11 @@ class PacketLog(object):
             self.timeout += self.timeout
         else:
             self.timeout = self.alpha*self.timeout + (1-self.alpha)*sampleRTT
+
+    def still_waiting_acks(self):
+        """ Returns True if there are still ACKs that are being waited on.
+        
+        :return: bool indicating whether there are ACKs that are still being
+        waited on
+        """
+        return len(self.packets_timers) != 0

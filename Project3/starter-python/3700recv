@@ -13,14 +13,13 @@ import select
 import json
 from Logger import Logger
 from Packet import Packet
+from PacketLog import PacketLog
 
 
 class Receiver(object):
     logger = Logger()
-    packet = None
-
-    MSG_SIZE = 1500
-    TIMEOUT = 5
+    packet = Packet("", "ack", 0, 0)
+    packet_log = PacketLog()
 
     # Bind to localhost and an ephemeral port
     UDP_IP = "127.0.0.1"
@@ -29,7 +28,7 @@ class Receiver(object):
     # Set up the socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((UDP_IP, UDP_PORT))
-    sock.settimeout(TIMEOUT)
+    sock.settimeout(packet_log.get_timeout())
 
     # Get port we bound to
     UDP_PORT = sock.getsockname()[1]
@@ -41,7 +40,7 @@ if __name__ == "__main__":
 
     # Now listen for packets
     while True:
-        result = r.sock.recvfrom(r.MSG_SIZE)
+        result = r.sock.recvfrom(r.packet.get_msg_size())
 
         # If nothing is ready, we hit the timeout
         if result:
@@ -58,6 +57,8 @@ if __name__ == "__main__":
                 # we continue (and keeping waiting until time out), but the sender should resend the
                 # packet after 2 seconds (timeout for packetlog), currently the sender is not doing
                 # that. Fix that.
+
+                # corrupted files
                 if not r.packet.is_good_crc(decoded["crc32"], decoded["data"]):
                     r.logger.log("bad crc")
                     continue
@@ -79,8 +80,8 @@ if __name__ == "__main__":
                 # Send back an ack to the sender
 
                 # construct the ack for the data packet that we just received
-                # TODO: add the correct ack_num and prev_seq_num (not sure how this works)
-                r.packet = Packet("", "ack", decoded["sequence"])
+                r.packet = Packet("", "ack", decoded['sequence'],
+                                  int(decoded['sequence']))
 
                 r.logger.log("ABOUT TO SEND " + r.packet.generateData())
 
@@ -99,4 +100,4 @@ if __name__ == "__main__":
                 raise e
         else:
             r.logger.log("[error] timeout")
-            sys.exit(-1)
+            #sys.exit(-1)

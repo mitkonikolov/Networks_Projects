@@ -107,7 +107,9 @@ if __name__ == "__main__":
             if s.send_next_packet():
                 s.packet_log.update_sws(-1)
             else:
-                break
+                # check if all packets have been ACKed first
+                if True or not s.packet_log.still_waiting_acks():
+                    break
         else:
             result = s.sock.recvfrom(s.MSG_SIZE)
 

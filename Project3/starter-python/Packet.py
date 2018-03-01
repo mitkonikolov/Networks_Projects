@@ -33,6 +33,7 @@ class Packet(object):
             data - the packet only sends data
             ack - the packet only acknowledges data
             dack - the packet sends and acknowledges data in the same time
+            dack - the packet sends and acknowledges data in the same time
         :param ack_num: an int sequence number of the packet being ACKed
         :return: None
         :param prev_seq_num: an int sequence number of the previous sent 
@@ -97,7 +98,21 @@ class Packet(object):
             self.gen_random_seq_num()
 
     def __calculate_checksum(self, data):
-        return hex(zlib.crc32(data) & 0xffffffff)
+        """Calculates the checksum on the given data. Because it works with
+        binary data, the string (which is unicode by default) needs to be turned
+        into binary.
+        
+        :param data: the str for which to calculate checksum 
+        :return: None
+        """
+        return hex(zlib.crc32(data.encode()) & 0xffffffff)
+
+    def get_checksum(self):
+        """ Getter for crc32.
+        
+        :return: self.crc32
+        """
+        return self.crc32
 
     def generateData(self, eof = False):
         return json.dumps({
@@ -130,26 +145,61 @@ class Packet(object):
 
     def check_ack(self, raw_data):
         try:
+            self.logger.log("raw data {}\n".format(raw_data))
             decoded = json.loads(raw_data)
+            #decoded = raw_data
+            #decoded = json.dumps(raw_data)
+            self.logger.log("decoded data {}\n".format(decoded))
+            self.logger.log("flag is {}\n".format(decoded['flag']=="ack"))
+            self.logger.log("ack is {}\n".format(decoded['ack']==decoded['sequence']))
             self.logger.log("the received ack is {}".format(json.dumps(decoded)))
 
-            # check if it's good data using crc
-            if self.is_good_crc(decoded["crc32"], decoded["data"]):
-                return False
 
-            if decoded["flag"] == "ack" and decoded["ack"] == decoded["sequence"]:
-                self.logger.log("[recv ack] " + decoded['sequence'])
+
+            # TODO talk to Ivan because I am not certain whether this is needed
+            # check if it's good data using crc
+            # if self.is_good_crc(decoded["crc32"], decoded["data"]):
+            #     return False
+
+            if (decoded['flag']=="ack") and (decoded['ack']==decoded[
+                'sequence']):
+                self.logger.log("[recv ack] {}".format( decoded['sequence']))
                 return decoded['ack']
-        except (ValueError, KeyError, TypeError):
-            pass
+        except:
+            self.logger.log("an exception occured")
 
         self.logger.log("[recv corrupt packet]")
         return False
 
+
     def is_good_crc(self, decoded_crc, decoded_data):
-        calculated_crc = self.__calculate_checksum(decoded_data)
+        """Calculates whether the decoded_crc matches the given decoded_data.
+        
+        :param decoded_crc: a string representing a CRC
+        :param decoded_data: a string representing the data that has arrived
+        :return: a bool based on whether the decoded_crc matches decoded_data
+        """
+        calculated_crc = self.__calculate_checksum(str(decoded_data))
         out = decoded_crc == calculated_crc
         if not out:
             self.logger.log("invalid crc for ack, received {} but calculated {}"
                             .format(decoded_crc, calculated_crc))
         return out
+
+    def set_ack_num(self, ack_num):
+        """ Sets the ack_num and seq_num of this packet to the given ack_num.
+        
+        :param ack_num: an int to which to set both self.ack_num and 
+        self.seq_num
+        :return: None 
+        """
+        self.ack_num = ack_num
+        self.seq_num = ack_num
+
+    def get_msg_size(self):
+        """ Get the message size for this packet.
+        
+        :return: self.MSG_SIZE
+        """
+        return self.MSG_SIZE
+
