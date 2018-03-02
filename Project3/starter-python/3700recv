@@ -111,8 +111,5 @@ if __name__ == "__main__":
             else:
                 prev_good_packet = Packet("", "ack", r.packet_log.get_last_received(),
                                           r.packet_log.get_last_received())
-            # if the socket timesout before any packets arrive r.address
-            # would be empty
-            if r.address != "":
-                prev_good_packet.send_packet(r.sock, r.address)
+            prev_good_packet.send_packet(r.sock, r.address)
             #sys.exit(-1)
