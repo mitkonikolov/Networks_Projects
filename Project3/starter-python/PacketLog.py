@@ -2,8 +2,12 @@
 
 from Packet import Packet
 import time
+from Logger import Logger
+
 
 class PacketLog(object):
+
+    logger = Logger()
 
     # TODO add comments
     # sending window size
@@ -15,7 +19,12 @@ class PacketLog(object):
     dup_acks = 0
     last_ack = 0
     # the alpha used for Karn/Partridge algo to update timeout
-    alpha = 0.8
+    alpha = 0.4
+
+    # For the receiver:
+    last_received = -1
+    # map of seq# -> packet's data
+    buffered_packets = {}
 
     def __init_(self):
         self.dup_acks = 0
@@ -63,10 +72,10 @@ class PacketLog(object):
         """
         self.sws += offset
 
-    def update_unacked_packets(self, ack, receival_time):
+    def update_unacked_packets(self, ack, receival_time, base):
         """ Remove all the acked packets from the packets_timers table.
         Also updates the lask_ack and dup_acks
-        :param ack: the ack we just received
+        :param ack: the ack we just received (the sequence number)
         :param receival_time: the time in microseconds when the packet was 
         received
         :return: the packet that needs to retransmitted or None
@@ -75,14 +84,14 @@ class PacketLog(object):
 
         # this is a duplicate ACK - for now do not rely on duplicate ACKs
         # because we need to find out what is the first seq_num to do this
-        # if self.last_ack == ack:
-        #     self.dup_acks += 1
-        #     if self.dup_acks >= 3 :
-        #         return self.packets_timers[ack + 1][0]
+        if self.last_ack == ack or base - 1 == ack:
+            self.dup_acks += 1
+            if self.dup_acks >= 3 :
+                return self.packets_timers[ack + 1][0]
 
         for key in self.packets_timers:
             # this packet is not being ACKed
-            if key != int(ack):
+            if key > int(ack):
                 out[key] = self.packets_timers[key]
             # this packet is being ACKed
             else:
@@ -94,7 +103,7 @@ class PacketLog(object):
         # keep only the unACKed packets in the dictionary
         self.packets_timers = out
         # check if any packets have expired
-        return self.retransmit_table()
+        return None
 
     def augment_timeout(self, sampleRTT, exp_back_off=False):
         """It updates the timeout value using the given sampleRTT in seconds
@@ -103,10 +112,13 @@ class PacketLog(object):
         :param sampleRTT: a sample RTT in seconds
         :return: None
         """
+        self.logger.log("timeout was {}".format(self.timeout))
+        # TODO: something wrong here, fix it
         if exp_back_off:
             self.timeout += self.timeout
         else:
             self.timeout = self.alpha*self.timeout + (1-self.alpha)*sampleRTT
+        self.logger.log("new timeout is {}".format(self.timeout))
 
     def still_waiting_acks(self):
         """ Returns True if there are still ACKs that are being waited on.
@@ -114,4 +126,53 @@ class PacketLog(object):
         :return: bool indicating whether there are ACKs that are still being
         waited on
         """
-        return len(self.packets_timers) != 0
+        return len(self.get_packet_timers()) != 0
+
+    def get_packet_timers(self):
+        return self.packets_timers
+
+    def get_dup_acks(self):
+        return self.dup_acks
+
+    # only used for receiver
+    def handle_packet(self, decoded):
+        seq = decoded["sequence"]
+        base = decoded["base"]
+
+        # if this is the first data packet received
+        if self.last_received == -1:
+            if seq == base:
+                self.logger.log("### Logging {} to STDOUT. and base: {}".format(seq, base))
+                self.logger.log_data(decoded["data"])
+                self.last_received = self.update_buffer_packets(seq)
+                return self.last_received
+            else:
+                self.buffered_packets[seq] = decoded["data"]
+                return base - 1
+        else:
+            if seq == self.last_received + 1:
+                self.logger.log("### Logging {} to STDOUT".format(seq))
+                self.logger.log_data(decoded["data"])
+                # if this is the next packet we expect
+                self.last_received = self.update_buffer_packets(seq)
+                return self.last_received
+            elif seq > self.last_received + 1:
+                # packet comes in out of order
+                self.buffered_packets[seq] = decoded["data"]
+                return self.last_received
+            # duplicated packet, we have already received this
+
+    def update_buffer_packets(self, seq):
+        seq += 1
+        while seq in self.buffered_packets:
+            self.logger.log("### Logging {} to STDOUT".format(seq))
+            self.logger.log_data(self.buffered_packets[seq])
+            del self.buffered_packets[seq]
+            seq += 1
+        return seq - 1
+
+    def get_buffered_packet(self):
+        return self.buffered_packets
+
+    def get_last_received(self):
+        return self.last_received

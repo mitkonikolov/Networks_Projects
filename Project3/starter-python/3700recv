@@ -11,6 +11,7 @@ import time
 import datetime
 import select
 import json
+import zlib
 from Logger import Logger
 from Packet import Packet
 from PacketLog import PacketLog
@@ -18,7 +19,7 @@ from PacketLog import PacketLog
 
 class Receiver(object):
     logger = Logger()
-    packet = Packet("", "ack", 0, 0)
+    packet = Packet("", "ack", -1, -1)
     packet_log = PacketLog()
 
     # Bind to localhost and an ephemeral port
@@ -33,71 +34,77 @@ class Receiver(object):
     # Get port we bound to
     UDP_PORT = sock.getsockname()[1]
     logger.log("[bound] " + str(UDP_PORT))
+    address = ""
 
 
 if __name__ == "__main__":
     r = Receiver()
+    base_is_set = False
 
     # Now listen for packets
     while True:
-        result = r.sock.recvfrom(r.packet.get_msg_size())
+        try:
+            result = r.sock.recvfrom(r.packet.get_msg_size())
 
-        # If nothing is ready, we hit the timeout
-        if result:
-            (data, addr) = result
+            # If nothing is ready, we hit the timeout
+            if result:
+                (data, addr) = result
 
-            try:
-                decoded = json.loads(data)
+                try:
+                    decoded = json.loads(data)
+                    r.address = addr
 
-                # creating a packet object only for checking crc32
-                r.packet = Packet(decoded["data"], "data", "")
+                    # corrupted files
+                    if not r.packet.is_good_crc(decoded["crc32"], decoded["data"]):
+                        r.logger.log("bad crc")
+                        continue
 
-                # TODO:
-                # note, check sender's todo, if this fails (bad data, crc no match),
-                # we continue (and keeping waiting until time out), but the sender should resend the
-                # packet after 2 seconds (timeout for packetlog), currently the sender is not doing
-                # that. Fix that.
+                    # If the EOF flag is set, exit
+                    if (decoded['eof']):
+                        r.logger.log("[completed]")
+                        sys.exit(0)
 
-                # corrupted files
-                if not r.packet.is_good_crc(decoded["crc32"], decoded["data"]):
-                    r.logger.log("bad crc")
-                    continue
+                    # if not base_is_set:
+                    #     r.packet.set_base(decoded["base"])
 
-                # If the EOF flag is set, exit
-                if (decoded['eof']):
-                    r.logger.log("[completed]")
-                    sys.exit(0)
+                    # TODO: call handle_packets and send an ack for the returned result if it's not None
+                    ack = r.packet_log.handle_packet(decoded)
 
-                # If there is data, we accept it and print it out
-                # TODO: change this to make sure we're printing in order
-                if (decoded['data']):
-                    # If we receive data, we assume it's in-order
-                    # You will need to do much more here
-                    r.logger.log("[recv data] " + str(decoded['sequence']) + " (" +
-                                 str(len(decoded['data'])) + ") ACCEPTED (in-order)")
-                    r.logger.log_data(decoded['data'])
 
-                # Send back an ack to the sender
+                    # Send back an ack to the sender
+                    if ack is not None:
+                        r.packet = Packet("", "ack", ack, ack)
 
-                # construct the ack for the data packet that we just received
-                r.packet = Packet("", "ack", decoded['sequence'],
-                                  int(decoded['sequence']))
+                        r.logger.log("ABOUT TO SEND {}".format(r.packet.generateData()))
 
-                r.logger.log("ABOUT TO SEND " + r.packet.generateData())
+                        packet_sent_time = r.packet.send_packet(r.sock, addr)
 
-                packet_sent_time = r.packet.send_packet(r.sock, addr)
+                        # currently not doing anything to packet_sent_time
+                        if packet_sent_time == -1:
+                            # NOTE: this should never be hit, if it hits, we should consider having
+                            #       a while loop that keeps trying to resend the ack packet
+                            # r.packet.send_packet(r.sock, addr)
+                            r.logger.log("failed sending ack")
+                            continue
+                        else:
+                            r.logger.log("successfully sent an ack")
 
-                # currently not doing anything to packet_sent_time
-                if packet_sent_time == -1:
-                    r.logger.log("failed sending ack")
-                    continue
-                else:
-                    r.logger.log("successfully sent an ack")
+                    # If there is data, we accept it and print it out
+                    # TODO: change this to make sure we're printing in order
+                    # if (decoded['data']):
+                        # If we receive data, we assume it's in-order
+                        # You will need to do much more here
+                        # r.logger.log("[recv data] " + str(decoded['sequence']) + " (" +
+                        #              str(len(decoded['data'])) + ") ACCEPTED (in-order)")
+                        # r.logger.log_data(decoded['data'])
 
-            except (ValueError, KeyError, TypeError) as e:
-                r.logger.log("[recv corrupt packet]")
-                print(e)
-                raise e
-        else:
+                except (ValueError, KeyError, TypeError) as e:
+                    r.logger.log("[recv corrupt packet]")
+                    print(e)
+                    raise e
+        except socket.timeout as e:
             r.logger.log("[error] timeout")
+            prev_good_packet = Packet("", "ack", r.packet_log.get_last_received(),
+                                      r.packet_log.get_last_received())
+            prev_good_packet.send_packet(r.sock, r.address)
             #sys.exit(-1)

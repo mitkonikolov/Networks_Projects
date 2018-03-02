@@ -13,7 +13,7 @@ class Packet(object):
     MSG_SIZE = 1500
 
 
-    def __init__(self, data, flag, ack_num, prev_seq_num=None):
+    def __init__(self, data, flag, ack_num, prev_seq_num = None, base = None):
         '''If prev_seq_num is not passed, the constructor is used for creating 
         the first packet to ever be sent.
         
@@ -40,18 +40,20 @@ class Packet(object):
         packet or the sequence number of the packet that is being acknowledged
         :return: None
         '''
+
         # this is the first packet to be sent
-        if prev_seq_num is None:
+        if prev_seq_num is None and flag != "ack":
             self.seq_num = 0
             self.gen_random_seq_num()
+            self.base = self.get_seq_num()
         # this is a subsequent packet
         else:
             self.seq_num = prev_seq_num
-            if flag == "data":
+            if flag == "data" and base is not None:
                 self.increment_seq_num()
+                self.base = base
             elif flag == "ack" and prev_seq_num != ack_num:
-                self.logger.log(
-                    "[error] prev_seq_num and ack_num must be the same")
+                self.logger.log("[error] prev_seq_num and ack_num must be the same")
                 raise RuntimeError("prev_seq_num and ack_num must be the same")
         self.data = data
         self.flag = flag
@@ -90,8 +92,6 @@ class Packet(object):
         '''
         old_seq_num = self.seq_num
         self.seq_num += 1
-        print(old_seq_num)
-        print(self.seq_num)
         # a wraparound has occured so a new random sequence number is generated
         # TODO the receiver should somehow be notified about this
         if old_seq_num > self.seq_num:
@@ -115,14 +115,26 @@ class Packet(object):
         return self.crc32
 
     def generateData(self, eof = False):
-        return json.dumps({
-            "sequence": self.seq_num,
-            "data": self.data,
-            "crc32": self.crc32,
-            "ack": self.ack_num,
-            "eof": eof,
-            "flag": self.flag
-        })
+        if self.flag == "ack":
+            return json.dumps({
+                "sequence": self.seq_num,
+                "data": self.data,
+                "crc32": self.crc32,
+                "ack": self.ack_num,
+                "eof": eof,
+                "flag": self.flag,
+                "base": -1
+            })
+        else:
+            return json.dumps({
+                "sequence": self.seq_num,
+                "data": self.data,
+                "crc32": self.crc32,
+                "ack": self.ack_num,
+                "eof": eof,
+                "flag": self.flag,
+                "base": self.base
+            })
 
     def send_packet(self, sock, dest, eof = False):
         """ Sends this packet (self) using the given sock to the given dest.
@@ -147,23 +159,10 @@ class Packet(object):
         try:
             self.logger.log("raw data {}\n".format(raw_data))
             decoded = json.loads(raw_data)
-            #decoded = raw_data
-            #decoded = json.dumps(raw_data)
-            self.logger.log("decoded data {}\n".format(decoded))
-            self.logger.log("flag is {}\n".format(decoded['flag']=="ack"))
-            self.logger.log("ack is {}\n".format(decoded['ack']==decoded['sequence']))
-            self.logger.log("the received ack is {}".format(json.dumps(decoded)))
 
-
-
-            # TODO talk to Ivan because I am not certain whether this is needed
-            # check if it's good data using crc
-            # if self.is_good_crc(decoded["crc32"], decoded["data"]):
-            #     return False
-
-            if (decoded['flag']=="ack") and (decoded['ack']==decoded[
+            if (decoded['flag']=="ack") and (decoded['ack'] == decoded[
                 'sequence']):
-                self.logger.log("[recv ack] {}".format( decoded['sequence']))
+                self.logger.log("[recv ack] {}".format(decoded['sequence']))
                 return decoded['ack']
         except:
             self.logger.log("an exception occured")
@@ -203,3 +202,9 @@ class Packet(object):
         """
         return self.MSG_SIZE
 
+    # def set_base(self, new_base):
+    #     self.logger.log("setting base from {} to a new base {}".format(self.base, new_base))
+    #     self.base = new_base
+
+    def get_base(self):
+        return self.base
