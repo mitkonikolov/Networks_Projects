@@ -4,72 +4,161 @@
 # Project 2 Starter Code
 #
 
+
 import sys
 import socket
 import time
 import datetime
 import select
 import json
+from Logger import Logger
+from Packet import Packet
+from PacketLog import PacketLog
 
-MSG_SIZE = 1500
-DATA_SIZE = 1000
-TIMEOUT = 30
-SEQUENCE = 0
 
-# Bind to localhost and an ephemeral port
-IP_PORT = sys.argv[1]
-UDP_IP = IP_PORT[0:IP_PORT.find(":")]
-UDP_PORT = int(IP_PORT[IP_PORT.find(":")+1:])
-dest = (UDP_IP, UDP_PORT)
+class Sender(object):
+    logger = Logger()
+    packet = None
+    packet_log = PacketLog()
+    prev_packet = None
+    base = -1
 
-# Set up the socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
-sock.settimeout(TIMEOUT)
+    time_last_sent = 0
 
-def log(string):
-  sys.stderr.write(datetime.datetime.now().strftime("%H:%M:%S.%f") + " " + string + "\n")
+    MSG_SIZE = 1500
+    DATA_SIZE = 1000
+    SEQUENCE = 0
 
-def send_next_packet():
-  global SEQUENCE
+    def __init__(self):
+        # Bind to localhost and an ephemeral port
+        self.IP_PORT = sys.argv[1]
+        self.UDP_IP = self.IP_PORT[0:self.IP_PORT.find(":")]
+        self.UDP_PORT = int(self.IP_PORT[self.IP_PORT.find(":")+1:])
+        self.dest = (self.UDP_IP, self.UDP_PORT)
 
-  data = sys.stdin.read(DATA_SIZE)
-  if (len(data) > 0):
-    msg = json.dumps({"sequence": SEQUENCE, "data": data, "ack": False, "eof": False})
-    SEQUENCE += len(data)
+        # Set up the socket
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.update_timeout()
 
-    if sock.sendto(msg, dest) < len(msg):
-      log("[error] unable to fully send packet")
-    else:
-      log("[send data] " + str(SEQUENCE) + " (" + str(len(data)) + ")")
-    return True
-  else:
-    return False
+        # the seq# of the last sent packet
+        self.last_sent = 0
+        # the seq# of the last acknowledged
+        # self.last_ack = 0
 
-# Send first packet
-send_next_packet()
+    def retransmit(self, packet, eof = False):
+        """ Retransmits the packet.
+        :param packet: the packet to be retransmitted
+        :return: bool
+        """
+        self.logger.log("retransmitting: {}".format(packet.seq_num))
+        packet_sent_time = packet.send_packet(self.sock, self.dest, eof)
+        # once successfully sent, we add packet to log and saves its sent_time
+        if packet_sent_time!= -1:
+            self.packet_log.update_log_time(self.packet, packet_sent_time)
+        else:
+            self.logger.log("[error] packet retransmission time is negative")
 
-# Now read in data, send packets
-while True:
-  log("ABOUT TO SLEEP")
-  result = sock.recvfrom(MSG_SIZE)
+    def send_next_packet(self, eof = False, data = None):
 
-  if result:
-    (data, addr) = result
-    try:
-      decoded = json.loads(data)
+        self.logger.log("inside packet sender")
 
-      # If there is an ack, send next packet
-      if decoded['ack'] == SEQUENCE:
-        log("[recv ack] " + str(SEQUENCE))
+        while s.packet_log.get_sws() > 0:
+            if data is None:
+                data = sys.stdin.read(self.DATA_SIZE)
 
-        # Try to send next packet; break if no more data
-        if (not send_next_packet()):
-          break
-    except (ValueError, KeyError, TypeError):
-      log("[recv corrupt packet]")
-  else:
-    log("[error] timeout")
-    sys.exit(-1)
+            if (len(data) > 0 or eof):
 
-sock.sendto(json.dumps({"eof": True, "data": "", "sequence": SEQUENCE, "ack": False}), dest)
-sys.exit(0)
+                self.logger.log("data is {}".format(data))
+
+                # if we're sending the first packet
+                if self.prev_packet is None:
+                    self.packet = Packet(data, "data", "")
+                    self.base = self.packet.get_base()
+                else:
+                    self.packet = Packet(data, "data", "", self.prev_packet.get_seq_num(), self.base)
+
+                # returns the time sent of the packet if success, -1 otherwise
+                packet_sent_time = self.packet.send_packet(self.sock, self.dest, eof)
+
+                # if failed sending the packet
+                if packet_sent_time == -1:
+                    s.logger.log("failed sending a packet, resending...")
+                    self.retransmit(self.packet)
+                    #return
+                else:
+                    # once successfully sent, we add packet to log and saves its sent_time
+                    self.packet_log.add_to_log(self.packet, packet_sent_time)
+                    self.prev_packet = self.packet
+                    self.packet_log.update_sws(-1)
+
+                #set data to None so we can read new data
+                data = None
+            else:
+                # there is no more data to be sent
+                return False
+        # sws is depleted
+        return False
+
+    def update_timeout(self):
+        """Updates timeout to its most recent value as stored in the PacketLog.
+        
+        :return: None
+        """
+        self.sock.settimeout(self.packet_log.get_timeout())
+
+
+if __name__ == "__main__":
+    s = Sender()
+
+    # Now read in data, send packets
+    while True:
+        s.logger.log("ABOUT TO SLEEP")
+
+        # if s.packet_log.get_sws() > 0:
+        #     s.logger.log("sws is {}".format(s.packet_log.get_sws()))
+        # if s.send_next_packet():
+        #     s.packet_log.update_sws(-1)
+        s.send_next_packet()
+        # check if all packets have been ACKed first
+        s.logger.log("packet timer size: {}".format(len(s.packet_log.packets_timers)))
+        if not s.packet_log.still_waiting_acks():
+            break
+
+        for packet in s.packet_log.retransmit_table(True):
+            s.retransmit(packet)
+        s.update_timeout()
+
+        try:
+            result = s.sock.recvfrom(s.MSG_SIZE)
+
+            if result:
+
+                s.logger.log("received some data")
+
+                (raw_data, addr) = result
+                receival_time = time.time()
+
+                ack = s.packet.check_ack(raw_data)
+
+                if ack:
+                    dropped_packet = s.packet_log.update_unacked_packets(ack, receival_time, s.packet.get_base())
+                    # a packet has been dropped
+                    if dropped_packet is not None:
+                        # TODO: this is not getting hit when sender does not get any acks
+                        # something might be wrong with `update_unacked_packets`?
+                        s.logger.log("one or more packets are not getting acked, retransmitting those packets...")
+                        s.retransmit(dropped_packet)
+                    # packets were sent successfully and timeout needs to be
+                    # updated based on latest sampleRTT
+                    else:
+                        s.update_timeout()
+        except socket.timeout as e:
+            # timeout has occurred => packets are retransmitted and
+            # timeout is being updated
+            for packet in s.packet_log.retransmit_table(True):
+                s.retransmit(packet)
+            s.update_timeout()
+
+
+    s.send_next_packet(True, "")
+    sys.exit(0)
