@@ -124,9 +124,9 @@ if __name__ == "__main__":
         if not s.packet_log.still_waiting_acks():
             break
 
-        for packet in s.packet_log.retransmit_table():
-            s.retransmit(packet)
-        s.update_timeout()
+        # for packet in s.packet_log.retransmit_table(True):
+        #     s.retransmit(packet)
+        # s.update_timeout()
 
         try:
             result = s.sock.recvfrom(s.MSG_SIZE)
@@ -141,7 +141,9 @@ if __name__ == "__main__":
                 ack = s.packet.check_ack(raw_data)
 
                 if ack:
-                    dropped_packet = s.packet_log.update_unacked_packets(ack, receival_time, s.packet.get_base())
+                    dropped_packet = s.packet_log.update_unacked_packets(ack,
+                        receival_time, s.packet.get_base(),
+                        json.loads(raw_data)['buffered'])
                     # a packet has been dropped
                     if dropped_packet is not None:
                         # TODO: this is not getting hit when sender does not get any acks
@@ -150,12 +152,15 @@ if __name__ == "__main__":
                         s.retransmit(dropped_packet)
                     # packets were sent successfully and timeout needs to be
                     # updated based on latest sampleRTT
-                    else:
-                        s.update_timeout()
+                    # else:
+                    #     s.update_timeout()
+                for packet in s.packet_log.retransmit_table():
+                    s.retransmit(packet)
+                s.update_timeout()
         except socket.timeout as e:
             # timeout has occurred => packets are retransmitted and
             # timeout is being updated
-            for packet in s.packet_log.retransmit_table():
+            for packet in s.packet_log.retransmit_table(True):
                 s.retransmit(packet)
             s.update_timeout()
 

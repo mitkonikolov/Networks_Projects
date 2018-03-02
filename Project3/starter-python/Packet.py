@@ -59,6 +59,7 @@ class Packet(object):
         self.flag = flag
         self.ack_num = ack_num
         self.crc32 = self.__calculate_checksum(data)
+        self.buffered = -0.1
 
 
     def gen_random_seq_num(self):
@@ -123,7 +124,8 @@ class Packet(object):
                 "ack": self.ack_num,
                 "eof": eof,
                 "flag": self.flag,
-                "base": -1
+                "base": -1,
+                "buffered": self.buffered
             })
         else:
             return json.dumps({
@@ -208,3 +210,6 @@ class Packet(object):
 
     def get_base(self):
         return self.base
+
+    def set_buffered(self, buffered):
+        self.buffered = buffered

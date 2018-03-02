@@ -26,6 +26,8 @@ class PacketLog(object):
     # map of seq# -> packet's data
     buffered_packets = {}
 
+    prev_buffered = -0.1
+
     def __init_(self):
         self.dup_acks = 0
         self.last_ack = 0
@@ -40,20 +42,30 @@ class PacketLog(object):
             self.packets_timers[packet.get_seq_num()] = (packet, time)
 
     def update_log_time(self, packet, new_time):
+        self.logger.log("[debug] set time to {}".format(new_time
+        ))
+        # self.logger.log("[debug] updating time, time before {}".format(
+        #     self.packets_timers[packet.get_seq_num()][1]
+        # ))
         self.packets_timers[packet.get_seq_num()] = (packet, new_time)
+        self.logger.log("new time {}".format(
+            self.packets_timers[packet.get_seq_num()][1]
+        ))
 
-    def retransmit_table(self, timeout_occured=False):
-        """ A timeout has occurred so it goes through self.packets_timers and 
-        checks which packet or packets have timed out.
-        It compiles a list of timed out packets.
+    def retransmit_table(self, timeout_occurred=False):
+        """ It goes through self.packets_timers and checks which packet or 
+        packets have timed out. It compiles a list of timed out packets.
+        This might be because a timeout has occured or simply because we want
+        to check whether one has occured.
         :return: a list of timed out packets
         """
         out = []
         for packet in self.packets_timers:
             if time.time() - self.packets_timers[packet][1] > self.timeout:
                 out.append(self.packets_timers[packet][0])
+                timeout_occurred = True
         # exponential backoff on timeout
-        if timeout_occured:
+        if timeout_occurred:
             self.augment_timeout(0, True)
         return out
 
@@ -76,7 +88,7 @@ class PacketLog(object):
         """
         self.sws += offset
 
-    def update_unacked_packets(self, ack, receival_time, base):
+    def update_unacked_packets(self, ack, receival_time, base, buffered_packet):
         """ Remove all the acked packets from the packets_timers table.
         Also updates the lask_ack and dup_acks
         :param ack: the ack we just received (the sequence number)
@@ -89,17 +101,32 @@ class PacketLog(object):
         if ack < self.last_ack:
             return None
 
-        # this is a duplicate ACK - for now do not rely on duplicate ACKs
-        # because we need to find out what is the first seq_num to do this
+        result = None
+
+        # this is a duplicate ACK
         if self.last_ack == ack or base - 1 == ack:
             self.dup_acks += 1
+            # this might resubmit one last_ack earlier if we get base-1 3 times
+            # but that's how I think is better
             if self.dup_acks >= 3:
-                return self.packets_timers[ack + 1][0]
-        if ack>self.last_ack and ack>=base:
+                result = self.packets_timers[ack + 1][0]
+
+        # this is not a duplicate ack
+        if ack>self.last_ack and ack>=base and ack in self.packets_timers:
             sampleRTT = receival_time - self.packets_timers[ack][1]
+        # a default value for sampleRTT
         else:
             sampleRTT = 0
+
         for key in self.packets_timers:
+            # this is the packet that led to a dup ack - take its sample RTT
+            # and remove it from the table because it is being acked through
+            # buffered_packet
+            if buffered_packet == key:
+                sampleRTT = receival_time - self.packets_timers[key][1]
+                if sampleRTT>0:
+                    self.augment_timeout(sampleRTT)
+                continue
             # this packet is not being ACKed
             if key > int(ack):
                 out[key] = self.packets_timers[key]
@@ -116,7 +143,7 @@ class PacketLog(object):
         # keep only the unACKed packets in the dictionary
         self.packets_timers = out
         # check if any packets have expired
-        return None
+        return result
 
     def augment_timeout(self, sampleRTT, exp_back_off=False):
         """It updates the timeout value using the given sampleRTT in seconds
@@ -129,7 +156,7 @@ class PacketLog(object):
         # TODO: something wrong here, fix it
         if exp_back_off:
             # self.timeout += self.timeout
-            self.timeout = self.timeout * 1.1
+            self.timeout = self.timeout * 1.2
             # self.logger.log("[timeout change] timed out")
             # self.timeout = self.timeout
         else:
@@ -162,21 +189,23 @@ class PacketLog(object):
                 self.logger.log("### Logging {} to STDOUT. and base: {}".format(seq, base))
                 self.logger.log_data(decoded["data"])
                 self.last_received = self.update_buffer_packets(seq)
-                return self.last_received
+                return (self.last_received, -0.1)
             else:
                 self.buffered_packets[seq] = decoded["data"]
-                return base - 1
+                self.prev_buffered = seq
+                return (base - 1, self.prev_buffered)
         else:
             if seq == self.last_received + 1:
                 self.logger.log("### Logging {} to STDOUT".format(seq))
                 self.logger.log_data(decoded["data"])
                 # if this is the next packet we expect
                 self.last_received = self.update_buffer_packets(seq)
-                return self.last_received
+                return (self.last_received, -0.1)
             elif seq > self.last_received + 1:
                 # packet comes in out of order
                 self.buffered_packets[seq] = decoded["data"]
-                return self.last_received
+                self.prev_buffered = seq
+                return (self.last_received, self.prev_buffered)
             # duplicated packet, we have already received this
 
     def update_buffer_packets(self, seq):
@@ -193,3 +222,6 @@ class PacketLog(object):
 
     def get_last_received(self):
         return self.last_received
+
+    def get_prev_buffered(self):
+        return self.prev_buffered

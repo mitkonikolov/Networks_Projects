@@ -25,7 +25,7 @@ class Receiver(object):
     # Bind to localhost and an ephemeral port
     UDP_IP = "127.0.0.1"
     UDP_PORT = 0
-    TIMEOUT = 0.8
+    TIMEOUT = 0.5
 
     # Set up the socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -75,7 +75,8 @@ if __name__ == "__main__":
 
                     # Send back an ack to the sender
                     if ack is not None:
-                        r.packet = Packet("", "ack", ack, ack)
+                        r.packet = Packet("", "ack", ack[0], ack[0])
+                        r.packet.set_buffered(ack[1])
 
                         r.logger.log("ABOUT TO SEND {}".format(r.packet.generateData()))
 
@@ -114,5 +115,6 @@ if __name__ == "__main__":
             # if the socket timesout before any packets arrive r.address
             # would be empty
             if r.address != "":
+                prev_good_packet.set_buffered(r.packet_log.get_prev_buffered())
                 prev_good_packet.send_packet(r.sock, r.address)
             #sys.exit(-1)
