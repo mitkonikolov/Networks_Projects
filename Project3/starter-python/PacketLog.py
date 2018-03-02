@@ -156,7 +156,7 @@ class PacketLog(object):
         # TODO: something wrong here, fix it
         if exp_back_off:
             # self.timeout += self.timeout
-            self.timeout = self.timeout * 1.2
+            self.timeout = self.timeout * 1.5
             # self.logger.log("[timeout change] timed out")
             # self.timeout = self.timeout
         else:
