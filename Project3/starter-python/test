@@ -2,7 +2,7 @@
 use Sys::Hostname;
 
 my $SEMESTER = "cs3700sp18";
-my $SEND = "3700send_our";
+my $SEND = "3700send";
 my $RECV = "3700recv";
 my $RUN = "run";
 
