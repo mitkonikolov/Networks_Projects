@@ -39,6 +39,9 @@ class PacketLog(object):
         if self.sws > 0:
             self.packets_timers[packet.get_seq_num()] = (packet, time)
 
+    def update_log_time(self, packet, new_time):
+        self.packets_timers[packet.get_seq_num()] = (packet, new_time)
+
     def retransmit_table(self):
         """ A timeout has occurred so it goes through self.packets_timers and 
         checks which packet or packets have timed out.
@@ -116,7 +119,11 @@ class PacketLog(object):
         # TODO: something wrong here, fix it
         if exp_back_off:
             self.timeout += self.timeout
+            # self.timeout = self.timeout * 1.2
+            # self.logger.log("[timeout change] timed out")
+            # self.timeout = self.timeout
         else:
+            self.logger.log("[timeout change] sampleRTT {}".format(sampleRTT))
             self.timeout = self.alpha*self.timeout + (1-self.alpha)*sampleRTT
         self.logger.log("new timeout is {}".format(self.timeout))
 

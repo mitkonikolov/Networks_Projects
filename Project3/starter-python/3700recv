@@ -25,16 +25,18 @@ class Receiver(object):
     # Bind to localhost and an ephemeral port
     UDP_IP = "127.0.0.1"
     UDP_PORT = 0
+    TIMEOUT = 0.8
 
     # Set up the socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((UDP_IP, UDP_PORT))
-    sock.settimeout(packet_log.get_timeout())
+    sock.settimeout(TIMEOUT)
 
     # Get port we bound to
     UDP_PORT = sock.getsockname()[1]
     logger.log("[bound] " + str(UDP_PORT))
     address = ""
+    base = -1
 
 
 if __name__ == "__main__":
@@ -64,8 +66,8 @@ if __name__ == "__main__":
                         r.logger.log("[completed]")
                         sys.exit(0)
 
-                    # if not base_is_set:
-                    #     r.packet.set_base(decoded["base"])
+                    if not base_is_set:
+                        r.base = int(decoded["base"])
 
                     # TODO: call handle_packets and send an ack for the returned result if it's not None
                     ack = r.packet_log.handle_packet(decoded)
@@ -104,7 +106,10 @@ if __name__ == "__main__":
                     raise e
         except socket.timeout as e:
             r.logger.log("[error] timeout")
-            prev_good_packet = Packet("", "ack", r.packet_log.get_last_received(),
-                                      r.packet_log.get_last_received())
+            if r.packet_log.get_last_received() == -1:
+                prev_good_packet = Packet("", "ack", r.base - 1, r.base - 1)
+            else:
+                prev_good_packet = Packet("", "ack", r.packet_log.get_last_received(),
+                                          r.packet_log.get_last_received())
             prev_good_packet.send_packet(r.sock, r.address)
             #sys.exit(-1)

@@ -51,7 +51,12 @@ class Sender(object):
         :return: bool
         """
         self.logger.log("retransmitting: {}".format(packet.seq_num))
-        packet.send_packet(self.sock, self.dest, eof)
+        packet_sent_time = packet.send_packet(self.sock, self.dest, eof)
+        # once successfully sent, we add packet to log and saves its sent_time
+        if packet_sent_time!= -1:
+            self.packet_log.update_log_time(self.packet, packet_sent_time)
+        else:
+            self.logger.log("[error] packet retransmission time is negative")
 
     def send_next_packet(self, eof = False, data = None):
 
