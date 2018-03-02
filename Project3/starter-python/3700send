@@ -124,6 +124,10 @@ if __name__ == "__main__":
         if not s.packet_log.still_waiting_acks():
             break
 
+        for packet in s.packet_log.retransmit_table():
+            s.retransmit(packet)
+        s.update_timeout()
+
         try:
             result = s.sock.recvfrom(s.MSG_SIZE)
 

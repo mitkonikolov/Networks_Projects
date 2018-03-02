@@ -85,13 +85,19 @@ class PacketLog(object):
         """
         out = {}
 
+        if ack < self.last_ack:
+            return None
+
         # this is a duplicate ACK - for now do not rely on duplicate ACKs
         # because we need to find out what is the first seq_num to do this
         if self.last_ack == ack or base - 1 == ack:
             self.dup_acks += 1
-            if self.dup_acks >= 3 :
+            if self.dup_acks >= 3:
                 return self.packets_timers[ack + 1][0]
-
+        if ack>self.last_ack and ack>=base:
+            sampleRTT = receival_time - self.packets_timers[ack][1]
+        else:
+            sampleRTT = 0
         for key in self.packets_timers:
             # this packet is not being ACKed
             if key > int(ack):
@@ -101,8 +107,11 @@ class PacketLog(object):
                 self.last_ack = ack
                 self.dup_acks = 0
                 self.sws += 1
-                sampleRTT = receival_time - self.packets_timers[key][1]
-                self.augment_timeout(sampleRTT)
+                # if key == ack:
+                #     sampleRTT = receival_time - self.packets_timers[key][1]
+                if sampleRTT>0:
+                    self.augment_timeout(sampleRTT)
+
         # keep only the unACKed packets in the dictionary
         self.packets_timers = out
         # check if any packets have expired
@@ -118,8 +127,8 @@ class PacketLog(object):
         self.logger.log("timeout was {}".format(self.timeout))
         # TODO: something wrong here, fix it
         if exp_back_off:
-            self.timeout += self.timeout
-            # self.timeout = self.timeout * 1.2
+            # self.timeout += self.timeout
+            self.timeout = self.timeout * 1.1
             # self.logger.log("[timeout change] timed out")
             # self.timeout = self.timeout
         else:
