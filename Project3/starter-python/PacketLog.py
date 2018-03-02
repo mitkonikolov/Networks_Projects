@@ -13,11 +13,11 @@ class PacketLog(object):
     # sending window size
     sws = 30
     # timeout value
-    timeout = 2
+    timeout = 1
     # map of seq# -> (packet, time_sent)
     packets_timers = {}
-    dup_acks = 0
-    last_ack = 0
+    # dup_acks = 0
+    # last_ack = 0
     # the alpha used for Karn/Partridge algo to update timeout
     alpha = 0.4
 
@@ -26,9 +26,9 @@ class PacketLog(object):
     # map of seq# -> packet's data
     buffered_packets = {}
 
-    def __init_(self):
-        self.dup_acks = 0
-        self.last_ack = 0
+    # def __init_(self):
+        # self.dup_acks = 0
+        # self.last_ack = 0
 
     def add_to_log(self, packet, time):
         """ Adds a packet to self.packets_timers
@@ -86,32 +86,35 @@ class PacketLog(object):
         """
         out = {}
 
-        if ack < self.last_ack:
-            return None
+        # if ack < self.last_ack:
+        #     return None
 
         # this is a duplicate ACK - for now do not rely on duplicate ACKs
         # because we need to find out what is the first seq_num to do this
-        if self.last_ack == ack or base - 1 == ack:
-            self.dup_acks += 1
-            if self.dup_acks >= 3:
-                return self.packets_timers[ack + 1][0]
-        if ack>self.last_ack and ack>=base:
-            sampleRTT = receival_time - self.packets_timers[ack][1]
-        else:
-            sampleRTT = 0
+        # if self.last_ack == ack or base - 1 == ack:
+        #     self.dup_acks += 1
+        #     if self.dup_acks >= 3:
+        #         return self.packets_timers[ack + 1][0]
+        # if ack > self.last_ack and ack >= base:
+        #     sampleRTT = receival_time - self.packets_timers[ack][1]
+        # else:
+        #     sampleRTT = 0
         for key in self.packets_timers:
             # this packet is not being ACKed
-            if key > int(ack):
+            if key != int(ack):
                 out[key] = self.packets_timers[key]
             # this packet is being ACKed
             else:
-                self.last_ack = ack
-                self.dup_acks = 0
+                # self.last_ack = ack
+                # self.dup_acks = 0
                 self.sws += 1
                 # if key == ack:
                 #     sampleRTT = receival_time - self.packets_timers[key][1]
-                if sampleRTT>0:
-                    self.augment_timeout(sampleRTT)
+                # if sampleRTT > 0:
+                #     self.augment_timeout(sampleRTT)
+                sampleRTT = receival_time - self.packets_timers[ack][1]
+                self.augment_timeout(sampleRTT)
+                break
 
         # keep only the unACKed packets in the dictionary
         self.packets_timers = out
@@ -148,8 +151,8 @@ class PacketLog(object):
     def get_packet_timers(self):
         return self.packets_timers
 
-    def get_dup_acks(self):
-        return self.dup_acks
+    # def get_dup_acks(self):
+    #     return self.dup_acks
 
     # only used for receiver
     def handle_packet(self, decoded):
@@ -162,21 +165,22 @@ class PacketLog(object):
                 self.logger.log("### Logging {} to STDOUT. and base: {}".format(seq, base))
                 self.logger.log_data(decoded["data"])
                 self.last_received = self.update_buffer_packets(seq)
-                return self.last_received
+                # return self.last_received
+                return seq
             else:
                 self.buffered_packets[seq] = decoded["data"]
-                return base - 1
+                return seq
         else:
             if seq == self.last_received + 1:
                 self.logger.log("### Logging {} to STDOUT".format(seq))
                 self.logger.log_data(decoded["data"])
                 # if this is the next packet we expect
                 self.last_received = self.update_buffer_packets(seq)
-                return self.last_received
+                return seq
             elif seq > self.last_received + 1:
                 # packet comes in out of order
                 self.buffered_packets[seq] = decoded["data"]
-                return self.last_received
+                return seq
             # duplicated packet, we have already received this
 
     def update_buffer_packets(self, seq):

@@ -160,7 +160,7 @@ class Packet(object):
             self.logger.log("raw data {}\n".format(raw_data))
             decoded = json.loads(raw_data)
 
-            if (decoded['flag']=="ack") and (decoded['ack'] == decoded[
+            if (decoded['flag'] == "ack") and (decoded['ack'] == decoded[
                 'sequence']):
                 self.logger.log("[recv ack] {}".format(decoded['sequence']))
                 return decoded['ack']
@@ -169,7 +169,6 @@ class Packet(object):
 
         self.logger.log("[recv corrupt packet]")
         return False
-
 
     def is_good_crc(self, decoded_crc, decoded_data):
         """Calculates whether the decoded_crc matches the given decoded_data.
