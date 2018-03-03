@@ -42,6 +42,7 @@ class Receiver(object):
 if __name__ == "__main__":
     r = Receiver()
     base_is_set = False
+    acked_eof = False
 
     # Now listen for packets
     while True:
@@ -53,7 +54,7 @@ if __name__ == "__main__":
                 (data, addr) = result
 
                 try:
-                    decoded = json.loads(data)
+                    decoded = json.loads(zlib.decompress(data))
                     r.address = addr
 
                     # corrupted files

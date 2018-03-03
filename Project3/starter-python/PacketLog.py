@@ -186,27 +186,37 @@ class PacketLog(object):
         # if this is the first data packet received
         if self.last_received == -1:
             if seq == base:
-                self.logger.log("### Logging {} to STDOUT. and base: {}".format(seq, base))
+                self.logger.log("[recv data] {} ({}) ACCEPTED (in-order)".format(seq,
+                                                len(decoded["data"])))
                 self.logger.log_data(decoded["data"])
                 self.last_received = self.update_buffer_packets(seq)
                 return (self.last_received, -0.1)
             else:
+                self.logger.log("[recv data] {} ({}) ACCEPTED ("
+                                "out-of-order)".format(seq,
+                                                len(decoded["data"])))
                 self.buffered_packets[seq] = decoded["data"]
                 self.prev_buffered = seq
                 return (base - 1, self.prev_buffered)
         else:
             if seq == self.last_received + 1:
-                self.logger.log("### Logging {} to STDOUT".format(seq))
+                self.logger.log("[recv data] {} ({}) ACCEPTED (in-order)".format(seq,
+                                                len(decoded["data"])))
                 self.logger.log_data(decoded["data"])
                 # if this is the next packet we expect
                 self.last_received = self.update_buffer_packets(seq)
                 return (self.last_received, -0.1)
             elif seq > self.last_received + 1:
                 # packet comes in out of order
+                self.logger.log("[recv data] {} ({}) ACCEPTED ("
+                                "out-of-order)".format(seq,
+                                                len(decoded["data"])))
                 self.buffered_packets[seq] = decoded["data"]
                 self.prev_buffered = seq
                 return (self.last_received, self.prev_buffered)
             # duplicated packet, we have already received this
+            else:
+                self.logger.log("[recv corrupt packet]")
 
     def update_buffer_packets(self, seq):
         seq += 1
