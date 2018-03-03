@@ -11,7 +11,7 @@ class PacketLog(object):
 
     # TODO add comments
     # sending window size
-    sws = 30
+    sws = 50
     # timeout value
     timeout = 2
     # map of seq# -> (packet, time_sent)
@@ -156,7 +156,7 @@ class PacketLog(object):
         # TODO: something wrong here, fix it
         if exp_back_off:
             # self.timeout += self.timeout
-            self.timeout = self.timeout * 1.5
+            self.timeout = self.timeout * 2
             # self.logger.log("[timeout change] timed out")
             # self.timeout = self.timeout
         else:
