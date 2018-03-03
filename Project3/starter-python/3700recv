@@ -53,7 +53,7 @@ if __name__ == "__main__":
                 (data, addr) = result
 
                 try:
-                    decoded = json.loads(data)
+                    decoded = json.loads(zlib.decompress(data))
                     r.address = addr
 
                     # corrupted files

@@ -6,6 +6,7 @@
 
 
 import sys
+import zlib
 import socket
 import time
 import datetime
@@ -138,7 +139,7 @@ if __name__ == "__main__":
                 (raw_data, addr) = result
                 receival_time = time.time()
 
-                ack = s.packet.check_ack(raw_data)
+                ack = s.packet.check_ack(zlib.decompress(raw_data))
 
                 if ack:
                     dropped_packet = s.packet_log.update_unacked_packets(ack,
