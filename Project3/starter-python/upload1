@@ -1,0 +1,2 @@
+#!/bin/bash
+scp * ivan8ivan8@login.ccs.neu.edu:Documents/cs3700/Networks_Projects/Project3/starter-python

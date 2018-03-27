@@ -144,7 +144,7 @@ class Packet(object):
         :param dest: the address is a pair (hostaddr, port)
         :return: the time it sends the packet
         """
-        msg = self.generateData(eof)
+        msg = zlib.compress(self.generateData(eof))
 
         self.logger.log("sending {}\n".format(msg))
 

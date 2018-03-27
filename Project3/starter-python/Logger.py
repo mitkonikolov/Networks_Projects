@@ -9,5 +9,5 @@ class Logger(object):
         sys.stdout.write(string)
 
     def log(self, string):
-        sys.stderr.write("{} [DEBUG] {}\n".format(datetime.datetime.now().strftime("%H:%M:%S.%f"),
+        sys.stderr.write("{} {}\n".format(datetime.datetime.now().strftime("%H:%M:%S.%f"),
                                                   string))

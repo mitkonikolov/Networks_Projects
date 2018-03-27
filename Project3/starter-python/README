@@ -1,0 +1,24 @@
+## High-level approach:
+We first created a list of features that we're planning to implement, talk about the advantage of a feature over another. Then we spent 80% of our time pair programming and 20% of time dividing up the work.
+
+We have also identified the order of the features we want to implement, that is something like the below:
+* packet structure with the Packet class and its functionalities
+* sliding window
+* fast retransmission using duplicate acks
+* adaptive retransmission using RTT with exponential backoff
+* seq number and adv window with a 64 bit field, to prevent from wrap arounds
+* create encapsulations for Packet and PacketLog for both the sender and the receiver to use
+* using CRC32 to detect damaged packets
+* data compression using the zlib library
+
+## Challenges:
+Our main challenge was after we have decided to go with the duplicate ack design choice. We have identified the advantage of using this approach (very fast, less overhead for acks), however, we're also sending more data from the sender even if the receiver already has that packet buffered. So it goes something like this: If the sender sends packet 1, 2, 3, 5, 6, 7... (missing packet 4), the receiver is going to buffer all the packet after 4 but keep acking packet 3 to ask for sender to retransmit packet 4. The sender in this case wouldn't know which packet the receiver have already buffered.
+
+Therefore, the solution we came up with is to include the buffered packets in the ack, so that the sender knows which packets the receiver have already buffered.
+
+One the other hand, we spent a lot of time debugging and making sure our timeouts for each packet are setting correctly. We set a send time when we transmit a packet and use that time to craete our timeout value, but we also need to remember to renew the timeout value when we retransmit the packet. Keep updating the timeout value and making sure it's being updated correctly was a little challenging.
+
+## Testing:
+We have written unit tests for couple of our more complex functions, they're located in the UnitTest.py file. We first implement the function, then we write the tests to make sure the function is doing what it suppose to do. We have identified bugs in advance multiple times before running the test suite by doing this.
+
+Also, using the test script provided with the assignment. We use it to test out overall program correctness and look at the test file itself to debug if a particular test case fails. We have clear logs in our program that logs debug messages to STDERR, we could understand what was going on just by reading the logs and use it to help debug or improve our program.

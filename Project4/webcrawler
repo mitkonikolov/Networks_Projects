@@ -1,0 +1,150 @@
+#!/usr/bin/python -u
+
+
+import sys
+import socket
+
+
+class Webcrawler(object):
+    RESPONSE_LENGTH = 4096
+    USERNAME = sys.argv[1]
+    PASSWORD = sys.argv[2]
+    HOST = "fring.ccs.neu.edu"
+    INIT_URL = "/accounts/login/?next=/fakebook"
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    token = ""
+    session_id = ""
+    location = ""
+    # if the data is chunked length will stay to 0
+    length = 0
+    response = ""
+    chunked = False
+    connection_closed = False
+    #list of urls already parsed
+    blacklist = []
+    #urls to parse
+    whitelist = []
+    flag_count = 0
+
+    def connect(self):
+        self.s.connect(("fring.ccs.neu.edu", 80))
+
+    def get_response(self, url):
+        read = self.s.recv(self.RESPONSE_LENGTH)
+        self.process_headers(read)
+        #connection was closed, drop the data and re-call
+        if self.connection_closed:
+            self.connection_closed = False
+            self.send_get(url)
+            return
+        if self.length > 0:
+            while read.find("</html>") == -1:
+                read += self.s.recv(self.RESPONSE_LENGTH)
+        if self.chunked:
+            #Looks for the end of the html code and a 0 representing no data
+            # left to send
+            while read.find("</html>") == -1 or read.find("\n0") == -1:
+                read += self.s.recv(self.RESPONSE_LENGTH)
+        self.length = 0
+        self.response = read
+        position_of_flag = read.find("<h2 class='secret_flag' "
+                                     "style=\"color:red\">FLAG: ") + 48
+        #flag was found
+        if position_of_flag > 50:
+            print(read[position_of_flag:position_of_flag+64])
+            self.flag_count += 1
+
+    def send_get(self, resource):
+        cookie = "Cookie: sessionid={}".format(self.session_id)
+        connect = "Connection: keep-alive"
+        self.s.sendall("GET {} HTTP/1.1\nHost: {}\n{}\n{}\n\n".format(resource,
+                                                            self.HOST, connect, cookie))
+        self.get_response(resource)
+
+    def send_post(self):
+        content = ("username={}&password={}&csrfmiddlewaretoken={}&next=".format(
+            self.USERNAME, self.PASSWORD, self.token, "/fakebook/"))
+        cookie = "Cookie: csrftoken={}; sessionid={}".format(self.token,
+                                                             self.session_id)
+        self.s.sendall("POST /accounts/login/ HTTP/1.1\nHost: "
+                       "{}\n{}\nContent-Length: {}\n\n{}".format(self.HOST,
+                                                              cookie,
+                                                              len(content),
+                                                              content))
+        self.get_response("/accounts/login/")
+        self.send_get(self.location)
+        self.find_urls(self.response)
+        self.search_for_flags()
+
+    def process_cookie(self, cookie):
+        cookie_elements = cookie.split("; ")
+        cookie_data = cookie_elements[0].split("=")
+        if cookie_data[0] == "csrftoken":
+            self.token = cookie_data[1]
+        else:
+            self.session_id = cookie_data[1]
+
+    def process_headers(self, response):
+        self.chunked = False
+        lines = response.splitlines()
+        saw_empty_line = False
+        for l in lines:
+            if l == "" and not saw_empty_line:
+                saw_empty_line = True
+                continue
+            #non-header data
+            elif (l == "" or l=="47f") and saw_empty_line:
+                break
+            line_elements = l.split(": ")
+            header_name = line_elements[0]
+            if header_name == "Set-Cookie":
+                self.process_cookie(line_elements[1])
+            elif header_name == "Content-Length":
+                self.length = int(line_elements[1])
+            elif header_name == "Location":
+                self.location = line_elements[1]
+            elif header_name == "Transfer-Encoding" and line_elements[1] == "chunked":
+                self.chunked = True
+            #Occurs when a 500 error is seen, or when the connection is closed
+            elif header_name == "Connection" and line_elements[1] == "close":
+                self.s.close()
+                self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.connect()
+                self.connection_closed = True
+
+    def find_between(self,string,first,last):
+        returning = []
+        while string.find(first) != -1:
+            string = string[string.index(first) + len(first):]
+            end = string.index(last)
+            #Only looks for urls that are in fakebook
+            if string[:1] == '/':
+                returning.append(string[:end])
+            string = string[end:]
+        return returning
+
+    def find_urls(self, response):
+        #identifies the urls on a page
+        list_of_urls = self.find_between(response, "<a href=\"", "\">")
+        for l in list_of_urls:
+            if l not in self.blacklist and l not in self.whitelist:
+                #add url to a list of urls to be parsed
+                self.whitelist.append(l)
+
+    def search_for_flags(self):
+        while self.whitelist:
+            l = self.whitelist[0]
+            self.send_get(l)
+            self.find_urls(self.response)
+            self.whitelist.remove(l)
+            self.blacklist.append(l)
+            #printed all 5 flags
+            if self.flag_count == 5:
+                return
+
+
+if __name__ == "__main__":
+    crawler = Webcrawler()
+    crawler.connect()
+    crawler.send_get(crawler.INIT_URL)
+    crawler.send_post()

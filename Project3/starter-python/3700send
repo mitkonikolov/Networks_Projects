@@ -6,6 +6,7 @@
 
 
 import sys
+import zlib
 import socket
 import time
 import datetime
@@ -109,24 +110,21 @@ class Sender(object):
 
 if __name__ == "__main__":
     s = Sender()
+    succ_sent_eof = False
 
     # Now read in data, send packets
     while True:
         s.logger.log("ABOUT TO SLEEP")
 
-        # if s.packet_log.get_sws() > 0:
-        #     s.logger.log("sws is {}".format(s.packet_log.get_sws()))
-        # if s.send_next_packet():
-        #     s.packet_log.update_sws(-1)
         s.send_next_packet()
         # check if all packets have been ACKed first
         s.logger.log("packet timer size: {}".format(len(s.packet_log.packets_timers)))
         if not s.packet_log.still_waiting_acks():
-            break
-
-        # for packet in s.packet_log.retransmit_table(True):
-        #     s.retransmit(packet)
-        # s.update_timeout()
+            if succ_sent_eof:
+                break
+            else:
+                s.send_next_packet(True, "")
+                succ_sent_eof = True
 
         try:
             result = s.sock.recvfrom(s.MSG_SIZE)
@@ -138,7 +136,7 @@ if __name__ == "__main__":
                 (raw_data, addr) = result
                 receival_time = time.time()
 
-                ack = s.packet.check_ack(raw_data)
+                ack = s.packet.check_ack(zlib.decompress(raw_data))
 
                 if ack:
                     dropped_packet = s.packet_log.update_unacked_packets(ack,
@@ -146,14 +144,8 @@ if __name__ == "__main__":
                         json.loads(raw_data)['buffered'])
                     # a packet has been dropped
                     if dropped_packet is not None:
-                        # TODO: this is not getting hit when sender does not get any acks
-                        # something might be wrong with `update_unacked_packets`?
                         s.logger.log("one or more packets are not getting acked, retransmitting those packets...")
                         s.retransmit(dropped_packet)
-                    # packets were sent successfully and timeout needs to be
-                    # updated based on latest sampleRTT
-                    # else:
-                    #     s.update_timeout()
                 for packet in s.packet_log.retransmit_table():
                     s.retransmit(packet)
                 s.update_timeout()
@@ -164,6 +156,8 @@ if __name__ == "__main__":
                 s.retransmit(packet)
             s.update_timeout()
 
-
     s.send_next_packet(True, "")
+    s.send_next_packet(True, "")
+    s.send_next_packet(True, "")
+    s.logger.log("[completed]")
     sys.exit(0)

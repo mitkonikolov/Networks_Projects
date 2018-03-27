@@ -1,0 +1,37 @@
+
+High-level approach
+We started by designing the code to take advantage of the simplicity of object oriented design. 
+After reading the tutorial "HTTP Made Really Easy", we used Google Chrome to go through the website and analyze what HTTP requests the browser
+sent. We identified constants that we would have to use through all our requests. Step-by-step we started going to the index page, then 
+successfully logging in and identifying html links on a page. Gradually, we faced more issues and using the developer tools of chrome we
+found out what needed to be done and replicated the same functionality in our program.
+
+
+Challenges
+The first and most time consuming challenge for us was actually sending our post request in order to successfully log in. We spent a long
+amount of time trying to identify why we would get a HTTP 403. We read on piazza and experimented a lot with adding a variety of headers
+until we found out that we needed to add a Length header to our request. Once we sent this data along with our correct cookie, we were then
+able to successfully log in and continue on with the rest of the project.
+Another significant issue that we faced was dealing with chunks. There were different types of chunks: for some of them the length was given
+in the headers while for other it was not. We needed to learn to identify when the response was chunked and how to address this. So, we spent
+a significant amount of time debugging our code using the terminal and a browser. Eventually, we were able to identify and summarize what 
+exactly needed to be done so we could continue on with the rest of the implementation.
+While we did face other issues a long th way, these two are the ones that definitely stood out.
+
+
+Testing
+The most important way we tested our code in was by running a large number of times. We wrote a script that would run the code for us many
+times so that we could identify whether when the server would randomly return a 500, this could somehow break our code. After running a large
+number of times over 2 days, we did not fail even once so we accepted that our code was able to successfully retrieve our secret flags in
+100% of the cases.
+Along the way as we were developing the code, we would test the smaller chunks of functionality that we had implemented by running it
+multiple times on the server manually. In this way, we were able to successfully identify issues with our code or new functionality that we
+needed to move on.
+
+
+Teamwork
+We started working together well very quickly. We used PyCharm and Github in order to increase our efficiency and for a almost 100% of the
+time we pair-programmed together. We created the design together, identified issues and resolved them in a team.
+
+
+
