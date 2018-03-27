@@ -25,7 +25,7 @@ class Receiver(object):
     # Bind to localhost and an ephemeral port
     UDP_IP = "127.0.0.1"
     UDP_PORT = 0
-    TIMEOUT = 0.8
+    TIMEOUT = 0.1
 
     # Set up the socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -42,6 +42,7 @@ class Receiver(object):
 if __name__ == "__main__":
     r = Receiver()
     base_is_set = False
+    acked_eof = False
 
     # Now listen for packets
     while True:
@@ -53,7 +54,7 @@ if __name__ == "__main__":
                 (data, addr) = result
 
                 try:
-                    decoded = json.loads(data)
+                    decoded = json.loads(zlib.decompress(data))
                     r.address = addr
 
                     # corrupted files
@@ -61,10 +62,17 @@ if __name__ == "__main__":
                         r.logger.log("bad crc")
                         continue
 
-                    # If the EOF flag is set, exit
-                    if (decoded['eof']):
+                    if (decoded['eof'] and acked_eof==True):
                         r.logger.log("[completed]")
                         sys.exit(0)
+
+                    # If the EOF flag is set, exit
+                    if (decoded['eof']):
+                        acked_eof = True
+                        r.packet = Packet("", "ack", decoded["sequence"],
+                                          decoded["sequence"])
+                        r.packet.send_packet(r.sock, addr)
+
 
                     if not base_is_set:
                         r.base = int(decoded["base"])
@@ -75,7 +83,8 @@ if __name__ == "__main__":
 
                     # Send back an ack to the sender
                     if ack is not None:
-                        r.packet = Packet("", "ack", ack, ack)
+                        r.packet = Packet("", "ack", ack[0], ack[0])
+                        r.packet.set_buffered(ack[1])
 
                         r.logger.log("ABOUT TO SEND {}".format(r.packet.generateData()))
 
@@ -91,15 +100,6 @@ if __name__ == "__main__":
                         else:
                             r.logger.log("successfully sent an ack")
 
-                    # If there is data, we accept it and print it out
-                    # TODO: change this to make sure we're printing in order
-                    # if (decoded['data']):
-                        # If we receive data, we assume it's in-order
-                        # You will need to do much more here
-                        # r.logger.log("[recv data] " + str(decoded['sequence']) + " (" +
-                        #              str(len(decoded['data'])) + ") ACCEPTED (in-order)")
-                        # r.logger.log_data(decoded['data'])
-
                 except (ValueError, KeyError, TypeError) as e:
                     r.logger.log("[recv corrupt packet]")
                     print(e)
@@ -114,5 +114,6 @@ if __name__ == "__main__":
             # if the socket timesout before any packets arrive r.address
             # would be empty
             if r.address != "":
+                prev_good_packet.set_buffered(r.packet_log.get_prev_buffered())
                 prev_good_packet.send_packet(r.sock, r.address)
             #sys.exit(-1)
