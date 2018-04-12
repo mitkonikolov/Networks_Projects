@@ -12,7 +12,7 @@ class Rpc:
         self.prev_last_ind = prev_last_ind
         self.prev_last_term = prev_last_term
 
-        # "append", "vote", "heart"
+        # "append", "vote", "heart", "put", "get"
         self.type = type
 
         # Append RPC

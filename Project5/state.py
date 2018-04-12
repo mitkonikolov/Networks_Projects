@@ -5,7 +5,7 @@ class State:
 
     # TODO Clarify committed, applied, replicated
 
-    def __init__(self):
+    def __init__(self, server):
         # Persistent State on All Servers
         self.current_term = 0
         # candidate ID
@@ -25,3 +25,16 @@ class State:
         self.next_index = {}
         # server -> highest log entry known to be replicated on the server
         self.match_index = {}
+
+        # state can be leader, follower, candidate
+        self.state = "follower"
+
+        self.server = server
+        self.vote_count = 0
+
+    def prepare_for_application(self):
+        self.state.state = "candidate"
+        self.current_term += 1
+        self.vote_count += 1
+        self.voted_for = self.server.my_id
+        return {"src": self.voted_for, "dst": "FFFF", "leader": self.voted_for, "type": "vote"}
