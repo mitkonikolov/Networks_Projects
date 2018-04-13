@@ -6,11 +6,11 @@ class Rpc:
                                            type, entries=None):
         self.term = term
 
-        self.leader_cand_id = leader_cand_id
+        #self.leader_cand_id = leader_cand_id
 
         # prev if a leader and last if a candidate
-        self.prev_last_ind = prev_last_ind
-        self.prev_last_term = prev_last_term
+        # self.prev_last_ind = 0
+        # self.prev_last_term = 0
 
         # "append", "vote", "heart", "put", "get"
         self.type = type
@@ -21,3 +21,5 @@ class Rpc:
             self.entries = []
         else:
             self.entries = entries
+
+

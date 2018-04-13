@@ -76,10 +76,3 @@ class Server:
 
         if msg['type'] == 'heart' and msg['leader'] == self.leader:
             self.last = time.time() *1000.0
-
-
-
-
-
-
-
