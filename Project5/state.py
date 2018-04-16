@@ -36,6 +36,22 @@ class State():
         # in ms
         self.last_heartbeat = 0
 
+        self.num_commits = 0
+
+        # dictionary storing
+        self.dict = {}
+
+        self.indexes = {}
+
+        self.prevLogIndex = -1
+        self.prevLogTerm = None
+        self.LogIndex = 0
+        self.LogTerm = None
+        self.entries = []
+        self.num_commits = {}
+        self.prepared_message = {}
+        self.leaderCommit = 0
+
     def prepare_for_application(self):
         self.state = "candidate"
         self.term += 1
@@ -47,6 +63,7 @@ class State():
     def set_leader(self):
         self.state = "leader"
         # the election is over
+        self.index_set()
         self.__reset_vote_stats()
 
     def add_vote(self):
@@ -89,3 +106,68 @@ class State():
     def __reset_vote_stats(self):
         self.vote_count = 0
         self.voted_for = None
+
+    def redirect_to_leader(self, msg):
+        mess = {"src": self.server.my_id, "dst": msg['src'],
+                "leader":self.server.leader, "type": "redirect", "MID": msg['MID']}
+        return mess
+
+    def get_value(self, msg):
+        mess = {"src": self.server.my_id, "dst": msg['src'],
+                "leader": self.server.leader, "type": "ok", "MID": msg['MID'],
+                "value": self.dict[msg['key']]}
+        return mess
+
+    def prepare_commit_follower(self, msg):
+        return self.reply_rpc(msg)
+
+    def commit_success(self,msg):
+        mess = {"src": self.server.my_id, "dst": msg['src'],
+                "leader": self.server.leader, "type": "ok", "MID": msg['MID']}
+        self.follower_commit()
+        self.prepared_message[self.LogIndex] = mess
+        self.num_commits[self.LogIndex] = 1
+        self.LogIndex += 1
+
+    def confirm_commit(self):
+        mess = {"src": self.server.my_id, "dst": "FFFF",
+                "leader": self.server.my_id, "type": "conf"}
+        self.follower_commit()
+        return mess
+
+    def follower_commit(self):
+        self.dict[self.LogTerm[0]] = self.LogTerm[1]
+        self.entries.append(self.LogTerm)
+
+    def prepare_keys(self, msg):
+        self.prevLogTerm = self.LogTerm
+        self.prevLogIndex = self.LogIndex
+        self.LogTerm = (msg['key'], msg['value'])
+
+    def index_set(self):
+        for replica in range(len(self.server.replica_ids)):
+            self.indexes[self.server.replica_ids[replica]] = self.LogIndex
+
+    # plt = the previous index the leader has for the follower
+    # pli = the current index of the follower
+    def append_entries_rpc(self, server):
+        mess = {"src": self.server.my_id, "dst": server,
+                "leader": self.server.my_id, "type": "rpc", "term": self.term,
+                "plt": self.indexes[server],
+                "pli": self.LogIndex,
+                "entries": self.entries[self.indexes[server]:],
+                "commitIndex": self.leaderCommit}
+        return mess
+
+    def send_fail(self, msg):
+        mess = {"src": self.server.my_id, "dst": msg['src'],
+                "leader": self.server.leader, "type": "fail", "MID": msg['MID']}
+        return mess
+
+    def reply_rpc(self, msg):
+        self.entries[msg["plt"]:] = msg['entries']
+        self.leaderCommit = msg['commitIndex']
+        self.LogTerm = msg['plt']
+        mess = {"src": self.server.my_id, "dst": msg['leader'],
+                "leader": msg['leader'], "type": "prep", "pli": msg['pli']}
+        return mess

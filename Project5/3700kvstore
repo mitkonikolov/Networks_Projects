@@ -17,7 +17,7 @@ class Server:
         self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
         self.sock.connect(self.my_id)
 
-        self.leader = "0000"
+        self.leader = "FFFF"
         self.state = State(self)
         self.reset_timeout()
         self.reset_last()
@@ -119,12 +119,6 @@ class Server:
                 (self.my_type(msg_type) and msg['term'] < self.state.term):
             return
 
-        # forward on to the leader
-        # if msg['type'] in ['get', 'put']:
-        #     mess = {"src": self.my_id, "dst": msg["src"], "leader": self.leader,
-        #             "type": "fail", "MID": msg["MID"]}
-        #     self.sock.send(json.dumps(mess))
-
         # the current term already has a candidate
         if msg_type == 'heart' and self.state.is_candidate():
             self.state.go_back_to_follower()
@@ -153,6 +147,50 @@ class Server:
                     self.log("won election and became leader")
                 # reset timer to wait enough for votes to be cast
                 self.reset_last()
+
+        elif msg_type == 'get':
+            if self.state.is_leader():
+                self.send(self.state.get_value(msg))
+
+            elif self.state.is_follower():
+                if self.leader == "FFFF":
+                    self.send(self.state.send_fail(msg))
+                else:
+                    self.send(self.state.redirect_to_leader(msg))
+
+        elif msg_type == 'put':
+            if self.state.is_leader():
+                self.state.prepare_keys(msg)
+                for server in range(len(self.replica_ids)):
+                    self.send(self.state.append_entries_rpc(self.replica_ids[server]))
+                self.state.commit_success(msg)
+
+            elif self.state.is_follower():
+                if self.leader == "FFFF":
+                    self.send(self.state.send_fail(msg))
+                else:
+                    self.send(self.state.redirect_to_leader(msg))
+
+        elif msg_type == 'prep':
+            if self.state.is_leader():
+                prev = self.state.indexes[msg['src']]
+                self.state.indexes[msg['src']] = msg['pli']
+                for n in range(prev, msg['pli'] + 1):
+                    self.state.num_commits[n] += 1
+                    if self.state.num_commits[n] == len(self.replica_ids)/2:
+                        print("CONFIRMATION " + str(n))
+                        self.send(self.state.prepared_message[n])
+                        self.state.commit_index += 1
+            elif self.state.is_follower():
+                self.send(self.state.prepare_commit_follower(msg))
+
+        elif msg_type == 'rpc':
+            if self.state.is_follower():
+                self.send(self.state.reply_rpc(msg))
+
+        elif msg_type == 'conf':
+            self.state.follower_commit()
+
 
 
     def become_leader(self):
