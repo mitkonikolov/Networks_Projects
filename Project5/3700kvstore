@@ -22,6 +22,9 @@ class Server:
         self.reset_timeout()
         self.reset_last()
 
+        # the data stored on this server
+        self.data = {}
+
     def get_timeout(self):
         return self.timeout
 
@@ -53,16 +56,6 @@ class Server:
                 if len(msg_raw) == 0: continue
 
                 self.process_mess(msg_raw)
-                # msg = json.loads(msg_raw)
-                #
-                # # For now, ignore get() and put() from clients
-                # if msg['type'] in ['get', 'put']:
-                #     pass
-                #
-                # # Handle noop messages. This may be removed from your final implementation
-                # elif msg['type'] == 'noop':
-                #     print '%s received a NOOP from %s' % (
-                #     msg['dst'], msg['src'])
 
             clock = time.time() * 1000.0
             if self.state.state != "leader" and clock - self.last > \
@@ -104,13 +97,15 @@ class Server:
         self.reset_last()
 
     def send(self, msg):
+        # if "MID" in msg:
+        #     self.log(msg)
         self.sock.send(json.dumps(msg))
 
     def process_mess(self, msg_raw):
         if len(msg_raw) == 0:
             return
 
-        print(self.log("received mess {}".format(msg_raw)))
+        # print(self.log("received mess {}".format(msg_raw)))
         msg = json.loads(msg_raw)
         msg_type = msg['type']
         # the message is from self, not for self, or from an old term
@@ -130,29 +125,100 @@ class Server:
             self.state.go_back_to_follower()
         # a message from the current leader was received
         if msg_type == 'heart' and msg['leader'] == self.leader:
-            self.log("received beat from {}".format(self.leader))
+            #self.log("received beat from {}".format(self.leader))
             self.reset_last()
         # the election was won so self needs to update its leader
         elif msg_type == 'won':
             self.leader = msg['leader']
-            self.log("election was won updating leader to {}"
-                     .format(self.leader))
+            #self.log("election was won updating leader to {}"
+            #         .format(self.leader))
         elif msg_type == 'vote':
             # self is not a candidate and it has not voted
             if self.state.voted_for is None and self.state.is_follower():
                 self.send(self.state.vote(msg))
-                self.log("{} voted for {}".format(self.my_id, msg['leader']))
+                # self.log("{} voted for {}".format(self.my_id, msg['leader']))
                 # a message from a candidate was received
                 self.reset_last()
             # self is a candidate and is getting a vote
             elif self.state.is_candidate() and msg['leader'] == self.my_id:
                 self.state.add_vote()
-                self.log("there are {} replicas".format(len(self.replica_ids)))
+                # self.log("there are {} replicas".format(len(self.replica_ids)))
                 if self.state.vote_count > (len(self.replica_ids)/2):
                     self.become_leader()
-                    self.log("won election and became leader")
+                    # self.log("won election and became leader")
                 # reset timer to wait enough for votes to be cast
                 self.reset_last()
+        elif msg_type == 'get':
+            if self.state.is_leader():
+                key = msg['key']
+                if key in self.data:
+                    value = self.data[key]
+                    self.send(self.state.gen_mess(msg, "ok", value))
+                else:
+                    # TODO confirm that this is indeed an OK mess
+                    self.send(self.state.gen_mess(msg, "ok", ""))
+            # no established leader
+            elif self.state.is_candidate():
+                self.send(self.state.gen_mess(msg, "fail"))
+            elif self.state.is_follower():
+                # we do not know the leader
+                if self.leader == "FFFF":
+                    self.send(self.state.gen_mess(msg, "fail"))
+                else:
+                    self.send(self.state.gen_mess(msg, "redirect"))
+        elif msg_type == "put":
+            if self.state.is_leader():
+                self.state.add_to_log(msg)
+                self.commit(msg)
+                # while True:
+                #     if self.commit(msg):
+                #         self.apply(msg)
+                #         break
+                # self.send(self.state.gen_mess(msg, "ok"))
+            elif self.state.is_candidate():
+                self.send(self.state.gen_mess(msg, 'fail'))
+            elif self.state.is_follower():
+                if self.leader == "FFFF":
+                    self.send(self.state.gen_mess(msg, 'fail'))
+                else:
+                    self.send(self.state.gen_mess(msg, "redirect"))
+        elif msg_type == "append":
+            # self.log("got an append {}".format(msg))
+            # checks if the prevLogIndx/Term is correctly in log
+            if self.state.log_consistency(msg):
+                self.state.append_to_log(msg)
+                append_succ = self.state.gen_append_succ(msg)
+                self.send(append_succ)
+                # self.log(" sending an append succ {}".format(append_succ))
+                # self.log("{}\n\n".format(self.state.log))
+            else:
+                self.send(self.state.gen_append_reject())
+        elif msg_type == "append_succ":
+            # self.log("got an append_succ {}".format(msg))
+            #assert(1==2)
+            # check whether the message can be committed
+            if self.state.incr_count_for(msg):
+                updated_entries = self.state.get_new_committed_entries()
+                self.update_data(updated_entries)
+                all_messages = self.state.gen_new_committed_messages()
+                for m in all_messages:
+                    self.send(m)
+                self.state.reset_committed_changed()
+
+    def update_data(self, updated_entries):
+        for entry_id in updated_entries:
+            entry = self.state.log[entry_id]
+            try:
+                self.data[entry['key']] = entry['value']
+            except TypeError:
+                print("Entry is {}".format(entry))
+                exit()
+
+
+    def commit(self, msg):
+        for replica_id in self.replica_ids:
+            append_msg = self.state.get_append(replica_id)
+            self.send(append_msg)
 
 
     def become_leader(self):
