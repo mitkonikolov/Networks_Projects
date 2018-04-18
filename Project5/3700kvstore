@@ -32,7 +32,7 @@ class Server:
         return self.timeout
 
     def reset_timeout(self):
-        self.timeout = int((random.random() * 150) + 150)
+        self.timeout = int((random.random() * 150) + 250)
 
     def reset_last(self):
         """Sets the last time a heartbeat has been sent to the current time
@@ -129,9 +129,11 @@ class Server:
                 (self.my_type(msg_type) and msg['term'] < self.state.term):
             return
 
-        if (self.my_type(msg_type) and msg['term'] > self.state.term):
+
+        if (msg_type!='vote' and 'term' in msg and msg['term'] >
+        self.state.term):
             self.state.term = msg['term']
-            self.state.go_back_to_follower()
+            if not self.state.is_follower(): self.state.go_back_to_follower()
 
         # forward on to the leader
         # if msg['type'] in ['get', 'put']:
@@ -152,11 +154,15 @@ class Server:
             self.leader = msg['leader']
             # self.log("election was won updating leader to {}"
     #         .format(self.leader))
-        elif msg_type == 'vote':
+            self.state.go_back_to_follower()
+            self.reset_last()
+        elif msg_type == 'vote' and not self.state.is_leader():
             # self is not a candidate and it has not voted
             if self.state.voted_for is None and self.state.is_follower() \
                     and msg['term'] >= self.state.term and \
                     msg['log_length'] >= len(self.state.log):
+                self.log(" vote for {} sending {}".format(msg['src'],
+                                                          self.state.vote(msg)))
                 self.send(self.state.vote(msg))
                 # self.log("{} voted for {}".format(self.my_id, msg['leader']))
                 # a message from a candidate was received
@@ -164,6 +170,8 @@ class Server:
             # self is a candidate and is getting a vote
             elif self.state.is_candidate() and msg['leader'] == self.my_id:
                 self.state.add_vote()
+                self.log(" received vote from {} now have {} votes".format(
+                    msg['src'], self.state.vote_count))
                 # self.log("there are {} replicas".format(len(self.replica_ids)))
                 if self.state.vote_count > (len(self.replica_ids)/2):
                     self.become_leader()
@@ -172,6 +180,8 @@ class Server:
                 self.reset_last()
                 # current time in ms
                 self.replica_time[msg['src']] = time.time() * 1000
+            else: self.log(" was asked to vote for {}".format(msg['src']))
+
         elif msg_type == 'get':
             if self.state.is_leader():
                 key = msg['key']
@@ -255,7 +265,7 @@ class Server:
         """
         for replica_id in self.replica_ids:
             curr_time = time.time() * 1000
-            if (curr_time - self.replica_time[replica_id]) < 2500:
+            if (curr_time - self.replica_time[replica_id]) > 1500:
                 append_msg = self.state.get_append(replica_id)
                 if not append_msg:
                     continue
