@@ -25,6 +25,9 @@ class Server:
         # the data stored on this server
         self.data = {}
 
+        # last time a leader heard from a replica
+        self.replica_time = {}
+
     def get_timeout(self):
         return self.timeout
 
@@ -32,6 +35,10 @@ class Server:
         self.timeout = int((random.random() * 150) + 150)
 
     def reset_last(self):
+        """Sets the last time a heartbeat has been sent to the current time
+        in miliseconds.
+        :return: None
+        """
         self.last = time.time() * 1000
 
     def get_state(self):
@@ -48,8 +55,12 @@ class Server:
             ready = select.select([self.sock], [], [], 0.1)[0]
             # check whether a heartbeat needs to be sent
             mess = self.state.check_heart()
+            # heartbeat does indeed need to be sent
             if mess is not None:
                 self.send(mess)
+
+            if self.state.is_leader(): self.commit()
+
             if self.sock in ready:
                 msg_raw = self.sock.recv(32768)
 
@@ -60,9 +71,9 @@ class Server:
             clock = time.time() * 1000.0
             if self.state.state != "leader" and clock - self.last > \
                     self.timeout:
-                print("{} and timeout is  {}".format((clock - self.last),
-                                                   self.timeout))
-                print("timedout, became candidate  " + self.my_id)
+                # self.log("{} and timeout is  {}".format((clock - self.last),
+                #                                    self.timeout))
+                # self.log("timedout, became candidate  " + self.my_id)
                 self.become_candidate()
 
 
@@ -90,9 +101,13 @@ class Server:
             #     self.become_candidate()
 
     def become_candidate(self):
+        """Generates message requesting vote, sets current state to candidate
+        and votes for itself
+        :return: None
+        """
+        self.log(" became a candidate")
         msg = self.state.prepare_for_application()
         self.send(msg)
-        print(json.dumps(msg))
         # reset the timer
         self.reset_last()
 
@@ -114,6 +129,10 @@ class Server:
                 (self.my_type(msg_type) and msg['term'] < self.state.term):
             return
 
+        if (self.my_type(msg_type) and msg['term'] > self.state.term):
+            self.state.term = msg['term']
+            self.state.go_back_to_follower()
+
         # forward on to the leader
         # if msg['type'] in ['get', 'put']:
         #     mess = {"src": self.my_id, "dst": msg["src"], "leader": self.leader,
@@ -123,18 +142,21 @@ class Server:
         # the current term already has a candidate
         if msg_type == 'heart' and self.state.is_candidate():
             self.state.go_back_to_follower()
+            self.leader = msg['leader']
         # a message from the current leader was received
         if msg_type == 'heart' and msg['leader'] == self.leader:
-            #self.log("received beat from {}".format(self.leader))
+            # self.log("received beat from {}".format(self.leader))
             self.reset_last()
         # the election was won so self needs to update its leader
         elif msg_type == 'won':
             self.leader = msg['leader']
-            #self.log("election was won updating leader to {}"
-            #         .format(self.leader))
+            # self.log("election was won updating leader to {}"
+    #         .format(self.leader))
         elif msg_type == 'vote':
             # self is not a candidate and it has not voted
-            if self.state.voted_for is None and self.state.is_follower():
+            if self.state.voted_for is None and self.state.is_follower() \
+                    and msg['term'] >= self.state.term and \
+                    msg['log_length'] >= len(self.state.log):
                 self.send(self.state.vote(msg))
                 # self.log("{} voted for {}".format(self.my_id, msg['leader']))
                 # a message from a candidate was received
@@ -148,6 +170,8 @@ class Server:
                     # self.log("won election and became leader")
                 # reset timer to wait enough for votes to be cast
                 self.reset_last()
+                # current time in ms
+                self.replica_time[msg['src']] = time.time() * 1000
         elif msg_type == 'get':
             if self.state.is_leader():
                 key = msg['key']
@@ -156,7 +180,7 @@ class Server:
                     self.send(self.state.gen_mess(msg, "ok", value))
                 else:
                     # TODO confirm that this is indeed an OK mess
-                    self.send(self.state.gen_mess(msg, "ok", ""))
+                    self.send(self.state.gen_mess(msg, "ok", "NA"))
             # no established leader
             elif self.state.is_candidate():
                 self.send(self.state.gen_mess(msg, "fail"))
@@ -169,12 +193,7 @@ class Server:
         elif msg_type == "put":
             if self.state.is_leader():
                 self.state.add_to_log(msg)
-                self.commit(msg)
-                # while True:
-                #     if self.commit(msg):
-                #         self.apply(msg)
-                #         break
-                # self.send(self.state.gen_mess(msg, "ok"))
+                self.commit()
             elif self.state.is_candidate():
                 self.send(self.state.gen_mess(msg, 'fail'))
             elif self.state.is_follower():
@@ -183,19 +202,22 @@ class Server:
                 else:
                     self.send(self.state.gen_mess(msg, "redirect"))
         elif msg_type == "append":
-            # self.log("got an append {}".format(msg))
+
+            if self.state.is_candidate():
+                self.state.go_back_to_follower()
+                self.leader = msg['leader']
+
             # checks if the prevLogIndx/Term is correctly in log
             if self.state.log_consistency(msg):
                 self.state.append_to_log(msg)
+                self.state.update_committed(msg)
+                self.update_data(self.state.get_new_committed_entries())
+                self.state.reset_ready_to_commit()
                 append_succ = self.state.gen_append_succ(msg)
                 self.send(append_succ)
-                # self.log(" sending an append succ {}".format(append_succ))
-                # self.log("{}\n\n".format(self.state.log))
             else:
                 self.send(self.state.gen_append_reject())
-        elif msg_type == "append_succ":
-            # self.log("got an append_succ {}".format(msg))
-            #assert(1==2)
+        elif msg_type == "append_succ" and self.state.is_leader():
             # check whether the message can be committed
             if self.state.incr_count_for(msg):
                 updated_entries = self.state.get_new_committed_entries()
@@ -203,9 +225,21 @@ class Server:
                 all_messages = self.state.gen_new_committed_messages()
                 for m in all_messages:
                     self.send(m)
-                self.state.reset_committed_changed()
+                self.state.reset_ready_to_commit()
+            # current time in ms
+            self.replica_time[msg['src']] = time.time() * 1000
+        elif msg_type == "append_reject" and self.state.is_leader():
+            if self.state.decr_next_index(msg['src']):
+                # current time in ms
+                self.replica_time[msg['src']] = time.time() * 1000
+            else:
+                raise RuntimeError("Incorrect next_index for replica")
 
     def update_data(self, updated_entries):
+        """Performs the change requested by the entry.
+        :param updated_entries: a set of entries to be performed
+        :return: None
+        """
         for entry_id in updated_entries:
             entry = self.state.log[entry_id]
             try:
@@ -215,9 +249,23 @@ class Server:
                 exit()
 
 
-    def commit(self, msg):
+    def commit(self):
+        """Sends an append to log message to all followers.
+        :return: None
+        """
         for replica_id in self.replica_ids:
-            append_msg = self.state.get_append(replica_id)
+            curr_time = time.time() * 1000
+            if (curr_time - self.replica_time[replica_id]) < 2500:
+                append_msg = self.state.get_append(replica_id)
+                if not append_msg:
+                    continue
+            else:
+                append_msg = {"src": self.my_id, "dst": replica_id,
+                                     "leader": self.leader.encode(
+                                         "utf-8").strip(), "type": "append",
+                "term": -1, "prevLogIndx": -1,
+                "prevLogTerm": -1, "entries": [],
+                "leaderCommit": self.state.commit_index}
             self.send(append_msg)
 
 
@@ -228,6 +276,9 @@ class Server:
         self.leader = self.my_id
         self.state.set_leader()
         self.send(self.state.gen_heartbeat(True))
+        self.log(" became a leader")
+        for replica_id in self.replica_ids:
+            self.replica_time[replica_id] = (time.time()*1000)
 
     def log(self, mess, error=False):
         if error:
@@ -239,6 +290,18 @@ class Server:
         return msg_type == 'heart' or msg_type == 'won' or msg_type == \
                'vote' or msg_type == 'append'
 
+
+
+
 if __name__ =="__main__":
     s = Server()
     s.listen()
+
+    # TODO
+    #   TODO Elections
+    #           +DONE add checking log length before voting
+    #   +DONE Add an append failure if the prevlogindex is different from what
+    #           we have in the log as a follower
+
+    # TODO Add info about committed messages into heartbeats as well and have
+    #  the followers utilize it
