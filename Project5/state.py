@@ -5,7 +5,7 @@ class State():
 
     # TODO Clarify committed, applied, replicated
     # a leader broadcasts every 50ms
-    BROADCAST_TIMEOUT = 25
+    BROADCAST_TIMEOUT = 150
 
     def __init__(self, server):
 

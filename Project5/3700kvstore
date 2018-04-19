@@ -33,6 +33,8 @@ class Server:
         # last time sent to replica
         self.replica_sent_time = {}
 
+        self.all_messages = {}
+
 
     def get_timeout(self):
         return self.timeout
@@ -99,6 +101,7 @@ class Server:
     def send(self, msg):
         # if "MID" in msg:
         #     self.log(msg)
+        # file = open("out.txt", "a")
         dst = msg['dst']
         # last time self sent to this replica
         self.replica_sent_time[dst] = time.time()*1000
@@ -106,6 +109,13 @@ class Server:
             self.log("sending {} mid for {}".format(msg['type'],
                                                          msg['MID']))
         self.sock.send(json.dumps(msg))
+        if msg['type'] in self.all_messages:
+            self.all_messages[msg['type']] += 1
+        else:
+            self.all_messages[msg['type']] = 1
+        # file.write("sent {} of type {}\n"
+        #            .format(self.all_messages[msg['type']], msg['type']))
+        # file.close()
 
     def process_mess(self, msg_raw):
         if len(msg_raw) == 0:
