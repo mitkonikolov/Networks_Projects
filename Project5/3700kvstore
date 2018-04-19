@@ -17,7 +17,7 @@ class Server:
         self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
         self.sock.connect(self.my_id)
 
-        self.leader = "0000"
+        self.leader = "FFFF"
         self.state = State(self)
         self.reset_timeout()
         self.reset_last()
@@ -129,6 +129,11 @@ class Server:
                 (self.my_type(msg_type) and msg['term'] < self.state.term):
             return
 
+<<<<<<< HEAD
+=======
+        self.log(msg)
+
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742
 
         if (msg_type!='vote' and 'term' in msg and msg['term'] >
         self.state.term):
@@ -314,4 +319,8 @@ if __name__ =="__main__":
     #           we have in the log as a follower
 
     # TODO Add info about committed messages into heartbeats as well and have
+<<<<<<< HEAD
     #  the followers utilize it
+=======
+    #  the followers utilize it
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742

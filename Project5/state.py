@@ -170,7 +170,15 @@ class State():
             return False
 
         # get all entries starting at next index for the replica inclusive
+<<<<<<< HEAD
         entries = self.log[next_replica_indx:]
+=======
+        entries = []
+        i = next_replica_indx
+        while i < len(self.log) - 1:
+            entries.append(self.log[i])
+            i+=1
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742
         if next_replica_indx>0:
             try:
                 prevLogTerm = self.log[next_replica_indx-1]['term']
@@ -181,9 +189,17 @@ class State():
                 exit()
         # index is 0
         else:
+<<<<<<< HEAD
             prevLogTerm = self.term
             # the follower saves the message at prevLogIndx + 1 = 0
             prevLogIndx = -1
+=======
+            entries = self.log
+            prevLogTerm = self.term
+            # the follower saves the message at prevLogIndx + 1 = 0
+            prevLogIndx = -1
+        self.server.log("QWERTY\n\n" + str(entries)+"\n" + str(next_replica_indx) + "\n\n")
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742
         mess = {"src": self.server.my_id, "dst": replica_id, "leader":
             self.server.leader.encode("utf-8").strip(), "type": "append",
                 "term": self.term, "prevLogIndx": prevLogIndx,
@@ -253,6 +269,11 @@ class State():
         new_next_index = msg['next_index']
         self.next_index[replica_id] = new_next_index
         entry_id = first_entry_ind
+<<<<<<< HEAD
+=======
+        self.server.log("entry id {} new next indx {} curr commit ind {}"
+                        .format(entry_id, new_next_index, self.commit_index))
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742
         # go through all the messages that this message says were
         # successfully appended to a follower's log
         while entry_id < new_next_index:
@@ -264,6 +285,10 @@ class State():
                 print("-----------------ERROR---------------")
                 print(len(self.entries_count))
                 raise RuntimeError
+<<<<<<< HEAD
+=======
+        self.server.log("comm indx {}".format(self.commit_index))
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742
         return len(self.ready_to_commit) > 0
 
     def check_ready_for_commit(self, entry_id):
@@ -324,5 +349,9 @@ class State():
             if curr_commit >= leader_commit_index:
                 break
             self.ready_to_commit.append(curr_commit)
+<<<<<<< HEAD
         self.commit_index = curr_commit
 
+=======
+        self.commit_index = curr_commit
+>>>>>>> 06a14af89b4a217fff1177f15df062c8f2efc742
