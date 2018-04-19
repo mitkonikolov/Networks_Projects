@@ -5,7 +5,7 @@ class State():
 
     # TODO Clarify committed, applied, replicated
     # a leader broadcasts every 50ms
-    BROADCAST_TIMEOUT = 50
+    BROADCAST_TIMEOUT = 30
 
     def __init__(self, server):
 
@@ -89,8 +89,8 @@ class State():
         :return: the next heartbeat or None
         """
         if self.state=="leader" and \
-                ((time.time()*1000) - self.last_heartbeat >
-                 State.BROADCAST_TIMEOUT):
+                ((time.time()*1000) - self.last_heartbeat) > \
+                State.BROADCAST_TIMEOUT:
             return self.gen_heartbeat()
 
     def is_follower(self):

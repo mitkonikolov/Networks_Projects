@@ -142,33 +142,21 @@ class Server:
         #     self.sock.send(json.dumps(mess))
 
         # the current term already has a candidate
-        if msg_type == 'heart' and self.state.is_candidate():
-            self.state.go_back_to_follower()
-            self.leader = msg['leader']
-        # a message from the current leader was received
-        if msg_type == 'heart' and msg['leader'] == self.leader:
-            # self.log("received beat from {}".format(self.leader))
+        if msg_type == 'heart':
+            if self.state.is_candidate():
+                self.state.go_back_to_follower()
+                self.leader = msg['leader']
             self.reset_last()
         # the election was won so self needs to update its leader
-        elif msg_type == 'won':
+        elif msg_type == 'won' and msg['term']==self.state.term:
             self.leader = msg['leader']
             # self.log("election was won updating leader to {}"
     #         .format(self.leader))
             self.state.go_back_to_follower()
             self.reset_last()
         elif msg_type == 'vote' and not self.state.is_leader():
-            # self is not a candidate and it has not voted
-            if self.state.voted_for is None and self.state.is_follower() \
-                    and msg['term'] >= self.state.term and \
-                    msg['log_length'] >= len(self.state.log):
-                self.log(" vote for {} sending {}".format(msg['src'],
-                                                          self.state.vote(msg)))
-                self.send(self.state.vote(msg))
-                # self.log("{} voted for {}".format(self.my_id, msg['leader']))
-                # a message from a candidate was received
-                self.reset_last()
             # self is a candidate and is getting a vote
-            elif self.state.is_candidate() and msg['leader'] == self.my_id:
+            if self.state.is_candidate() and msg['leader'] == self.my_id:
                 self.state.add_vote()
                 self.log(" received vote from {} now have {} votes".format(
                     msg['src'], self.state.vote_count))
@@ -176,12 +164,24 @@ class Server:
                 if self.state.vote_count > (len(self.replica_ids)/2):
                     self.become_leader()
                     # self.log("won election and became leader")
-                # reset timer to wait enough for votes to be cast
-                self.reset_last()
                 # current time in ms
                 self.replica_time[msg['src']] = time.time() * 1000
-            else: self.log(" was asked to vote for {}".format(msg['src']))
-
+                self.reset_last()
+            # self is not a candidate and it has not voted
+            elif msg['term'] > self.state.term or \
+                    (self.state.voted_for is None and
+                     self.state.is_follower() and msg['term'] == self.state.term):
+                if 'log_length' in msg and \
+                        msg['log_length'] >= len(self.state.log):
+                    self.log(" vote for {} sending {}".format(msg['src'],
+                                                              self.state.vote(msg)))
+                    self.send(self.state.vote(msg))
+                self.state.term = msg['term']
+                # else:
+                #     self.log("didn't vote for {} cand's term {} log len"
+                #              " {}".format(msg['src'], msg['term'],
+                #                           msg['log_length']))
+                self.reset_last()
         elif msg_type == 'get':
             if self.state.is_leader():
                 key = msg['key']
@@ -269,14 +269,14 @@ class Server:
                 append_msg = self.state.get_append(replica_id)
                 if not append_msg:
                     continue
-            else:
-                append_msg = {"src": self.my_id, "dst": replica_id,
-                                     "leader": self.leader.encode(
-                                         "utf-8").strip(), "type": "append",
-                "term": -1, "prevLogIndx": -1,
-                "prevLogTerm": -1, "entries": [],
-                "leaderCommit": self.state.commit_index}
-            self.send(append_msg)
+            # else:
+            #     append_msg = {"src": self.my_id, "dst": replica_id,
+            #                          "leader": self.leader.encode(
+            #                              "utf-8").strip(), "type": "append",
+            #     "term": -1, "prevLogIndx": -1,
+            #     "prevLogTerm": -1, "entries": [],
+            #     "leaderCommit": self.state.commit_index}
+                self.send(append_msg)
 
 
     def become_leader(self):
@@ -294,7 +294,7 @@ class Server:
         if error:
             print("[err] {}".format(mess))
         else:
-            print("[mess] {} {}".format(self.my_id, mess))
+            print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
 
     def my_type(self, msg_type):
         return msg_type == 'heart' or msg_type == 'won' or msg_type == \
