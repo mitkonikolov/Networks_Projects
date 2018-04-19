@@ -101,7 +101,7 @@ class State():
     def go_back_to_follower(self):
         self.state = "follower"
         self.__reset_vote_stats()
-        self.server.log(" went back to follower")
+        # self.server.log(" went back to follower")
 
     def __reset_vote_stats(self):
         self.vote_count = []
@@ -118,17 +118,17 @@ class State():
             return {"src": self.server.my_id, "dst": msg[
                 'src'].encode('utf-8').strip(), "leader":
                 self.server.leader.encode('utf-8').strip(), "type": type,
-                    "MID": msg['MID'].encode('utf-8').strip()}
+                    "MID": msg['MID'].encode('utf-8').strip(), "term":self.term}
         elif value=="NA":
             return {"src": self.server.my_id, "dst": msg['src'].encode(
                 'utf-8').strip(), "leader": self.server.leader.encode(
                 'utf-8').strip(), "type": type,
-                    "MID": msg['MID'].encode('utf-8').strip(), "value": ""}
+                    "MID": msg['MID'].encode('utf-8').strip(), "value": "", "term":self.term}
         else:
             return {"src": self.server.my_id, "dst": msg['src'].encode(
                 'utf-8').strip(), "leader": self.server.leader.encode(
                 'utf-8').strip(), "type": type,
-                    "MID": msg['MID'].encode('utf-8').strip(), "value": value}
+                    "MID": msg['MID'].encode('utf-8').strip(), "value": value, "term":self.term}
 
     def add_to_log(self, msg):
         """ Adds the msg/entry to the log of leader and sets the
@@ -185,7 +185,7 @@ class State():
             prevLogTerm = self.term
             # the follower saves the message at prevLogIndx + 1 = 0
             prevLogIndx = -1
-        self.server.log("QWERTY\n\n" + str(entries)+"\n" + str(next_replica_indx) + "\n\n")
+        # self.server.log("QWERTY\n\n" + str(entries)+"\n" + str(next_replica_indx) + "\n\n")
         mess = {"src": self.server.my_id, "dst": replica_id, "leader":
             self.server.leader.encode("utf-8").strip(), "type": "append",
                 "term": self.term, "prevLogIndx": prevLogIndx,
@@ -236,7 +236,7 @@ class State():
         """
         return {"src": self.server.my_id, "dst": msg['src'],
                 "type":"append_succ", "next_index": len(self.log),
-                "leader": self.server.leader}
+                "leader": self.server.leader, "term": self.term}
 
     def gen_append_reject(self):
         """A follower generates a message for a rejected append message.
@@ -259,8 +259,8 @@ class State():
         new_next_index = msg['next_index']
         self.next_index[replica_id] = new_next_index
         entry_id = first_entry_ind
-        self.server.log("entry id {} new next indx {} curr commit ind {}"
-                        .format(entry_id, new_next_index, self.commit_index))
+        # self.server.log("entry id {} new next indx {} curr commit ind {}"
+        #                 .format(entry_id, new_next_index, self.commit_index))
         # go through all the messages that this message says were
         # successfully appended to a follower's log
         while entry_id < new_next_index:
@@ -272,7 +272,7 @@ class State():
                 print("-----------------ERROR---------------")
                 print(len(self.entries_count))
                 raise RuntimeError
-        self.server.log("comm indx {}".format(self.commit_index))
+        # self.server.log("comm indx {}".format(self.commit_index))
         return len(self.ready_to_commit) > 0
 
     def check_ready_for_commit(self, entry_id):

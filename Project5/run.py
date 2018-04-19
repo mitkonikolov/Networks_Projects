@@ -171,7 +171,12 @@ class Client:
     def finalize(self):
         for req in self.reqs.itervalues():
             if req.get: self.sim.stats.unanswered_get += 1
-            else: self.sim.stats.unanswered_put += 1
+            else:
+                self.sim.stats.unanswered_put += 1
+
+        for req in self.sim.stats.unanswered_put:
+            print("unanwered put was {}".format(
+                req))
         
     def create_req(self, get=True):
         # create a get message, if possible
