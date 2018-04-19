@@ -5,49 +5,55 @@ class State():
 
     # TODO Clarify committed, applied, replicated
     # a leader broadcasts every 50ms
-    BROADCAST_TIMEOUT = 50
+    BROADCAST_TIMEOUT = 25
 
     def __init__(self, server):
+
+        # BASIC
         # Persistent State on All Servers
         self.term = 0
+        # state can be leader, follower, candidate
+        self.state = "follower"
+        self.server = server
+        # in ms
+        self.last_heartbeat = 0
+
+        # ELECTIONS
         # candidate ID
         self.voted_for = None
-
         # current number of votes for self during elections
         self.vote_count = []
 
         # MANAGING SYSTEM
         # a list of Entry objects
         self.log = []
-
         # Volatile State on All Servers
-        # index of highest log entry that was committed
-        self.commit_index = 0
-        # index of highest log entry that was applied to state machine
-        self.last_applied = 0
-
+        # new_entry in leader's log -> appended to folowers log -> committed
+        # index of highest log entry that was committed (succ stored)
+        self.commit_index = -1
+        # server -> highest log entry known to be replicated on the server
+        self.match_index = {}
         # Volatile State on Leaders
         # server -> index of next log entry to send to that server
         # TODO initialize to current last log entry + 1 => need to know servers
         self.next_index = {}
-        # server -> highest log entry known to be replicated on the server
-        self.match_index = {}
-
-        # state can be leader, follower, candidate
-        self.state = "follower"
-
-        self.server = server
-        self.vote_count = 0
-        # in ms
-        self.last_heartbeat = 0
+        # entry -> number of servers who have the entry in their log
+        self.entries_count = {}
+        # entries that we just found out are ready to be committed (this must
+        #  be reset after the commit)
+        self.ready_to_commit = []
 
     def prepare_for_application(self):
+        """Generate a message requesting voting.
+        :return:
+        """
         self.state = "candidate"
         self.term += 1
         self.vote_count.append(self.server.my_id)
         self.voted_for = self.server.my_id
         return {"src": self.voted_for, "dst": "FFFF",
-                "leader": self.voted_for, "type": "vote", "term": self.term}
+                "leader": self.voted_for, "type": "vote", "term": self.term,
+                "log_length": len(self.log)}
 
     def set_leader(self):
         self.state = "leader"
@@ -62,18 +68,25 @@ class State():
         return mess
 
     def gen_heartbeat(self, won=False):
+        """Generates a heartbeat to announce or maintain leadership.
+        :param won: indicates whether this is an announcement of leadership
+        :return: a dictionary that represents the heartbeat
+        """
         mess = {"src": self.server.my_id, "dst": "FFFF",
                 "leader": self.server.my_id, "type": "heart", "term":
-                    self.term}
+                    self.term, "leaderCommit": self.commit_index}
         if won:
             mess["type"] = "won"
         self.last_heartbeat = time.time()*1000
         return mess
 
     def check_heart(self):
+        """Checks whether a heartbea needs to be sent.
+        :return: the next heartbeat or None
+        """
         if self.state=="leader" and \
-                ((time.time()*1000) - self.last_heartbeat >
-                 State.BROADCAST_TIMEOUT):
+                ((time.time()*1000) - self.last_heartbeat) > \
+                State.BROADCAST_TIMEOUT:
             return self.gen_heartbeat()
 
     def is_follower(self):
@@ -88,6 +101,7 @@ class State():
     def go_back_to_follower(self):
         self.state = "follower"
         self.__reset_vote_stats()
+        self.server.log(" went back to follower")
 
     def __reset_vote_stats(self):
         self.vote_count = []
@@ -203,6 +217,7 @@ class State():
         """
         append_indx = msg['prevLogIndx'] + 1
         self.log = self.log[:append_indx]
+
         i = 0
         while i < len(msg['entries']):
             # overwriting data in the log of a follower
@@ -230,6 +245,7 @@ class State():
         return {"src": self.server.my_id, "dst": self.server.leader,
                 "type": "append_reject", "leader": self.server.leader,
                 "term": self.term}
+
 
     def incr_count_for(self, msg):
         """Updates the next_index for the replica that sent the
