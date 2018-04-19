@@ -5,6 +5,8 @@ from state import State
 
 class Server:
 
+
+
     def __init__(self):
         # Your ID number
         self.my_id = sys.argv[1]
@@ -17,11 +19,10 @@ class Server:
         self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
         self.sock.connect(self.my_id)
 
-        self.leader = "0000"
+        self.leader = "FFFF"
         self.state = State(self)
         self.reset_timeout()
         self.reset_last()
-
 
         # the data stored on this server
         self.data = {}
@@ -34,9 +35,13 @@ class Server:
         return self.timeout
 
     def reset_timeout(self):
-        self.timeout = int((random.random() * 150) + 150)
+        self.timeout = int((random.random() * 150) + 450)
 
     def reset_last(self):
+        """Sets the last time a heartbeat has been sent to the current time
+        in miliseconds.
+        :return: None
+        """
         self.last = time.time() * 1000
 
     def get_state(self):
@@ -53,31 +58,25 @@ class Server:
             ready = select.select([self.sock], [], [], 0.1)[0]
             # check whether a heartbeat needs to be sent
             mess = self.state.check_heart()
+            # heartbeat does indeed need to be sent
             if mess is not None:
                 self.send(mess)
+
+            if self.state.is_leader(): self.commit()
+
             if self.sock in ready:
                 msg_raw = self.sock.recv(32768)
 
                 if len(msg_raw) == 0: continue
 
                 self.process_mess(msg_raw)
-                # msg = json.loads(msg_raw)
-                #
-                # # For now, ignore get() and put() from clients
-                # if msg['type'] in ['get', 'put']:
-                #     pass
-                #
-                # # Handle noop messages. This may be removed from your final implementation
-                # elif msg['type'] == 'noop':
-                #     print '%s received a NOOP from %s' % (
-                #     msg['dst'], msg['src'])
 
             clock = time.time() * 1000.0
             if self.state.state != "leader" and clock - self.last > \
                     self.timeout:
-                print("{} and timeout is  {}".format((clock - self.last),
-                                                   self.timeout))
-                print("timedout, became candidate  " + self.my_id)
+                # self.log("{} and timeout is  {}".format((clock - self.last),
+                #                                    self.timeout))
+                # self.log("timedout, became candidate  " + self.my_id)
                 self.become_candidate()
 
             # ready = select.select([self.sock], [], [], 0.1)[0]
@@ -92,27 +91,33 @@ class Server:
             #     self.become_candidate()
 
     def become_candidate(self):
+        """Generates message requesting vote, sets current state to candidate
+        and votes for itself
+        :return: None
+        """
+        self.log(" became a candidate")
+        self.reset_timeout()
         msg = self.state.prepare_for_application()
         self.send(msg)
-        print(json.dumps(msg))
         # reset the timer
         self.reset_last()
 
     def send(self, msg):
+        # if "MID" in msg:
+        #     self.log(msg)
         self.sock.send(json.dumps(msg))
 
     def process_mess(self, msg_raw):
         if len(msg_raw) == 0:
             return
 
-        print(self.log("received mess {}".format(msg_raw)))
+        # print(self.log("received mess {}".format(msg_raw)))
         msg = json.loads(msg_raw)
         msg_type = msg['type']
         # the message is from self, not for self, or from an old term
         if msg['src'] == self.my_id or \
                 (msg['dst'] != self.my_id and msg['dst'] != 'FFFF'):
             return
-
         self.log(msg)
 
 
@@ -128,7 +133,6 @@ class Server:
         #     self.sock.send(json.dumps(mess))
 
         # the current term already has a candidate
-
         if msg_type == 'heart' and msg['term'] == self.state.term:
             if self.state.is_candidate():
                 self.state.go_back_to_follower()
@@ -142,11 +146,7 @@ class Server:
             # self.log("election was won updating leader to {}"
     #         .format(self.leader))
             self.state.go_back_to_follower()
-        # a message from the current leader was received
-        if msg_type == 'heart' and msg['leader'] == self.leader:
-            self.log("received beat from {}".format(self.leader))
             self.reset_last()
-
         elif msg_type == 'vote' and not self.state.is_leader() and msg['term'] == self.state.term:
             # self is a candidate and is getting a vote
             if self.state.is_candidate() and msg['leader'] == self.my_id:
@@ -157,10 +157,10 @@ class Server:
                 # self.log("there are {} replicas".format(len(self.replica_ids)))
                 if len(self.state.vote_count) > (len(self.replica_ids)/2):
                     self.become_leader()
-                    self.log("won election and became leader")
-                # reset timer to wait enough for votes to be cast
+                    # self.log("won election and became leader")
+                # current time in ms
+                self.replica_time[msg['src']] = time.time() * 1000
                 self.reset_last()
-
             # self is not a candidate and it has not voted
             elif ((self.state.voted_for is None or
                   self.state.voted_for == msg['src']) and self.state.is_follower()
@@ -289,17 +289,33 @@ class Server:
         self.leader = self.my_id
         self.state.set_leader()
         self.send(self.state.gen_heartbeat(True))
+        self.log(" became a leader")
+        for replica_id in self.replica_ids:
+            self.replica_time[replica_id] = (time.time()*1000)
 
     def log(self, mess, error=False):
         if error:
             print("[err] {}".format(mess))
         else:
-            print("[mess] {} {}".format(self.my_id, mess))
+            # print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
+            assert(1==1)
 
     def my_type(self, msg_type):
         return msg_type == 'heart' or msg_type == 'won' or msg_type == \
                'vote' or msg_type == 'append'
 
+
+
+
 if __name__ =="__main__":
     s = Server()
     s.listen()
+
+    # TODO
+    #   TODO Elections
+    #           +DONE add checking log length before voting
+    #   +DONE Add an append failure if the prevlogindex is different from what
+    #           we have in the log as a follower
+
+    # TODO Add info about committed messages into heartbeats as well and have
+    #  the followers utilize it
