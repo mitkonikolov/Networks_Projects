@@ -91,7 +91,7 @@ class Server:
         and votes for itself
         :return: None
         """
-        # self.log(" became a candidate")
+        self.log(" became a candidate")
         self.reset_timeout()
         msg = self.state.prepare_for_application()
         self.send(msg)
@@ -320,7 +320,7 @@ class Server:
         if error:
             print("[err] {}".format(mess))
         else:
-            #print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
+            print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
             assert(1==1)
 
     def my_type(self, msg_type):
