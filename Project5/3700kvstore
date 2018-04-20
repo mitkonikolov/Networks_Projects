@@ -59,7 +59,6 @@ class Server:
 
     def listen(self):
         self.reset_last()
-        print("here0")
 
         while True:
             ready = select.select([self.sock], [], [], 0.1)[0]
@@ -99,8 +98,8 @@ class Server:
         self.reset_last()
 
     def send(self, msg):
-        # if "MID" in msg:
-        #     self.log(msg)
+        if msg['type'] == 'redirect':
+            self.log(msg)
         # file = open("out.txt", "a")
         dst = msg['dst']
         # last time self sent to this replica
@@ -151,11 +150,11 @@ class Server:
             self.reset_last()
         # the election was won so self needs to update its leader
         elif msg_type == 'won' and msg['term'] == self.state.term:
+            self.state.go_back_to_follower()
             if msg['leader'] != "FFFF":
                 self.leader = msg['leader']
             # self.log("election was won updating leader to {}"
     #         .format(self.leader))
-            self.state.go_back_to_follower()
             self.reset_last()
         elif msg_type == 'vote' and not self.state.is_leader() and msg['term'] == self.state.term:
             # self is a candidate and is getting a vote
