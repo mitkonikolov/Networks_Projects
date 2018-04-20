@@ -142,9 +142,10 @@ class State():
         key = msg['key']
         value = msg['value']
         term = self.term
+        indx = len(self.log)
         # add to log
         self.log.append({"src":src, "MID": mid, "key": key, "value": value,
-                         "term": term})
+                         "term": term, "indx": indx})
         self.entries_count[len(self.log) - 1] = 1
 
     def init_all_next_index(self):
@@ -256,39 +257,58 @@ class State():
         :param msg: append_succ from a follower
         :return: whether there are newly committed messages
         """
+        # print("here")
         replica_id = msg['src']
         first_entry_ind = self.next_index[replica_id]
         new_next_index = msg['next_index']
         self.next_index[replica_id] = new_next_index
         entry_id = first_entry_ind
+        # print(entry_id)
+        # print(len(self.log))
+        # print(new_next_index)
         # self.server.log("entry id {} new next indx {} curr commit ind {}"
         #                 .format(entry_id, new_next_index, self.commit_index))
         # go through all the messages that this message says were
         # successfully appended to a follower's log
         while entry_id < new_next_index:
             try:
-                self.entries_count[entry_id] += 1
-                self.check_ready_for_commit(entry_id)
+                entry = self.log[entry_id]
+                # print("got the entry")
+                # for entries in the curr term commit by counting
+                if entry['term']==self.term:
+                    self.entries_count[entry_id] += 1
+                    self.check_ready_for_commit(entry)
                 entry_id += 1
             except KeyError:
                 print("-----------------ERROR---------------")
                 print(len(self.entries_count))
                 raise RuntimeError
         # self.server.log("comm indx {}".format(self.commit_index))
-        return len(self.ready_to_commit) > 0
+        if len(self.ready_to_commit):
+            first_entry = self.ready_to_commit[0]
+            index = first_entry['indx']-1
+            # there are implicitly committed entries from previous terms and
+            # possibly leaders
+            while self.commit_index<index:
+                # add entries that were added implicitly
+                self.ready_to_commit.insert(0, self.log[index])
+                index -= 1
+            self.commit_index = self.ready_to_commit[-1]['indx']
+            return True
+        return False
 
-    def check_ready_for_commit(self, entry_id):
+    def check_ready_for_commit(self, entry):
         """Checks whether the entry_id is an entry that becomes newly
         committed and if so adds it to self.ready_to_commit
-        :param entry_id: the id of the entry
+        :param entry: the entry
         :return: None
         """
+        entry_id = entry['indx']
         if self.entries_count[entry_id] > (len(self.server.replica_ids)/2):
             # self.server.log("so far {} need to be more than {}".format(
             #     self.entries_count[n], (len(self.server.replica_ids)/2)))
             if self.commit_index < entry_id:
-                self.commit_index = entry_id
-                self.ready_to_commit.append(entry_id)
+                self.ready_to_commit.append(entry)
 
     def get_new_committed_entries(self):
         """
@@ -302,8 +322,7 @@ class State():
         :return:
         """
         all_messages = []
-        for n in self.ready_to_commit:
-            entry = self.log[n]
+        for entry in self.ready_to_commit:
             all_messages.append(self.gen_mess(entry, "ok"))
         return all_messages
 
@@ -332,5 +351,5 @@ class State():
         curr_commit = self.commit_index
         while curr_commit < len(self.log) and curr_commit < leader_commit_index:
             curr_commit += 1
-            self.ready_to_commit.append(curr_commit)
+            self.ready_to_commit.append(self.log[curr_commit])
         self.commit_index = curr_commit

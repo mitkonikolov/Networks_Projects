@@ -271,8 +271,7 @@ class Server:
         :param updated_entries: a set of entries to be performed
         :return: None
         """
-        for entry_id in updated_entries:
-            entry = self.state.log[entry_id]
+        for entry in updated_entries:
             try:
                 self.data[entry['key']] = entry['value']
             except TypeError:
