@@ -168,7 +168,7 @@ class State():
         # get all entries starting at next index for the replica inclusive
         entries = []
         i = next_replica_indx
-        while i < (len(self.log) - 1):
+        while i < (len(self.log)):
             entries.append(self.log[i])
             i+=1
         if next_replica_indx>0:

@@ -320,7 +320,8 @@ class Server:
         if error:
             print("[err] {}".format(mess))
         else:
-            print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
+            #print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
+            assert(1==1)
 
     def my_type(self, msg_type):
         return msg_type == 'heart' or msg_type == 'won' or msg_type == \
