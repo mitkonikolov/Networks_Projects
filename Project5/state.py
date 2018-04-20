@@ -6,7 +6,7 @@ class State():
     # TODO Clarify committed, applied, replicated
     # a leader broadcasts every 50ms
     BROADCAST_TIMEOUT = 150
-    MAX_ENTRIES = 15
+    MAX_ENTRIES = 25
 
     def __init__(self, server):
 
@@ -52,6 +52,7 @@ class State():
         self.term += 1
         self.vote_count.append(self.server.my_id)
         self.voted_for = self.server.my_id
+        self.leader = "FFFF"
         return {"src": self.voted_for, "dst": "FFFF",
                 "leader": self.voted_for, "type": "vote", "term": self.term,
                 "log_length": len(self.log)}
@@ -63,7 +64,7 @@ class State():
         self.init_all_next_index()
 
     def vote(self, msg):
-        mess = {"src": self.server.my_id, "dst": msg['leader'],
+        mess = {"src": self.server.my_id, "dst": msg['src'],
                 "leader": msg['leader'], "type": "vote", "term": msg['term']}
         self.voted_for = msg['leader']
         return mess
@@ -100,6 +101,7 @@ class State():
         return self.state == "leader"
 
     def go_back_to_follower(self):
+        self.server.leader = "FFFF"
         self.state = "follower"
         self.__reset_vote_stats()
         # self.server.log(" went back to follower")
@@ -316,7 +318,7 @@ class State():
         be decremented
         :return: True if successful
         """
-        self.next_index[replica_id] -= 1
+        self.next_index[replica_id] = max(self.next_index[replica_id] - 5, 0)
         # check whether the data is uncorrupted
         return self.next_index[replica_id] >= 0
 
@@ -329,7 +331,7 @@ class State():
         """
         leader_commit_index = int(msg['leaderCommit'])
         curr_commit = self.commit_index
-        while curr_commit < len(self.log) and curr_commit < leader_commit_index:
+        while curr_commit < len(self.log) - 1 and curr_commit < leader_commit_index:
             curr_commit += 1
             self.ready_to_commit.append(curr_commit)
         self.commit_index = curr_commit
