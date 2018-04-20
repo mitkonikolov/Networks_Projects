@@ -285,10 +285,10 @@ class Server:
         """
         for replica_id in self.replica_ids:
             curr_time = time.time() * 1000
+            append_msg = self.state.get_append(replica_id)
             # we have heard from this replica in the last three seconds
             if new_append or ((curr_time - self.replica_time[replica_id]) <
                               3000):
-                append_msg = self.state.get_append(replica_id)
                 if append_msg:
                     # fresh append
                     if new_append:
@@ -304,6 +304,10 @@ class Server:
                                  "not expired")
                 else:
                     self.log(" not sending a message cause up to date")
+            # it's been two seconds since the last time we have sent to them
+            elif (curr_time - self.replica_sent_time[replica_id]) > 2000:
+                if append_msg:
+                    self.send(append_msg)
             # else:
             #     append_msg = {"src": self.my_id, "dst": replica_id,
             #                          "leader": self.leader.encode(
