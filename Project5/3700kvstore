@@ -58,7 +58,6 @@ class Server:
         return {"src": self.my_id, "dst": dst, "leader": self.leader, "type": type}
 
     def listen(self):
-        self.reset_last()
 
         while True:
             ready = select.select([self.sock], [], [], 0.1)[0]
@@ -127,7 +126,7 @@ class Server:
         if msg['src'] == self.my_id or \
                 (msg['dst'] != self.my_id and msg['dst'] != 'FFFF'):
             return
-        # self.log(msg)
+        #self.log(msg)
 
 
         if ('term' in msg and
@@ -145,14 +144,12 @@ class Server:
         if msg_type == 'heart' and msg['term'] == self.state.term:
             if self.state.is_candidate():
                 self.state.go_back_to_follower()
-                if msg['leader'] != "FFFF":
-                    self.leader = msg['leader']
+                self.leader = msg['leader']
             self.reset_last()
         # the election was won so self needs to update its leader
         elif msg_type == 'won' and msg['term'] == self.state.term:
             self.state.go_back_to_follower()
-            if msg['leader'] != "FFFF":
-                self.leader = msg['leader']
+            self.leader = msg['leader']
             # self.log("election was won updating leader to {}"
     #         .format(self.leader))
             self.reset_last()
@@ -179,7 +176,7 @@ class Server:
                     # self.log(" vote for {} sending {}".format(msg['src'],
                     #                                           self.state.vote(msg)))
                     self.send(self.state.vote(msg))
-                self.state.term = msg['term']
+                self.leader = "FFFF"
                 # else:
                 #     self.log("didn't vote for {} cand's term {} log len"
                 #              " {}".format(msg['src'], msg['term'],
@@ -218,17 +215,12 @@ class Server:
                     self.send(self.state.gen_mess(msg, "redirect"))
         elif msg_type == "append":
 
+            if self.state.is_candidate() or self.state.is_leader():
+                self.state.go_back_to_follower()
+
             if msg['term'] < self.state.term:
                 self.send(self.state.gen_append_reject())
                 return
-
-            if self.state.is_candidate():
-                self.state.go_back_to_follower()
-                if msg['leader'] != 'FFFF':
-                    self.leader = msg['leader']
-                else:
-                    return
-
 
             # checks if the prevLogIndx/Term is correctly in log
             if self.state.log_consistency(msg):
@@ -264,6 +256,7 @@ class Server:
         :param updated_entries: a set of entries to be performed
         :return: None
         """
+        self.log(updated_entries)
         for entry_id in updated_entries:
             entry = self.state.log[entry_id]
             try:
@@ -319,7 +312,7 @@ class Server:
         if error:
             print("[err] {}".format(mess))
         else:
-            print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
+            #print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
             assert(1==1)
 
     def my_type(self, msg_type):
