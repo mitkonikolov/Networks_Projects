@@ -54,7 +54,7 @@ class State():
         self.voted_for = self.server.my_id
         return {"src": self.voted_for, "dst": "FFFF",
                 "leader": self.voted_for, "type": "vote", "term": self.term,
-                "log_length": len(self.log)}
+                "log_length": len(self.log), "commit_index": self.commit_index}
 
     def set_leader(self):
         self.state = "leader"

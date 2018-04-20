@@ -177,8 +177,8 @@ class Server:
             elif ((self.state.voted_for is None or
                   self.state.voted_for == msg['src']) and self.state.is_follower()
                   and msg['term'] == self.state.term):
-                if 'log_length' in msg and \
-                        msg['log_length'] >= len(self.state.log):
+                if 'commit_index' in msg and \
+                        msg['commit_index'] >= self.state.commit_index:
                     # self.log(" vote for {} sending {}".format(msg['src'],
                     #                                           self.state.vote(msg)))
                     self.send(self.state.vote(msg))
