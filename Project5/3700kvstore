@@ -67,8 +67,6 @@ class Server:
             if mess is not None:
                 self.send(mess)
 
-            # if self.state.is_leader(): self.commit()
-
             if self.sock in ready:
                 msg_raw = self.sock.recv(32768)
 
@@ -97,8 +95,7 @@ class Server:
         self.reset_last()
 
     def send(self, msg):
-        if msg['type'] == 'redirect':
-            self.log(msg)
+        self.log(msg)
         # file = open("out.txt", "a")
         dst = msg['dst']
         # last time self sent to this replica
@@ -119,26 +116,17 @@ class Server:
         if len(msg_raw) == 0:
             return
 
-        # print(self.log("received mess {}".format(msg_raw)))
         msg = json.loads(msg_raw)
         msg_type = msg['type']
         # the message is from self, not for self, or from an old term
         if msg['src'] == self.my_id or \
                 (msg['dst'] != self.my_id and msg['dst'] != 'FFFF'):
             return
-        #self.log(msg)
-
 
         if ('term' in msg and
                 msg['term'] > self.state.term):
             self.state.term = msg['term']
             self.state.go_back_to_follower()
-
-        # forward on to the leader
-        # if msg['type'] in ['get', 'put']:
-        #     mess = {"src": self.my_id, "dst": msg["src"], "leader": self.leader,
-        #             "type": "fail", "MID": msg["MID"]}
-        #     self.sock.send(json.dumps(mess))
 
         # the current term already has a candidate
         if msg_type == 'heart' and msg['term'] == self.state.term:
@@ -176,7 +164,7 @@ class Server:
                     # self.log(" vote for {} sending {}".format(msg['src'],
                     #                                           self.state.vote(msg)))
                     self.send(self.state.vote(msg))
-                self.leader = "FFFF"
+                    self.leader = "FFFF"
                 # else:
                 #     self.log("didn't vote for {} cand's term {} log len"
                 #              " {}".format(msg['src'], msg['term'],
@@ -245,7 +233,7 @@ class Server:
             # current time in ms
             self.replica_time[msg['src']] = time.time() * 1000
         elif msg_type == "append_reject" and self.state.is_leader() and msg['term'] == self.state.term:
-            if self.state.decr_next_index(msg['src']):
+            if self.state.decr_next_index(msg['src'], msg['len']):
                 # current time in ms
                 self.replica_time[msg['src']] = time.time() * 1000
             else:
@@ -256,7 +244,6 @@ class Server:
         :param updated_entries: a set of entries to be performed
         :return: None
         """
-        self.log(updated_entries)
         for entry_id in updated_entries:
             entry = self.state.log[entry_id]
             try:
@@ -304,7 +291,7 @@ class Server:
         self.leader = self.my_id
         self.state.set_leader()
         self.send(self.state.gen_heartbeat(True))
-        # self.log(" became a leader")
+        self.log(" became a leader")
         for replica_id in self.replica_ids:
             self.replica_time[replica_id] = (time.time()*1000)
 
