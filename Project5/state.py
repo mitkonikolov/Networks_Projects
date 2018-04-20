@@ -6,6 +6,7 @@ class State():
     # TODO Clarify committed, applied, replicated
     # a leader broadcasts every 50ms
     BROADCAST_TIMEOUT = 150
+    MAX_ENTRIES = 15
 
     def __init__(self, server):
 
@@ -168,7 +169,7 @@ class State():
         # get all entries starting at next index for the replica inclusive
         entries = []
         i = next_replica_indx
-        while i < (len(self.log)):
+        while i < (len(self.log)) and i < next_replica_indx + self.MAX_ENTRIES:
             entries.append(self.log[i])
             i+=1
         if next_replica_indx>0:
