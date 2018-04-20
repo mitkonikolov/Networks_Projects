@@ -5,7 +5,7 @@ from state import State
 
 class Server:
 
-    RESEND_TIMEOUT = 300
+    RESEND_TIMEOUT = 350
 
     def __init__(self):
         # Your ID number
@@ -59,7 +59,7 @@ class Server:
 
     def listen(self):
         self.reset_last()
-        print("here0")
+        # print("here0")
 
         while True:
             ready = select.select([self.sock], [], [], 0.1)[0]
@@ -69,7 +69,7 @@ class Server:
             if mess is not None:
                 self.send(mess)
 
-            # if self.state.is_leader(): self.commit()
+            if self.state.is_leader(): self.commit()
 
             if self.sock in ready:
                 msg_raw = self.sock.recv(32768)
@@ -102,17 +102,19 @@ class Server:
         # if "MID" in msg:
         #     self.log(msg)
         # file = open("out.txt", "a")
-        dst = msg['dst']
-        # last time self sent to this replica
-        self.replica_sent_time[dst] = time.time()*1000
-        if msg['type'] == 'ok' or msg['type'] == 'fail':
-            self.log("sending {} mid for {}".format(msg['type'],
-                                                         msg['MID']))
+        if msg['type'] == 'append':
+            dst = msg['dst']
+            # last time self sent to this replica
+            self.replica_sent_time[dst] = time.time()*1000
+
+        # if msg['type'] == 'ok' or msg['type'] == 'fail':
+        #     self.log("sending {} mid for {}".format(msg['type'],
+        #                                                  msg['MID']))
         self.sock.send(json.dumps(msg))
-        if msg['type'] in self.all_messages:
-            self.all_messages[msg['type']] += 1
-        else:
-            self.all_messages[msg['type']] = 1
+        # if msg['type'] in self.all_messages:
+        #     self.all_messages[msg['type']] += 1
+        # else:
+        #     self.all_messages[msg['type']] = 1
         # file.write("sent {} of type {}\n"
         #            .format(self.all_messages[msg['type']], msg['type']))
         # file.close()
@@ -220,7 +222,9 @@ class Server:
         elif msg_type == "append":
 
             if msg['term'] < self.state.term:
-                self.send(self.state.gen_append_reject())
+                reject = self.state.gen_append_reject()
+                reject['wrong_prev_indx'] = 0
+                self.send(reject)
                 return
 
             if self.state.is_candidate():
@@ -253,10 +257,12 @@ class Server:
                 self.state.reset_ready_to_commit()
             # current time in ms
             self.replica_time[msg['src']] = time.time() * 1000
-        elif msg_type == "append_reject" and self.state.is_leader() and msg['term'] == self.state.term:
-            if self.state.decr_next_index(msg['src']):
+        elif msg_type == "append_reject" and self.state.is_leader() and \
+                msg['term'] == self.state.term:
+            if msg['wrong_prev_indx']==0 and self.state.decr_next_index(msg['src']):
                 # current time in ms
                 self.replica_time[msg['src']] = time.time() * 1000
+                self.send(self.state.get_append(msg['src']))
             else:
                 raise RuntimeError("Incorrect next_index for replica")
 
@@ -288,10 +294,14 @@ class Server:
                     # fresh append
                     if new_append:
                         self.send(append_msg)
-                    elif self.replica_sent_time[replica_id] > \
-                            self.RESEND_TIMEOUT:
+                    # a message has never been sent or hasn't been sent recently
+                    elif replica_id not in self.replica_sent_time or\
+                            ((curr_time - self.replica_sent_time[replica_id])
+                             > self.RESEND_TIMEOUT):
                         self.send(append_msg)
-                        self.log("not resending a message cause timeout has "
+                    else:
+                        self.log("not resending a message cause timeout \
+                    has "
                                  "not expired")
                 else:
                     self.log(" not sending a message cause up to date")
@@ -320,7 +330,7 @@ class Server:
         if error:
             print("[err] {}".format(mess))
         else:
-            print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
+            # print("[mess] {} {} {}".format(time.time(), self.my_id, mess))
             assert(1==1)
 
     def my_type(self, msg_type):

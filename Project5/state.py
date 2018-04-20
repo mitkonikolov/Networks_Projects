@@ -152,7 +152,8 @@ class State():
         :return:
         """
         for replica_id in self.server.replica_ids:
-            self.next_index[replica_id] = len(self.log)
+            # self.next_index[replica_id] = len(self.log)
+            self.next_index[replica_id] = self.commit_index+1
 
     def get_append(self, replica_id):
         """Generates append to log message for a specific replica.
@@ -245,7 +246,7 @@ class State():
         """
         return {"src": self.server.my_id, "dst": self.server.leader,
                 "type": "append_reject", "leader": self.server.leader,
-                "term": self.term}
+                "term": self.term, "wrong_prev_indx": 1}
 
 
     def incr_count_for(self, msg):
