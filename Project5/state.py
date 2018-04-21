@@ -5,7 +5,7 @@ class State():
 
     # TODO Clarify committed, applied, replicated
     # a leader broadcasts every 50ms
-    BROADCAST_TIMEOUT = 15
+    BROADCAST_TIMEOUT = 30
     MAX_ENTRIES = 25
 
     def __init__(self, server):
@@ -50,7 +50,7 @@ class State():
         """
         self.state = "candidate"
         self.term += 1
-        self.vote_count.append(self.server.my_id)
+        self.vote_count = [self.server.my_id]
         self.voted_for = self.server.my_id
         self.server.leader = "FFFF"
         return {"src": self.voted_for, "dst": "FFFF",
@@ -104,11 +104,12 @@ class State():
     def go_back_to_follower(self):
         self.server.log("I AM NOW A MERE FOLLOWER")
         if self.is_leader():
-            com = self.commit_index
+            com = self.commit_index + 1
             while com < len(self.log):
                 mess = self.gen_mess(self.log[com], "fail")
                 self.server.send(mess)
                 com += 1
+        self.server.last_leader = self.server.leader
         self.server.leader = "FFFF"
         self.state = "follower"
         self.__reset_vote_stats()
@@ -125,21 +126,29 @@ class State():
         :param value:
         :return:
         """
-        if not value:
-            return {"src": self.server.my_id, "dst": msg[
+        if type=='fail':
+            m = {"src": self.server.my_id, "dst": msg[
+                'src'].encode('utf-8').strip(), "type": type,
+                    "MID": msg['MID'].encode('utf-8').strip(),
+                    "term":self.term, "leader": self.server.my_id}
+        elif not value:
+            m = {"src": self.server.my_id, "dst": msg[
                 'src'].encode('utf-8').strip(), "leader":
                 self.server.leader.encode('utf-8').strip(), "type": type,
                     "MID": msg['MID'].encode('utf-8').strip(), "term":self.term}
         elif value=="NA":
-            return {"src": self.server.my_id, "dst": msg['src'].encode(
+            m = {"src": self.server.my_id, "dst": msg['src'].encode(
                 'utf-8').strip(), "leader": self.server.leader.encode(
                 'utf-8').strip(), "type": type,
                     "MID": msg['MID'].encode('utf-8').strip(), "value": "", "term":self.term}
         else:
-            return {"src": self.server.my_id, "dst": msg['src'].encode(
+            m = {"src": self.server.my_id, "dst": msg['src'].encode(
                 'utf-8').strip(), "leader": self.server.leader.encode(
                 'utf-8').strip(), "type": type,
                     "MID": msg['MID'].encode('utf-8').strip(), "value": value, "term":self.term}
+        if m['leader'] == "FFFF":
+            m['leader'] = self.server.my_id
+        return m
 
     def add_to_log(self, msg):
         """ Adds the msg/entry to the log of leader and sets the
@@ -170,6 +179,8 @@ class State():
         append to log message
         :return: append to log message
         """
+        # if replica_id not in self.next_index:
+        #     self.next_index[replica_id] = 0
         next_replica_indx = self.next_index[replica_id]
 
         # the replica's log is up-to-date
@@ -298,6 +309,7 @@ class State():
             if self.commit_index < entry_id:
                 self.commit_index = entry_id
                 self.ready_to_commit.append(entry_id)
+            self.server.last_quorum = time.time()
 
     def get_new_committed_entries(self):
         """

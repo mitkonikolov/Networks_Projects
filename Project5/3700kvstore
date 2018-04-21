@@ -20,6 +20,7 @@ class Server:
         self.sock.connect(self.my_id)
 
         self.leader = "FFFF"
+        self.last_leader = ""
         self.state = State(self)
         self.reset_timeout()
         self.reset_last()
@@ -34,6 +35,9 @@ class Server:
         self.replica_sent_time = {}
 
         self.all_messages = {}
+
+        self.havent_heard_from = {}
+        self.last_quorum=0
 
 
     def get_timeout(self):
@@ -67,6 +71,8 @@ class Server:
             if mess is not None:
                 self.send(mess)
 
+
+
             if self.sock in ready:
                 msg_raw = self.sock.recv(32768)
 
@@ -82,6 +88,9 @@ class Server:
                 # self.log("timedout, became candidate  " + self.my_id)
                 self.become_candidate()
 
+            if self.state.is_leader(): self.commit()
+
+
     def become_candidate(self):
         """Generates message requesting vote, sets current state to candidate
         and votes for itself
@@ -96,6 +105,15 @@ class Server:
 
     def send(self, msg):
         self.log(msg)
+        if msg['type']!="vote" and "leader" in msg and msg['leader']=="FFFF":
+            # if self.state.is_leader and ((time.time()*1000) -
+            #                             self.last_quorum) > 3000:
+            #     for k in self.havent_heard_from:
+            #         if k!= self.last_leader:
+            #             msg['leader']=k
+            #             break
+            # else:
+            msg['leader'] = self.my_id
         # file = open("out.txt", "a")
         dst = msg['dst']
         # last time self sent to this replica
@@ -128,7 +146,7 @@ class Server:
             self.state.term = msg['term']
             self.state.go_back_to_follower()
 
-        # the current term already has a candidate
+        # the current heartbeat therefore there is a leader here
         if msg_type == 'heart' and msg['term'] == self.state.term:
             if self.state.is_candidate():
                 self.state.go_back_to_follower()
@@ -155,7 +173,7 @@ class Server:
                 # current time in ms
                 self.replica_time[msg['src']] = time.time() * 1000
                 self.reset_last()
-            # self is not a candidate and it has not voted
+            # self is not a candidat1e and it has not voted
             elif ((self.state.voted_for is None or
                   self.state.voted_for == msg['src']) and self.state.is_follower()
                   and msg['term'] == self.state.term):
@@ -191,13 +209,13 @@ class Server:
                 self.send(self.state.gen_mess(msg, "fail"))
             elif self.state.is_follower():
                 # we do not know the leader
-                if self.leader == "FFFF":
+                if self.leader == 'FFFF':
                     self.send(self.state.gen_mess(msg, "fail"))
                 else:
                     self.send(self.state.gen_mess(msg, "redirect"))
         elif msg_type == "put":
             if msg['dst'] == "FFFF" :
-                if self.leader != "FFFF":
+                if self.leader == "FFFF":
                     self.send(self.state.gen_mess(msg, "redirect"))
                 else:
                     self.send(self.state.gen_mess(msg, "fail"))
@@ -207,16 +225,19 @@ class Server:
                 self.state.add_to_log(msg)
                 self.commit(True)
             elif self.state.is_candidate():
-                self.send(self.state.gen_mess(msg, 'fail'))
+                mess = self.state.gen_mess(msg, 'fail')
+                if mess['leader'] == 'FFFF':
+                    print("sending bad leader")
+                self.send(mess)
             elif self.state.is_follower():
-                if self.leader == "FFFF":
+                if self.leader == 'FFFF':
                     self.send(self.state.gen_mess(msg, 'fail'))
                 else:
                     self.send(self.state.gen_mess(msg, "redirect"))
         elif msg_type == "append":
 
             if msg['term'] < self.state.term:
-                self.send(self.state.gen_append_reject())
+                #self.send(self.state.gen_append_reject())
                 return
 
             if self.state.is_candidate() or self.state.is_leader():
@@ -270,8 +291,8 @@ class Server:
             curr_time = time.time() * 1000
             append_msg = self.state.get_append(replica_id)
             # we have heard from this replica in the last three seconds
-            if new_append or ((curr_time - self.replica_time[replica_id]) <
-                              3000):
+            if new_append or replica_id in self.replica_time or\
+                    ((curr_time - self.replica_time[replica_id]) < 3000):
                 if append_msg:
                     # fresh append
                     if new_append:
@@ -281,14 +302,12 @@ class Server:
                             ((curr_time - self.replica_sent_time[replica_id])
                              > self.RESEND_TIMEOUT):
                         self.send(append_msg)
-                    else:
-                        self.log("not resending a message cause timeout \
-                    has "
-                                 "not expired")
+                        self.havent_heard_from[replica_id] = 0
                 else:
                     self.log(" not sending a message cause up to date")
             # it's been two seconds since the last time we have sent to them
-            elif (curr_time - self.replica_sent_time[replica_id]) > 1000:
+            elif replica_id in self.replica_sent_time and \
+                    (curr_time - self.replica_sent_time[replica_id]) > 2000:
                 if append_msg:
                     self.send(append_msg)
 
@@ -304,6 +323,7 @@ class Server:
         self.log(" became a leader")
         for replica_id in self.replica_ids:
             self.replica_time[replica_id] = (time.time()*1000)
+        self.last_quorum = time.time()
 
     def log(self, mess, error=False):
         if error:
